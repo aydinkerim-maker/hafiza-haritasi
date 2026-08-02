@@ -111,37 +111,13 @@
             "Turkey": { trName: "Türkiye", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT" },
             "Ukraine": { trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı, AGİT" },
             "Russia": { trName: "Rusya Federasyonu", founding: "1991", pop: "144 Milyon", area: "17,098,242 km²", pact: "BMGK, ŞİÖ, BRICS" },
-            "Greece": { trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO" }
+            "Greece": { trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO" },
+            "United States": { trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, QUAD" },
+            "Israel": { trName: "İsrail", founding: "1948", pop: "9.3 Milyon", area: "20,770 km²", pact: "OECD" },
+            "Palestine": { trName: "Filistin", founding: "1988", pop: "5 Milyon", area: "6,020 km²", pact: "Arap Birliği, İÖT" }
         };
 
-        const newsData = [
-            {
-                id: 1,
-                title: "Karadeniz Tahıl Koridoru Anlaşması ve Boğazlar Güvenliği",
-                tags: ["#TahılKrizi", "#Diplomasi", "#Türkiye", "#Ukrayna", "#Rusya", "#BM"],
-                summary: "Küresel gıda krizini önlemek amacıyla oluşturulan koridor kapsamında sevkiyat stratejileri yeniden değerlendiriliyor.\n\nSavaş nedeniyle Karadeniz limanlarında sıkışan milyonlarca ton tahılın dünya pazarlarına ulaştırılması için kurulan mekanizma, boğazlar üzerindeki denetimlerle sürdürülüyor. Türkiye ve BM arabuluculuğunda yürütülen görüşmelerde güvenlik garantileri ana gündem maddesidir.",
-                history: "Karadeniz'deki ticaret rotalarının güvenliği tarih boyunca bölgesel güçlerin ana rekabet alanı olmuştur. 1936 Montrö Boğazlar Sözleşmesi, Türkiye'ye boğazlar üzerinde tam yetki vererek Karadeniz'in bir çatışma gölüne dönüşmesini engellemiştir.\n\n2022'de patlak veren Rusya-Ukrayna savaşı, küresel gıda tedarik zincirini etkilemiş, Montrö'nün sağladığı tarafsızlık zemini diplomatik hamleleri mümkün kılmıştır.",
-                link: "https://www.bbc.com",
-                countries: {
-                    "Turkey": { role: "Arabulucu", title: "Türkiye (Arabulucu / Denetim)", color: "#22c55e" },
-                    "Ukraine": { role: "Aktör", title: "Ukrayna (Ana Üretici)", color: "#ef4444" },
-                    "Russia": { role: "Aktör", title: "Rusya (Taraf / Güvenlik)", color: "#ef4444" }
-                }
-            },
-            {
-                id: 2,
-                title: "Doğu Akdeniz Enerji Sahaları ve Navtex Gerilimi",
-                tags: ["#Enerji", "#DoğuAkdeniz", "#Türkiye", "#Yunanistan", "#NATO"],
-                summary: "Bölgedeki münhasır ekonomik bölge tartışmaları ve yeni doğalgaz rezervlerinin keşfi sonrasında naval tatbikatlar artırıldı.\n\nKıta sahanlığı sınırları ve ruhsat sahaları üzerindeki çakışmalar, araştırma gemilerinin faaliyetleriyle yeniden gündeme geldi. İlgili ülkeler deniz yetki alanlarını korumak amacıyla devriyeleri sıklaştırıyor.",
-                history: "Doğu Akdeniz'deki kıta sahanlığı tartışmaları 1970'li yıllara kadar uzanmaktadır. 2010'lu yıllarda devasa doğalgaz sahalarının keşfedilmesi, geleneksel siyasi gerilimi bir 'enerji jeopolitiği' denklemine dönüştürmüştür.",
-                link: "https://www.reuters.com",
-                countries: {
-                    "Turkey": { role: "Aktör", title: "Türkiye (Hak İddiası & Sondaj)", color: "#ef4444" },
-                    "Greece": { role: "Aktör", title: "Yunanistan (Karşı Taraf)", color: "#38bdf8" }
-                }
-            }
-        ];
-
+        let newsData = [];
         const map = L.map('map', { center: [39.0, 35.0], zoom: 3, zoomControl: true });
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
 
@@ -149,22 +125,18 @@
         let worldGeoData = null;
         let currentRoleFilter = 'ALL';
 
-        // Güvenilir TopoJSON / GeoJSON Kaynağından Gerçek Kıvrımlı Sınırları Çek
-        fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
-            .then(res => res.json())
-            .then(data => {
-                worldGeoData = data;
-                renderNewsList();
-            })
-            .catch(err => {
-                // Alternatif yedek sunucu
-                fetch('https://openlayers.org/en/v6.5.0/examples/data/geojson/countries.geojson')
-                    .then(res => res.json())
-                    .then(data => {
-                        worldGeoData = data;
-                        renderNewsList();
-                    });
-            });
+        // Harita Sınırlarını ve Botun Ürettiği Canlı Haberleri Çek
+        Promise.all([
+            fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson').then(r => r.json()),
+            fetch('newsData.json').then(r => r.json())
+        ]).then(([geoData, liveNews]) => {
+            worldGeoData = geoData;
+            newsData = liveNews;
+            renderNewsList();
+        }).catch(err => {
+            console.error("Veri yükleme hatası:", err);
+            document.getElementById('summaryText').innerText = "Haber verileri yüklenirken bir hata oluştu veya bot henüz ilk veriyi üretmedi.";
+        });
 
         function renderNewsList() {
             const newsListEl = document.getElementById('newsList');
@@ -183,7 +155,7 @@
                 card.innerHTML = `
                     <h3>${news.title}</h3>
                     <div class="tags">
-                        ${news.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                        ${news.tags ? news.tags.map(t => `<span class="tag">${t}</span>`).join('') : ''}
                     </div>
                 `;
                 newsListEl.appendChild(card);
@@ -225,22 +197,22 @@
 
             geojsonLayer = L.geoJson(worldGeoData, {
                 style: (feature) => {
-                    // Ülke isimlerini eşleştir (name veya ADMIN alanı)
                     const countryName = feature.properties.name || feature.properties.ADMIN;
                     
-                    // İsim dönüştürücü (Turkey -> Turkey/Republic of Turkey vb.)
                     let matchedKey = null;
-                    if (countryName === "Turkey" || countryName === "Republic of Turkey") matchedKey = "Turkey";
-                    if (countryName === "Ukraine") matchedKey = "Ukraine";
-                    if (countryName === "Russia" || countryName === "Russian Federation") matchedKey = "Russia";
-                    if (countryName === "Greece") matchedKey = "Greece";
+                    for (let key of Object.keys(news.countries)) {
+                        if (countryName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(countryName.toLowerCase())) {
+                            matchedKey = key;
+                            break;
+                        }
+                    }
 
                     const activeCountry = matchedKey ? news.countries[matchedKey] : null;
 
                     if (activeCountry) {
                         return {
                             fillColor: activeCountry.color,
-                            fillOpacity: 0.6,
+                            fillOpacity: 0.65,
                             weight: 2,
                             color: '#ffffff'
                         };
@@ -256,10 +228,12 @@
                     const countryName = feature.properties.name || feature.properties.ADMIN;
                     
                     let matchedKey = null;
-                    if (countryName === "Turkey" || countryName === "Republic of Turkey") matchedKey = "Turkey";
-                    if (countryName === "Ukraine") matchedKey = "Ukraine";
-                    if (countryName === "Russia" || countryName === "Russian Federation") matchedKey = "Russia";
-                    if (countryName === "Greece") matchedKey = "Greece";
+                    for (let key of Object.keys(news.countries)) {
+                        if (countryName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(countryName.toLowerCase())) {
+                            matchedKey = key;
+                            break;
+                        }
+                    }
 
                     const activeCountry = matchedKey ? news.countries[matchedKey] : null;
 
