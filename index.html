@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopolitik Hafıza & İstihbarat Portalı</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; height: 100vh; display: flex; flex-direction: column; }
+        
+        header { background: #1e293b; padding: 10px 20px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.1rem; font-weight: bold; color: #38bdf8; }
+        .org-menu { display: flex; gap: 10px; }
+        .org-btn { background: #334155; color: #cbd5e1; border: 1px solid #475569; padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+        .org-btn:hover, .org-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
+
+        .app-container { display: flex; flex: 1; overflow: hidden; }
+        
+        .sidebar { width: 340px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; }
+        .role-filter-bar { padding: 10px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; gap: 5px; justify-content: space-between; }
+        .role-btn { flex: 1; padding: 6px 2px; font-size: 0.72rem; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: center; color: #fff; opacity: 0.6; transition: 0.2s; }
+        .role-btn.active, .role-btn:hover { opacity: 1; }
+        .role-all { background: #475569; }
+        .role-actor { background: #ef4444; }
+        .role-supporter { background: #38bdf8; }
+        .role-mediator { background: #22c55e; }
+
+        .news-list { overflow-y: auto; flex: 1; }
+        .news-card { padding: 15px; border-bottom: 1px solid #334155; cursor: pointer; transition: background 0.2s; }
+        .news-card:hover, .news-card.active { background: #334155; }
+        .news-card h3 { font-size: 0.9rem; margin-bottom: 8px; color: #f1f5f9; line-height: 1.3; }
+        .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tag { background: #0284c7; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; }
+
+        .map-container { flex: 1; position: relative; background: #090d16; }
+        #map { width: 100%; height: 100%; }
+
+        .country-card { position: absolute; top: 15px; right: 15px; z-index: 1000; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(8px); border: 1px solid #475569; border-radius: 8px; padding: 12px 16px; width: 270px; display: none; }
+        .country-card h3 { font-size: 1rem; color: #38bdf8; margin-bottom: 6px; border-bottom: 1px solid #334155; padding-bottom: 4px; }
+        .country-info-grid { font-size: 0.78rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; color: #cbd5e1; }
+
+        .info-panel { width: 380px; background: #1e293b; border-left: 1px solid #334155; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .panel-block { background: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid #334155; }
+        .panel-block h4 { font-size: 0.8rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; }
+        .panel-block p { font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; white-space: pre-line; }
+        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; margin-top: 6px; }
+        .legend-color { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+        .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 10px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">JEOPOLİTİK HAFIZA PORTALI</div>
+        <div class="org-menu">
+            <button class="org-btn" onclick="filterOrg('ALL')">Tüm Bölge</button>
+            <button class="org-btn" onclick="filterOrg('NATO')">NATO</button>
+            <button class="org-btn" onclick="filterOrg('BM')">BM Güvenlik Konseyi</button>
+            <button class="org-btn" onclick="filterOrg('SCO')">Şangay İşbirliği</button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="role-filter-bar">
+                <button class="role-btn role-all active" onclick="filterRole('ALL')">Tümü</button>
+                <button class="role-btn role-actor" onclick="filterRole('Aktör')">Aktör</button>
+                <button class="role-btn role-supporter" onclick="filterRole('Destekçi')">Destekçi</button>
+                <button class="role-btn role-mediator" onclick="filterRole('Arabulucu')">Arabulucu</button>
+            </div>
+            <div class="news-list" id="newsList"></div>
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="country-card" id="countryCard">
+                <h3 id="cardCountryName">Türkiye Cumhuriyeti</h3>
+                <div class="country-info-grid">
+                    <div><strong>Kuruluş:</strong> <span id="cardFounding">1923</span></div>
+                    <div><strong>Nüfus:</strong> <span id="cardPop">85 Milyon</span></div>
+                    <div><strong>Yüzölçümü:</strong> <span id="cardArea">783,562 km²</span></div>
+                    <div><strong>Pakt:</strong> <span id="cardPact">NATO, G20</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <div class="panel-block">
+                <h4>Haber Özeti (Detaylı)</h4>
+                <p id="summaryText">Lütfen bir gelişme seçin.</p>
+            </div>
+
+            <div class="panel-block">
+                <h4>Olaydaki Aktörler & Konumları</h4>
+                <div id="countryLegend"></div>
+            </div>
+
+            <div class="panel-block" style="border-left: 3px solid #f59e0b;">
+                <h4 style="color: #f59e0b;">Tarihsel Arka Plan & Derin Hafıza</h4>
+                <p id="historyText">Tarihsel arka plan yükleniyor...</p>
+            </div>
+
+            <a href="#" id="sourceLink" target="_blank" class="source-btn" style="display: none;">Kaynak Habere Git &rarr;</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const countryProfiles = {
+            "Turkey": { trName: "Türkiye", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT" },
+            "Ukraine": { trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı, AGİT" },
+            "Russia": { trName: "Rusya Federasyonu", founding: "1991", pop: "144 Milyon", area: "17,098,242 km²", pact: "BMGK, ŞİÖ, BRICS" },
+            "Greece": { trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO" }
+        };
+
+        const newsData = [
+            {
+                id: 1,
+                title: "Karadeniz Tahıl Koridoru Anlaşması ve Boğazlar Güvenliği",
+                tags: ["#TahılKrizi", "#Diplomasi", "#Türkiye", "#Ukrayna", "#Rusya", "#BM"],
+                summary: "Küresel gıda krizini önlemek amacıyla oluşturulan koridor kapsamında sevkiyat stratejileri yeniden değerlendiriliyor.\n\nSavaş nedeniyle Karadeniz limanlarında sıkışan milyonlarca ton tahılın dünya pazarlarına ulaştırılması için kurulan mekanizma, boğazlar üzerindeki denetimlerle sürdürülüyor. Türkiye ve BM arabuluculuğunda yürütülen görüşmelerde güvenlik garantileri ana gündem maddesidir.",
+                history: "Karadeniz'deki ticaret rotalarının güvenliği tarih boyunca bölgesel güçlerin ana rekabet alanı olmuştur. 1936 Montrö Boğazlar Sözleşmesi, Türkiye'ye boğazlar üzerinde tam yetki vererek Karadeniz'in bir çatışma gölüne dönüşmesini engellemiştir.\n\n2022'de patlak veren Rusya-Ukrayna savaşı, küresel gıda tedarik zincirini etkilemiş, Montrö'nün sağladığı tarafsızlık zemini diplomatik hamleleri mümkün kılmıştır.",
+                link: "https://www.bbc.com",
+                countries: {
+                    "Turkey": { role: "Arabulucu", title: "Türkiye (Arabulucu / Denetim)", color: "#22c55e" },
+                    "Ukraine": { role: "Aktör", title: "Ukrayna (Ana Üretici)", color: "#ef4444" },
+                    "Russia": { role: "Aktör", title: "Rusya (Taraf / Güvenlik)", color: "#ef4444" }
+                }
+            },
+            {
+                id: 2,
+                title: "Doğu Akdeniz Enerji Sahaları ve Navtex Gerilimi",
+                tags: ["#Enerji", "#DoğuAkdeniz", "#Türkiye", "#Yunanistan", "#NATO"],
+                summary: "Bölgedeki münhasır ekonomik bölge tartışmaları ve yeni doğalgaz rezervlerinin keşfi sonrasında naval tatbikatlar artırıldı.\n\nKıta sahanlığı sınırları ve ruhsat sahaları üzerindeki çakışmalar, araştırma gemilerinin faaliyetleriyle yeniden gündeme geldi. İlgili ülkeler deniz yetki alanlarını korumak amacıyla devriyeleri sıklaştırıyor.",
+                history: "Doğu Akdeniz'deki kıta sahanlığı tartışmaları 1970'li yıllara kadar uzanmaktadır. 2010'lu yıllarda devasa doğalgaz sahalarının keşfedilmesi, geleneksel siyasi gerilimi bir 'enerji jeopolitiği' denklemine dönüştürmüştür.",
+                link: "https://www.reuters.com",
+                countries: {
+                    "Turkey": { role: "Aktör", title: "Türkiye (Hak İddiası & Sondaj)", color: "#ef4444" },
+                    "Greece": { role: "Aktör", title: "Yunanistan (Karşı Taraf)", color: "#38bdf8" }
+                }
+            }
+        ];
+
+        const map = L.map('map', { center: [39.0, 35.0], zoom: 3, zoomControl: true });
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
+
+        let geojsonLayer = null;
+        let worldGeoData = null;
+        let currentRoleFilter = 'ALL';
+
+        // Güvenilir TopoJSON / GeoJSON Kaynağından Gerçek Kıvrımlı Sınırları Çek
+        fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
+            .then(res => res.json())
+            .then(data => {
+                worldGeoData = data;
+                renderNewsList();
+            })
+            .catch(err => {
+                // Alternatif yedek sunucu
+                fetch('https://openlayers.org/en/v6.5.0/examples/data/geojson/countries.geojson')
+                    .then(res => res.json())
+                    .then(data => {
+                        worldGeoData = data;
+                        renderNewsList();
+                    });
+            });
+
+        function renderNewsList() {
+            const newsListEl = document.getElementById('newsList');
+            newsListEl.innerHTML = '';
+
+            const filteredNews = newsData.filter(news => {
+                if (currentRoleFilter === 'ALL') return true;
+                return Object.values(news.countries).some(c => c.role === currentRoleFilter);
+            });
+
+            filteredNews.forEach((news, index) => {
+                const card = document.createElement('div');
+                card.className = `news-card ${index === 0 ? 'active' : ''}`;
+                card.onclick = () => selectNews(news, card);
+
+                card.innerHTML = `
+                    <h3>${news.title}</h3>
+                    <div class="tags">
+                        ${news.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                    </div>
+                `;
+                newsListEl.appendChild(card);
+            });
+
+            if (filteredNews.length > 0) {
+                selectNews(filteredNews[0], newsListEl.firstChild);
+            }
+        }
+
+        function selectNews(news, cardEl) {
+            document.querySelectorAll('.news-card').forEach(c => c.classList.remove('active'));
+            if(cardEl) cardEl.classList.add('active');
+
+            document.getElementById('summaryText').innerText = news.summary;
+            document.getElementById('historyText').innerText = news.history;
+            
+            const sourceBtn = document.getElementById('sourceLink');
+            sourceBtn.href = news.link;
+            sourceBtn.style.display = 'block';
+
+            const legendEl = document.getElementById('countryLegend');
+            legendEl.innerHTML = '';
+
+            for (const [code, info] of Object.entries(news.countries)) {
+                legendEl.innerHTML += `
+                    <div class="legend-item" style="cursor:pointer;" onclick="showCountryCard('${code}')">
+                        <span><strong>${countryProfiles[code]?.trName || code}</strong> (${info.role})</span>
+                        <span class="legend-color" style="background: ${info.color}"></span>
+                    </div>
+                `;
+            }
+
+            if (!worldGeoData) return;
+
+            if (geojsonLayer) map.removeLayer(geojsonLayer);
+
+            let highlightedBounds = L.latLngBounds();
+
+            geojsonLayer = L.geoJson(worldGeoData, {
+                style: (feature) => {
+                    // Ülke isimlerini eşleştir (name veya ADMIN alanı)
+                    const countryName = feature.properties.name || feature.properties.ADMIN;
+                    
+                    // İsim dönüştürücü (Turkey -> Turkey/Republic of Turkey vb.)
+                    let matchedKey = null;
+                    if (countryName === "Turkey" || countryName === "Republic of Turkey") matchedKey = "Turkey";
+                    if (countryName === "Ukraine") matchedKey = "Ukraine";
+                    if (countryName === "Russia" || countryName === "Russian Federation") matchedKey = "Russia";
+                    if (countryName === "Greece") matchedKey = "Greece";
+
+                    const activeCountry = matchedKey ? news.countries[matchedKey] : null;
+
+                    if (activeCountry) {
+                        return {
+                            fillColor: activeCountry.color,
+                            fillOpacity: 0.6,
+                            weight: 2,
+                            color: '#ffffff'
+                        };
+                    }
+                    return {
+                        fillColor: '#1e293b',
+                        fillOpacity: 0.05,
+                        weight: 0.5,
+                        color: '#334155'
+                    };
+                },
+                onEachFeature: (feature, layer) => {
+                    const countryName = feature.properties.name || feature.properties.ADMIN;
+                    
+                    let matchedKey = null;
+                    if (countryName === "Turkey" || countryName === "Republic of Turkey") matchedKey = "Turkey";
+                    if (countryName === "Ukraine") matchedKey = "Ukraine";
+                    if (countryName === "Russia" || countryName === "Russian Federation") matchedKey = "Russia";
+                    if (countryName === "Greece") matchedKey = "Greece";
+
+                    const activeCountry = matchedKey ? news.countries[matchedKey] : null;
+
+                    if (activeCountry) {
+                        highlightedBounds.extend(layer.getBounds());
+                        layer.on('click', () => showCountryCard(matchedKey));
+                        layer.bindPopup(`<b>${countryProfiles[matchedKey]?.trName || matchedKey}</b><br>Rol: ${activeCountry.role}`);
+                    }
+                }
+            }).addTo(map);
+
+            if (highlightedBounds.isValid()) {
+                map.fitBounds(highlightedBounds, { padding: [50, 50], maxZoom: 5, animate: true, duration: 1.2 });
+            }
+
+            const firstCountry = Object.keys(news.countries)[0];
+            if(firstCountry) showCountryCard(firstCountry);
+        }
+
+        function showCountryCard(countryCode) {
+            const card = document.getElementById('countryCard');
+            const profile = countryProfiles[countryCode];
+
+            if (profile) {
+                document.getElementById('cardCountryName').innerText = profile.trName;
+                document.getElementById('cardFounding').innerText = profile.founding;
+                document.getElementById('cardPop').innerText = profile.pop;
+                document.getElementById('cardArea').innerText = profile.area;
+                document.getElementById('cardPact').innerText = profile.pact;
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        }
+
+        function filterRole(role) {
+            currentRoleFilter = role;
+            document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            renderNewsList();
+        }
+
+        function filterOrg(org) {
+            alert(org + " filtresi seçildi.");
+        }
+    </script>
+</body>
+</html>
