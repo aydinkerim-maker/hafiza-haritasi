@@ -2,19 +2,20 @@ name: Gunluk Jeopolitik Haber Botu
 
 on:
   schedule:
-    # Her gün UTC ile 05:00 (TSİ 08:00) çalışır
     - cron: '0 5 * * *'
-  workflow_dispatch: # Elle tetikleme butonu ekler
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Depoyu Klonla
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Python Kur
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -25,8 +26,8 @@ jobs:
 
       - name: Degisiklikleri Kaydet ve Push Et
         run: |
-          git config --global user.name 'Geopolitical Bot'
-          git config --global user.email 'bot@noreply.github.com'
-          git add newsData.json
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A
           git commit -m "Otomatik Gunluk Haber Guncellemesi" || exit 0
           git push
