@@ -30,8 +30,8 @@ def get_latest_news():
         return []
 
 def analyze_with_gemini(news_item):
-    # Google AI Studio'da aktif çalışan güncel Gemini endpoint'i
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}"
+    # Doğrudan güncel ve aktif standart Gemini 2.0 Flash endpoint'i
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
     
     prompt = f"""
     Aşağıdaki uluslararası haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama yazma, sadece geçerli bir JSON döndür:
