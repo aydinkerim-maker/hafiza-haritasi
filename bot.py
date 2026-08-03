@@ -31,8 +31,8 @@ def get_latest_news():
         return []
 
 def analyze_with_gemini(news_item):
-    # Standart v1beta endpoint adresi
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}"
+    # Sırayla denenecek kararlı model isimleri
+    models_to_try = ["gemini-1.5-flash", "gemini-1.5-pro"]
     
     prompt = f"""
     Aşağıdaki uluslararası haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama yazma, sadece geçerli bir JSON döndür:
@@ -56,22 +56,26 @@ def analyze_with_gemini(news_item):
     """
 
     data = {"contents": [{"parts": [{"text": prompt}]}]}
-    req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
-    
-    try:
-        response = urllib.request.urlopen(req)
-        raw_response = response.read().decode('utf-8')
-        res_data = json.loads(raw_response)
+
+    for model in models_to_try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
+        req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
         
-        text_response = res_data['candidates'][0]['content']['parts'][0]['text']
-        text_response = text_response.replace("```json", "").replace("```", "").strip()
-        return json.loads(text_response)
-    except urllib.error.HTTPError as e:
-        print(f"API HTTP Hatası: {e.code} - {e.read().decode('utf-8')}")
-        return None
-    except Exception as e:
-        print(f"API Genel Hata: {e}")
-        return None
+        try:
+            print(f"Deneniyor ({model})...")
+            response = urllib.request.urlopen(req)
+            raw_response = response.read().decode('utf-8')
+            res_data = json.loads(raw_response)
+            
+            text_response = res_data['candidates'][0]['content']['parts'][0]['text']
+            text_response = text_response.replace("```json", "").replace("```", "").strip()
+            return json.loads(text_response)
+        except urllib.error.HTTPError as e:
+            print(f"API Hatası ({model}): {e.code} - {e.read().decode('utf-8')}")
+        except Exception as e:
+            print(f"Genel Hata ({model}): {e}")
+            
+    return None
 
 def main():
     if not API_KEY:
@@ -87,8 +91,7 @@ def main():
         if result:
             result['id'] = idx + 1
             processed_news.append(result)
-        # 429 Kota engeline takılmamak için 5 saniye bekleme
-        time.sleep(5)
+        time.sleep(3)
 
     print(f"Toplam İşlenen Haber Sayısı: {len(processed_news)}")
 
