@@ -30,11 +30,11 @@ def get_latest_news():
         return []
 
 def analyze_with_gemini(news_item):
-    # Google REST API standart endpoint adresi
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={API_KEY}"
+    # Google AI Studio'da aktif çalışan güncel Gemini endpoint'i
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}"
     
     prompt = f"""
-    Aşağıdaki uluslararası haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama, giriş veya çıkış cümlesi yazma. Sadece geçerli bir JSON döndür:
+    Aşağıdaki uluslararası haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama yazma, sadece geçerli bir JSON döndür:
 
     Başlık: {news_item['title']}
     İçerik: {news_item['text']}
@@ -54,10 +54,7 @@ def analyze_with_gemini(news_item):
     Ülke isimleri İngilizce standart olsun (Turkey, Russia, Ukraine, Greece, United States vb.).
     """
 
-    data = {
-        "contents": [{"parts": [{"text": prompt}]}]
-    }
-    
+    data = {"contents": [{"parts": [{"text": prompt}]}]}
     req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
     
     try:
