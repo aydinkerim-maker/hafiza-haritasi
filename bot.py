@@ -30,10 +30,11 @@ def get_latest_news():
         return []
 
 def analyze_with_gemini(news_item):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={API_KEY}"
+    # Düzeltilmiş Kararlı Gemini Endpoint (v1/models/gemini-1.5-flash)
+    url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={API_KEY}"
     
     prompt = f"""
-    Aşağıdaki haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir metin yazma, sadece JSON dündür:
+    Aşağıdaki haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir metin veya markdown yazma, sadece geçerli JSON döndür:
 
     Başlık: {news_item['title']}
     İçerik: {news_item['text']}
@@ -70,7 +71,7 @@ def analyze_with_gemini(news_item):
 
 def main():
     if not API_KEY:
-        print("KRİTİK HATA: GEMINI_API_KEY tanımlı değil! Secrets alanını kontrol et.")
+        print("KRİTİK HATA: GEMINI_API_KEY tanımlı değil!")
         return
 
     raw_news = get_latest_news()
