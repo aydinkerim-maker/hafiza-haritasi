@@ -30,20 +30,20 @@ def get_latest_news():
         return []
 
 def analyze_with_gemini(news_item):
-    # Düzeltilmiş Kararlı Gemini Endpoint (v1/models/gemini-1.5-flash)
+    # Düzeltilmiş Kararlı Kararlı Endpoint
     url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={API_KEY}"
     
     prompt = f"""
-    Aşağıdaki haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir metin veya markdown yazma, sadece geçerli JSON döndür:
+    Aşağıdaki uluslararası haberi jeopolitik açıdan analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama, giriş veya çıkış cümlesi yazma. Sadece geçerli bir JSON döndür:
 
     Başlık: {news_item['title']}
     İçerik: {news_item['text']}
 
-    JSON:
+    JSON Şablonu:
     {{
         "title": "Türkçe Başlık",
         "tags": ["#Etiket1", "#Etiket2"],
-        "summary": "10 cümlelik detaylı özet.",
+        "summary": "10 cümlelik tarafsız özet.",
         "history": "10 cümlelik tarihsel hafıza analizi.",
         "link": "{news_item['link']}",
         "countries": {{
@@ -53,12 +53,31 @@ def analyze_with_gemini(news_item):
     }}
     """
 
-    data = {"contents": [{"parts": [{"text": prompt}]}]}
+    # GÜVENLİK AYARLARINI EKLE (Sessiz Reddederse Engeli Kaldırmayı Dene)
+    safety_settings = [
+        {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+        {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+        {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+        {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
+    ]
+
+    data = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "safetySettings": safety_settings # Güvenlik ayarlarını koda gömüyoruz
+    }
+    
     req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
     
     try:
         response = urllib.request.urlopen(req)
-        res_data = json.loads(response.read().decode('utf-8'))
+        raw_response = response.read().decode('utf-8')
+        res_data = json.loads(raw_response)
+        
+        # Sessiz Reddederse (Cevap döner ama boştur) Logla
+        if 'candidates' not in res_data:
+            print(f"API Sessiz Reddetti (Boş Yanıt): {json.dumps(res_data, indent=2)}")
+            return None
+            
         text_response = res_data['candidates'][0]['content']['parts'][0]['text']
         text_response = text_response.replace("```json", "").replace("```", "").strip()
         return json.loads(text_response)
@@ -67,6 +86,7 @@ def analyze_with_gemini(news_item):
         return None
     except Exception as e:
         print(f"API Genel Hata: {e}")
+        print(f"Ham Yanıt: {raw_response if 'raw_response' in locals() else 'Alınamadı'}")
         return None
 
 def main():
