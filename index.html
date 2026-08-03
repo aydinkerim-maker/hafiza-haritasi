@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jeopolitik Hafıza & İstihbarat Portalı</title>
+    <title>KÜRESEL HAFIZA | Stratejik Jeopolitik Analiz</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -19,7 +19,6 @@
             overflow: hidden; 
         }
         
-        /* ASKERİ TEMA HEADER (HUD PANEL) */
         header { 
             background: rgba(10, 15, 29, 0.95); 
             backdrop-filter: blur(16px);
@@ -34,33 +33,33 @@
         
         .header-top { display: flex; justify-content: space-between; align-items: center; }
         
+        /* YENİ VURUCU LOGO VE İSİM */
         .logo { 
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.15rem; 
+            font-size: 1.25rem; 
             font-weight: 900; 
             color: #38bdf8; 
             letter-spacing: 2px; 
             display: flex; 
             align-items: center; 
-            gap: 10px;
+            gap: 12px;
             text-transform: uppercase;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+            text-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
         }
         
-        /* RADAR SIMSİ */
         .radar-box {
             position: relative;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 2px solid #22c55e;
-            box-shadow: 0 0 10px #22c55e;
+            box-shadow: 0 0 12px #22c55e;
             overflow: hidden;
         }
         .radar-sweep {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: conic-gradient(from 0deg, rgba(34,197,94,0.4), transparent 60deg);
+            background: conic-gradient(from 0deg, rgba(34,197,94,0.5), transparent 60deg);
             border-radius: 50%;
             animation: sweep 2s linear infinite;
         }
@@ -70,12 +69,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #22c55e;
             font-weight: 700;
             letter-spacing: 1px;
             background: rgba(34, 197, 94, 0.1);
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 4px;
             border: 1px solid rgba(34, 197, 94, 0.4);
         }
@@ -84,7 +83,6 @@
         .org-menu { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
         .org-menu::-webkit-scrollbar { display: none; }
         
-        /* TACTICAL BUTTONS */
         .org-btn { 
             background: #0f172a; 
             color: #94a3b8; 
@@ -113,7 +111,6 @@
 
         .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #050811; }
         
-        /* SOL PANEL: TACTICAL NEWS FEED */
         .sidebar { width: 360px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
         .role-filter-bar { padding: 10px; background: #050811; border-bottom: 1px solid #1e293b; display: flex; gap: 6px; }
         .role-btn { flex: 1; padding: 6px 2px; font-size: 0.75rem; border: none; border-radius: 3px; cursor: pointer; font-weight: 700; text-align: center; color: #fff; opacity: 0.5; transition: all 0.2s; text-transform: uppercase; }
@@ -143,11 +140,9 @@
         .tags { display: flex; gap: 6px; flex-wrap: wrap; }
         .tag { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.7rem; padding: 2px 8px; border-radius: 3px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; }
 
-        /* HARİTA ALANI */
         .map-container { flex: 1; position: relative; background: #050811; }
         #map { width: 100%; height: 100%; background: #050811; }
 
-        /* ISTIHBARAT KARTI */
         .country-card { 
             position: absolute; 
             top: 20px; 
@@ -165,7 +160,6 @@
         .country-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: #38bdf8; margin-bottom: 10px; border-bottom: 1px solid #1e293b; padding-bottom: 6px; }
         .country-info-grid { font-size: 0.82rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: #cbd5e1; }
 
-        /* SAĞ PANEL: ARŞİV DOSYASI (MEMORANDUM) */
         .info-panel { width: 380px; background: #0a0f1d; border-left: 1px solid #1e293b; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; z-index: 10; }
         .panel-block { background: #0f172a; padding: 14px; border-radius: 6px; border: 1px solid #1e293b; }
         .panel-block h4 { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
@@ -222,7 +216,7 @@
         <div class="header-top">
             <div class="logo">
                 <div class="radar-box"><div class="radar-sweep"></div></div>
-                JEOPOLİTİK HAFIZA PORTALI
+                KÜRESEL HAFIZA
             </div>
             <div class="live-tag">
                 ● CANLI İSTİHBARAT AKIŞI
@@ -314,7 +308,6 @@
             "Egypt": { trName: "Mısır Arap Cumhuriyeti", founding: "1922", pop: "110 Milyon", area: "1,010,408 km²", pact: "Arap Birliği, BRICS" }
         };
 
-        // KESİN TAM EŞLEŞEN KOD LİSTESİ (ÇAKIŞMAYI ÖNLER)
         const orgMemberships = {
             "NATO": ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Latvia", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"],
             "UN": ["ALL"],
@@ -408,12 +401,10 @@
             drawMap();
         }
 
-        // BİREBİR KELİME DÜZELTME HASSASİYETİ (OMAN - ROMANIA ÇAKIŞMASINI ÇÖZER)
         function checkExactMembership(countryName, targetList) {
-            const nameLower = countryName.toLowerCase().strip ? countryName.toLowerCase().strip() : countryName.toLowerCase().trim();
+            const nameLower = countryName.toLowerCase().trim();
             return targetList.some(member => {
                 const memberLower = member.toLowerCase().trim();
-                // Birebir eşleşme veya kelime sınırlarına tam uyum
                 if (nameLower === memberLower) return true;
                 if (nameLower.startsWith(memberLower + " ") || nameLower.endsWith(" " + memberLower)) return true;
                 if (memberLower === "romania" && nameLower.includes("romania")) return true;
