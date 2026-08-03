@@ -7,19 +7,23 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; height: 100vh; display: flex; flex-direction: column; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
         
-        header { background: #1e293b; padding: 10px 20px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.1rem; font-weight: bold; color: #38bdf8; }
-        .org-menu { display: flex; gap: 10px; }
-        .org-btn { background: #334155; color: #cbd5e1; border: 1px solid #475569; padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+        header { background: #1e293b; padding: 10px 15px; border-bottom: 1px solid #334155; display: flex; flex-direction: column; gap: 8px; z-index: 1001; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1rem; font-weight: bold; color: #38bdf8; letter-spacing: 0.5px; }
+        
+        .org-menu { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+        .org-menu::-webkit-scrollbar { display: none; }
+        .org-btn { background: #334155; color: #cbd5e1; border: 1px solid #475569; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
         .org-btn:hover, .org-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
 
-        .app-container { display: flex; flex: 1; overflow: hidden; }
+        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; }
         
-        .sidebar { width: 340px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; }
-        .role-filter-bar { padding: 10px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; gap: 5px; justify-content: space-between; }
-        .role-btn { flex: 1; padding: 6px 2px; font-size: 0.72rem; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: center; color: #fff; opacity: 0.6; transition: 0.2s; }
+        /* Sol Menü: Haberler */
+        .sidebar { width: 340px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; z-index: 10; }
+        .role-filter-bar { padding: 8px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; gap: 4px; justify-content: space-between; }
+        .role-btn { flex: 1; padding: 6px 2px; font-size: 0.7rem; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: center; color: #fff; opacity: 0.6; transition: 0.2s; }
         .role-btn.active, .role-btn:hover { opacity: 1; }
         .role-all { background: #475569; }
         .role-actor { background: #ef4444; }
@@ -27,42 +31,74 @@
         .role-mediator { background: #22c55e; }
 
         .news-list { overflow-y: auto; flex: 1; }
-        .news-card { padding: 15px; border-bottom: 1px solid #334155; cursor: pointer; transition: background 0.2s; }
+        .news-card { padding: 12px 15px; border-bottom: 1px solid #334155; cursor: pointer; transition: background 0.2s; }
         .news-card:hover, .news-card.active { background: #334155; }
-        .news-card h3 { font-size: 0.9rem; margin-bottom: 8px; color: #f1f5f9; line-height: 1.3; }
+        .news-card h3 { font-size: 0.85rem; margin-bottom: 6px; color: #f1f5f9; line-height: 1.3; }
         .tags { display: flex; gap: 4px; flex-wrap: wrap; }
-        .tag { background: #0284c7; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; }
+        .tag { background: #0284c7; color: #fff; font-size: 0.6rem; padding: 2px 5px; border-radius: 3px; }
 
+        /* Harita Alanı */
         .map-container { flex: 1; position: relative; background: #090d16; }
         #map { width: 100%; height: 100%; }
 
-        .country-card { position: absolute; top: 15px; right: 15px; z-index: 1000; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(8px); border: 1px solid #475569; border-radius: 8px; padding: 12px 16px; width: 270px; display: none; }
-        .country-card h3 { font-size: 1rem; color: #38bdf8; margin-bottom: 6px; border-bottom: 1px solid #334155; padding-bottom: 4px; }
-        .country-info-grid { font-size: 0.78rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; color: #cbd5e1; }
+        /* Ülke Kartı */
+        .country-card { position: absolute; top: 15px; right: 15px; z-index: 1000; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(8px); border: 1px solid #475569; border-radius: 8px; padding: 12px 15px; width: 260px; display: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .country-card h3 { font-size: 0.95rem; color: #38bdf8; margin-bottom: 6px; border-bottom: 1px solid #334155; padding-bottom: 4px; }
+        .country-info-grid { font-size: 0.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; color: #cbd5e1; }
 
-        .info-panel { width: 380px; background: #1e293b; border-left: 1px solid #334155; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .panel-block { background: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid #334155; }
-        .panel-block h4 { font-size: 0.8rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; }
-        .panel-block p { font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; white-space: pre-line; }
-        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; margin-top: 6px; }
-        .legend-color { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
-        .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 10px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; }
+        /* Sağ Panel: Analiz */
+        .info-panel { width: 360px; background: #1e293b; border-left: 1px solid #334155; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; z-index: 10; }
+        .panel-block { background: #0f172a; padding: 12px; border-radius: 6px; border: 1px solid #334155; }
+        .panel-block h4 { font-size: 0.75rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .panel-block p { font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; white-space: pre-line; }
+        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; margin-top: 5px; }
+        .legend-color { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+        .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 8px; border-radius: 5px; font-size: 0.8rem; font-weight: bold; }
+
+        /* Mobil Alt Sekme Menüsü (Sadece Mobilde Görünür) */
+        .mobile-tabs { display: none; background: #0f172a; border-top: 1px solid #334155; z-index: 1002; }
+        .tab-btn { flex: 1; padding: 10px 0; border: none; background: none; color: #94a3b8; font-size: 0.75rem; font-weight: bold; cursor: pointer; text-align: center; }
+        .tab-btn.active { color: #38bdf8; border-top: 2px solid #38bdf8; background: #1e293b; }
+
+        /* MOBİL UYUMLULUK SİHRİ (Media Queries) */
+        @media (max-width: 768px) {
+            header { padding: 8px 10px; }
+            .org-menu { padding-bottom: 2px; }
+            .app-container { flex-direction: column; }
+            
+            /* Mobilde Panelleri Gizle/Göster Modu */
+            .sidebar, .info-panel, .map-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
+            
+            .sidebar.mobile-active { display: flex; }
+            .map-container.mobile-active { display: block; }
+            .info-panel.mobile-active { display: flex; width: 100%; border-left: none; }
+            
+            .mobile-tabs { display: flex; }
+            .country-card { top: 10px; right: 10px; left: 10px; width: auto; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">JEOPOLİTİK HAFIZA PORTALI</div>
+        <div class="header-top">
+            <div class="logo">JEOPOLİTİK HAFIZA PORTALI</div>
+        </div>
         <div class="org-menu">
-            <button class="org-btn" onclick="filterOrg('ALL')">Tüm Bölge</button>
+            <button class="org-btn active" onclick="filterOrg('ALL')">Tüm Bölge</button>
             <button class="org-btn" onclick="filterOrg('NATO')">NATO</button>
-            <button class="org-btn" onclick="filterOrg('BM')">BM Güvenlik Konseyi</button>
-            <button class="org-btn" onclick="filterOrg('SCO')">Şangay İşbirliği</button>
+            <button class="org-btn" onclick="filterOrg('BMGK')">BM Güvenlik Konseyi</button>
+            <button class="org-btn" onclick="filterOrg('SCO')">Şanghay İşbirliği</button>
+            <button class="org-btn" onclick="filterOrg('BRICS')">BRICS</button>
+            <button class="org-btn" onclick="filterOrg('TDT')">Türk Devletleri B.</button>
+            <button class="org-btn" onclick="filterOrg('EU')">Avrupa Birliği</button>
+            <button class="org-btn" onclick="filterOrg('ARAB')">Arap Birliği</button>
         </div>
     </header>
 
     <div class="app-container">
-        <div class="sidebar">
+        <!-- Sol Menü: Haber Akışı -->
+        <div class="sidebar" id="sidebarSection">
             <div class="role-filter-bar">
                 <button class="role-btn role-all active" onclick="filterRole('ALL')">Tümü</button>
                 <button class="role-btn role-actor" onclick="filterRole('Aktör')">Aktör</button>
@@ -72,20 +108,22 @@
             <div class="news-list" id="newsList"></div>
         </div>
 
-        <div class="map-container">
+        <!-- Orta: İnteraktif Harita -->
+        <div class="map-container mobile-active" id="mapSection">
             <div id="map"></div>
             <div class="country-card" id="countryCard">
-                <h3 id="cardCountryName">Türkiye Cumhuriyeti</h3>
+                <h3 id="cardCountryName">Ülke Adı</h3>
                 <div class="country-info-grid">
-                    <div><strong>Kuruluş:</strong> <span id="cardFounding">1923</span></div>
-                    <div><strong>Nüfus:</strong> <span id="cardPop">85 Milyon</span></div>
-                    <div><strong>Yüzölçümü:</strong> <span id="cardArea">783,562 km²</span></div>
-                    <div><strong>Pakt:</strong> <span id="cardPact">NATO, G20</span></div>
+                    <div><strong>Kuruluş:</strong> <span id="cardFounding">-</span></div>
+                    <div><strong>Nüfus:</strong> <span id="cardPop">-</span></div>
+                    <div><strong>Yüzölçümü:</strong> <span id="cardArea">-</span></div>
+                    <div><strong>Pakt:</strong> <span id="cardPact">-</span></div>
                 </div>
             </div>
         </div>
 
-        <div class="info-panel">
+        <!-- Sağ: Analiz ve Hafıza Paneli -->
+        <div class="info-panel" id="panelSection">
             <div class="panel-block">
                 <h4>Haber Özeti (Detaylı)</h4>
                 <p id="summaryText">Lütfen bir gelişme seçin.</p>
@@ -105,16 +143,44 @@
         </div>
     </div>
 
+    <!-- Mobil Alt Geçiş Sekmeleri -->
+    <div class="mobile-tabs">
+        <button class="tab-btn" onclick="switchMobileTab('news')">📰 Haberler</button>
+        <button class="tab-btn active" onclick="switchMobileTab('map')">🗺️ Harita</button>
+        <button class="tab-btn" onclick="switchMobileTab('panel')">📊 Analiz</button>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        // Genişletilmiş ve Eksiksiz Ülke Veritabanı
         const countryProfiles = {
             "Turkey": { trName: "Türkiye", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT" },
             "Ukraine": { trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı, AGİT" },
             "Russia": { trName: "Rusya Federasyonu", founding: "1991", pop: "144 Milyon", area: "17,098,242 km²", pact: "BMGK, ŞİÖ, BRICS" },
             "Greece": { trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO" },
-            "United States": { trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, QUAD" },
+            "United States": { trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, BMGK" },
+            "United Kingdom": { trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, BMGK, G7" },
+            "Iran": { trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ, EKO" },
+            "Pakistan": { trName: "Pakistan", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ, İÖT" },
+            "India": { trName: "Hindistan", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ, QUAD" },
             "Israel": { trName: "İsrail", founding: "1948", pop: "9.3 Milyon", area: "20,770 km²", pact: "OECD" },
-            "Palestine": { trName: "Filistin", founding: "1988", pop: "5 Milyon", area: "6,020 km²", pact: "Arap Birliği, İÖT" }
+            "Palestine": { trName: "Filistin", founding: "1988", pop: "5 Milyon", area: "6,020 km²", pact: "Arap Birliği, İÖT" },
+            "Germany": { trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7" },
+            "France": { trName: "Fransa", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, BMGK, G7" },
+            "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BMGK, BRICS, ŞİÖ" },
+            "Egypt": { trName: "Mısır", founding: "1922", pop: "110 Milyon", area: "1,010,408 km²", pact: "Arap Birliği, BRICS, AfB" },
+            "Azerbaijan": { trName: "Azerbaycan", founding: "1991", pop: "10 Milyon", area: "86,600 km²", pact: "TDT, AGİT, Bağlantısızlar" }
+        };
+
+        // Örgüt Üyelik Veritabanı
+        const orgMemberships = {
+            "NATO": ["Turkey", "United States", "United Kingdom", "Greece", "Germany", "France"],
+            "BMGK": ["United States", "United Kingdom", "Russia", "China", "France"],
+            "SCO": ["Russia", "China", "India", "Pakistan", "Iran"],
+            "BRICS": ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Iran"],
+            "TDT": ["Turkey", "Azerbaijan", "Kazakhstan", "Uzbekistan", "Kyrgyzstan"],
+            "EU": ["Germany", "France", "Greece", "Italy", "Spain", "Poland"],
+            "ARAB": ["Egypt", "Saudi Arabia", "UAE", "Palestine", "Iraq", "Syria", "Jordan"]
         };
 
         let newsData = [];
@@ -124,8 +190,10 @@
         let geojsonLayer = null;
         let worldGeoData = null;
         let currentRoleFilter = 'ALL';
+        let activeOrgFilter = 'ALL';
+        let currentSelectedNews = null;
 
-        // Harita Sınırlarını ve Botun Ürettiği Canlı Haberleri Çek
+        // Verileri Çek
         Promise.all([
             fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson').then(r => r.json()),
             fetch('newsData.json').then(r => r.json())
@@ -135,7 +203,7 @@
             renderNewsList();
         }).catch(err => {
             console.error("Veri yükleme hatası:", err);
-            document.getElementById('summaryText').innerText = "Haber verileri yüklenirken bir hata oluştu veya bot henüz ilk veriyi üretmedi.";
+            document.getElementById('summaryText').innerText = "Haber verileri yüklenirken bir hata oluştu.";
         });
 
         function renderNewsList() {
@@ -167,6 +235,7 @@
         }
 
         function selectNews(news, cardEl) {
+            currentSelectedNews = news;
             document.querySelectorAll('.news-card').forEach(c => c.classList.remove('active'));
             if(cardEl) cardEl.classList.add('active');
 
@@ -189,8 +258,11 @@
                 `;
             }
 
-            if (!worldGeoData) return;
+            drawMap();
+        }
 
+        function drawMap() {
+            if (!worldGeoData || !currentSelectedNews) return;
             if (geojsonLayer) map.removeLayer(geojsonLayer);
 
             let highlightedBounds = L.latLngBounds();
@@ -200,57 +272,56 @@
                     const countryName = feature.properties.name || feature.properties.ADMIN;
                     
                     let matchedKey = null;
-                    for (let key of Object.keys(news.countries)) {
+                    for (let key of Object.keys(currentSelectedNews.countries)) {
                         if (countryName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(countryName.toLowerCase())) {
                             matchedKey = key;
                             break;
                         }
                     }
 
-                    const activeCountry = matchedKey ? news.countries[matchedKey] : null;
+                    // Örgüt Filtresi Kontrolü
+                    let isOrgMember = false;
+                    if (activeOrgFilter !== 'ALL') {
+                        const orgList = orgMemberships[activeOrgFilter] || [];
+                        isOrgMember = orgList.some(k => countryName.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(countryName.toLowerCase()));
+                    }
+
+                    const activeCountry = matchedKey ? currentSelectedNews.countries[matchedKey] : null;
+
+                    if (activeOrgFilter !== 'ALL' && isOrgMember) {
+                        return { fillColor: '#0284c7', fillOpacity: 0.8, weight: 2, color: '#38bdf8' };
+                    }
 
                     if (activeCountry) {
-                        return {
-                            fillColor: activeCountry.color,
-                            fillOpacity: 0.65,
-                            weight: 2,
-                            color: '#ffffff'
-                        };
+                        return { fillColor: activeCountry.color, fillOpacity: 0.7, weight: 2, color: '#ffffff' };
                     }
-                    return {
-                        fillColor: '#1e293b',
-                        fillOpacity: 0.05,
-                        weight: 0.5,
-                        color: '#334155'
-                    };
+
+                    return { fillColor: '#1e293b', fillOpacity: 0.05, weight: 0.5, color: '#334155' };
                 },
                 onEachFeature: (feature, layer) => {
                     const countryName = feature.properties.name || feature.properties.ADMIN;
                     
                     let matchedKey = null;
-                    for (let key of Object.keys(news.countries)) {
+                    for (let key of Object.keys(countryProfiles)) {
                         if (countryName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(countryName.toLowerCase())) {
                             matchedKey = key;
                             break;
                         }
                     }
 
-                    const activeCountry = matchedKey ? news.countries[matchedKey] : null;
-
-                    if (activeCountry) {
-                        highlightedBounds.extend(layer.getBounds());
+                    if (matchedKey) {
                         layer.on('click', () => showCountryCard(matchedKey));
-                        layer.bindPopup(`<b>${countryProfiles[matchedKey]?.trName || matchedKey}</b><br>Rol: ${activeCountry.role}`);
+                        if(currentSelectedNews.countries[matchedKey]) {
+                            highlightedBounds.extend(layer.getBounds());
+                            layer.bindPopup(`<b>${countryProfiles[matchedKey]?.trName || matchedKey}</b><br>Rol: ${currentSelectedNews.countries[matchedKey].role}`);
+                        }
                     }
                 }
             }).addTo(map);
 
-            if (highlightedBounds.isValid()) {
-                map.fitBounds(highlightedBounds, { padding: [50, 50], maxZoom: 5, animate: true, duration: 1.2 });
+            if (highlightedBounds.isValid() && activeOrgFilter === 'ALL') {
+                map.fitBounds(highlightedBounds, { padding: [50, 50], maxZoom: 5, animate: true });
             }
-
-            const firstCountry = Object.keys(news.countries)[0];
-            if(firstCountry) showCountryCard(firstCountry);
         }
 
         function showCountryCard(countryCode) {
@@ -265,7 +336,13 @@
                 document.getElementById('cardPact').innerText = profile.pact;
                 card.style.display = 'block';
             } else {
-                card.style.display = 'none';
+                // Eğer veritabanında henüz profil yoksa temel bilgiyi göster
+                document.getElementById('cardCountryName').innerText = countryCode;
+                document.getElementById('cardFounding').innerText = "-";
+                document.getElementById('cardPop').innerText = "-";
+                document.getElementById('cardArea').innerText = "-";
+                document.getElementById('cardPact').innerText = "Bölgesel Aktör";
+                card.style.display = 'block';
             }
         }
 
@@ -277,7 +354,33 @@
         }
 
         function filterOrg(org) {
-            alert(org + " filtresi seçildi.");
+            activeOrgFilter = org;
+            document.querySelectorAll('.org-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            drawMap();
+        }
+
+        // Mobil Sekme Değiştirici
+        function switchMobileTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const sidebar = document.getElementById('sidebarSection');
+            const mapSec = document.getElementById('mapSection');
+            const panel = document.getElementById('panelSection');
+
+            sidebar.classList.remove('mobile-active');
+            mapSec.classList.remove('mobile-active');
+            panel.classList.remove('mobile-active');
+
+            if (tabName === 'news') {
+                sidebar.classList.add('mobile-active');
+            } else if (tabName === 'map') {
+                mapSec.classList.add('mobile-active');
+                setTimeout(() => map.invalidateSize(), 200); // Haritayı mobile tam oturt
+            } else if (tabName === 'panel') {
+                panel.classList.add('mobile-active');
+            }
         }
     </script>
 </body>
