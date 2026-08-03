@@ -33,7 +33,6 @@
         
         .header-top { display: flex; justify-content: space-between; align-items: center; }
         
-        /* YENİ VURUCU LOGO VE İSİM */
         .logo { 
             font-family: 'Orbitron', sans-serif;
             font-size: 1.25rem; 
@@ -45,6 +44,8 @@
             gap: 12px;
             text-transform: uppercase;
             text-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
+            cursor: pointer;
+            user-select: none;
         }
         
         .radar-box {
@@ -77,6 +78,7 @@
             padding: 4px 12px;
             border-radius: 4px;
             border: 1px solid rgba(34, 197, 94, 0.4);
+            cursor: pointer;
         }
 
         .header-controls { display: flex; flex-direction: column; gap: 8px; }
@@ -214,11 +216,11 @@
 
     <header>
         <div class="header-top">
-            <div class="logo">
+            <div class="logo" onclick="window.location.reload()" title="Sayfayı Yenile">
                 <div class="radar-box"><div class="radar-sweep"></div></div>
                 KÜRESEL HAFIZA
             </div>
-            <div class="live-tag">
+            <div class="live-tag" onclick="window.location.reload()" title="Verileri Güncelle">
                 ● CANLI İSTİHBARAT AKIŞI
             </div>
         </div>
@@ -267,17 +269,17 @@
 
         <div class="info-panel" id="panelSection">
             <div class="panel-block">
-                <h4>Saha İstihbarat Özeti</h4>
+                <h4 id="panelTitle">Saha İstihbarat Özeti</h4>
                 <p id="summaryText">Lütfen bir gelişme seçin.</p>
             </div>
 
             <div class="panel-block">
-                <h4>Olaydaki Aktörler & Konumları</h4>
+                <h4 id="legendTitle">Olaydaki Aktörler & Konumları</h4>
                 <div id="countryLegend"></div>
             </div>
 
             <div class="panel-block history-block">
-                <h4>Tarihsel Arka Plan & Derin Hafıza</h4>
+                <h4 id="historyTitle">Tarihsel Arka Plan & Derin Hafıza</h4>
                 <p id="historyText">Tarihsel arka plan yükleniyor...</p>
             </div>
 
@@ -287,6 +289,7 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        // TAM TÜRKÇELEŞTİRİLMİŞ ÜLKE BİLGİ VERİTABANI
         const countryProfiles = {
             "Turkey": { trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT" },
             "Ukraine": { trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı, AGİT" },
@@ -306,6 +309,45 @@
             "India": { trName: "Hindistan Cumhuriyeti", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ, QUAD" },
             "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ" },
             "Egypt": { trName: "Mısır Arap Cumhuriyeti", founding: "1922", pop: "110 Milyon", area: "1,010,408 km²", pact: "Arap Birliği, BRICS" }
+        };
+
+        // ÖRGÜT DETAYLI ANALİZ VERİTABANI (SAĞ PANEL İÇİN)
+        const orgInfoData = {
+            "NATO": {
+                title: "Kuzey Atlas Antlaşması Örgütü (NATO)",
+                summary: "1949 yılında kurulan askeri ve siyasi ittifak. Temel ilkesi kolektif savunmadır (Madde 5). Günümüzde 32 üye ülkeye sahiptir.",
+                history: "Soğuk Savaş döneminde SSCB tehdidine karşı kurulmuş, Doğu Bloku'nun yıkılmasıyla küresel kriz yönetimi ve terörle mücadele odaklı bir yapıya dönüşmüştür. Son dönemde Doğu Avrupa kanadını tahkim etmektedir."
+            },
+            "UN": {
+                title: "Birleşmiş Milletler (BM)",
+                summary: "1945 yılında küresel barış ve güvenliği korumak amacıyla kurulan dünya örgütü. 193 üye devleti bünyesinde barındırır.",
+                history: "İkinci Dünya Savaşı'nın ardından Milletler Cemiyeti'nin yerine kurulmuştur. Güvenlik Konseyi (BMGK) daimi 5 üyesinin (ABD, Rusya, Çin, İngiltere, Fransa) veto hakkı nedeniyle küresel krizlerde kritik rol oynar."
+            },
+            "SCO": {
+                title: "Şanghay İşbirliği Örgütü (ŞİÖ)",
+                summary: "Avrasya bölgesinde güvenlik, ekonomi ve kültür alanında işbirliğini hedefleyen hükümetlerarası örgüt.",
+                history: "1996'da Şanghay Beşlisi olarak başladı, 2001'de kurumsallaştı. Çin ve Rusya liderliğinde Batı paktına alternatif bir Avrasya güç odağı olarak gelişmiş; Hindistan, Pakistan ve İran'ın katılımıyla küresel ağırlığı artmıştır."
+            },
+            "BRICS": {
+                title: "BRICS Küresel Ekonomik Paktı",
+                summary: "Yükselen büyük ekonomilerin küresel finans ve jeopolitik dengelerde söz sahibi olmak için oluşturduğu blok.",
+                history: "Brezilya, Rusya, Hindistan, Çin ve Güney Afrika ile başlayan yapı; Mısır, İran, BAE ve Etiyopya'nın katılımıyla genişlemiş, küresel dolarsızlaşma ve alternatif finansal altyapılar üzerine odaklanmıştır."
+            },
+            "TDT": {
+                title: "Türk Devletleri Teşkilatı (TDT)",
+                summary: "Türk dili konuşan ülkeler arasında kapsamlı işbirliğini hedefleyen uluslararası örgüt.",
+                history: "2009 Nahçıvan Anlaşması ile Türk Keneşi adıyla kurulmuş, 2021'de Teşkilat yapısına kavuşmuştur. Türkiye, Azerbaycan, Kazakistan, Kırgızistan ve Özbekistan tam üye; Macaristan, KKTC ve Türkmenistan gözlemcidir."
+            },
+            "EU": {
+                title: "Avrupa Birliği (AB)",
+                summary: "27 Avrupa ülkesinin siyasi ve ekonomik ortaklık yapısı. Tek pazar ve ortak para birimi (Euro) entegrasyonuna sahiptir.",
+                history: "1951 Kömür ve Çelik Topluluğu'ndan 1992 Maastricht Antlaşması ile bugünkü siyasi birliğe dönüşmüştür. Küresel ticaret ve düzenlemelerde devasa bir güç bloğudur."
+            },
+            "ARAB": {
+                title: "Arap Devletleri Ligi (Arap Birliği)",
+                summary: "Arap coğrafyasındaki 22 üye ülkenin bölgesel işbirliği örgütü.",
+                history: "1945'te Kahire'de kurulmuştur. Üye ülkeler arasında siyasi, ekonomik ve askeri koordinasyonu hedefler. Orta Doğu krizlerinde bölgesel bir platformdur."
+            }
         };
 
         const orgMemberships = {
@@ -378,6 +420,10 @@
 
             document.querySelectorAll('.news-card').forEach(c => c.classList.remove('active'));
             if(cardEl) cardEl.classList.add('active');
+
+            document.getElementById('panelTitle').innerText = "Saha İstihbarat Özeti";
+            document.getElementById('legendTitle').innerText = "Olaydaki Aktörler & Konumları";
+            document.getElementById('historyTitle').innerText = "Tarihsel Arka Plan & Derin Hafıza";
 
             document.getElementById('summaryText').innerText = news.summary;
             document.getElementById('historyText').innerText = news.history;
@@ -510,11 +556,29 @@
             renderNewsList();
         }
 
+        // ÖRGÜT SEÇİLDİĞİNDE SAĞ PANELYİ DOLDUR
         function filterOrg(org) {
             activeOrgFilter = org;
             document.querySelectorAll('.org-btn').forEach(b => b.classList.remove('active'));
             const activeBtn = document.getElementById(`btn-org-${org}`);
             if(activeBtn) activeBtn.classList.add('active');
+
+            if (org !== 'ALL' && orgInfoData[org]) {
+                const info = orgInfoData[org];
+                document.getElementById('panelTitle').innerText = "Örgüt Analizi";
+                document.getElementById('legendTitle').innerText = "Üye Ülke Sayısı";
+                document.getElementById('historyTitle').innerText = "Stratejik & Tarihsel Rolü";
+
+                document.getElementById('summaryText').innerText = info.summary;
+                document.getElementById('historyText').innerText = info.history;
+                
+                const legendEl = document.getElementById('countryLegend');
+                const memberCount = org === 'UN' ? "193 Üye Ülke" : `${(orgMemberships[org] || []).length} Üye Ülke`;
+                legendEl.innerHTML = `<div class="legend-item"><span><strong>${info.title}</strong></span><span class="legend-color" style="background:#0284c7;"></span></div><div class="legend-item"><span>Kapsam: ${memberCount}</span></div>`;
+                
+                document.getElementById('sourceLink').style.display = 'none';
+            }
+
             drawMap();
         }
 
