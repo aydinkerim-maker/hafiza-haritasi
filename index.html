@@ -7,57 +7,200 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
         
-        header { background: #1e293b; padding: 10px 15px; border-bottom: 1px solid #334155; display: flex; flex-direction: column; gap: 8px; z-index: 1001; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #090d16; 
+            color: #f1f5f9; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+        }
+        
+        /* HEADER: Komuta Merkezi Estetiği */
+        header { 
+            background: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(12px);
+            padding: 10px 16px; 
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            z-index: 1001; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
         .header-top { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1rem; font-weight: bold; color: #38bdf8; letter-spacing: 0.5px; }
         
-        .header-controls { display: flex; flex-direction: column; gap: 6px; }
-        .org-menu { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+        .logo { 
+            font-size: 1.05rem; 
+            font-weight: 800; 
+            color: #38bdf8; 
+            letter-spacing: 1px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+            text-transform: uppercase;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+        }
+        
+        /* Canlı Sinyal Işığı */
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.68rem;
+            color: #22c55e;
+            font-weight: 700;
+            background: rgba(34, 197, 94, 0.1);
+            padding: 3px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .header-controls { display: flex; flex-direction: column; gap: 8px; }
+        .org-menu { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
         .org-menu::-webkit-scrollbar { display: none; }
-        .org-btn { background: #334155; color: #cbd5e1; border: 1px solid #475569; padding: 5px 10px; border-radius: 4px; font-size: 0.72rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-        .org-btn:hover, .org-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
-
-        .mobile-view-tabs { display: none; gap: 4px; background: #0f172a; padding: 4px; border-radius: 6px; border: 1px solid #334155; }
-        .tab-btn { flex: 1; padding: 6px 0; border: none; background: #1e293b; color: #94a3b8; font-size: 0.75rem; font-weight: bold; cursor: pointer; border-radius: 4px; text-align: center; }
-        .tab-btn.active { color: #fff; background: #0284c7; }
-
-        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #0f172a; }
         
-        .sidebar { width: 340px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; z-index: 10; }
-        .role-filter-bar { padding: 8px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; gap: 4px; justify-content: space-between; }
-        .role-btn { flex: 1; padding: 6px 2px; font-size: 0.7rem; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: center; color: #fff; opacity: 0.6; transition: 0.2s; }
-        .role-btn.active, .role-btn:hover { opacity: 1; }
+        /* Neon Butonlar */
+        .org-btn { 
+            background: #1e293b; 
+            color: #94a3b8; 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 6px 12px; 
+            border-radius: 6px; 
+            font-size: 0.73rem; 
+            font-weight: 600;
+            cursor: pointer; 
+            white-space: nowrap; 
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .org-btn:hover { background: #334155; color: #fff; border-color: rgba(56, 189, 248, 0.4); }
+        .org-btn.active { 
+            background: linear-gradient(135deg, #0284c7, #0369a1); 
+            color: #fff; 
+            border-color: #38bdf8; 
+            box-shadow: 0 0 12px rgba(2, 132, 199, 0.5);
+        }
+
+        .mobile-view-tabs { display: none; gap: 6px; background: #0f172a; padding: 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
+        .tab-btn { flex: 1; padding: 8px 0; border: none; background: #1e293b; color: #94a3b8; font-size: 0.78rem; font-weight: 700; cursor: pointer; border-radius: 6px; text-align: center; transition: 0.2s; }
+        .tab-btn.active { color: #fff; background: linear-gradient(135deg, #0284c7, #0369a1); box-shadow: 0 0 10px rgba(2, 132, 199, 0.4); }
+
+        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #090d16; }
+        
+        /* SOL MENÜ: Haber Kartları */
+        .sidebar { width: 350px; background: #0f172a; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; z-index: 10; }
+        .role-filter-bar { padding: 10px; background: #090d16; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; gap: 5px; }
+        .role-btn { flex: 1; padding: 7px 2px; font-size: 0.7rem; border: none; border-radius: 5px; cursor: pointer; font-weight: 700; text-align: center; color: #fff; opacity: 0.5; transition: all 0.2s; }
+        .role-btn.active, .role-btn:hover { opacity: 1; transform: translateY(-1px); }
         .role-all { background: #475569; }
-        .role-actor { background: #ef4444; }
-        .role-supporter { background: #38bdf8; }
-        .role-mediator { background: #22c55e; }
+        .role-actor { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+        .role-supporter { background: linear-gradient(135deg, #38bdf8, #0284c7); box-shadow: 0 0 8px rgba(56, 189, 248, 0.4); }
+        .role-mediator { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
 
-        .news-list { overflow-y: auto; flex: 1; }
-        .news-card { padding: 12px 15px; border-bottom: 1px solid #334155; cursor: pointer; transition: background 0.2s; }
-        .news-card:hover, .news-card.active { background: #334155; }
-        .news-card h3 { font-size: 0.85rem; margin-bottom: 6px; color: #f1f5f9; line-height: 1.3; }
+        .news-list { overflow-y: auto; flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .news-card { 
+            padding: 14px; 
+            background: #1e293b; 
+            border-radius: 8px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            cursor: pointer; 
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .news-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: #38bdf8;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .news-card:hover { background: #273549; transform: translateX(3px); }
+        .news-card.active { 
+            background: #273549; 
+            border-color: rgba(56, 189, 248, 0.4); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        .news-card.active::before { opacity: 1; }
+        .news-card h3 { font-size: 0.88rem; margin-bottom: 8px; color: #f8fafc; line-height: 1.4; font-weight: 600; }
         .tags { display: flex; gap: 4px; flex-wrap: wrap; }
-        .tag { background: #0284c7; color: #fff; font-size: 0.6rem; padding: 2px 5px; border-radius: 3px; }
+        .tag { background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-size: 0.63rem; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.2); font-weight: 600; }
 
-        .map-container { flex: 1; position: relative; background: #0f172a; }
-        #map { width: 100%; height: 100%; background: #0f172a; }
+        /* HARİTA ALANI */
+        .map-container { flex: 1; position: relative; background: #090d16; }
+        #map { width: 100%; height: 100%; background: #090d16; }
 
-        .country-card { position: absolute; top: 15px; right: 15px; z-index: 1000; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(8px); border: 1px solid #475569; border-radius: 8px; padding: 12px 15px; width: 260px; display: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        .country-card h3 { font-size: 0.95rem; color: #38bdf8; margin-bottom: 6px; border-bottom: 1px solid #334155; padding-bottom: 4px; }
-        .country-info-grid { font-size: 0.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; color: #cbd5e1; }
+        /* Ülke Kartı Glow */
+        .country-card { 
+            position: absolute; 
+            top: 16px; 
+            right: 16px; 
+            z-index: 1000; 
+            background: rgba(15, 23, 42, 0.92); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(56, 189, 248, 0.3); 
+            border-radius: 10px; 
+            padding: 14px 16px; 
+            width: 270px; 
+            display: none; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 15px rgba(56, 189, 248, 0.15); 
+        }
+        .country-card h3 { font-size: 1rem; color: #38bdf8; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; font-weight: 700; }
+        .country-info-grid { font-size: 0.78rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: #cbd5e1; }
 
-        .info-panel { width: 360px; background: #1e293b; border-left: 1px solid #334155; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; z-index: 10; }
-        .panel-block { background: #0f172a; padding: 12px; border-radius: 6px; border: 1px solid #334155; }
-        .panel-block h4 { font-size: 0.75rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; }
-        .panel-block p { font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; white-space: pre-line; }
-        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; margin-top: 5px; }
-        .legend-color { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
-        .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 8px; border-radius: 5px; font-size: 0.8rem; font-weight: bold; }
+        /* SAĞ PANEL: Analiz & Derin Hafıza */
+        .info-panel { width: 370px; background: #0f172a; border-left: 1px solid rgba(255,255,255,0.08); padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; z-index: 10; }
+        .panel-block { background: #1e293b; padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
+        .panel-block h4 { font-size: 0.75rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.8px; font-weight: 700; }
+        .panel-block p { font-size: 0.82rem; color: #cbd5e1; line-height: 1.6; white-space: pre-line; }
+        
+        .history-block { 
+            border-left: 4px solid #f59e0b; 
+            background: linear-gradient(135deg, rgba(30, 41, 59, 1), rgba(245, 158, 11, 0.05));
+        }
+        .history-block h4 { color: #f59e0b; }
+
+        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .legend-item:last-child { border-bottom: none; }
+        .legend-color { width: 12px; height: 12px; border-radius: 3px; display: inline-block; box-shadow: 0 0 8px currentColor; }
+        
+        .source-btn { 
+            display: inline-block; 
+            width: 100%; 
+            text-align: center; 
+            background: linear-gradient(135deg, #0284c7, #0369a1); 
+            color: #fff; 
+            text-decoration: none; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 0.82rem; 
+            font-weight: 700; 
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            transition: all 0.2s;
+        }
+        .source-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.5); }
 
         @media (max-width: 768px) {
-            header { padding: 8px 10px; }
+            header { padding: 10px; }
             .mobile-view-tabs { display: flex; }
             .app-container { flex-direction: column; }
             
@@ -67,7 +210,7 @@
             .map-container.mobile-active { display: block; }
             .info-panel.mobile-active { display: flex; width: 100%; border-left: none; }
             
-            .country-card { top: 10px; right: 10px; left: 10px; width: auto; }
+            .country-card { top: 12px; right: 12px; left: 12px; width: auto; }
         }
     </style>
 </head>
@@ -75,7 +218,13 @@
 
     <header>
         <div class="header-top">
-            <div class="logo">JEOPOLİTİK HAFIZA PORTALI</div>
+            <div class="logo">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                JEOPOLİTİK HAFIZA PORTALI
+            </div>
+            <div class="live-indicator">
+                <div class="pulse-dot"></div> CANLI AKIŞ
+            </div>
         </div>
         <div class="header-controls">
             <div class="org-menu">
@@ -131,8 +280,8 @@
                 <div id="countryLegend"></div>
             </div>
 
-            <div class="panel-block" style="border-left: 3px solid #f59e0b;">
-                <h4 style="color: #f59e0b;">Tarihsel Arka Plan & Derin Hafıza</h4>
+            <div class="panel-block history-block">
+                <h4>Tarihsel Arka Plan & Derin Hafıza</h4>
                 <p id="historyText">Tarihsel arka plan yükleniyor...</p>
             </div>
 
@@ -221,11 +370,9 @@
             }
         }
 
-        // HABER SEÇİLDİĞİNDE ÖRGÜT FİLTRESİNİ OTOMATİK SIFIRLA
         function selectNews(news, cardEl) {
             currentSelectedNews = news;
             
-            // Eğer harita örgüt modundaysa, haber seçilince "Tüm Bölge" moduna geri dön
             activeOrgFilter = 'ALL';
             document.querySelectorAll('.org-btn').forEach(b => b.classList.remove('active'));
             const defaultOrgBtn = document.getElementById('btn-org-ALL');
@@ -278,7 +425,7 @@
                         if (isOrgMember) {
                             return { fillColor: '#0284c7', fillOpacity: 0.8, weight: 1.5, color: '#38bdf8' };
                         }
-                        return { fillColor: '#1e293b', fillOpacity: 0.05, weight: 0.5, color: '#334155' };
+                        return { fillColor: '#0f172a', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
                     }
 
                     let activeCountry = null;
@@ -295,7 +442,7 @@
                         return { fillColor: activeCountry.color, fillOpacity: 0.85, weight: 2, color: '#ffffff' };
                     }
 
-                    return { fillColor: '#1e293b', fillOpacity: 0.05, weight: 0.5, color: '#334155' };
+                    return { fillColor: '#0f172a', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
                 },
                 onEachFeature: (feature, layer) => {
                     const countryName = feature.properties.name || feature.properties.ADMIN;
