@@ -35,14 +35,10 @@
 
         .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #050811; }
         
+        /* TEMİZ VE SADELEŞTİRİLMİŞ SOL HABER PANELİ */
         .sidebar { width: 360px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
-        .role-filter-bar { padding: 10px; background: #050811; border-bottom: 1px solid #1e293b; display: flex; gap: 6px; }
-        .role-btn { flex: 1; padding: 6px 2px; font-size: 0.75rem; border: none; border-radius: 3px; cursor: pointer; font-weight: 700; text-align: center; color: #fff; opacity: 0.5; transition: all 0.2s; text-transform: uppercase; }
-        .role-btn.active, .role-btn:hover { opacity: 1; }
-        .role-all { background: #334155; }
-        .role-actor { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
-        .role-supporter { background: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.5); }
-        .role-mediator { background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.5); }
+        .tag-search-info { display: none; padding: 8px 12px; background: rgba(56, 189, 248, 0.1); border-bottom: 1px solid rgba(56, 189, 248, 0.2); font-size: 0.78rem; color: #38bdf8; justify-content: space-between; align-items: center; }
+        .clear-tag-btn { background: #ef4444; color: #fff; border: none; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
 
         .news-list { overflow-y: auto; flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
         .news-card { padding: 14px; background: #0f172a; border-radius: 6px; border: 1px solid #1e293b; cursor: pointer; transition: all 0.25s ease; position: relative; }
@@ -50,7 +46,8 @@
         .news-card.active { background: #1e293b; border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.25); }
         .news-card h3 { font-size: 0.95rem; margin-bottom: 8px; color: #f8fafc; line-height: 1.4; font-weight: 600; }
         .tags { display: flex; gap: 6px; flex-wrap: wrap; }
-        .tag { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.7rem; padding: 2px 8px; border-radius: 3px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; }
+        .tag { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.7rem; padding: 2px 8px; border-radius: 3px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; transition: all 0.2s; }
+        .tag:hover { background: #0284c7; color: #fff; }
 
         .map-container { flex: 1; position: relative; background: #050811; }
         #map { width: 100%; height: 100%; background: #050811; }
@@ -121,11 +118,9 @@
 
     <div class="app-container">
         <div class="sidebar" id="sidebarSection">
-            <div class="role-filter-bar">
-                <button class="role-btn role-all active" onclick="filterRole('ALL')">Tümü</button>
-                <button class="role-btn role-actor" onclick="filterRole('Aktör')">Aktör</button>
-                <button class="role-btn role-supporter" onclick="filterRole('Destekçi')">Destekçi</button>
-                <button class="role-btn role-mediator" onclick="filterRole('Arabulucu')">Arabulucu</button>
+            <div class="tag-search-info" id="tagSearchInfo">
+                <span>Filtre: <strong id="activeTagText">#Etiket</strong></span>
+                <button class="clear-tag-btn" onclick="clearTagFilter()">Sıfırla ✕</button>
             </div>
             <div class="news-list" id="newsList"></div>
         </div>
@@ -165,7 +160,25 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // TÜRKÇE İSİM SÖZLÜĞÜ VE VERİTABANI
+        // İNGİLİZCE ÜLKE İSİMLERİNİ BİREBİR TÜRKÇEYE ÇEVİREN KAPSAMLI SÖZLÜK
+        const trNameDict = {
+            "United States": "Amerika Birleşik Devletleri", "United States of America": "Amerika Birleşik Devletleri", "USA": "ABD",
+            "United Kingdom": "Birleşik Krallık (İngiltere)", "Great Britain": "Birleşik Krallık",
+            "Turkey": "Türkiye Cumhuriyeti", "Turkey": "Türkiye",
+            "Russia": "Rusya Federasyonu", "Russian Federation": "Rusya",
+            "China": "Çin Halk Cumhuriyeti", "China": "Çin",
+            "Germany": "Almanya Federal Cumhuriyeti", "Germany": "Almanya",
+            "France": "Fransa Cumhuriyeti", "France": "Fransa",
+            "Greece": "Yunanistan", "Italy": "İtalya", "Spain": "İspanya", "Portugal": "Portekiz",
+            "Iran": "İran İslam Cumhuriyeti", "Iran (Islamic Republic of)": "İran",
+            "Pakistan": "Pakistan İslam Cumhuriyeti", "Pakistan": "Pakistan",
+            "India": "Hindistan Cumhuriyeti", "India": "Hindistan",
+            "Egypt": "Mısır Arap Cumhuriyeti", "Egypt": "Mısır",
+            "Saudi Arabia": "Suudi Arabistan", "Syria": "Suriye", "Iraq": "Irak", "Israel": "İsrail", "Palestine": "Filistin",
+            "Ukraine": "Ukrayna", "Poland": "Polonya", "Romania": "Romanya", "Bulgaria": "Bulgaristan",
+            "Kazakhstan": "Kazakistan", "Uzbekistan": "Özbekistan", "Azerbaijan": "Azerbaycan", "Turkmenistan": "Türkmenistan", "Kyrgyzstan": "Kırgızistan"
+        };
+
         const countryProfiles = {
             "Turkey": { trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT" },
             "Ukraine": { trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı, AGİT" },
@@ -186,13 +199,9 @@
             "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ" },
             "Egypt": { trName: "Mısır Arap Cumhuriyeti", founding: "1922", pop: "110 Milyon", area: "1,010,408 km²", pact: "Arap Birliği, BRICS" },
             "Azerbaijan": { trName: "Azerbaycan Cumhuriyeti", founding: "1991", pop: "10.1 Milyon", area: "86,600 km²", pact: "TDT, İÖT, AGİT" },
-            "Kazakhstan": { trName: "Kazakistan Cumhuriyeti", founding: "1991", pop: "19.8 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ, KGTÖ" },
-            "Uzbekistan": { trName: "Özbekistan Cumhuriyeti", founding: "1991", pop: "36 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ" },
-            "Turkmenistan": { trName: "Türkmenistan", founding: "1991", pop: "6.4 Milyon", area: "488,100 km²", pact: "TDT (Gözlemci), BM" },
-            "Hungary": { trName: "Macaristan", founding: "895", pop: "9.6 Milyon", area: "93,030 km²", pact: "AB, NATO, TDT (Gözlemci)" }
+            "Kazakhstan": { trName: "Kazakistan Cumhuriyeti", founding: "1991", pop: "19.8 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ, KGTÖ" }
         };
 
-        // DERİN ÖRGÜT DETAYLARI VE TÜRKÇE İSİM LİSTELERİ
         const orgInfoData = {
             "NATO": {
                 title: "Kuzey Atlas Antlaşması Örgütü (NATO)",
@@ -210,7 +219,7 @@
                 title: "Şanghay İşbirliği Örgütü (ŞİÖ)",
                 summary: "Avrasya coğrafyasında askeri, ekonomik ve güvenlik işbirliğini hedefleyen Avrasya ittifakı.",
                 history: "1996'da sınır güvenliği için kurulan Şanghay Beşlisi'nin 2001'de büyümesiyle kuruldu. Çin ve Rusya liderliğindeki blok; Hindistan, Pakistan ve İran'ın katılımıyla Avrasya'nın ana güç odağı haline gelmiştir.",
-                membersTr: ["Çin", "Rusya", "Hindistan", "Pakistan", "İran", "Kazakistan", "Özbekistan", "Kırgızistan", "Tacikistan", "Beyaz Rusya"]
+                membersTr: ["Çin", "Rusya", "Hindistan", "Pakistan", "İran", "Kazakhstan", "Özbekistan", "Kırgızistan", "Tacikistan", "Beyaz Rusya"]
             },
             "BRICS": {
                 title: "BRICS Küresel Ekonomik Paktı",
@@ -239,7 +248,7 @@
         };
 
         const orgMemberships = {
-            "NATO": ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Latvia", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"],
+            "NATO": ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Letonya", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"],
             "UN": ["ALL"],
             "SCO": ["Russia", "China", "India", "Pakistan", "Iran", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Tajikistan", "Belarus"],
             "BRICS": ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Ethiopia", "Iran", "United Arab Emirates"],
@@ -249,12 +258,12 @@
         };
 
         let newsData = [];
+        let selectedTagFilter = null;
         const map = L.map('map', { center: [30.0, 15.0], zoom: 2, zoomControl: true });
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
 
         let geojsonLayer = null;
         let worldGeoData = null;
-        let currentRoleFilter = 'ALL';
         let activeOrgFilter = 'ALL';
         let currentSelectedNews = null;
 
@@ -275,8 +284,12 @@
             newsListEl.innerHTML = '';
 
             const filteredNews = newsData.filter(news => {
-                if (currentRoleFilter === 'ALL') return true;
-                return Object.values(news.countries).some(c => c.role === currentRoleFilter);
+                if (!selectedTagFilter) return true;
+                const cleanSelected = selectedTagFilter.toLowerCase().replace('#', '').trim();
+                return news.tags && news.tags.some(t => {
+                    const cleanTag = t.toLowerCase().replace('#', '').trim();
+                    return cleanTag.includes(cleanSelected) || cleanSelected.includes(cleanTag);
+                });
             });
 
             filteredNews.forEach((news, index) => {
@@ -284,18 +297,35 @@
                 card.className = `news-card ${index === 0 ? 'active' : ''}`;
                 card.onclick = () => selectNews(news, card);
 
+                const tagsHtml = news.tags ? news.tags.map(t => `<span class="tag" onclick="filterByTag('${t}', event)">${t}</span>`).join('') : '';
+
                 card.innerHTML = `
                     <h3>${news.title}</h3>
-                    <div class="tags">
-                        ${news.tags ? news.tags.map(t => `<span class="tag">${t}</span>`).join('') : ''}
-                    </div>
+                    <div class="tags">${tagsHtml}</div>
                 `;
                 newsListEl.appendChild(card);
             });
 
             if (filteredNews.length > 0) {
                 selectNews(filteredNews[0], newsListEl.firstChild);
+            } else {
+                document.getElementById('summaryText').innerText = "Bu etikete uygun haber bulunamadı.";
             }
+        }
+
+        // ETİKETE TIKLAYINCA ARAMA/FİLTRELEME FONKSİYONU
+        function filterByTag(tagName, event) {
+            if(event) event.stopPropagation(); // Kart tıklamasını engelle
+            selectedTagFilter = tagName;
+            document.getElementById('activeTagText').innerText = tagName;
+            document.getElementById('tagSearchInfo').style.display = 'flex';
+            renderNewsList();
+        }
+
+        function clearTagFilter() {
+            selectedTagFilter = null;
+            document.getElementById('tagSearchInfo').style.display = 'none';
+            renderNewsList();
         }
 
         function selectNews(news, cardEl) {
@@ -324,9 +354,10 @@
             legendEl.innerHTML = '';
 
             for (const [code, info] of Object.entries(news.countries)) {
+                const turkishName = countryProfiles[code]?.trName || trNameDict[code] || code;
                 legendEl.innerHTML += `
                     <div class="legend-item" style="cursor:pointer;" onclick="showCountryCard('${code}', '${code}')">
-                        <span><strong>${countryProfiles[code]?.trName || code}</strong> (${info.role})</span>
+                        <span><strong>${turkishName}</strong> (${info.role})</span>
                         <span class="legend-color" style="background: ${info.color}"></span>
                     </div>
                 `;
@@ -409,25 +440,27 @@
                         for (let key of Object.keys(currentSelectedNews.countries)) {
                             if (checkExactMembership(countryName, [key])) {
                                 highlightedBounds.extend(layer.getBounds());
-                                layer.bindPopup(`<b>${countryProfiles[key]?.trName || countryName}</b><br>Rol: ${currentSelectedNews.countries[key].role}`);
+                                const turkishName = countryProfiles[key]?.trName || trNameDict[countryName] || countryName;
+                                layer.bindPopup(`<b>${turkishName}</b><br>Rol: ${currentSelectedNews.countries[key].role}`);
                             }
                         }
                     }
                 }
             }).addTo(map);
 
-            // HARİTA DİNAMİK ODAKLAMA
+            // GÜVENLİ VE AKILLI ZOOM (FIT BOUNDS)
             if (activeOrgFilter === 'UN') {
                 map.setView([20.0, 0.0], 2, { animate: true });
             } else if (highlightedBounds.isValid()) {
-                map.fitBounds(highlightedBounds, { padding: [30, 30], maxZoom: 5, animate: true });
+                map.fitBounds(highlightedBounds, { padding: [40, 40], maxZoom: 4, animate: true });
             }
         }
 
-        // AKILLI ÜLKE KARTI (BİLGİSİZ VE İNGİLİZCE ÜLKE KALMAZ)
+        // AKILLI %100 TÜRKÇE ÜLKE KARTI
         function showCountryCard(countryCode, originalName) {
             const card = document.getElementById('countryCard');
             const profile = countryProfiles[countryCode];
+            const cleanTurkishName = profile?.trName || trNameDict[originalName] || trNameDict[countryCode] || originalName || countryCode;
 
             if (profile) {
                 document.getElementById('cardCountryName').innerText = profile.trName;
@@ -436,23 +469,15 @@
                 document.getElementById('cardArea').innerText = profile.area;
                 document.getElementById('cardPact').innerText = profile.pact;
             } else {
-                document.getElementById('cardCountryName').innerText = originalName || countryCode;
+                document.getElementById('cardCountryName').innerText = cleanTurkishName;
                 document.getElementById('cardFounding').innerText = "Egemen Devlet";
-                document.getElementById('cardPop').innerText = "BM Üyesi";
-                document.getElementById('cardArea').innerText = "Uluslararası Veri";
-                document.getElementById('cardPact').innerText = "Bölgesel Aktör";
+                document.getElementById('cardPop').innerText = "BM Üyesi Devlet";
+                document.getElementById('cardArea').innerText = "Bölgesel Veri";
+                document.getElementById('cardPact').innerText = "Uluslararası Aktör";
             }
             card.style.display = 'block';
         }
 
-        function filterRole(role) {
-            currentRoleFilter = role;
-            document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            renderNewsList();
-        }
-
-        // ÖRGÜT DETAY VE ÜYE İSİMLERİ LİSTESİNİ DOLDURAN GELİŞMİŞ FONKSİYON
         function filterOrg(org) {
             activeOrgFilter = org;
             document.querySelectorAll('.org-btn').forEach(b => b.classList.remove('active'));
