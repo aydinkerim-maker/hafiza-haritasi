@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Jeopolitik Hafıza & İstihbarat Portalı</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: #090d16; 
+            font-family: 'Rajdhani', sans-serif; 
+            background: #050811; 
             color: #f1f5f9; 
             height: 100vh; 
             display: flex; 
@@ -18,186 +19,187 @@
             overflow: hidden; 
         }
         
-        /* HEADER: Komuta Merkezi Estetiği */
+        /* ASKERİ TEMA HEADER (HUD PANEL) */
         header { 
-            background: rgba(15, 23, 42, 0.95); 
-            backdrop-filter: blur(12px);
-            padding: 10px 16px; 
-            border-bottom: 1px solid rgba(56, 189, 248, 0.2); 
+            background: rgba(10, 15, 29, 0.95); 
+            backdrop-filter: blur(16px);
+            padding: 12px 20px; 
+            border-bottom: 2px solid #38bdf8; 
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
             display: flex; 
             flex-direction: column; 
             gap: 10px; 
             z-index: 1001; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
+        
         .header-top { display: flex; justify-content: space-between; align-items: center; }
         
         .logo { 
-            font-size: 1.05rem; 
-            font-weight: 800; 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem; 
+            font-weight: 900; 
             color: #38bdf8; 
-            letter-spacing: 1px; 
+            letter-spacing: 2px; 
             display: flex; 
             align-items: center; 
-            gap: 8px;
+            gap: 10px;
             text-transform: uppercase;
-            text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
         }
         
-        /* Canlı Sinyal Işığı */
-        .live-indicator {
+        /* RADAR SIMSİ */
+        .radar-box {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+            overflow: hidden;
+        }
+        .radar-sweep {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: conic-gradient(from 0deg, rgba(34,197,94,0.4), transparent 60deg);
+            border-radius: 50%;
+            animation: sweep 2s linear infinite;
+        }
+        @keyframes sweep { 100% { transform: rotate(360deg); } }
+
+        .live-tag {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.68rem;
+            gap: 8px;
+            font-size: 0.8rem;
             color: #22c55e;
             font-weight: 700;
+            letter-spacing: 1px;
             background: rgba(34, 197, 94, 0.1);
-            padding: 3px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-        .pulse-dot {
-            width: 7px;
-            height: 7px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(34, 197, 94, 0.4);
         }
 
         .header-controls { display: flex; flex-direction: column; gap: 8px; }
-        .org-menu { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+        .org-menu { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
         .org-menu::-webkit-scrollbar { display: none; }
         
-        /* Neon Butonlar */
+        /* TACTICAL BUTTONS */
         .org-btn { 
-            background: #1e293b; 
+            background: #0f172a; 
             color: #94a3b8; 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            padding: 6px 12px; 
-            border-radius: 6px; 
-            font-size: 0.73rem; 
-            font-weight: 600;
+            border: 1px solid #1e293b; 
+            padding: 6px 14px; 
+            border-radius: 4px; 
+            font-size: 0.8rem; 
+            font-weight: 700;
+            letter-spacing: 0.5px;
             cursor: pointer; 
             white-space: nowrap; 
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+            transition: all 0.2s ease; 
+            text-transform: uppercase;
         }
-        .org-btn:hover { background: #334155; color: #fff; border-color: rgba(56, 189, 248, 0.4); }
+        .org-btn:hover { background: #1e293b; color: #fff; border-color: #38bdf8; }
         .org-btn.active { 
-            background: linear-gradient(135deg, #0284c7, #0369a1); 
+            background: #0284c7; 
             color: #fff; 
             border-color: #38bdf8; 
-            box-shadow: 0 0 12px rgba(2, 132, 199, 0.5);
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.6);
         }
 
-        .mobile-view-tabs { display: none; gap: 6px; background: #0f172a; padding: 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
-        .tab-btn { flex: 1; padding: 8px 0; border: none; background: #1e293b; color: #94a3b8; font-size: 0.78rem; font-weight: 700; cursor: pointer; border-radius: 6px; text-align: center; transition: 0.2s; }
-        .tab-btn.active { color: #fff; background: linear-gradient(135deg, #0284c7, #0369a1); box-shadow: 0 0 10px rgba(2, 132, 199, 0.4); }
+        .mobile-view-tabs { display: none; gap: 6px; background: #050811; padding: 4px; border-radius: 6px; border: 1px solid #1e293b; }
+        .tab-btn { flex: 1; padding: 8px 0; border: none; background: #0f172a; color: #94a3b8; font-size: 0.85rem; font-weight: 700; cursor: pointer; border-radius: 4px; text-align: center; }
+        .tab-btn.active { color: #fff; background: #0284c7; box-shadow: 0 0 10px rgba(2, 132, 199, 0.5); }
 
-        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #090d16; }
+        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #050811; }
         
-        /* SOL MENÜ: Haber Kartları */
-        .sidebar { width: 350px; background: #0f172a; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; z-index: 10; }
-        .role-filter-bar { padding: 10px; background: #090d16; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; gap: 5px; }
-        .role-btn { flex: 1; padding: 7px 2px; font-size: 0.7rem; border: none; border-radius: 5px; cursor: pointer; font-weight: 700; text-align: center; color: #fff; opacity: 0.5; transition: all 0.2s; }
-        .role-btn.active, .role-btn:hover { opacity: 1; transform: translateY(-1px); }
-        .role-all { background: #475569; }
-        .role-actor { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
-        .role-supporter { background: linear-gradient(135deg, #38bdf8, #0284c7); box-shadow: 0 0 8px rgba(56, 189, 248, 0.4); }
-        .role-mediator { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
+        /* SOL PANEL: TACTICAL NEWS FEED */
+        .sidebar { width: 360px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
+        .role-filter-bar { padding: 10px; background: #050811; border-bottom: 1px solid #1e293b; display: flex; gap: 6px; }
+        .role-btn { flex: 1; padding: 6px 2px; font-size: 0.75rem; border: none; border-radius: 3px; cursor: pointer; font-weight: 700; text-align: center; color: #fff; opacity: 0.5; transition: all 0.2s; text-transform: uppercase; }
+        .role-btn.active, .role-btn:hover { opacity: 1; }
+        .role-all { background: #334155; }
+        .role-actor { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+        .role-supporter { background: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.5); }
+        .role-mediator { background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.5); }
 
-        .news-list { overflow-y: auto; flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .news-list { overflow-y: auto; flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
         .news-card { 
             padding: 14px; 
-            background: #1e293b; 
-            border-radius: 8px; 
-            border: 1px solid rgba(255,255,255,0.05); 
+            background: #0f172a; 
+            border-radius: 6px; 
+            border: 1px solid #1e293b; 
             cursor: pointer; 
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s ease;
             position: relative;
-            overflow: hidden;
         }
-        .news-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 3px;
-            background: #38bdf8;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .news-card:hover { background: #273549; transform: translateX(3px); }
+        .news-card:hover { background: #1e293b; border-color: #38bdf8; transform: translateX(4px); }
         .news-card.active { 
-            background: #273549; 
-            border-color: rgba(56, 189, 248, 0.4); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            background: #1e293b; 
+            border-color: #38bdf8; 
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
         }
-        .news-card.active::before { opacity: 1; }
-        .news-card h3 { font-size: 0.88rem; margin-bottom: 8px; color: #f8fafc; line-height: 1.4; font-weight: 600; }
-        .tags { display: flex; gap: 4px; flex-wrap: wrap; }
-        .tag { background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-size: 0.63rem; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.2); font-weight: 600; }
+        .news-card h3 { font-size: 0.95rem; margin-bottom: 8px; color: #f8fafc; line-height: 1.4; font-weight: 600; }
+        .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.7rem; padding: 2px 8px; border-radius: 3px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; }
 
         /* HARİTA ALANI */
-        .map-container { flex: 1; position: relative; background: #090d16; }
-        #map { width: 100%; height: 100%; background: #090d16; }
+        .map-container { flex: 1; position: relative; background: #050811; }
+        #map { width: 100%; height: 100%; background: #050811; }
 
-        /* Ülke Kartı Glow */
+        /* ISTIHBARAT KARTI */
         .country-card { 
             position: absolute; 
-            top: 16px; 
-            right: 16px; 
+            top: 20px; 
+            right: 20px; 
             z-index: 1000; 
-            background: rgba(15, 23, 42, 0.92); 
+            background: rgba(10, 15, 29, 0.95); 
             backdrop-filter: blur(12px); 
-            border: 1px solid rgba(56, 189, 248, 0.3); 
-            border-radius: 10px; 
-            padding: 14px 16px; 
-            width: 270px; 
+            border: 1px solid #38bdf8; 
+            border-radius: 6px; 
+            padding: 16px; 
+            width: 280px; 
             display: none; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 15px rgba(56, 189, 248, 0.15); 
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); 
         }
-        .country-card h3 { font-size: 1rem; color: #38bdf8; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; font-weight: 700; }
-        .country-info-grid { font-size: 0.78rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: #cbd5e1; }
+        .country-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: #38bdf8; margin-bottom: 10px; border-bottom: 1px solid #1e293b; padding-bottom: 6px; }
+        .country-info-grid { font-size: 0.82rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: #cbd5e1; }
 
-        /* SAĞ PANEL: Analiz & Derin Hafıza */
-        .info-panel { width: 370px; background: #0f172a; border-left: 1px solid rgba(255,255,255,0.08); padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; z-index: 10; }
-        .panel-block { background: #1e293b; padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
-        .panel-block h4 { font-size: 0.75rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.8px; font-weight: 700; }
-        .panel-block p { font-size: 0.82rem; color: #cbd5e1; line-height: 1.6; white-space: pre-line; }
+        /* SAĞ PANEL: ARŞİV DOSYASI (MEMORANDUM) */
+        .info-panel { width: 380px; background: #0a0f1d; border-left: 1px solid #1e293b; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; z-index: 10; }
+        .panel-block { background: #0f172a; padding: 14px; border-radius: 6px; border: 1px solid #1e293b; }
+        .panel-block h4 { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .panel-block p { font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; white-space: pre-line; }
         
         .history-block { 
             border-left: 4px solid #f59e0b; 
-            background: linear-gradient(135deg, rgba(30, 41, 59, 1), rgba(245, 158, 11, 0.05));
+            background: rgba(245, 158, 11, 0.03);
+            border-top: 1px solid rgba(245, 158, 11, 0.2);
+            border-right: 1px solid rgba(245, 158, 11, 0.2);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
         }
         .history-block h4 { color: #f59e0b; }
 
-        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .legend-item:last-child { border-bottom: none; }
-        .legend-color { width: 12px; height: 12px; border-radius: 3px; display: inline-block; box-shadow: 0 0 8px currentColor; }
+        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; padding: 6px 0; border-bottom: 1px solid #1e293b; }
+        .legend-color { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
         
         .source-btn { 
             display: inline-block; 
             width: 100%; 
             text-align: center; 
-            background: linear-gradient(135deg, #0284c7, #0369a1); 
+            background: #0284c7; 
             color: #fff; 
             text-decoration: none; 
-            padding: 10px; 
-            border-radius: 6px; 
-            font-size: 0.82rem; 
+            padding: 12px; 
+            border-radius: 4px; 
+            font-size: 0.88rem; 
             font-weight: 700; 
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
             transition: all 0.2s;
+            text-transform: uppercase;
         }
-        .source-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.5); }
+        .source-btn:hover { background: #0369a1; box-shadow: 0 0 20px rgba(2, 132, 199, 0.7); }
 
         @media (max-width: 768px) {
             header { padding: 10px; }
@@ -219,11 +221,11 @@
     <header>
         <div class="header-top">
             <div class="logo">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                <div class="radar-box"><div class="radar-sweep"></div></div>
                 JEOPOLİTİK HAFIZA PORTALI
             </div>
-            <div class="live-indicator">
-                <div class="pulse-dot"></div> CANLI AKIŞ
+            <div class="live-tag">
+                ● CANLI İSTİHBARAT AKIŞI
             </div>
         </div>
         <div class="header-controls">
@@ -271,7 +273,7 @@
 
         <div class="info-panel" id="panelSection">
             <div class="panel-block">
-                <h4>Haber Özeti (Detaylı)</h4>
+                <h4>Saha İstihbarat Özeti</h4>
                 <p id="summaryText">Lütfen bir gelişme seçin.</p>
             </div>
 
@@ -303,6 +305,8 @@
             "Italy": { trName: "İtalya Cumhuriyeti", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO, G7" },
             "Germany": { trName: "Almanya Federal Rep.", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7" },
             "France": { trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, BM, G7" },
+            "Romania": { trName: "Romanya", founding: "1877", pop: "19 Milyon", area: "238,397 km²", pact: "AB, NATO" },
+            "Oman": { trName: "Umman Sultanlığı", founding: "1651", pop: "4.5 Milyon", area: "309,500 km²", pact: "Arap Birliği, KİK" },
             "Iran": { trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ, EKO" },
             "Pakistan": { trName: "Pakistan İslam Rep.", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ, İÖT" },
             "India": { trName: "Hindistan Cumhuriyeti", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ, QUAD" },
@@ -310,13 +314,14 @@
             "Egypt": { trName: "Mısır Arap Cumhuriyeti", founding: "1922", pop: "110 Milyon", area: "1,010,408 km²", pact: "Arap Birliği, BRICS" }
         };
 
+        // KESİN TAM EŞLEŞEN KOD LİSTESİ (ÇAKIŞMAYI ÖNLER)
         const orgMemberships = {
-            "NATO": ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Romania", "Bulgaria", "Hungary", "Czech Rep.", "Slovakia", "Albania", "Lithuania", "Latvia", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"],
+            "NATO": ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Latvia", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"],
             "UN": ["ALL"],
             "SCO": ["Russia", "China", "India", "Pakistan", "Iran", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Tajikistan"],
             "BRICS": ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Ethiopia", "Iran", "United Arab Emirates"],
             "TDT": ["Turkey", "Azerbaijan", "Kazakhstan", "Uzbekistan", "Kyrgyzstan"],
-            "EU": ["Germany", "France", "Italy", "Spain", "Greece", "Poland", "Portugal", "Netherlands", "Belgium", "Austria", "Sweden", "Finland", "Denmark", "Ireland", "Czech Rep.", "Slovakia", "Hungary", "Romania", "Bulgaria", "Croatia", "Slovenia", "Estonia", "Latvia", "Lithuania", "Cyprus"],
+            "EU": ["Germany", "France", "Italy", "Spain", "Greece", "Romania", "Poland", "Portugal", "Netherlands", "Belgium", "Austria", "Sweden", "Finland", "Denmark", "Ireland", "Slovakia", "Hungary", "Bulgaria", "Croatia", "Slovenia", "Estonia", "Latvia", "Lithuania", "Cyprus"],
             "ARAB": ["Egypt", "Saudi Arabia", "United Arab Emirates", "Palestine", "Iraq", "Syria", "Jordan", "Algeria", "Morocco", "Tunisia", "Libya", "Sudan", "Oman", "Yemen", "Kuwait", "Qatar", "Bahrain", "Lebanon"]
         };
 
@@ -403,6 +408,20 @@
             drawMap();
         }
 
+        // BİREBİR KELİME DÜZELTME HASSASİYETİ (OMAN - ROMANIA ÇAKIŞMASINI ÇÖZER)
+        function checkExactMembership(countryName, targetList) {
+            const nameLower = countryName.toLowerCase().strip ? countryName.toLowerCase().strip() : countryName.toLowerCase().trim();
+            return targetList.some(member => {
+                const memberLower = member.toLowerCase().trim();
+                // Birebir eşleşme veya kelime sınırlarına tam uyum
+                if (nameLower === memberLower) return true;
+                if (nameLower.startsWith(memberLower + " ") || nameLower.endsWith(" " + memberLower)) return true;
+                if (memberLower === "romania" && nameLower.includes("romania")) return true;
+                if (memberLower === "oman" && (nameLower === "oman" || nameLower === "sultanate of oman")) return true;
+                return false;
+            });
+        }
+
         function drawMap() {
             if (!worldGeoData) return;
             if (geojsonLayer) map.removeLayer(geojsonLayer);
@@ -419,19 +438,19 @@
                             isOrgMember = true;
                         } else {
                             const orgList = orgMemberships[activeOrgFilter] || [];
-                            isOrgMember = orgList.some(k => countryName.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(countryName.toLowerCase()));
+                            isOrgMember = checkExactMembership(countryName, orgList);
                         }
 
                         if (isOrgMember) {
-                            return { fillColor: '#0284c7', fillOpacity: 0.8, weight: 1.5, color: '#38bdf8' };
+                            return { fillColor: '#0284c7', fillOpacity: 0.85, weight: 1.5, color: '#38bdf8' };
                         }
-                        return { fillColor: '#0f172a', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
+                        return { fillColor: '#050811', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
                     }
 
                     let activeCountry = null;
                     if (currentSelectedNews && currentSelectedNews.countries) {
                         for (let key of Object.keys(currentSelectedNews.countries)) {
-                            if (countryName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(countryName.toLowerCase())) {
+                            if (checkExactMembership(countryName, [key])) {
                                 activeCountry = currentSelectedNews.countries[key];
                                 break;
                             }
@@ -442,14 +461,14 @@
                         return { fillColor: activeCountry.color, fillOpacity: 0.85, weight: 2, color: '#ffffff' };
                     }
 
-                    return { fillColor: '#0f172a', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
+                    return { fillColor: '#050811', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
                 },
                 onEachFeature: (feature, layer) => {
                     const countryName = feature.properties.name || feature.properties.ADMIN;
                     
                     let matchedKey = null;
                     for (let key of Object.keys(countryProfiles)) {
-                        if (countryName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(countryName.toLowerCase())) {
+                        if (checkExactMembership(countryName, [key])) {
                             matchedKey = key;
                             break;
                         }
@@ -459,7 +478,7 @@
 
                     if (activeOrgFilter === 'ALL' && currentSelectedNews && currentSelectedNews.countries) {
                         for (let key of Object.keys(currentSelectedNews.countries)) {
-                            if (countryName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(countryName.toLowerCase())) {
+                            if (checkExactMembership(countryName, [key])) {
                                 highlightedBounds.extend(layer.getBounds());
                                 layer.bindPopup(`<b>${countryProfiles[key]?.trName || countryName}</b><br>Rol: ${currentSelectedNews.countries[key].role}`);
                             }
