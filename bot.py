@@ -31,8 +31,8 @@ def get_latest_news():
         return []
 
 def analyze_with_gemini(news_item):
-    # Sırayla denenecek kararlı model isimleri
-    models_to_try = ["gemini-1.5-flash", "gemini-1.5-pro"]
+    # Google AI Studio panelinde senin hesabında açık görünen güncel modeller
+    models_to_try = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash"]
     
     prompt = f"""
     Aşağıdaki uluslararası haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama yazma, sadece geçerli bir JSON döndür:
@@ -69,6 +69,7 @@ def analyze_with_gemini(news_item):
             
             text_response = res_data['candidates'][0]['content']['parts'][0]['text']
             text_response = text_response.replace("```json", "").replace("```", "").strip()
+            print(f"BAŞARILI: {model} yanıt verdi!")
             return json.loads(text_response)
         except urllib.error.HTTPError as e:
             print(f"API Hatası ({model}): {e.code} - {e.read().decode('utf-8')}")
@@ -91,7 +92,7 @@ def main():
         if result:
             result['id'] = idx + 1
             processed_news.append(result)
-        time.sleep(3)
+        time.sleep(2)
 
     print(f"Toplam İşlenen Haber Sayısı: {len(processed_news)}")
 
