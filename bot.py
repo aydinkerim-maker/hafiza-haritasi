@@ -16,12 +16,20 @@ def get_latest_news():
         html = urllib.request.urlopen(req).read()
         root = ET.fromstring(html)
         
-        items = root.findall('.//item')[:8] # 8 haber çek
+        items = root.findall('.//item')[:12]
         news_list = []
         for item in items:
             title = item.find('title').text if item.find('title') is not None else ""
             description = item.find('description').text if item.find('description') is not None else ""
             link = item.find('link').text if item.find('link') is not None else ""
+            
+            # MAGAZİN & EĞLENCE FİLTRESİ
+            ignore_keywords = ["concert", "singer", "pop star", "music", "album", "movie", "actor", "actress", "massive attack", "ariana grande"]
+            combined_text = (title + " " + description).lower()
+            if any(k in combined_text for k in ignore_keywords):
+                print(f"Magazin içerik elendi: {title}")
+                continue
+
             news_list.append({"title": title, "text": description, "link": link})
         return news_list
     except Exception as e:
@@ -32,7 +40,8 @@ def analyze_with_gemini(news_item):
     models_to_try = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash"]
     
     prompt = f"""
-    Aşağıdaki haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama yazma, sadece geçerli bir JSON döndür:
+    Aşağıdaki haberi analiz et. Eğer haber magazin, müzik, spor veya eğlence ile ilgiliyse SADECE "SKIPPED" yaz. 
+    Eğer uluslararası siyaset, askeri, diplomasi veya jeopolitik bir haber ise BİREBİR şu JSON formatında Türkçe yanıt ver:
 
     Başlık: {news_item['title']}
     İçerik: {news_item['text']}
@@ -61,7 +70,11 @@ def analyze_with_gemini(news_item):
         try:
             response = urllib.request.urlopen(req)
             res_data = json.loads(response.read().decode('utf-8'))
-            text_response = res_data['candidates'][0]['content']['parts'][0]['text']
+            text_response = res_data['candidates'][0]['content']['parts'][0]['text'].strip()
+            
+            if "SKIPPED" in text_response:
+                return None
+
             text_response = text_response.replace("```json", "").replace("```", "").strip()
             return json.loads(text_response)
         except Exception:
@@ -74,7 +87,6 @@ def main():
         print("KRİTİK HATA: GEMINI_API_KEY tanımlı değil!")
         return
 
-    # Mevcut haberleri oku
     existing_news = []
     if os.path.exists('newsData.json'):
         try:
@@ -84,31 +96,26 @@ def main():
             existing_news = []
 
     existing_links = {item.get('link') for item in existing_news if 'link' in item}
-
     raw_news = get_latest_news()
     newly_processed = []
 
     for idx, item in enumerate(raw_news):
         if item['link'] in existing_links:
-            print(f"Zaten mevcut, atlanıyor: {item['title']}")
             continue
 
-        print(f"Yeni Haber İşleniyor ({idx+1}): {item['title']}")
+        print(f"Haber İşleniyor: {item['title']}")
         result = analyze_with_gemini(item)
         if result:
             newly_processed.append(result)
         time.sleep(2)
 
-    # Yeni haberleri en üste ekle
     all_news = newly_processed + existing_news
-    
-    # ID'leri yeniden düzenle
     for index, item in enumerate(all_news):
         item['id'] = index + 1
 
     with open('newsData.json', 'w', encoding='utf-8') as f:
         json.dump(all_news, f, ensure_ascii=False, indent=4)
-    print(f"TOPLAM HABER SAYISI: {len(all_news)} - newsData.json güncellendi.")
+    print("newsData.json güncellendi.")
 
 if __name__ == "__main__":
     main()
