@@ -13,21 +13,18 @@
         .header-top { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1rem; font-weight: bold; color: #38bdf8; letter-spacing: 0.5px; }
         
-        /* Üst Menü ve Mobil Sekmeler */
         .header-controls { display: flex; flex-direction: column; gap: 6px; }
         .org-menu { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
         .org-menu::-webkit-scrollbar { display: none; }
         .org-btn { background: #334155; color: #cbd5e1; border: 1px solid #475569; padding: 5px 10px; border-radius: 4px; font-size: 0.72rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
         .org-btn:hover, .org-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
 
-        /* Mobil Üst Sekme Butonları */
         .mobile-view-tabs { display: none; gap: 4px; background: #0f172a; padding: 4px; border-radius: 6px; border: 1px solid #334155; }
         .tab-btn { flex: 1; padding: 6px 0; border: none; background: #1e293b; color: #94a3b8; font-size: 0.75rem; font-weight: bold; cursor: pointer; border-radius: 4px; text-align: center; }
         .tab-btn.active { color: #fff; background: #0284c7; }
 
         .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #0f172a; }
         
-        /* Sol Menü: Haberler */
         .sidebar { width: 340px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; z-index: 10; }
         .role-filter-bar { padding: 8px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; gap: 4px; justify-content: space-between; }
         .role-btn { flex: 1; padding: 6px 2px; font-size: 0.7rem; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: center; color: #fff; opacity: 0.6; transition: 0.2s; }
@@ -44,16 +41,13 @@
         .tags { display: flex; gap: 4px; flex-wrap: wrap; }
         .tag { background: #0284c7; color: #fff; font-size: 0.6rem; padding: 2px 5px; border-radius: 3px; }
 
-        /* Harita Alanı */
         .map-container { flex: 1; position: relative; background: #0f172a; }
         #map { width: 100%; height: 100%; background: #0f172a; }
 
-        /* Ülke Kartı */
         .country-card { position: absolute; top: 15px; right: 15px; z-index: 1000; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(8px); border: 1px solid #475569; border-radius: 8px; padding: 12px 15px; width: 260px; display: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         .country-card h3 { font-size: 0.95rem; color: #38bdf8; margin-bottom: 6px; border-bottom: 1px solid #334155; padding-bottom: 4px; }
         .country-info-grid { font-size: 0.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; color: #cbd5e1; }
 
-        /* Sağ Panel: Analiz */
         .info-panel { width: 360px; background: #1e293b; border-left: 1px solid #334155; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; z-index: 10; }
         .panel-block { background: #0f172a; padding: 12px; border-radius: 6px; border: 1px solid #334155; }
         .panel-block h4 { font-size: 0.75rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; }
@@ -84,18 +78,16 @@
             <div class="logo">JEOPOLİTİK HAFIZA PORTALI</div>
         </div>
         <div class="header-controls">
-            <!-- Örgüt Butonları -->
             <div class="org-menu">
-                <button class="org-btn active" onclick="filterOrg('ALL')">Tüm Bölge</button>
-                <button class="org-btn" onclick="filterOrg('NATO')">NATO</button>
-                <button class="org-btn" onclick="filterOrg('UN')">Birleşmiş Milletler (BM)</button>
-                <button class="org-btn" onclick="filterOrg('SCO')">Şanghay İşbirliği</button>
-                <button class="org-btn" onclick="filterOrg('BRICS')">BRICS</button>
-                <button class="org-btn" onclick="filterOrg('TDT')">Türk Devletleri B.</button>
-                <button class="org-btn" onclick="filterOrg('EU')">Avrupa Birliği (AB)</button>
-                <button class="org-btn" onclick="filterOrg('ARAB')">Arap Birliği</button>
+                <button class="org-btn active" id="btn-org-ALL" onclick="filterOrg('ALL')">Tüm Bölge</button>
+                <button class="org-btn" id="btn-org-NATO" onclick="filterOrg('NATO')">NATO</button>
+                <button class="org-btn" id="btn-org-UN" onclick="filterOrg('UN')">Birleşmiş Milletler (BM)</button>
+                <button class="org-btn" id="btn-org-SCO" onclick="filterOrg('SCO')">Şanghay İşbirliği</button>
+                <button class="org-btn" id="btn-org-BRICS" onclick="filterOrg('BRICS')">BRICS</button>
+                <button class="org-btn" id="btn-org-TDT" onclick="filterOrg('TDT')">Türk Devletleri B.</button>
+                <button class="org-btn" id="btn-org-EU" onclick="filterOrg('EU')">Avrupa Birliği (AB)</button>
+                <button class="org-btn" id="btn-org-ARAB" onclick="filterOrg('ARAB')">Arap Birliği</button>
             </div>
-            <!-- Mobil Sayfa Sekmeleri (Üstte Görünür) -->
             <div class="mobile-view-tabs">
                 <button class="tab-btn" onclick="switchMobileTab('news')">📰 Haberler</button>
                 <button class="tab-btn active" onclick="switchMobileTab('map')">🗺️ Harita</button>
@@ -105,7 +97,6 @@
     </header>
 
     <div class="app-container">
-        <!-- Sol Menü: Haber Akışı -->
         <div class="sidebar" id="sidebarSection">
             <div class="role-filter-bar">
                 <button class="role-btn role-all active" onclick="filterRole('ALL')">Tümü</button>
@@ -116,7 +107,6 @@
             <div class="news-list" id="newsList"></div>
         </div>
 
-        <!-- Orta: İnteraktif Harita -->
         <div class="map-container mobile-active" id="mapSection">
             <div id="map"></div>
             <div class="country-card" id="countryCard">
@@ -130,7 +120,6 @@
             </div>
         </div>
 
-        <!-- Sağ: Analiz ve Hafıza Paneli -->
         <div class="info-panel" id="panelSection">
             <div class="panel-block">
                 <h4>Haber Özeti (Detaylı)</h4>
@@ -232,8 +221,16 @@
             }
         }
 
+        // HABER SEÇİLDİĞİNDE ÖRGÜT FİLTRESİNİ OTOMATİK SIFIRLA
         function selectNews(news, cardEl) {
             currentSelectedNews = news;
+            
+            // Eğer harita örgüt modundaysa, haber seçilince "Tüm Bölge" moduna geri dön
+            activeOrgFilter = 'ALL';
+            document.querySelectorAll('.org-btn').forEach(b => b.classList.remove('active'));
+            const defaultOrgBtn = document.getElementById('btn-org-ALL');
+            if(defaultOrgBtn) defaultOrgBtn.classList.add('active');
+
             document.querySelectorAll('.news-card').forEach(c => c.classList.remove('active'));
             if(cardEl) cardEl.classList.add('active');
 
@@ -269,7 +266,6 @@
                 style: (feature) => {
                     const countryName = feature.properties.name || feature.properties.ADMIN;
 
-                    // ÖRGÜT SEÇİLİYSE: Sadece Örgüt Üyelerini Mavi Yap, Haber Ülkelerini Bulaştırma
                     if (activeOrgFilter !== 'ALL') {
                         let isOrgMember = false;
                         if (activeOrgFilter === 'UN') {
@@ -285,7 +281,6 @@
                         return { fillColor: '#1e293b', fillOpacity: 0.05, weight: 0.5, color: '#334155' };
                     }
 
-                    // TÜM BÖLGE SEÇİLİYSE: Haber Ülkelerini Renklendir
                     let activeCountry = null;
                     if (currentSelectedNews && currentSelectedNews.countries) {
                         for (let key of Object.keys(currentSelectedNews.countries)) {
@@ -361,7 +356,8 @@
         function filterOrg(org) {
             activeOrgFilter = org;
             document.querySelectorAll('.org-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            const activeBtn = document.getElementById(`btn-org-${org}`);
+            if(activeBtn) activeBtn.classList.add('active');
             drawMap();
         }
 
