@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import urllib.request
 import urllib.error
 import xml.etree.ElementTree as ET
@@ -30,8 +31,8 @@ def get_latest_news():
         return []
 
 def analyze_with_gemini(news_item):
-    # Doğrudan güncel ve aktif standart Gemini 2.0 Flash endpoint'i
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
+    # Standart v1beta endpoint adresi
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}"
     
     prompt = f"""
     Aşağıdaki uluslararası haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama yazma, sadece geçerli bir JSON döndür:
@@ -86,6 +87,8 @@ def main():
         if result:
             result['id'] = idx + 1
             processed_news.append(result)
+        # 429 Kota engeline takılmamak için 5 saniye bekleme
+        time.sleep(5)
 
     print(f"Toplam İşlenen Haber Sayısı: {len(processed_news)}")
 
