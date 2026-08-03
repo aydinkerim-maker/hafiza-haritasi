@@ -9,7 +9,6 @@ API_KEY = os.environ.get("GEMINI_API_KEY")
 RSS_URL = "https://feeds.bbci.co.uk/news/world/rss.xml"
 
 print(f"--- BOT BAŞLATILDI ---")
-print(f"API Key Mevcut mu?: {'EVET' if API_KEY else 'HAYIR'}")
 
 def get_latest_news():
     try:
@@ -17,25 +16,23 @@ def get_latest_news():
         html = urllib.request.urlopen(req).read()
         root = ET.fromstring(html)
         
-        items = root.findall('.//item')[:3]
+        items = root.findall('.//item')[:8] # 8 haber çek
         news_list = []
         for item in items:
             title = item.find('title').text if item.find('title') is not None else ""
             description = item.find('description').text if item.find('description') is not None else ""
             link = item.find('link').text if item.find('link') is not None else ""
             news_list.append({"title": title, "text": description, "link": link})
-        print(f"RSS Başarılı: {len(news_list)} haber çekildi.")
         return news_list
     except Exception as e:
         print(f"RSS Hatası: {e}")
         return []
 
 def analyze_with_gemini(news_item):
-    # Google AI Studio panelinde senin hesabında açık görünen güncel modeller
     models_to_try = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash"]
     
     prompt = f"""
-    Aşağıdaki uluslararası haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama yazma, sadece geçerli bir JSON döndür:
+    Aşağıdaki haberi analiz et ve BİREBİR şu JSON formatında Türkçe yanıt ver. Başka hiçbir açıklama yazma, sadece geçerli bir JSON döndür:
 
     Başlık: {news_item['title']}
     İçerik: {news_item['text']}
@@ -52,7 +49,7 @@ def analyze_with_gemini(news_item):
             "Ukraine": {{"role": "Aktör", "color": "#ef4444"}}
         }}
     }}
-    Ülke isimleri İngilizce standart olsun (Turkey, Russia, Ukraine, Greece, United States vb.).
+    Ülke isimleri İngilizce standart olsun (Turkey, Russia, Ukraine, Greece, United States, Iran, Pakistan, India vb.).
     """
 
     data = {"contents": [{"parts": [{"text": prompt}]}]}
@@ -62,19 +59,13 @@ def analyze_with_gemini(news_item):
         req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
         
         try:
-            print(f"Deneniyor ({model})...")
             response = urllib.request.urlopen(req)
-            raw_response = response.read().decode('utf-8')
-            res_data = json.loads(raw_response)
-            
+            res_data = json.loads(response.read().decode('utf-8'))
             text_response = res_data['candidates'][0]['content']['parts'][0]['text']
             text_response = text_response.replace("```json", "").replace("```", "").strip()
-            print(f"BAŞARILI: {model} yanıt verdi!")
             return json.loads(text_response)
-        except urllib.error.HTTPError as e:
-            print(f"API Hatası ({model}): {e.code} - {e.read().decode('utf-8')}")
-        except Exception as e:
-            print(f"Genel Hata ({model}): {e}")
+        except Exception:
+            continue
             
     return None
 
@@ -83,25 +74,41 @@ def main():
         print("KRİTİK HATA: GEMINI_API_KEY tanımlı değil!")
         return
 
+    # Mevcut haberleri oku
+    existing_news = []
+    if os.path.exists('newsData.json'):
+        try:
+            with open('newsData.json', 'r', encoding='utf-8') as f:
+                existing_news = json.load(f)
+        except Exception:
+            existing_news = []
+
+    existing_links = {item.get('link') for item in existing_news if 'link' in item}
+
     raw_news = get_latest_news()
-    processed_news = []
+    newly_processed = []
 
     for idx, item in enumerate(raw_news):
-        print(f"Haber İşleniyor ({idx+1}): {item['title']}")
+        if item['link'] in existing_links:
+            print(f"Zaten mevcut, atlanıyor: {item['title']}")
+            continue
+
+        print(f"Yeni Haber İşleniyor ({idx+1}): {item['title']}")
         result = analyze_with_gemini(item)
         if result:
-            result['id'] = idx + 1
-            processed_news.append(result)
+            newly_processed.append(result)
         time.sleep(2)
 
-    print(f"Toplam İşlenen Haber Sayısı: {len(processed_news)}")
+    # Yeni haberleri en üste ekle
+    all_news = newly_processed + existing_news
+    
+    # ID'leri yeniden düzenle
+    for index, item in enumerate(all_news):
+        item['id'] = index + 1
 
-    if processed_news:
-        with open('newsData.json', 'w', encoding='utf-8') as f:
-            json.dump(processed_news, f, ensure_ascii=False, indent=4)
-        print("DOSYAYA YAZILDI: newsData.json güncellendi.")
-    else:
-        print("UYARI: İşlenen haber olmadığı için dosyaya yazılmadı.")
+    with open('newsData.json', 'w', encoding='utf-8') as f:
+        json.dump(all_news, f, ensure_ascii=False, indent=4)
+    print(f"TOPLAM HABER SAYISI: {len(all_news)} - newsData.json güncellendi.")
 
 if __name__ == "__main__":
     main()
