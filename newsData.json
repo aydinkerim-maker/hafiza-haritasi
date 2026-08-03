@@ -1,1 +1,83 @@
-[]
+[
+    {
+        "title": "Trump, İran ile Yeni Görüşmelerin Pazartesi Günü Başlayacağını Öne Sürdü",
+        "tags": [
+            "#Trump",
+            "#İran",
+            "#Diplomasi",
+            "#ABD"
+        ],
+        "summary": "ABD'nin eski başkanı Donald Trump, İran ile yeni müzakerelerin Pazartesi günü başlayabileceğini öne sürdü. Tahran yönetimi, bu iddialara ve görüşmelerin yakın zamanda başlayacağına dair öneriye henüz resmi bir yanıt vermedi. Trump, daha önce de benzer şekilde savaşın müzakereler yoluyla sona ermesinin çok yakın olduğunu iddia etmişti. Ancak bu tür iddiaların ardından bölgedeki askeri saldırıların ve çatışmaların yeniden hız kazandığı görülmüştü. Trump'ın bu açıklaması, uluslararası kamuoyunda diplomatik bir hareketlilik beklentisi yarattı. İran tarafının sessizliği, Trump'ın önerisine karşı temkinli bir yaklaşım sergilediklerini gösteriyor. Bölgesel gerilimlerin gölgesinde yapılacak olası bir görüşme, Orta Doğu dengelerini kökten değiştirebilir. Analistler, Trump'ın bu çıkışının iç politika malzemesi veya diplomatik bir baskı aracı olabileceğini belirtiyor. Savaşın sona ermesine yönelik müzakere umutları, sahadaki fiili çatışmalar nedeniyle sık sık sekteye uğramaktadır. Sonuç olarak, Pazartesi günü için planlanan bu olası görüşmenin gerçekleşip gerçekleşmeyeceği belirsizliğini koruyor.",
+        "history": "ABD ve İran arasındaki diplomatik ilişkiler, 1979 İslam Devrimi'nden bu yana kronik bir gerilim hattında ilerlemektedir. Donald Trump, başkanlığı döneminde İran'a karşı 'maksimum baskı' politikasını benimsemiş ve sert yaptırımları devreye sokmuştu. Trump yönetimi, 2018 yılında Kapsamlı Ortak Eylem Planı (JCPOA) olarak bilinen nükleer anlaşmadan tek taraflı olarak çekilmişti. Bu çekilme kararı, iki ülke arasındaki güven bunalımını derinleştirerek diplomatik kanalların neredeyse tamamen tıkanmasına yol açtı. İranlı general Kasım Süleymani'nin 2020'de ABD tarafından suikastla öldürülmesi, ilişkileri doğrudan askeri çatışmanın eşiğine getirdi. Tarihsel süreçte taraflar, doğrudan görüşmeler yerine genellikle üçüncü ülkeler veya gizli kanallar aracılığıyla iletişim kurmayı tercih etti. Trump'ın geçmişte Kuzey Kore ve diğer krizlerde de benzer 'görüşme yakın' açıklamaları yaptığı ancak somut sonuçlar alınamadığı bilinmektedir. İran ise ABD'nin yaptırımları kaldırmasını her türlü doğrudan müzakerenin ön koşulu olarak sunmaya devam etmektedir. Geçmişteki başarısız ateşkes ve müzakere girişimleri, bölgedeki aktörlerin bu tür ani diplomatik çıkışlara şüpheyle yaklaşmasına neden olmaktadır. Sonuç olarak, iki ülkenin tarihsel bagajı, liderlerin bireysel açıklamalarının ötesinde yapısal engeller barındırmaktadır.",
+        "link": "https://www.bbc.co.uk/news/articles/c23579jzv08o?at_medium=RSS&at_campaign=rss",
+        "countries": {
+            "United States": {
+                "role": "Baş Aktör",
+                "color": "#ef4444"
+            },
+            "Iran": {
+                "role": "Hedef Aktör",
+                "color": "#22c55e"
+            }
+        },
+        "id": 1
+    },
+    {
+        "title": "'Tek oğlum adalet ararken vuruldu' - Pakistan kontrolündeki Keşmir'de ölümcül protestoların odağındaki şehir Rawalakot'un içinden",
+        "tags": [
+            "#Keşmir",
+            "#Pakistan",
+            "#Rawalakot",
+            "#Protesto",
+            "#İnsanHakları",
+            "#Enflasyon",
+            "#ŞiddetOlayları"
+        ],
+        "summary": "Pakistan kontrolündeki Keşmir'in Rawalakot kentinde, güvenlik güçleri ile protestocular arasında şiddetli çatışmalar yaşandı. Gösteriler, artan enflasyon, yüksek elektrik faturaları ve un fiyatlarındaki fahiş artışlar nedeniyle başladı. BBC ekibi, bölgede uygulanan sıkı güvenlik önlemlerine ve iletişim kesintilerine rağmen şehre özel erişim sağladı. Olaylar sırasında, adalet arayışında olduğunu belirten sivillerden biri olan genç bir adam güvenlik güçlerince vurularak hayatını kaybetti. Hayatını kaybeden gencin ailesi, oğullarının barışçıl protestolara katıldığını ve haksız yere hedef alındığını savundu. Halk Awami Eylem Komitesi (JAAC) öncülüğünde düzenlenen gösteriler, bölge genelinde hayatı durma noktasına getirdi. Güvenlik güçleri, kalabalığı dağıtmak için göz yaşartıcı gaz ve gerçek mermi kullanmakla suçlanıyor. Pakistan hükümeti, gerilimi düşürmek amacıyla bölgeye yönelik bazı ekonomik sübvansiyonlar paketi açıkladı. Ancak halk, bu vaatlerin geçici olduğunu ve bölgedeki derin ekonomik krizin çözülmediğini belirterek tepki göstermeye devam ediyor. Bölgedeki gergin bekleyiş sürerken, hayatını kaybedenlerin yakınları sorumluların adalet önünde hesap vermesini talep ediyor.",
+        "history": "Keşmir sorunu, 1947 yılında Hindistan ve Pakistan'ın İngiliz sömürge yönetiminden bağımsızlıklarını kazanmasıyla başladı. Bölge, o tarihten bu yana her iki nükleer güç arasında üç büyük savaşa ve sayısız sınır çatışmasına neden oldu. Pakistan kontrolündeki Keşmir (Azad Keşmir), teoride özerk bir yapıya sahip olsa da pratikte İslamabad yönetiminin sıkı kontrolü altındadır. Bölge halkı, yıllardır merkezi hükümet tarafından ekonomik ve siyasi olarak ihmal edildiklerini savunmaktadır. Pakistan'ın yaşadığı kronik ekonomik kriz ve IMF anlaşmaları, Keşmir gibi hassas bölgelerde yaşam maliyetlerini katlanılamaz hale getirdi. Hindistan ile yaşanan jeopolitik rekabet, Keşmir'deki her türlü yerel muhalefetin ulusal güvenlik tehdidi olarak görülmesine yol açmaktadır. Geçmişte de bölgede benzer ekonomik taleplerle protestolar düzenlenmiş ancak her defasında sert askeri önlemlerle bastırılmıştır. Keşmir'in her iki yakasındaki halk, sınır hatlarındaki askeri hareketlilik ve hak ihlalleri nedeniyle sürekli bir baskı altında yaşamaktadır. Uluslararası toplum ve insan hakları örgütleri, bölgedeki internet kesintileri ve basın özgürlüğü kısıtlamalarını sıkça eleştirmektedir. Son yaşanan Rawalakot olayları, Keşmir'deki sosyal huzursuzluğun sadece sınır çatışmalarıyla sınırlı olmadığını, derin sosyo-ekonomik temelleri olduğunu bir kez daha gösterdi.",
+        "link": "https://www.bbc.co.uk/news/articles/c5yvqk69enko?at_medium=RSS&at_campaign=rss",
+        "countries": {
+            "Pakistan": {
+                "role": "Güvenlik güçlerinin sert müdahaleleri ve ekonomik kriz sebebiyle protestoların merkezinde yer alan yönetici devlet.",
+                "color": "#ef4444"
+            },
+            "India": {
+                "role": "Keşmir bölgesi üzerinde hak iddia eden ve bölgedeki istikrarsızlığı yakından takip eden sınır komşusu ve rakip aktör.",
+                "color": "#eab308"
+            },
+            "United Kingdom": {
+                "role": "1947 yılındaki çekilme sürecinde Keşmir sınırlarını belirsiz bırakarak sorunun tarihsel temelini atan eski sömürgeci güç.",
+                "color": "#3b82f6"
+            }
+        },
+        "id": 2
+    },
+    {
+        "title": "Yunanistan'da Yangın Söndürme Helikopterlerinin Çarpışması Sonucu İki Mürettebat Hayatını Kaybetti, İngiliz Pilot Kurtuldu",
+        "tags": [
+            "#Yunanistan",
+            "#HelikopterKazası",
+            "#YangınSöndürme",
+            "#HavacılıkKazası",
+            "#DoğalAfet"
+        ],
+        "summary": "Yunanistan'da orman yangınlarıyla mücadele eden iki helikopterin havada çarpışması sonucu feci bir kaza meydana geldi. Yaşanan bu trajik olayda helikopterlerde görevli iki mürettebat üyesinin hayatını kaybettiği bildirildi. Kazada yaşamını yitiren personellerden birinin Danimarka, diğerinin ise Yunanistan vatandaşı olduğu açıklandı. Olay esnasında helikopterde bulunan bir İngiliz pilot ise kazadan sağ kurtulmayı başardı. İngiliz pilotun yanı sıra diğer helikopterdeki bir başka Yunan mürettebat üyesi de kazayı yaralı olarak atlattı. Kazanın, yangın söndürme operasyonlarının en yoğun olduğu kritik bir bölgede gerçekleştiği belirtildi. Yetkililer, çarpışmanın kesin nedenini belirlemek amacıyla geniş çaplı bir soruşturma başlattı. Bölgedeki şiddetli rüzgarların ve yoğun dumanın görüş mesafesini düşürerek kazaya sebebiyet vermiş olabileceği üzerinde duruluyor. Hayatını kaybedenlerin ailelerine taziye mesajları iletilirken, kurtulanların tedavilerine hemen başlandı. Bu acı olay, Akdeniz genelinde her geçen yıl artan orman yangınlarıyla mücadelenin ne kadar tehlikeli olduğunu bir kez daha gözler önüne serdi.",
+        "history": "Yunanistan, coğrafi konumu ve iklim yapısı nedeniyle her yıl yaz aylarında çok şiddetli orman yangınlarıyla karşı karşıya kalmaktadır. Son yıllarda küresel iklim değişikliğinin etkisiyle ülkede sıcaklık rekorları kırılmakta ve yangınların sıklığı artmaktadır. Atina yönetimi, yetersiz yerel altyapı sebebiyle her büyük yangın döneminde uluslararası yardım çağrısında bulunmak zorunda kalmaktadır. Avrupa Birliği Sivil Koruma Mekanizması kapsamında her yıl farklı ülkelerden helikopterler ve pilotlar bölgeye sevk edilmektedir. Geçmiş yıllarda da benzer şekilde yabancı pilotların ve mürettebatın katıldığı operasyonlarda ölümcül kazalar yaşanmıştır. Özellikle 2007 ve 2018 yıllarında meydana gelen mega yangınlar, ülkenin afet yönetim tarihindeki en büyük felaketler olarak kayıtlara geçmiştir. Akdeniz havzasındaki yangın söndürme operasyonlarında koordinasyon eksikliği ve zorlu hava şartları en büyük risk faktörleridir. Bu kazada hayatını kaybeden Danimarkalı mürettebat, uluslararası dayanışmanın ve bu mücadeledeki küresel risklerin somut bir örneğidir. Havacılık uzmanları, dumanla kaplı hava sahalarında birden fazla hava aracının koordinasyonunun her zaman çok yüksek risk barındırdığını vurgulamaktadır. Tarih boyunca yaşanan bu kayıplar, yangınla mücadele stratejilerinde teknolojik yenilenme ve daha sıkı uçuş güvenliği protokolleri ihtiyacını sürekli gündemde tutmaktadır.",
+        "link": "https://www.bbc.co.uk/news/articles/c1417713ve6o?at_medium=RSS&at_campaign=rss",
+        "countries": {
+            "Greece": {
+                "role": "Ev Sahibi ve Kurban",
+                "color": "#3b82f6"
+            },
+            "Denmark": {
+                "role": "Kurban",
+                "color": "#ef4444"
+            },
+            "United Kingdom": {
+                "role": "Aktör",
+                "color": "#22c55e"
+            }
+        },
+        "id": 3
+    }
+]
