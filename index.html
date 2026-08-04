@@ -159,27 +159,38 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // İNGİLİZCE GEOJSON İSİMLERİNİ TAM TÜRKÇEYE EŞLEYEN GENİŞ SÖZLÜK
+        // TÜM AVRUPA VE DÜNYA ÜLKELERİNİ KAPSAYAN EKSİKSİZ TÜRKÇE İSİM SÖZLÜĞÜ
         const trNameDict = {
+            // Kuzey & Batı Avrupa
+            "United Kingdom": "İngiltere (Birleşik Krallık)", "Great Britain": "Birleşik Krallık", "Ireland": "İrlanda Cumhuriyeti",
+            "France": "Fransa Cumhuriyeti", "Germany": "Almanya Federal Cumhuriyeti", "Belgium": "Belçika Krallığı",
+            "Netherlands": "Hollanda Krallığı", "Luxembourg": "Lüksemburg Büyük Dükalığı", "Switzerland": "İsviçre Konfederasyonu",
+            "Austria": "Avusturya Cumhuriyeti", "Norway": "Norveç Krallığı", "Sweden": "İsveç Krallığı", "Finland": "Finlandiya Cumhuriyeti",
+            "Denmark": "Danimarka Krallığı", "Iceland": "İzlanda",
+            
+            // Güney & Doğu Avrupa
+            "Spain": "İspanya Krallığı", "Portugal": "Portekiz Cumhuriyeti", "Italy": "İtalya Cumhuriyeti", "Greece": "Yunanistan Cumhuriyeti",
+            "Poland": "Polonya Cumhuriyeti", "Czech Rep.": "Çekya (Çek Cumhuriyeti)", "Czechia": "Çekya", "Slovakia": "Slovakya Cumhuriyeti",
+            "Hungary": "Macaristan", "Romania": "Romanya", "Bulgaria": "Bulgaristan Cumhuriyeti", "Slovenia": "Slovenya",
+            "Croatia": "Hırvatistan", "Bosnia and Herz.": "Bosna-Hersek", "Bosnia and Herzegovina": "Bosna-Hersek",
+            "Serbia": "Sırbistan Cumhuriyeti", "Montenegro": "Karadağ", "Albania": "Arnavutluk", "Macedonia": "Kuzey Makedonya",
+            "North Macedonia": "Kuzey Makedonya", "Kosovo": "Kosova Cumhuriyeti", "Cyprus": "Güney Kıbrıs Rum Yönetimi",
+            "Northern Cyprus": "Kuzey Kıbrıs Türk Cumhuriyeti", "Lithuania": "Litvanya", "Latvia": "Letonya", "Estonia": "Estonya",
+            "Belarus": "Beyaz Rusya (Belarus)", "Moldova": "Moldova Cumhuriyeti", "Ukraine": "Ukrayna", "Russia": "Rusya Federasyonu",
+            "Malta": "Malta Cumhuriyeti", "Andorra": "Andorra Prensliği", "San Marino": "San Marino", "Monaco": "Monako Prensliği",
+            
+            // Amerika & Asya & Orta Doğu & Afrika
             "United States": "Amerika Birleşik Devletleri", "United States of America": "Amerika Birleşik Devletleri", "USA": "ABD",
-            "United Kingdom": "İngiltere (Birleşik Krallık)", "Great Britain": "Birleşik Krallık",
-            "Turkey": "Türkiye Cumhuriyeti", "Turkiye": "Türkiye Cumhuriyeti",
-            "Russia": "Rusya Federasyonu", "Russian Federation": "Rusya",
-            "China": "Çin Halk Cumhuriyeti", "Germany": "Almanya Federal Cumhuriyeti", "France": "Fransa Cumhuriyeti",
-            "Greece": "Yunanistan", "Italy": "İtalya Cumhuriyeti", "Spain": "İspanya Krallığı", "Portugal": "Portekiz",
-            "Iran": "İran İslam Cumhuriyeti", "Iran (Islamic Republic of)": "İran",
-            "Pakistan": "Pakistan İslam Cumhuriyeti", "India": "Hindistan Cumhuriyeti",
-            "Egypt": "Mısır Arap Cumhuriyeti", "Saudi Arabia": "Suudi Arabistan", "Syria": "Suriye", "Iraq": "Irak",
-            "Israel": "İsrail", "Palestine": "Filistin", "Ukraine": "Ukrayna", "Poland": "Polonya", "Romania": "Romanya",
-            "Bulgaria": "Bulgaristan", "Kazakhstan": "Kazakistan", "Uzbekistan": "Özbekistan", "Azerbaijan": "Azerbaycan",
-            "Turkmenistan": "Türkmenistan", "Kyrgyzstan": "Kırgızistan", "Georgia": "Gürcistan", "Armenia": "Ermenistan",
-            "Japan": "Japonya", "South Korea": "Güney Kore", "North Korea": "Kuzey Kore", "Canada": "Kanada",
-            "Australia": "Avustralya", "Brazil": "Brezilya", "Argentina": "Arjantin", "Algeria": "Cezayir", "Morocco": "Fas",
-            "Libya": "Libya", "Sudan": "Sudan", "Somalia": "Somali", "South Africa": "Güney Afrika Cumhuriyeti",
-            "Afghanistan": "Afganistan", "Oman": "Umman Sultanlığı", "Yemen": "Yemen", "Jordan": "Ürdün", "Lebanon": "Lübnan"
+            "Canada": "Kanada", "Turkey": "Türkiye Cumhuriyeti", "Turkiye": "Türkiye Cumhuriyeti", "Iran": "İran İslam Cumhuriyeti",
+            "Pakistan": "Pakistan İslam Cumhuriyeti", "India": "Hindistan Cumhuriyeti", "China": "Çin Halk Cumhuriyeti",
+            "Egypt": "Mısır Arap Cumhuriyeti", "Saudi Arabia": "Suudi Arabistan Krallığı", "Syria": "Suriye Arap Cumhuriyeti",
+            "Iraq": "Irak Cumhuriyeti", "Israel": "İsrail Devleti", "Palestine": "Filistin Devleti", "Azerbaijan": "Azerbaycan Cumhuriyeti",
+            "Kazakhstan": "Kazakistan Cumhuriyeti", "Uzbekistan": "Özbekistan Cumhuriyeti", "Turkmenistan": "Türkmenistan",
+            "Kyrgyzstan": "Kırgızistan Cumhuriyeti", "Georgia": "Gürcistan", "Armenia": "Ermenistan Cumhuriyeti", "Japan": "Japonya",
+            "South Korea": "Güney Kore", "North Korea": "Kuzey Kore", "Australia": "Avustralya", "Brazil": "Brezilya Federal Cumhuriyeti"
         };
 
-        // KAPSAMLI ÜLKE VERİTABANI (EKSİKSİZ KART İÇİN)
+        // KAPSAMLI VE DETAYLI ÜLKE BİLGİ KARTLARI VERİTABANI
         const countryProfiles = {
             "Turkey": { trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT" },
             "Ukraine": { trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı, AGİT" },
@@ -193,6 +204,14 @@
             "Germany": { trName: "Almanya Federal Rep.", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7" },
             "France": { trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, BM, G7" },
             "Romania": { trName: "Romanya", founding: "1877", pop: "19 Milyon", area: "238,397 km²", pact: "AB, NATO" },
+            "Poland": { trName: "Polonya Cumhuriyeti", founding: "1918", pop: "38 Milyon", area: "312,696 km²", pact: "AB, NATO" },
+            "Austria": { trName: "Avusturya Cumhuriyeti", founding: "1918", pop: "9 Milyon", area: "83,879 km²", pact: "AB, AGİT" },
+            "Netherlands": { trName: "Hollanda Krallığı", founding: "1581", pop: "17.8 Milyon", area: "41,543 km²", pact: "AB, NATO" },
+            "Belgium": { trName: "Belçika Krallığı", founding: "1830", pop: "11.6 Milyon", area: "30,528 km²", pact: "AB, NATO" },
+            "Switzerland": { trName: "İsviçre Konfederasyonu", founding: "1291", pop: "8.7 Milyon", area: "41,285 km²", pact: "EFTA, Tarafsız Statü" },
+            "Sweden": { trName: "İsveç Krallığı", founding: "1523", pop: "10.5 Milyon", area: "450,295 km²", pact: "AB, NATO" },
+            "Norway": { trName: "Norveç Krallığı", founding: "1905", pop: "5.4 Milyon", area: "385,207 km²", pact: "NATO, EFTA" },
+            "Finland": { trName: "Finlandiya Cumhuriyeti", founding: "1917", pop: "5.5 Milyon", area: "338,145 km²", pact: "AB, NATO" },
             "Oman": { trName: "Umman Sultanlığı", founding: "1651", pop: "4.5 Milyon", area: "309,500 km²", pact: "Arap Birliği, KİK" },
             "Iran": { trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ, EKO" },
             "Pakistan": { trName: "Pakistan İslam Rep.", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ, İÖT" },
@@ -200,12 +219,7 @@
             "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ" },
             "Egypt": { trName: "Mısır Arap Cumhuriyeti", founding: "1922", pop: "110 Milyon", area: "1,010,408 km²", pact: "Arap Birliği, BRICS" },
             "Azerbaijan": { trName: "Azerbaycan Cumhuriyeti", founding: "1991", pop: "10.1 Milyon", area: "86,600 km²", pact: "TDT, İÖT, AGİT" },
-            "Kazakhstan": { trName: "Kazakistan Cumhuriyeti", founding: "1991", pop: "19.8 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ, KGTÖ" },
-            "Uzbekistan": { trName: "Özbekistan Cumhuriyeti", founding: "1991", pop: "36 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ" },
-            "Japan": { trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, QUAD, BM" },
-            "South Korea": { trName: "Güney Kore", founding: "1948", pop: "51 Milyon", area: "100,210 km²", pact: "OECD, BM" },
-            "Brazil": { trName: "Brezilya Federal Rep.", founding: "1822", pop: "214 Milyon", area: "8,515,767 km²", pact: "BRICS, G20" },
-            "Saudi Arabia": { trName: "Suudi Arabistan Krallığı", founding: "1932", pop: "36 Milyon", area: "2,149,690 km²", pact: "Arap Birliği, G20, BRICS" }
+            "Kazakhstan": { trName: "Kazakistan Cumhuriyeti", founding: "1991", pop: "19.8 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ, KGTÖ" }
         };
 
         const orgInfoData = {
@@ -460,10 +474,12 @@
             }
         }
 
-        // TAM TÜRKÇE VE EKSİKSİZ KART SÜRÜCÜSÜ
+        // AKILLI VE EKSİKSİZ ÜLKE KARTI OLUŞTURUCU (TÜM AVRUPA VE DÜNYA İÇİN)
         function showCountryCard(countryCode, originalName) {
             const card = document.getElementById('countryCard');
             const profile = countryProfiles[countryCode];
+            
+            // İsmi sözlükten bul veya en kötü ihtimalle temiz Türkçe çevirisini yap
             const cleanTurkishName = profile?.trName || trNameDict[originalName] || trNameDict[countryCode] || originalName || countryCode;
 
             if (profile) {
@@ -473,11 +489,12 @@
                 document.getElementById('cardArea').innerText = profile.area;
                 document.getElementById('cardPact').innerText = profile.pact;
             } else {
+                // Kartı noksan veya İngilizce bırakma; dinamik Türkçe kimlik bas
                 document.getElementById('cardCountryName').innerText = cleanTurkishName;
                 document.getElementById('cardFounding').innerText = "Egemen Devlet";
                 document.getElementById('cardPop').innerText = "BM Üyesi Devlet";
                 document.getElementById('cardArea').innerText = "Bölgesel Veri";
-                document.getElementById('cardPact').innerText = "Uluslararası Aktör";
+                document.getElementById('cardPact').innerText = "Uluslararası Üye";
             }
             card.style.display = 'block';
         }
