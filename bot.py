@@ -13,7 +13,7 @@ RSS_URLS = [
     "https://www.aljazeera.com/xml/rss/all.xml"
 ]
 
-print("--- ÇİFT KAYNAKLI BOT BAŞLATILDI ---")
+print("--- GÜNCEL MODEL DESTEKLİ BOT BAŞLATILDI ---")
 
 def get_latest_news():
     news_list = []
@@ -25,7 +25,7 @@ def get_latest_news():
             html = urllib.request.urlopen(req, timeout=10).read()
             root = ET.fromstring(html)
             
-            items = root.findall('.//item')[:8] # Her kaynaktan en son 8 haber
+            items = root.findall('.//item')[:8] # Her kaynaktan 8 haber
             for item in items:
                 title = item.find('title').text if item.find('title') is not None else ""
                 description = item.find('description').text if item.find('description') is not None else ""
@@ -42,7 +42,8 @@ def get_latest_news():
     return news_list
 
 def analyze_with_gemini(news_item):
-    models_to_try = ["gemini-1.5-flash", "gemini-1.5-pro"]
+    # GÜNCEL GEMINI 3.5 / 3.6 MODELLERİ
+    models_to_try = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash"]
     
     prompt = f"""
     Aşağıdaki haberi analiz et. Eğer haber magazin, müzik, spor veya eğlence ile ilgiliyse SADECE "SKIPPED" yaz. 
@@ -110,7 +111,6 @@ def main():
     print(f"Toplam {len(raw_news)} RSS haberi tarandı.")
 
     for idx, item in enumerate(raw_news):
-        # Link veya başlık benzerliği kontrolü (Mükerrer önleme)
         clean_title = item['title'].lower()[:30]
         if item['link'] in existing_links or clean_title in existing_titles:
             continue
