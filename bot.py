@@ -11,7 +11,7 @@ RSS_URLS = [
     "https://www.aljazeera.com/xml/rss/all.xml"
 ]
 
-print("--- BOT BAŞLATILDI ---", flush=True)
+print("--- HABER BOTU BAŞLATILDI (GEMINI 3.5 / 3.6) ---", flush=True)
 
 def get_latest_news():
     news_list = []
@@ -43,8 +43,8 @@ def get_latest_news():
     return news_list
 
 def analyze_with_gemini(news_item):
-    # TAM GÜNCEL MODELLER
-    models_to_try = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite"]
+    # SADECE GÜNCEL GEMINI 3.5 VE 3.6 MODELLERİ
+    models_to_try = ["gemini-3.5-flash", "gemini-3.6-flash"]
     
     prompt = f"""
     Aşağıdaki haberi analiz et. Eğer haber magazin, müzik, spor veya eğlence ile ilgiliyse SADECE "SKIPPED" yaz. 
@@ -73,7 +73,8 @@ def analyze_with_gemini(news_item):
     for model in models_to_try:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
         try:
-            res = requests.post(url, json=payload, headers={'Content-Type': 'application/json'}, timeout=15)
+            # 45 saniye zaman aşımı: Derin analizlerin yarım kalmasını önler
+            res = requests.post(url, json=payload, headers={'Content-Type': 'application/json'}, timeout=45)
             if res.status_code == 200:
                 res_data = res.json()
                 text_response = res_data['candidates'][0]['content']['parts'][0]['text'].strip()
@@ -85,8 +86,11 @@ def analyze_with_gemini(news_item):
                 return json.loads(text_response)
             else:
                 print(f"Model {model} HTTP Hatası: {res.status_code}", flush=True)
+                if res.status_code == 429:
+                    print("Kota sınırı uyarısı alındı, bekleniyor...", flush=True)
+                    time.sleep(5)
         except Exception as err:
-            print(f"Model {model} Bağlantı Hatası: {err}", flush=True)
+            print(f"Model {model} Bağlantı/Timeout Hatası: {err}", flush=True)
             continue
             
     return None
@@ -124,7 +128,9 @@ def main():
             newly_processed.append(result)
             existing_titles.add(clean_title)
             print(" -> Başarıyla eklendi.", flush=True)
-        time.sleep(1)
+        
+        # İstekler arası 5 saniye bekleme (429 Rate Limit önleyici)
+        time.sleep(5)
 
     all_news = newly_processed + existing_news
     for index, item in enumerate(all_news):
