@@ -36,7 +36,6 @@
         
         .sidebar { width: 360px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
         
-        /* ARAMA ÇUBUĞU TASARIMI */
         .search-box { padding: 12px; background: #050811; border-bottom: 1px solid #1e293b; }
         .search-box input { width: 100%; padding: 10px 12px; background: #0f172a; border: 1px solid #38bdf8; color: #f1f5f9; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; transition: box-shadow 0.2s; }
         .search-box input:focus { box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
@@ -219,7 +218,7 @@
                 summary: "1949 yılında Washington Antlaşması ile kurulan askeri ve siyasi ittifak. Temel direği, bir üyeye yapılan silahlı saldırıyı tüm üyelere yapılmış sayan meşhur 5. Madde doktrinidir.\n\nGünümüzde 32 müttefikiyle Atlantik'ten Hint-Pasifik sınırına kadar kolektif caydırıcılığın ana kalesidir.",
                 history: "Soğuk Savaş döneminde Varşova Paktı'na karşı Doğu Avrupa ve Boğazlar hattını korumuş, 1990 sonrasında Balkanlar ve Afganistan müdahaleleriyle kriz yönetimi örgütüne dönüşmüştür.\n\nRusya-Ukrayna savaşıyla birlikte tarihinin en büyük askeri sevkiyatını gerçekleştirerek Doğu Kanadını tamamen tahkim etmiş, İsveç ve Finlandiya'nın katılımıyla Kuzey Kutbu'nu etki alanına almıştır.",
                 membersTr: ["Türkiye", "ABD", "İngiltere", "Kanada", "Almanya", "Fransa", "İtalya", "İspanya", "Yunanistan", "Romanya", "Polonya", "Norveç", "Hollanda", "Belçika", "Portekiz", "Danimarka", "Finlandiya", "İsveç", "Bulgaristan", "Macaristan", "Slovakya", "Arnavutluk", "Litvanya", "Letonya", "Estonya", "Hırvatistan", "Slovenya", "Karadağ", "Kuzey Makedonya", "Çekya", "İzlanda", "Lüksemburg"],
-                membersEn: ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Latvia", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"]
+                membersEn: ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Letonya", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"]
             },
             "UN": {
                 title: "Birleşmiş Milletler (BM)",
@@ -366,6 +365,20 @@
         let geojsonLayer = null;
         let worldGeoData = null;
 
+        // TÜRKÇE KARAKTER DUYARSIZ KÜÇÜK HARF FONKSİYONU
+        function toTRLowerCase(str) {
+            if (!str) return "";
+            return str
+                .replace(/İ/g, "i")
+                .replace(/I/g, "ı")
+                .replace(/Ğ/g, "ğ")
+                .replace(/Ü/g, "ü")
+                .replace(/Ş/g, "ş")
+                .replace(/Ö/g, "ö")
+                .replace(/Ç/g, "ç")
+                .toLowerCase();
+        }
+
         Promise.all([
             fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson').then(r => r.json()),
             fetch('newsData.json').then(r => r.json())
@@ -387,7 +400,7 @@
             if (mode === 'news') document.getElementById('searchBoxContainer').style.display = 'block';
             else document.getElementById('searchBoxContainer').style.display = 'none';
 
-            executeSearch(); // Arama ve filtreleri uygular
+            executeSearch();
         }
 
         function executeSearch() {
@@ -400,22 +413,22 @@
             else if(currentMainMode === 'conflicts') dataSource = conflictListData;
 
             const searchInput = document.getElementById('newsSearchInput');
-            const searchText = searchInput ? searchInput.value.toLowerCase().trim() : "";
+            const searchText = searchInput ? toTRLowerCase(searchInput.value.trim()) : "";
 
             const filteredData = dataSource.filter(item => {
                 let tagMatch = true;
                 if (currentMainMode === 'news' && selectedTagFilter) {
-                    const cleanSelected = selectedTagFilter.toLowerCase().replace('#', '').trim();
-                    tagMatch = item.tags && item.tags.some(t => t.toLowerCase().replace('#', '').trim().includes(cleanSelected));
+                    const cleanSelected = toTRLowerCase(selectedTagFilter.replace('#', '').trim());
+                    tagMatch = item.tags && item.tags.some(t => toTRLowerCase(t.replace('#', '').trim()).includes(cleanSelected));
                 }
 
                 let searchMatch = true;
                 if (searchText) {
-                    const titleMatch = (item.title || "").toLowerCase().includes(searchText);
-                    const summaryMatch = (item.summary || item.sub || "").toLowerCase().includes(searchText);
+                    const titleMatch = toTRLowerCase(item.title || "").includes(searchText);
+                    const summaryMatch = toTRLowerCase(item.summary || item.sub || "").includes(searchText);
                     
                     let tagsMatch = false;
-                    if (item.tags) tagsMatch = item.tags.some(t => t.toLowerCase().includes(searchText));
+                    if (item.tags) tagsMatch = item.tags.some(t => toTRLowerCase(t).includes(searchText));
                     
                     searchMatch = titleMatch || summaryMatch || tagsMatch;
                 }
@@ -552,9 +565,9 @@
         }
 
         function checkExactMembership(countryName, targetList) {
-            const nameLower = countryName.toLowerCase().trim();
+            const nameLower = toTRLowerCase(countryName.trim());
             return targetList.some(member => {
-                const memberLower = member.toLowerCase().trim();
+                const memberLower = toTRLowerCase(member.trim());
                 if (nameLower === memberLower) return true;
                 if (nameLower.startsWith(memberLower + " ") || nameLower.endsWith(" " + memberLower)) return true;
                 return false;
@@ -638,7 +651,6 @@
                             if (checkExactMembership(countryName, [key])) {
                                 highlightedBounds.extend(layer.getBounds());
                                 const turkishName = countryProfiles[key]?.trName || trNameDict[countryName] || countryName;
-                                // Popup'taki rol açıklamasını kısalttık ki ekrana taşmasın
                                 const shortRole = activeCountries[key].role.split('(')[0].trim();
                                 layer.bindPopup(`<b>${turkishName}</b><br>Rol: ${shortRole}`);
                             }
