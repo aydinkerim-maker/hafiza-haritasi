@@ -2,10 +2,8 @@ name: Gunluk Jeopolitik Haber Botu
 
 on:
   schedule:
-    # Türkiye Saati ile (UTC+3): 08:00, 12:00, 16:00, 20:00, 00:00
-    # UTC Karşılığı: 05:00, 09:00, 13:00, 17:00, 21:00
     - cron: '0 5,9,13,17,21 * * *'
-  workflow_dispatch: # İstediğin an elle tetikleme butonu
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,14 +15,14 @@ jobs:
       - name: Python Kur
         uses: actions/setup-python@v5
         with:
-          python-python-version: '3.10'
+          python-version: '3.10'
 
-      - name: Botu Çalıştır
+      - name: Botu Calistir
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python bot.py
 
-      - name: Değişiklikleri Kaydet ve Push Et
+      - name: Degisiklikleri Kaydet ve Push Et
         run: |
           git config --global user.name 'GitHub Action Bot'
           git config --global user.email 'action@github.com'
