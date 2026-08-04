@@ -35,7 +35,6 @@
 
         .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #050811; }
         
-        /* TEMİZ VE SADELEŞTİRİLMİŞ SOL HABER PANELİ */
         .sidebar { width: 360px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
         .tag-search-info { display: none; padding: 8px 12px; background: rgba(56, 189, 248, 0.1); border-bottom: 1px solid rgba(56, 189, 248, 0.2); font-size: 0.78rem; color: #38bdf8; justify-content: space-between; align-items: center; }
         .clear-tag-btn { background: #ef4444; color: #fff; border: none; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
@@ -160,25 +159,27 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // İNGİLİZCE ÜLKE İSİMLERİNİ BİREBİR TÜRKÇEYE ÇEVİREN KAPSAMLI SÖZLÜK
+        // İNGİLİZCE GEOJSON İSİMLERİNİ TAM TÜRKÇEYE EŞLEYEN GENİŞ SÖZLÜK
         const trNameDict = {
             "United States": "Amerika Birleşik Devletleri", "United States of America": "Amerika Birleşik Devletleri", "USA": "ABD",
-            "United Kingdom": "Birleşik Krallık (İngiltere)", "Great Britain": "Birleşik Krallık",
-            "Turkey": "Türkiye Cumhuriyeti", "Turkey": "Türkiye",
+            "United Kingdom": "İngiltere (Birleşik Krallık)", "Great Britain": "Birleşik Krallık",
+            "Turkey": "Türkiye Cumhuriyeti", "Turkiye": "Türkiye Cumhuriyeti",
             "Russia": "Rusya Federasyonu", "Russian Federation": "Rusya",
-            "China": "Çin Halk Cumhuriyeti", "China": "Çin",
-            "Germany": "Almanya Federal Cumhuriyeti", "Germany": "Almanya",
-            "France": "Fransa Cumhuriyeti", "France": "Fransa",
-            "Greece": "Yunanistan", "Italy": "İtalya", "Spain": "İspanya", "Portugal": "Portekiz",
+            "China": "Çin Halk Cumhuriyeti", "Germany": "Almanya Federal Cumhuriyeti", "France": "Fransa Cumhuriyeti",
+            "Greece": "Yunanistan", "Italy": "İtalya Cumhuriyeti", "Spain": "İspanya Krallığı", "Portugal": "Portekiz",
             "Iran": "İran İslam Cumhuriyeti", "Iran (Islamic Republic of)": "İran",
-            "Pakistan": "Pakistan İslam Cumhuriyeti", "Pakistan": "Pakistan",
-            "India": "Hindistan Cumhuriyeti", "India": "Hindistan",
-            "Egypt": "Mısır Arap Cumhuriyeti", "Egypt": "Mısır",
-            "Saudi Arabia": "Suudi Arabistan", "Syria": "Suriye", "Iraq": "Irak", "Israel": "İsrail", "Palestine": "Filistin",
-            "Ukraine": "Ukrayna", "Poland": "Polonya", "Romania": "Romanya", "Bulgaria": "Bulgaristan",
-            "Kazakhstan": "Kazakistan", "Uzbekistan": "Özbekistan", "Azerbaijan": "Azerbaycan", "Turkmenistan": "Türkmenistan", "Kyrgyzstan": "Kırgızistan"
+            "Pakistan": "Pakistan İslam Cumhuriyeti", "India": "Hindistan Cumhuriyeti",
+            "Egypt": "Mısır Arap Cumhuriyeti", "Saudi Arabia": "Suudi Arabistan", "Syria": "Suriye", "Iraq": "Irak",
+            "Israel": "İsrail", "Palestine": "Filistin", "Ukraine": "Ukrayna", "Poland": "Polonya", "Romania": "Romanya",
+            "Bulgaria": "Bulgaristan", "Kazakhstan": "Kazakistan", "Uzbekistan": "Özbekistan", "Azerbaijan": "Azerbaycan",
+            "Turkmenistan": "Türkmenistan", "Kyrgyzstan": "Kırgızistan", "Georgia": "Gürcistan", "Armenia": "Ermenistan",
+            "Japan": "Japonya", "South Korea": "Güney Kore", "North Korea": "Kuzey Kore", "Canada": "Kanada",
+            "Australia": "Avustralya", "Brazil": "Brezilya", "Argentina": "Arjantin", "Algeria": "Cezayir", "Morocco": "Fas",
+            "Libya": "Libya", "Sudan": "Sudan", "Somalia": "Somali", "South Africa": "Güney Afrika Cumhuriyeti",
+            "Afghanistan": "Afganistan", "Oman": "Umman Sultanlığı", "Yemen": "Yemen", "Jordan": "Ürdün", "Lebanon": "Lübnan"
         };
 
+        // KAPSAMLI ÜLKE VERİTABANI (EKSİKSİZ KART İÇİN)
         const countryProfiles = {
             "Turkey": { trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT" },
             "Ukraine": { trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı, AGİT" },
@@ -199,7 +200,12 @@
             "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ" },
             "Egypt": { trName: "Mısır Arap Cumhuriyeti", founding: "1922", pop: "110 Milyon", area: "1,010,408 km²", pact: "Arap Birliği, BRICS" },
             "Azerbaijan": { trName: "Azerbaycan Cumhuriyeti", founding: "1991", pop: "10.1 Milyon", area: "86,600 km²", pact: "TDT, İÖT, AGİT" },
-            "Kazakhstan": { trName: "Kazakistan Cumhuriyeti", founding: "1991", pop: "19.8 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ, KGTÖ" }
+            "Kazakhstan": { trName: "Kazakistan Cumhuriyeti", founding: "1991", pop: "19.8 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ, KGTÖ" },
+            "Uzbekistan": { trName: "Özbekistan Cumhuriyeti", founding: "1991", pop: "36 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ" },
+            "Japan": { trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, QUAD, BM" },
+            "South Korea": { trName: "Güney Kore", founding: "1948", pop: "51 Milyon", area: "100,210 km²", pact: "OECD, BM" },
+            "Brazil": { trName: "Brezilya Federal Rep.", founding: "1822", pop: "214 Milyon", area: "8,515,767 km²", pact: "BRICS, G20" },
+            "Saudi Arabia": { trName: "Suudi Arabistan Krallığı", founding: "1932", pop: "36 Milyon", area: "2,149,690 km²", pact: "Arap Birliği, G20, BRICS" }
         };
 
         const orgInfoData = {
@@ -219,7 +225,7 @@
                 title: "Şanghay İşbirliği Örgütü (ŞİÖ)",
                 summary: "Avrasya coğrafyasında askeri, ekonomik ve güvenlik işbirliğini hedefleyen Avrasya ittifakı.",
                 history: "1996'da sınır güvenliği için kurulan Şanghay Beşlisi'nin 2001'de büyümesiyle kuruldu. Çin ve Rusya liderliğindeki blok; Hindistan, Pakistan ve İran'ın katılımıyla Avrasya'nın ana güç odağı haline gelmiştir.",
-                membersTr: ["Çin", "Rusya", "Hindistan", "Pakistan", "İran", "Kazakhstan", "Özbekistan", "Kırgızistan", "Tacikistan", "Beyaz Rusya"]
+                membersTr: ["Çin", "Rusya", "Hindistan", "Pakistan", "İran", "Kazakistan", "Özbekistan", "Kırgızistan", "Tacikistan", "Beyaz Rusya"]
             },
             "BRICS": {
                 title: "BRICS Küresel Ekonomik Paktı",
@@ -248,7 +254,7 @@
         };
 
         const orgMemberships = {
-            "NATO": ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Letonya", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"],
+            "NATO": ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Latvia", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"],
             "UN": ["ALL"],
             "SCO": ["Russia", "China", "India", "Pakistan", "Iran", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Tajikistan", "Belarus"],
             "BRICS": ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Ethiopia", "Iran", "United Arab Emirates"],
@@ -313,9 +319,8 @@
             }
         }
 
-        // ETİKETE TIKLAYINCA ARAMA/FİLTRELEME FONKSİYONU
         function filterByTag(tagName, event) {
-            if(event) event.stopPropagation(); // Kart tıklamasını engelle
+            if(event) event.stopPropagation();
             selectedTagFilter = tagName;
             document.getElementById('activeTagText').innerText = tagName;
             document.getElementById('tagSearchInfo').style.display = 'flex';
@@ -448,7 +453,6 @@
                 }
             }).addTo(map);
 
-            // GÜVENLİ VE AKILLI ZOOM (FIT BOUNDS)
             if (activeOrgFilter === 'UN') {
                 map.setView([20.0, 0.0], 2, { animate: true });
             } else if (highlightedBounds.isValid()) {
@@ -456,7 +460,7 @@
             }
         }
 
-        // AKILLI %100 TÜRKÇE ÜLKE KARTI
+        // TAM TÜRKÇE VE EKSİKSİZ KART SÜRÜCÜSÜ
         function showCountryCard(countryCode, originalName) {
             const card = document.getElementById('countryCard');
             const profile = countryProfiles[countryCode];
