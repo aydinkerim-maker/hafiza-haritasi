@@ -1,49 +1,49 @@
 import os
 import json
 import time
-import urllib.request
-import urllib.error
+import requests
 import xml.etree.ElementTree as ET
 
 API_KEY = os.environ.get("GEMINI_API_KEY")
 
-# ÇİFT RSS KAYNAĞI
 RSS_URLS = [
     "https://feeds.bbci.co.uk/news/world/rss.xml",
     "https://www.aljazeera.com/xml/rss/all.xml"
 ]
 
-print("--- GÜNCEL MODEL DESTEKLİ BOT BAŞLATILDI ---")
+print("--- BOT BAŞLATILDI ---", flush=True)
 
 def get_latest_news():
     news_list = []
     ignore_keywords = ["concert", "singer", "pop star", "music", "album", "movie", "actor", "actress", "massive attack", "ariana grande", "sport", "football"]
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
 
     for url in RSS_URLS:
         try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            html = urllib.request.urlopen(req, timeout=10).read()
-            root = ET.fromstring(html)
-            
-            items = root.findall('.//item')[:8] # Her kaynaktan 8 haber
-            for item in items:
-                title = item.find('title').text if item.find('title') is not None else ""
-                description = item.find('description').text if item.find('description') is not None else ""
-                link = item.find('link').text if item.find('link') is not None else ""
-                
-                combined_text = (title + " " + description).lower()
-                if any(k in combined_text for k in ignore_keywords):
-                    continue
+            print(f"RSS Çekiliyor: {url}", flush=True)
+            response = requests.get(url, headers=headers, timeout=10)
+            if response.status_code == 200:
+                root = ET.fromstring(response.content)
+                items = root.findall('.//item')[:8]
+                for item in items:
+                    title = item.find('title').text if item.find('title') is not None else ""
+                    description = item.find('description').text if item.find('description') is not None else ""
+                    link = item.find('link').text if item.find('link') is not None else ""
+                    
+                    combined_text = (title + " " + description).lower()
+                    if any(k in combined_text for k in ignore_keywords):
+                        continue
 
-                news_list.append({"title": title, "text": description, "link": link})
+                    news_list.append({"title": title, "text": description, "link": link})
+            else:
+                print(f"RSS Yanıt Vermedi ({response.status_code}): {url}", flush=True)
         except Exception as e:
-            print(f"RSS Yükleme Hatası ({url}): {e}")
+            print(f"RSS Hatası ({url}): {e}", flush=True)
 
     return news_list
 
 def analyze_with_gemini(news_item):
-    # GÜNCEL GEMINI 3.5 / 3.6 MODELLERİ
-    models_to_try = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash"]
+    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash"]
     
     prompt = f"""
     Aşağıdaki haberi analiz et. Eğer haber magazin, müzik, spor veya eğlence ile ilgiliyse SADECE "SKIPPED" yaz. 
@@ -67,31 +67,32 @@ def analyze_with_gemini(news_item):
     Ülke isimleri İngilizce standart olsun (Turkey, Russia, Ukraine, Greece, United States, Iran, Pakistan, India vb.).
     """
 
-    data = {"contents": [{"parts": [{"text": prompt}]}]}
+    payload = {"contents": [{"parts": [{"text": prompt}]}]}
 
     for model in models_to_try:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
-        req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
-        
         try:
-            response = urllib.request.urlopen(req, timeout=12)
-            res_data = json.loads(response.read().decode('utf-8'))
-            text_response = res_data['candidates'][0]['content']['parts'][0]['text'].strip()
-            
-            if "SKIPPED" in text_response:
-                return None
+            res = requests.post(url, json=payload, headers={'Content-Type': 'application/json'}, timeout=15)
+            if res.status_code == 200:
+                res_data = res.json()
+                text_response = res_data['candidates'][0]['content']['parts'][0]['text'].strip()
+                
+                if "SKIPPED" in text_response:
+                    return None
 
-            text_response = text_response.replace("```json", "").replace("```", "").strip()
-            return json.loads(text_response)
+                text_response = text_response.replace("```json", "").replace("```", "").strip()
+                return json.loads(text_response)
+            else:
+                print(f"Model {model} HTTP Hatası: {res.status_code}", flush=True)
         except Exception as err:
-            print(f"Model {model} hatası: {err}")
+            print(f"Model {model} Bağlantı Hatası: {err}", flush=True)
             continue
             
     return None
 
 def main():
     if not API_KEY:
-        print("KRİTİK HATA: GEMINI_API_KEY tanımlı değil!")
+        print("KRİTİK HATA: GEMINI_API_KEY tanımlı değil!", flush=True)
         return
 
     existing_news = []
@@ -108,19 +109,20 @@ def main():
     raw_news = get_latest_news()
     newly_processed = []
 
-    print(f"Toplam {len(raw_news)} RSS haberi tarandı.")
+    print(f"Toplam {len(raw_news)} RSS haberi tarandı.", flush=True)
 
     for idx, item in enumerate(raw_news):
         clean_title = item['title'].lower()[:30]
         if item['link'] in existing_links or clean_title in existing_titles:
+            print(f"Aynı haber geçildi ({idx+1}/{len(raw_news)}): {item['title'][:40]}...", flush=True)
             continue
 
-        print(f"Yeni Haber İşleniyor ({idx+1}/{len(raw_news)}): {item['title']}")
+        print(f"Yeni Haber İşleniyor ({idx+1}/{len(raw_news)}): {item['title']}", flush=True)
         result = analyze_with_gemini(item)
         if result:
             newly_processed.append(result)
             existing_titles.add(clean_title)
-            print(" -> Başarıyla eklendi.")
+            print(" -> Başarıyla eklendi.", flush=True)
         time.sleep(1)
 
     all_news = newly_processed + existing_news
@@ -129,7 +131,7 @@ def main():
 
     with open('newsData.json', 'w', encoding='utf-8') as f:
         json.dump(all_news, f, ensure_ascii=False, indent=4)
-    print("İşlem tamamlandı. newsData.json güncellendi.")
+    print("İşlem tamamlandı. newsData.json güncellendi.", flush=True)
 
 if __name__ == "__main__":
     main()
