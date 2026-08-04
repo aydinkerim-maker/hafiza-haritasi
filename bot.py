@@ -8,12 +8,13 @@ import xml.etree.ElementTree as ET
 API_KEY = os.environ.get("GEMINI_API_KEY")
 RSS_URL = "https://feeds.bbci.co.uk/news/world/rss.xml"
 
-print(f"--- BOT BAŞLATILDI ---")
+print("--- BOT BAŞLATILDI ---")
 
 def get_latest_news():
     try:
         req = urllib.request.Request(RSS_URL, headers={'User-Agent': 'Mozilla/5.0'})
-        html = urllib.request.urlopen(req).read()
+        # 10 Saniye içinde RSS yanıt vermezse zaman aşımına uğrar
+        html = urllib.request.urlopen(req, timeout=10).read()
         root = ET.fromstring(html)
         
         items = root.findall('.//item')[:12]
@@ -23,11 +24,10 @@ def get_latest_news():
             description = item.find('description').text if item.find('description') is not None else ""
             link = item.find('link').text if item.find('link') is not None else ""
             
-            # MAGAZİN & EĞLENCE FİLTRESİ
             ignore_keywords = ["concert", "singer", "pop star", "music", "album", "movie", "actor", "actress", "massive attack", "ariana grande"]
             combined_text = (title + " " + description).lower()
             if any(k in combined_text for k in ignore_keywords):
-                print(f"Magazin içerik elendi: {title}")
+                print(f"Magazin elendi: {title}")
                 continue
 
             news_list.append({"title": title, "text": description, "link": link})
@@ -37,7 +37,8 @@ def get_latest_news():
         return []
 
 def analyze_with_gemini(news_item):
-    models_to_try = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash"]
+    # En hızlı yanıt veren güncel modeller
+    models_to_try = ["gemini-1.5-flash", "gemini-1.5-pro"]
     
     prompt = f"""
     Aşağıdaki haberi analiz et. Eğer haber magazin, müzik, spor veya eğlence ile ilgiliyse SADECE "SKIPPED" yaz. 
@@ -68,7 +69,8 @@ def analyze_with_gemini(news_item):
         req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
         
         try:
-            response = urllib.request.urlopen(req)
+            # 12 Saniye timeout: Model yanıt vermezse takılmayıp anında sıradakine geçecek
+            response = urllib.request.urlopen(req, timeout=12)
             res_data = json.loads(response.read().decode('utf-8'))
             text_response = res_data['candidates'][0]['content']['parts'][0]['text'].strip()
             
@@ -77,7 +79,8 @@ def analyze_with_gemini(news_item):
 
             text_response = text_response.replace("```json", "").replace("```", "").strip()
             return json.loads(text_response)
-        except Exception:
+        except Exception as err:
+            print(f"Model {model} yanıt vermedi/hata aldı: {err}")
             continue
             
     return None
@@ -99,15 +102,19 @@ def main():
     raw_news = get_latest_news()
     newly_processed = []
 
+    print(f"Toplam {len(raw_news)} RSS haberi tarandı.")
+
     for idx, item in enumerate(raw_news):
         if item['link'] in existing_links:
+            print(f"Mevcut haber atlandı: {item['title']}")
             continue
 
-        print(f"Haber İşleniyor: {item['title']}")
+        print(f"İşleniyor ({idx+1}/{len(raw_news)}): {item['title']}")
         result = analyze_with_gemini(item)
         if result:
             newly_processed.append(result)
-        time.sleep(2)
+            print(" -> Analiz Başarılı!")
+        time.sleep(1)
 
     all_news = newly_processed + existing_news
     for index, item in enumerate(all_news):
@@ -115,7 +122,7 @@ def main():
 
     with open('newsData.json', 'w', encoding='utf-8') as f:
         json.dump(all_news, f, ensure_ascii=False, indent=4)
-    print("newsData.json güncellendi.")
+    print("İşlem tamamlandı. newsData.json güncellendi.")
 
 if __name__ == "__main__":
     main()
