@@ -43,7 +43,6 @@ def get_latest_news():
     return news_list
 
 def analyze_with_gemini(news_item):
-    # SADECE PANELDEKİ AKTİF GÜNCEL MODELLER
     models_to_try = ["gemini-3.5-flash-lite", "gemini-3.6-flash"]
     
     prompt = f"""
@@ -56,16 +55,20 @@ def analyze_with_gemini(news_item):
     JSON Şablonu:
     {{
         "title": "Türkçe Başlık",
-        "tags": ["#Etiket1", "#Etiket2"],
+        "tags": ["#Etiket1", "#Türkiye", "#ABD", "#İran"],
         "summary": "10 cümlelik detaylı özet.",
         "history": "10 cümlelik tarihsel hafıza analizi.",
         "link": "{news_item['link']}",
         "countries": {{
-            "Turkey": {{"role": "Aktör", "color": "#22c55e"}},
-            "Ukraine": {{"role": "Aktör", "color": "#ef4444"}}
+            "Turkey": {{"role": "Arabulucu (Krizi çözmek için diplomatik görüşme yürütüyor)", "color": "#22c55e"}},
+            "United States": {{"role": "Aktör (Bölgeye uçak gemisi sevk eden taraf)", "color": "#38bdf8"}}
         }}
     }}
-    Ülke isimleri İngilizce standart olsun (Turkey, Russia, Ukraine, Greece, United States, Iran, Pakistan, India vb.).
+
+    KURALLAR:
+    1. "tags" kısmına olaya dahil olan ülkelerin TÜRKÇE isimlerini KESİNLİKLE hashtag olarak ekle (Örn: #İran, #ABD, #Rusya). Etiketlerin hepsi Türkçe olmalı.
+    2. "role" kısmına sadece "Aktör" veya "Gözlemci" yazıp geçme. Ülkenin o olaydaki rolünü ve ne yaptığını parantez içinde ya da kısaca açıkla (Örn: "Destekçi (Silah yardımı yapıyor)").
+    3. JSON içindeki anahtar ülke isimleri (key) mutlaka İngilizce standart kalsın (Turkey, Russia, Ukraine, Greece, United States, Iran, Pakistan, India vb.).
     """
 
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
@@ -119,7 +122,7 @@ def main():
     print(f"Toplam {len(raw_news)} RSS haberi tarandı.", flush=True)
 
     processed_count = 0
-    max_news_per_run = 4 # Her çalıştırmada max 4 taze haber
+    max_news_per_run = 4 
 
     for idx, item in enumerate(raw_news):
         if processed_count >= max_news_per_run:
@@ -139,7 +142,6 @@ def main():
             processed_count += 1
             print(" -> Başarıyla eklendi.", flush=True)
         
-        # Kota koruması için 5 saniye es veriyoruz
         time.sleep(5)
 
     all_news = newly_processed + existing_news
