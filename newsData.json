@@ -1,5 +1,30 @@
 [
     {
+        "title": "İspanya Başbakanı Sanchez, AB Ceuta Göçmen Krizini Görüşürken Eleştirilerin Hedefinde",
+        "tags": [
+            "#İspanya",
+            "#Fas",
+            "#Ceuta",
+            "#AB",
+            "#GöçKrizi",
+            "#PedroSanchez"
+        ],
+        "summary": "İspanya Başbakanı Pedro Sanchez, Kuzey Afrika'daki İspanyol toprağı Ceuta'ya gerçekleşen kitlesel göçmen akınının ardından iç siyasette sert eleştirilerle karşı karşıya kaldı. Avrupa Birliği yetkilileri, sınırdaki yasa dışı geçişleri ve tırmanan insani krizi ele almak üzere acil bir toplantı gerçekleştirdi. Ceuta'ya giren binlerce düzensiz göçmenin büyük bir kısmının bölgeden ayrılarak Fas'a geri döndüğü bildirildi. Fas makamlarıyla yürütülen diplomatik temaslar sonucunda sınır güvenliğinin yeniden sağlanması hedefleniyor. Muhalefet partileri, Sanchez hükümetini Fas ile yaşanan diplomatik krizde yetersiz kalmak ve sınır güvenliğini zafiyete uğratmakla suçluyor. Göçmen krizinin, Fas'ın Batı Sahra konusundaki gerilimler sebebiyle sınır kontrollerini gevşetmesinden kaynaklandığı öne sürülüyor. Avrupa Birliği, Ceuta sınırının aynı zamanda AB'nin dış sınırı olduğunu vurgulayarak İspanya'ya tam destek beyan etti. İspanyol güvenlik güçleri bölgedeki devriyeleri artırırken, sınıra ek askeri birlikler ve polis takviyesi sevk edildi. İnsani yardım kuruluşları, geri gönderilen göçmenlerin durumu ve insan hakları ihlalleri konusunda endişelerini dile getiriyor. Yaşanan bu son kriz, Akdeniz üzerinden Avrupa'ya yönelik göç baskısının ve jeopolitik şantaj iddialarının yeniden gündeme gelmesine yol açtı.",
+        "history": "Ceuta ve Melilla, Kuzey Afrika kıyısında yer alan ve İspanya'ya ait olan stratejik önemdeki iki özerk şehirdir. Fas, 1956 yılında bağımsızlığını kazandığından bu yana Ceuta ve Melilla üzerindeki hak iddialarını sürdürmektedir. İspanya ise bu toprakların 16. ve 17. yüzyıllardan beri kendi hakimiyetinde olduğunu belirterek egemenlik tartışmalarını reddetmektedir. İki ülke arasındaki ilişkiler tarih boyunca egemenlik hakları, balıkçılık anlaşmaları ve sınır güvenliği ekseninde sık sık gerilmiştir. Batı Sahra sorunu, İspanya ile Fas arasındaki diplomatik ilişkilerin en hassas ve çatışmalı alanlarından birini oluşturmaktadır. Fas'ın polis kontrolünü esneterek göçmenlerin geçişine göz yumması, geçmişte de Madrid yönetimini baskı altına almak için kullandığı bir araç olmuştur. Avrupa Birliği, Ceuta ve Melilla'yı kendi dış sınırı kabul ettiği için İspanya'nın toprak bütünlüğünü her zaman doğrudan desteklemiştir. 2000'li yıllardan itibaren İspanya, bu sınırları aşılması zor devasa çitler ve yüksek teknoloji gözetleme sistemleriyle donatmıştır. Buna rağmen ekonomik sıkıntılar ve Afrika'daki siyasi istikrarsızlıklar, bölgeyi sürekli bir göç rotası haline getirmiştir. Ceuta'da yaşanan son kriz, iki komşu arasındaki tarihsel rekabetin ve derin diplomatik güvensizliğin somut bir yansımasıdır.",
+        "link": "https://www.aljazeera.com/news/2026/8/4/spanish-pm-sanchez-faces-criticism-as-eu-meets-over-ceuta-crossings?traffic_source=rss",
+        "countries": {
+            "Spain": {
+                "role": "Hedef Ülke",
+                "color": "#ef4444"
+            },
+            "Morocco": {
+                "role": "Transit Ülke / Aktör",
+                "color": "#22c55e"
+            }
+        },
+        "id": 1
+    },
+    {
         "title": "Manş Denizi'nde Teknesi Alev Alan 150'den Fazla Düzensiz Göçmen Kurtarıldı",
         "tags": [
             "#ManşDenizi",
@@ -21,7 +46,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 1
+        "id": 2
     },
     {
         "title": "Analiz: Trump, en yakın müttefiklerinden gelen soğuk gerçeklikle yüzleşiyor",
@@ -41,7 +66,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 2
+        "id": 3
     },
     {
         "title": "Ukrayna, Moskova bölgesinde beş kişinin öldüğü saldırının ardından daha fazla Wildberries tesisini vurdu",
@@ -66,7 +91,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 3
+        "id": 4
     },
     {
         "title": "Trump Media'nın Piyasaları Etkileyen Gönderilere Hızlı Erişim Satışı Neden Tartışmalı?",
@@ -86,7 +111,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 4
+        "id": 5
     },
     {
         "title": "Rus İşgali Altındaki Kırım'da Bir Asker Silahlı Saldırıda Dört Kişiyi Öldürdü",
@@ -110,7 +135,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 5
+        "id": 6
     },
     {
         "title": "AB, Ceuta'daki göçmen geçişlerinin ardından daha güçlü sınırlar çağrısında bulundu",
@@ -140,7 +165,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 6
+        "id": 7
     },
     {
         "title": "Rusya, Ukrayna İnsansız Hava Aracının Kalabalık Bir Plaja Çarpması Sonucu Yedi Kişinin Öldüğünü ve 40 Kişinin Yaralandığını Açıkladı",
@@ -164,7 +189,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 7
+        "id": 8
     },
     {
         "title": "Fransa'daki Orman Yangınları Köyde Yüzlerce 2. Dünya Savaşı Mühimmatını Ortaya Çıkardı",
@@ -188,7 +213,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 8
+        "id": 9
     },
     {
         "title": "Eşimi ve ikizlerimi geride bıraktım - Bu Nijeryalı adam neden Güney Afrika'dan kaçtı?",
@@ -214,7 +239,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 9
+        "id": 10
     },
     {
         "title": "ABD Eyaletleri, Onlarca Ülkeyi Etkileyen Trump Gümrük Vergilerini Engellemek İçin Dava Açtı",
@@ -238,7 +263,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 10
+        "id": 11
     },
     {
         "title": "Ren Nehri rekor seviyede düştü: Kuraklık Avrupa nehirlerini zorluyor",
@@ -275,7 +300,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 11
+        "id": 12
     },
     {
         "title": "Analistler: Orta Doğu'da Petrol Tankerlerine Yönelik Tehdit, İran Savaşı Başlangıcından Bu Yana En Kötü Seviyede",
@@ -304,7 +329,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 12
+        "id": 13
     },
     {
         "title": "Deprem Vuran Japonya AVM'sine Patronun Emriyle Giren İki İşçi Patlamada Öldü",
@@ -324,7 +349,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 13
+        "id": 14
     },
     {
         "title": "Ariana Grande, 'Bitmek Bilmeyen' Baskılar Nedeniyle Kamuoyundan Uzaklaşma Kararı Aldı",
@@ -348,7 +373,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 14
+        "id": 15
     },
     {
         "title": "Fas Kralı'nın Mektubu, Büyük Bir Otoyola Trump'ın Adının Verildiğini Doğruladı",
@@ -373,7 +398,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 15
+        "id": 16
     },
     {
         "title": "Massive Attack, Singapur'un Filistin Protestosu Yasağına Tepki Gösterdi",
@@ -402,7 +427,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 16
+        "id": 17
     },
     {
         "title": "ABD ve Japonya, Yen'i Desteklemek İçin Nadir Görülen Ortak Bir Adım Attı",
@@ -423,7 +448,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 17
+        "id": 18
     },
     {
         "title": "İran, Trump'ın Pazartesi günü yeni görüşmelerin başlayacağı yönündeki iddiasını yalanladı",
@@ -452,7 +477,7 @@
                 "color": "#10b981"
             }
         },
-        "id": 18
+        "id": 19
     },
     {
         "title": "Aung San Suu Kyi, 2,5 Yıl Sonra İlk Doğrulanan Dış Temasında Sağlıklı Görünüyor",
@@ -476,7 +501,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 19
+        "id": 20
     },
     {
         "title": "\"Tek oğlum adalet için ayaktayken vuruldu\" - Pakistan yönetimindeki Keşmir'de ölümcül protestoların pençesindeki şehirden izlenimler",
@@ -500,6 +525,6 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 20
+        "id": 21
     }
 ]
