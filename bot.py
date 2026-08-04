@@ -6,38 +6,42 @@ import urllib.error
 import xml.etree.ElementTree as ET
 
 API_KEY = os.environ.get("GEMINI_API_KEY")
-RSS_URL = "https://feeds.bbci.co.uk/news/world/rss.xml"
 
-print("--- BOT BAŞLATILDI ---")
+# ÇİFT RSS KAYNAĞI
+RSS_URLS = [
+    "https://feeds.bbci.co.uk/news/world/rss.xml",
+    "https://www.aljazeera.com/xml/rss/all.xml"
+]
+
+print("--- ÇİFT KAYNAKLI BOT BAŞLATILDI ---")
 
 def get_latest_news():
-    try:
-        req = urllib.request.Request(RSS_URL, headers={'User-Agent': 'Mozilla/5.0'})
-        # 10 Saniye içinde RSS yanıt vermezse zaman aşımına uğrar
-        html = urllib.request.urlopen(req, timeout=10).read()
-        root = ET.fromstring(html)
-        
-        items = root.findall('.//item')[:12]
-        news_list = []
-        for item in items:
-            title = item.find('title').text if item.find('title') is not None else ""
-            description = item.find('description').text if item.find('description') is not None else ""
-            link = item.find('link').text if item.find('link') is not None else ""
-            
-            ignore_keywords = ["concert", "singer", "pop star", "music", "album", "movie", "actor", "actress", "massive attack", "ariana grande"]
-            combined_text = (title + " " + description).lower()
-            if any(k in combined_text for k in ignore_keywords):
-                print(f"Magazin elendi: {title}")
-                continue
+    news_list = []
+    ignore_keywords = ["concert", "singer", "pop star", "music", "album", "movie", "actor", "actress", "massive attack", "ariana grande", "sport", "football"]
 
-            news_list.append({"title": title, "text": description, "link": link})
-        return news_list
-    except Exception as e:
-        print(f"RSS Hatası: {e}")
-        return []
+    for url in RSS_URLS:
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            html = urllib.request.urlopen(req, timeout=10).read()
+            root = ET.fromstring(html)
+            
+            items = root.findall('.//item')[:8] # Her kaynaktan en son 8 haber
+            for item in items:
+                title = item.find('title').text if item.find('title') is not None else ""
+                description = item.find('description').text if item.find('description') is not None else ""
+                link = item.find('link').text if item.find('link') is not None else ""
+                
+                combined_text = (title + " " + description).lower()
+                if any(k in combined_text for k in ignore_keywords):
+                    continue
+
+                news_list.append({"title": title, "text": description, "link": link})
+        except Exception as e:
+            print(f"RSS Yükleme Hatası ({url}): {e}")
+
+    return news_list
 
 def analyze_with_gemini(news_item):
-    # En hızlı yanıt veren güncel modeller
     models_to_try = ["gemini-1.5-flash", "gemini-1.5-pro"]
     
     prompt = f"""
@@ -69,7 +73,6 @@ def analyze_with_gemini(news_item):
         req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
         
         try:
-            # 12 Saniye timeout: Model yanıt vermezse takılmayıp anında sıradakine geçecek
             response = urllib.request.urlopen(req, timeout=12)
             res_data = json.loads(response.read().decode('utf-8'))
             text_response = res_data['candidates'][0]['content']['parts'][0]['text'].strip()
@@ -80,7 +83,7 @@ def analyze_with_gemini(news_item):
             text_response = text_response.replace("```json", "").replace("```", "").strip()
             return json.loads(text_response)
         except Exception as err:
-            print(f"Model {model} yanıt vermedi/hata aldı: {err}")
+            print(f"Model {model} hatası: {err}")
             continue
             
     return None
@@ -99,21 +102,25 @@ def main():
             existing_news = []
 
     existing_links = {item.get('link') for item in existing_news if 'link' in item}
+    existing_titles = {item.get('title', '').lower()[:30] for item in existing_news if 'title' in item}
+
     raw_news = get_latest_news()
     newly_processed = []
 
     print(f"Toplam {len(raw_news)} RSS haberi tarandı.")
 
     for idx, item in enumerate(raw_news):
-        if item['link'] in existing_links:
-            print(f"Mevcut haber atlandı: {item['title']}")
+        # Link veya başlık benzerliği kontrolü (Mükerrer önleme)
+        clean_title = item['title'].lower()[:30]
+        if item['link'] in existing_links or clean_title in existing_titles:
             continue
 
-        print(f"İşleniyor ({idx+1}/{len(raw_news)}): {item['title']}")
+        print(f"Yeni Haber İşleniyor ({idx+1}/{len(raw_news)}): {item['title']}")
         result = analyze_with_gemini(item)
         if result:
             newly_processed.append(result)
-            print(" -> Analiz Başarılı!")
+            existing_titles.add(clean_title)
+            print(" -> Başarıyla eklendi.")
         time.sleep(1)
 
     all_news = newly_processed + existing_news
