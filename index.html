@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KÜRESEL HAFIZA | Stratejik Jeopolitik Analiz</title>
-    <!-- Site Simgesi / Favicon -->
+    <title>KÜRESEL HAFIZA | Stratejik Jeopolitik Analiz Portalı</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20'/><path d='M2 12h20'/></svg>">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
@@ -12,7 +11,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Rajdhani', sans-serif; background: #050811; color: #f1f5f9; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
         
-        /* HEADER: Komuta Arayüzü */
         header { background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(16px); padding: 12px 20px; border-bottom: 2px solid #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.25); display: flex; flex-direction: column; gap: 10px; z-index: 1001; }
         .header-top { display: flex; justify-content: space-between; align-items: center; }
         
@@ -28,7 +26,6 @@
         .org-menu { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
         .org-menu::-webkit-scrollbar { display: none; }
         
-        /* Ana Mod Butonları */
         .mode-btn { background: #0f172a; color: #94a3b8; border: 1px solid #1e293b; padding: 8px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
         .mode-btn:hover { background: #1e293b; color: #fff; border-color: #38bdf8; }
         .mode-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; box-shadow: 0 0 15px rgba(2, 132, 199, 0.6); }
@@ -47,7 +44,7 @@
         .news-card { padding: 14px; background: #0f172a; border-radius: 6px; border: 1px solid #1e293b; cursor: pointer; transition: all 0.25s ease; position: relative; }
         .news-card:hover { background: #1e293b; border-color: #38bdf8; transform: translateX(4px); }
         .news-card.active { background: #1e293b; border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.25); }
-        .news-card h3 { font-size: 0.95rem; margin-bottom: 8px; color: #f8fafc; line-height: 1.4; font-weight: 600; }
+        .news-card h3 { font-size: 0.95rem; margin-bottom: 6px; color: #f8fafc; line-height: 1.4; font-weight: 600; }
         .news-card p.sub { font-size: 0.8rem; color: #94a3b8; }
         
         .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
@@ -61,10 +58,10 @@
         .country-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: #38bdf8; margin-bottom: 10px; border-bottom: 1px solid #1e293b; padding-bottom: 6px; }
         .country-info-grid { font-size: 0.82rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: #cbd5e1; }
 
-        .info-panel { width: 390px; background: #0a0f1d; border-left: 1px solid #1e293b; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; z-index: 10; }
-        .panel-block { background: #0f172a; padding: 14px; border-radius: 6px; border: 1px solid #1e293b; }
-        .panel-block h4 { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-        .panel-block p { font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; white-space: pre-line; }
+        .info-panel { width: 420px; background: #0a0f1d; border-left: 1px solid #1e293b; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; z-index: 10; }
+        .panel-block { background: #0f172a; padding: 16px; border-radius: 6px; border: 1px solid #1e293b; }
+        .panel-block h4 { font-family: 'Orbitron', sans-serif; font-size: 0.82rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        .panel-block p { font-size: 0.88rem; color: #cbd5e1; line-height: 1.65; white-space: pre-line; }
         
         .history-block { border-left: 4px solid #f59e0b; background: rgba(245, 158, 11, 0.03); border-top: 1px solid rgba(245, 158, 11, 0.2); border-right: 1px solid rgba(245, 158, 11, 0.2); border-bottom: 1px solid rgba(245, 158, 11, 0.2); }
         .history-block h4 { color: #f59e0b; }
@@ -72,8 +69,8 @@
         .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; padding: 6px 0; border-bottom: 1px solid #1e293b; }
         .legend-color { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
         
-        .member-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; max-height: 150px; overflow-y: auto; padding-right: 4px; }
-        .member-chip { background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; padding: 3px 8px; border-radius: 4px; }
+        .member-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; max-height: 180px; overflow-y: auto; padding-right: 4px; }
+        .member-chip { background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; padding: 4px 8px; border-radius: 4px; font-weight: 600; }
 
         .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 12px; border-radius: 4px; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(2, 132, 199, 0.4); transition: all 0.2s; text-transform: uppercase; }
         .source-btn:hover { background: #0369a1; box-shadow: 0 0 20px rgba(2, 132, 199, 0.7); }
@@ -163,169 +160,211 @@
         const trNameDict = {
             "United States": "Amerika Birleşik Devletleri", "United States of America": "Amerika Birleşik Devletleri", "USA": "ABD",
             "United Kingdom": "İngiltere (Birleşik Krallık)", "Great Britain": "Birleşik Krallık",
-            "Turkey": "Türkiye Cumhuriyeti", "Turkiye": "Türkiye Cumhuriyeti",
-            "Russia": "Rusya Federasyonu", "Russian Federation": "Rusya",
+            "Turkey": "Türkiye Cumhuriyeti", "Turkiye": "Türkiye Cumhuriyeti", "Russia": "Rusya Federasyonu",
             "China": "Çin Halk Cumhuriyeti", "Germany": "Almanya Federal Cumhuriyeti", "France": "Fransa Cumhuriyeti",
             "Greece": "Yunanistan", "Italy": "İtalya Cumhuriyeti", "Spain": "İspanya Krallığı", "Portugal": "Portekiz",
             "Iran": "İran İslam Cumhuriyeti", "Pakistan": "Pakistan İslam Cumhuriyeti", "India": "Hindistan Cumhuriyeti",
             "Egypt": "Mısır Arap Cumhuriyeti", "Saudi Arabia": "Suudi Arabistan Krallığı", "Syria": "Suriye Arap Cumhuriyeti",
             "Iraq": "Irak Cumhuriyeti", "Israel": "İsrail Devleti", "Palestine": "Filistin Devleti", "Ukraine": "Ukrayna",
-            "Taiwan": "Tayvan (Çin Cumhuriyeti)", "Azerbaijan": "Azerbaycan Cumhuriyeti", "Kazakhstan": "Kazakistan Cumhuriyeti"
+            "Taiwan": "Tayvan", "Azerbaijan": "Azerbaycan Cumhuriyeti", "Kazakhstan": "Kazakistan Cumhuriyeti", "Japan": "Japonya",
+            "Australia": "Avustralya", "United Arab Emirates": "Birleşik Arap Emirlikleri", "Qatar": "Katar", "Kuwait": "Kuveyt"
         };
 
         const countryProfiles = {
-            "Turkey": { trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT" },
+            "Turkey": { trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT, İÖT" },
             "Ukraine": { trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı, AGİT" },
-            "Russia": { trName: "Rusya Federasyonu", founding: "1991", pop: "144 Milyon", area: "17,098,242 km²", pact: "BM, ŞİÖ, BRICS" },
+            "Russia": { trName: "Rusya Federasyonu", founding: "1991", pop: "144 Milyon", area: "17,098,242 km²", pact: "BM, ŞİÖ, BRICS, G20" },
             "Greece": { trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO" },
-            "United States": { trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, BM" },
-            "United Kingdom": { trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, BM, G7" },
-            "Canada": { trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7, BM" },
-            "Spain": { trName: "İspanya Krallığı", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO" },
-            "Italy": { trName: "İtalya Cumhuriyeti", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO, G7" },
-            "Germany": { trName: "Almanya Federal Rep.", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7" },
-            "France": { trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, BM, G7" },
-            "Iran": { trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ, EKO" },
+            "United States": { trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, G20, QUAD, BM" },
+            "United Kingdom": { trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, BM, G7, G20" },
+            "Canada": { trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7, G20" },
+            "Spain": { trName: "İspanya Krallığı", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO, G20" },
+            "Italy": { trName: "İtalya Cumhuriyeti", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO, G7, G20" },
+            "Germany": { trName: "Almanya Federal Rep.", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7, G20" },
+            "France": { trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, BM, G7, G20" },
+            "Iran": { trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ, İÖT, EKO" },
             "Pakistan": { trName: "Pakistan İslam Rep.", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ, İÖT" },
-            "India": { trName: "Hindistan Cumhuriyeti", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ, QUAD" },
-            "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ" },
-            "Taiwan": { trName: "Tayvan", founding: "1912", pop: "23.5 Milyon", area: "36,197 km²", pact: "Batı Paktı Müttefiki" }
+            "India": { trName: "Hindistan Cumhuriyeti", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ, QUAD, G20" },
+            "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ, G20" },
+            "Japan": { trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, G20, QUAD" },
+            "Australia": { trName: "Avustralya", founding: "1901", pop: "26 Milyon", area: "7,692,024 km²", pact: "G20, QUAD, AUKUS" }
         };
 
-        // 1. ULUSLARARASI ÖRGÜTLER VERİTABANI
+        // 1. GENİŞLETİLMİŞ ULUSLARARASI ÖRGÜTLER KATALOĞU (12 ANA PAKT)
         const orgListData = [
-            { id: "NATO", title: "Kuzey Atlas Antlaşması Örgütü (NATO)", sub: "32 Üye Ülke • Askeri İttifak" },
-            { id: "UN", title: "Birleşmiş Milletler (BM)", sub: "193 Üye Ülke • Küresel Barış Örgütü" },
-            { id: "SCO", title: "Şanghay İşbirliği Örgütü (ŞİÖ)", sub: "10 Üye Ülke • Avrasya Güvenlik Bloğu" },
-            { id: "BRICS", title: "BRICS Küresel Ekonomik Paktı", sub: "9 Üye Ülke • Yükselen Ekonomiler" },
-            { id: "TDT", title: "Türk Devletleri Teşkilatı (TDT)", sub: "5 Tam Üye, 3 Gözlemci • Türk Dünyası" },
-            { id: "EU", title: "Avrupa Birliği (AB)", sub: "27 Üye Ülke • Ekonomik & Siyasi Birlik" },
-            { id: "ARAB", title: "Arap Devletleri Ligi", sub: "22 Üye Ülke • Bölgesel Pakt" }
+            { id: "NATO", title: "Kuzey Atlas Antlaşması Örgütü (NATO)", sub: "32 Üye • Küresel Askeri İttifak" },
+            { id: "UN", title: "Birleşmiş Milletler (BM)", sub: "193 Üye • Küresel Barış & Hukuk Örgütü" },
+            { id: "SCO", title: "Şanghay İşbirliği Örgütü (ŞİÖ)", sub: "10 Üye • Avrasya Güvenlik & Güç Bloğu" },
+            { id: "BRICS", title: "BRICS Küresel Ekonomik Paktı", sub: "9 Üye • Yükselen Finansal Güç Odakları" },
+            { id: "TDT", title: "Türk Devletleri Teşkilatı (TDT)", sub: "5 Tam Üye, 3 Gözlemci • Türk Dünyası Entegrasyonu" },
+            { id: "EU", title: "Avrupa Birliği (AB)", sub: "27 Üye • Siyasi & Ekonomik Tek Pazar" },
+            { id: "QUAD", title: "Dörtlü Güvenlik Diyaloğu (QUAD)", sub: "4 Üye • Hint-Pasifik Güvenlik Paktı" },
+            { id: "G7", title: "G7 Sanayileşmiş Ülkeler Grubu", sub: "7 Üye • Küresel Ekonomi Komutası" },
+            { id: "G20", title: "G20 En Büyük Ekonomiler Grubu", sub: "19 Ülke + AB & AfB • Dünya Ekonomisi" },
+            { id: "OIC", title: "İslam İşbirliği Teşkilatı (İÖT)", sub: "57 Üye • İslam Coğrafyası Çatı Birlik" },
+            { id: "GCC", title: "Körfez İşbirliği Konseyi (KİK)", sub: "6 Üye • Basra Körfezi Enerji Birlikteliği" },
+            { id: "ARAB", title: "Arap Devletleri Ligi (Arap Birliği)", sub: "22 Üye • Orta Doğu & Kuzey Afrika Paktı" }
         ];
 
+        // DERİNLEŞTİRİLMİŞ ÖRGÜT ANALİZ METİNLERİ
         const orgInfoData = {
             "NATO": {
                 title: "Kuzey Atlas Antlaşması Örgütü (NATO)",
-                summary: "1949 yılında Washington Antlaşması ile kurulan askeri ittifak. Temel ilkesi 'Bir üyeye yapılan saldırı hepsine yapılmıştır' mantığını güden 5. Maddesidir.",
-                history: "Soğuk Savaş döneminde Sovyet tehdidine karşı Doğu Avrupa ve Atlantik hattını korumak için kurulmuş, günümüzde küresel kriz yönetimi ve Doğu Avrupa tahkimatına odaklanmıştır.",
+                summary: "1949 yılında Washington Antlaşması ile Sovyet yayılmacılığına karşı kurulan askeri ittifak. Temel direği, bir üyeye yapılan silahlı saldırıyı tüm üyelere yapılmış sayan meşhur 5. Madde doktrinidir.\n\nGünümüzde 32 müttefikiyle Atlantik'ten Hint-Pasifik sınırına kadar kolektif caydırıcılığın ana kalesidir.",
+                history: "Soğuk Savaş döneminde Varşova Paktı'na karşı Doğu Avrupa ve Boğazlar hattını korumuş, 1990 sonrasında Balkanlar ve Afganistan müdahaleleriyle kriz yönetimi örgütüne dönüşmüştür.\n\nRusya-Ukrayna savaşıyla birlikte tarihinin en büyük askeri sevkiyatını gerçekleştirerek Doğu Kanadını (Baltık-Karadeniz hattı) tamamen tahkim etmiş, İsveç ve Finlandiya'nın katılımıyla Kuzey Kutbu'nu da etki alanına almıştır.",
                 membersTr: ["Türkiye", "ABD", "İngiltere", "Kanada", "Almanya", "Fransa", "İtalya", "İspanya", "Yunanistan", "Romanya", "Polonya", "Norveç", "Hollanda", "Belçika", "Portekiz", "Danimarka", "Finlandiya", "İsveç", "Bulgaristan", "Macaristan", "Slovakya", "Arnavutluk", "Litvanya", "Letonya", "Estonya", "Hırvatistan", "Slovenya", "Karadağ", "Kuzey Makedonya", "Çekya", "İzlanda", "Lüksemburg"],
                 membersEn: ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Latvia", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"]
             },
             "UN": {
                 title: "Birleşmiş Milletler (BM)",
-                summary: "1945'te kurulan, küresel barış ve güvenliği korumayı amaçlayan en üst düzey uluslararası örgüttür. 193 üye ülkesi ile uluslararası hukukun merkezidir.",
-                history: "İkinci Dünya Savaşı sonrası İttifak devletleri öncülüğünde kuruldu. Güvenlik Konseyi'nin (BMGK) daimi 5 üyesi (ABD, Rusya, Çin, İngiltere, Fransa) veto hakkına sahiptir.",
-                membersTr: ["Türkiye", "ABD", "Rusya", "Çin", "İngiltere", "Fransa", "Almanya", "Japonya", "Hindistan", "Brezilya", "...ve 193 Üye"],
+                summary: "İkinci Dünya Savaşı yıkımının ardından 1945'te San Francisco'da 51 ülke tarafından temelleri atılan, günümüzde 193 egemen devletin üye olduğu evrensel çatı örgüt.\n\nUluslararası barış, insan hakları, iklim ve küresel diplomasinin en üst karar organıdır.",
+                history: "Milletler Cemiyeti'nin başarısızlığı üzerine kurulan sistem, Güvenlik Konseyi (BMGK) etrafında şekillenmiştir. Daimi 5 üyenin (ABD, Rusya, Çin, İngiltere, Fransa) mutlak veto hakkı, Soğuk Savaş krizlerinde ve günümüz Orta Doğu/Ukrayna savaşlarında tilit yaratması nedeniyle 'Dünya 5'ten büyüktür' doktrini çerçevesinde reform tartışmalarının odağındadır.",
+                membersTr: ["Türkiye", "ABD", "Rusya", "Çin", "İngiltere", "Fransa", "Almanya", "Japonya", "Hindistan", "Brezilya", "...ve tüm bağımsız devletler (193 Üye)"],
                 membersEn: ["ALL"]
             },
             "SCO": {
                 title: "Şanghay İşbirliği Örgütü (ŞİÖ)",
-                summary: "Avrasya coğrafyasında askeri, ekonomik ve güvenlik işbirliğini hedefleyen dev Avrasya ittifakı.",
-                history: "1996'da Şanghay Beşlisi olarak başladı, 2001'de kurumsallaştı. Çin ve Rusya liderliğindeki blok; Hindistan, Pakistan ve İran'ın katılımıyla Avrasya'nın ana güç odağı haline gelmiştir.",
+                summary: "1996'da Çin, Rusya, Kazakistan, Kırgızistan ve Tacikistan'ın oluşturduğu 'Şanghay Beşlisi' yapısının 2001'de kurumsallaşmasıyla doğan Avrasya dev siyasi ve güvenlik bloğu.\n\nDünya nüfusunun yaklaşık %40'ını ve Avrasya karasının büyük bölümünü temsil eder.",
+                history: "Başlangıçta sınır güvenliği ve ayrılıkçı hareketlerle (Aşırıcılık, Terör, Ayrılıkçılık) mücadeleyi hedefleyen yapı; Hindistan, Pakistan, İran ve Beyaz Rusya'nın katılımıyla Batı merkezli küresel düzene (NATO/G7) alternatif en büyük Avrasya güç odağı haline gelmiştir. Ortak askeri tatbikatlar ve enerji koridorları örgütün ana omurgasıdır.",
                 membersTr: ["Çin", "Rusya", "Hindistan", "Pakistan", "İran", "Kazakistan", "Özbekistan", "Kırgızistan", "Tacikistan", "Beyaz Rusya"],
                 membersEn: ["Russia", "China", "India", "Pakistan", "Iran", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Tajikistan", "Belarus"]
             },
             "BRICS": {
                 title: "BRICS Küresel Ekonomik Paktı",
-                summary: "Gelişmekte olan dev ekonomilerin Batı merkezli finansal sisteme (SWIFT, Dolar) alternatif olarak oluşturduğu küresel blok.",
-                history: "Brezilya, Rusya, Hindistan, Çin ve Güney Afrika ile başlayan yapı; Mısır, İran, BAE ve Etiyopya'nın katılımıyla küresel ticaret ve enerji koridorlarında ana aktör haline gelmiştir.",
+                summary: "2006 yılında Brezilya, Rusya, Hindistan ve Çin'in (BRIC) kurduğu, 2010'da Güney Afrika'nın katıldığı küresel ekonomi paktı.\n\nTemel amacı, II. Dünya Savaşı sonrası kurulan Batı finansal sistemine (IMF, Dünya Bankası, SWIFT) alternatif küresel dengeler ve 'Dolarsızlaşma' (De-dollarization) mekanizmaları inşa etmektir.",
+                history: "2024 itibarıyla Mısır, Etiyopya, İran ve BAE'nin katılımıyla 'BRICS+' yapısına dönüşmüş; küresel petrol rezervlerinin ve ticaret hatlarının merkezine yerleşmiştir. Yeni Kalkınma Bankası (NDB) üzerinden yerel para birimleriyle ticaret projesini yürütmektedir.",
                 membersTr: ["Brezilya", "Rusya", "Hindistan", "Çin", "Güney Afrika", "Mısır", "İran", "Birleşik Arap Emirlikleri", "Etiyopya"],
                 membersEn: ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Ethiopia", "Iran", "United Arab Emirates"]
             },
             "TDT": {
                 title: "Türk Devletleri Teşkilatı (TDT)",
-                summary: "Türk dünyası arasında dil, kültür, siyaset, ekonomi ve savunma sanayii alanında entegrasyonu sağlayan uluslararası örgüt.",
-                history: "2009 Nahçıvan Anlaşması ile temelleri atılmış, 2021 İstanbul Zirvesi ile Teşkilat adını almıştır. Ortak alfabe, ticaret haritası ve askeri tatbikatlarla entegrasyon hızlanmıştır.",
+                summary: "2009 Nahçıvan Anlaşması ile Türk Dili Konuşan Ülkeler İşbirliği Konseyi adıyla kurulan, 2021 İstanbul Zirvesi'nde Teşkilat yapısına kavuşan Türk dünyasının entegrasyon çatı örgütü.\n\nAdriyatik'ten Çin Seddi'ne uzanan jeopolitik hat üzerinde dil, kültür, siyaset, ekonomi ve savunma sanayii birliğini hedefler.",
+                history: "SSCB'nin dağılmasının ardından bağımsızlığına kavuşan Türk cumhuriyetlerinin stratejik ortaklığına dayanır. Ortak Türk Alfabesi projesi, Zengezur Koridoru bağlamındaki Hazar Geçişli Doğu-Batı Orta Koridoru ve savunma sanayiindeki müttefiklik adımları teşkilatın geleceğinde kritik rol oynamaktadır.",
                 membersTr: ["Türkiye", "Azerbaycan", "Kazakistan", "Özbekistan", "Kırgızistan", "Macaristan (Gözlemci)", "KKTC (Gözlemci)", "Türkmenistan (Gözlemci)"],
                 membersEn: ["Turkey", "Azerbaijan", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Hungary"]
             },
             "EU": {
                 title: "Avrupa Birliği (AB)",
-                summary: "27 Avrupa devletinin oluşturduğu tek pazar, serbest dolaşım ve ortak hukuki değerlere sahip ekonomik ve siyasi birlik.",
-                history: "1951 Kömür ve Çelik Topluluğu'ndan günümüzdeki Maastricht yapısına evrilmiştir. Ortak para birimi (Euro) ve küresel ticaret standartları koyma gücü yüksektir.",
+                summary: "1951 Kömür ve Çelik Topluluğu ve 1957 Roma Antlaşması ile temelleri atılan, 1992 Maastricht Antlaşması ile bugünkü siyasi, hukuki ve ekonomik birlik statüsünü alan 27 üyeli dev yapı.\n\nDünyanın en büyük tek pazarı ve Euro para birimiyle devasa bir jeoeonomik güçtür.",
+                history: "Avrupa kıtasındaki tarihsel savaşları tamamen engellemek için kurulan entegrasyon; Soğuk Savaş sonrası Doğu Bloku ülkelerini bünyesine katarak genişlemiştir. Günümüzde stratejik özerklik, ortak savunma sanayii hamleleri ve sınır güvenliği krizleriyle yüzleşmektedir.",
                 membersTr: ["Almanya", "Fransa", "İtalya", "İspanya", "Yunanistan", "Romanya", "Polonya", "Portekiz", "Hollanda", "Belçika", "Avusturya", "İsveç", "Finlandiya", "Danimarka", "İrlanda", "Slovakya", "Macaristan", "Bulgaristan", "Hırvatistan", "Slovenya", "Estonya", "Letonya", "Litvanya", "Güney Kıbrıs", "Çekya", "Lüksemburg", "Malta"],
                 membersEn: ["Germany", "France", "Italy", "Spain", "Greece", "Romania", "Poland", "Portugal", "Netherlands", "Belgium", "Austria", "Sweden", "Finland", "Denmark", "Ireland", "Slovakia", "Hungary", "Bulgaria", "Croatia", "Slovenia", "Estonia", "Latvia", "Lithuania", "Cyprus"]
             },
+            "QUAD": {
+                title: "Dörtlü Güvenlik Diyaloğu (QUAD)",
+                summary: "ABD, Japonya, Avustralya ve Hindistan arasında Hint-Pasifik bölgesinin deniz güvenliğini ve serbest dolaşımını korumak amacıyla kurulan stratejik güvenlik ittifakı.",
+                history: "2004 Hint Okyanusu tsunamisi insani yardımlarıyla başlayan gayriresmi temaslar, Çin Halk Cumhuriyeti'nin Güney Çin Denizi ve Pasifik'teki hızlı askeri yayılmasına karşı 2017'de liderler düzeyinde kurumsal bir güvenlik bloğuna dönüştürülmüştür.",
+                membersTr: ["ABD", "Japonya", "Avustralya", "Hindistan"],
+                membersEn: ["United States", "Japan", "Australia", "India"]
+            },
+            "G7": {
+                title: "G7 Sanayileşmiş Ülkeler Grubu",
+                summary: "Dünyanın en büyük gelişmiş ekonomilerine sahip 7 ülkesinin ve Avrupa Birliği temsilcilerinin oluşturduğu küresel ekonomik ve siyasi yönlendirme platformu.",
+                history: "1973 Petrol Krizinin ardından 1975'te kurulan grup; finansal istikrar, küresel güvenlik, enerji politikaları ve uluslararası krizlere (Rusya yaptırımları vb.) ortak tutum belirleme merkezi olarak çalışır.",
+                membersTr: ["ABD", "İngiltere", "Almanya", "Fransa", "İtalya", "Kanada", "Japonya"],
+                membersEn: ["United States", "United Kingdom", "Germany", "France", "Italy", "Canada", "Japan"]
+            },
+            "G20": {
+                title: "G20 En Büyük Ekonomiler Grubu",
+                summary: "Dünya ekonomisinin %85'ini, küresel ticaretin %75'ini ve dünya nüfusunun üçte ikisini temsil eden 19 gelişmiş/gelişmekte olan ülke ile AB ve Afrika Birliği'nden oluşan sistemik platform.",
+                history: "1999 Asya finansal krizinin ardından maliye bakanları düzeyinde başlamış, 2008 Küresel Ekonomik Krizinde liderler zirvesine dönüşmüştür. Kuzey-Güney küresel diyaloğunun ana meydanıdır.",
+                membersTr: ["Türkiye", "ABD", "Çin", "Rusya", "Almanya", "Fransa", "İngiltere", "Japonya", "Hindistan", "Brezilya", "Güney Afrika", "Suudi Arabistan", "Güney Kore", "Meksika", "Endonezya", "Avustralya", "Kanada", "İtalya", "Arjantin"],
+                membersEn: ["Turkey", "United States", "China", "Russia", "Germany", "France", "United Kingdom", "Japan", "India", "Brazil", "South Africa", "Saudi Arabia", "South Korea", "Mexico", "Indonesia", "Australia", "Canada", "Italy", "Argentina"]
+            },
+            "OIC": {
+                title: "İslam İşbirliği Teşkilatı (İÖT)",
+                summary: "1969 yılında Mescid-i Aksa kundaklamasının ardından Rabat'ta kurulan, 57 üye ülkesiyle Birleşmiş Milletler'den sonraki en büyük ikinci hükümetlerarası uluslararası örgüt.",
+                history: "İslam dünyasının haklarını korumak, Filistin davasına diplomatik destek vermek ve üye ülkeler arasında ekonomik/kültürel dayanışmayı sağlamak amacıyla çalışır. Suudi Arabistan (Cidde) merkezlidir.",
+                membersTr: ["Türkiye", "Suudi Arabistan", "Pakistan", "İran", "Mısır", "Endonezya", "Malezya", "Azerbaycan", "Cezayir", "Fas", "...ve toplam 57 Üye Ülke"],
+                membersEn: ["Turkey", "Saudi Arabia", "Pakistan", "Iran", "Egypt", "Indonesia", "Malaysia", "Azerbaijan", "Algeria", "Morocco"]
+            },
+            "GCC": {
+                title: "Körfez İşbirliği Konseyi (KİK)",
+                summary: "1981 yılında Riyad'da kurulan Basra Körfezi'ne kıyısı olan 6 Arap monarşisinin ekonomik, askeri ve güvenlik paktı.",
+                history: "İran İslam Devrimi ve İran-Irak Savaşının yarattığı güvenlik tehdidine karşı kurulan konsey; petrol rezervleri, Ortak Yarımada Kalkanı askeri gücü ve ekonomik entegrasyonu ile Orta Doğu'nun finansal kalbidir.",
+                membersTr: ["Suudi Arabistan", "Birleşik Arap Emirlikleri", "Katar", "Kuveyt", "Umman", "Bahreyn"],
+                membersEn: ["Saudi Arabia", "United Arab Emirates", "Qatar", "Kuwait", "Oman", "Bahrain"]
+            },
             "ARAB": {
                 title: "Arap Devletleri Ligi (Arap Birliği)",
-                summary: "Arap coğrafyasındaki 22 ülkenin coğrafi, ekonomik ve siyasi egemenliğini koordinasyon için kurduğu bölgesel birlik.",
-                history: "1945'te Kahire'de kurulmuştur. Kuzey Afrika'dan Basra Körfezi'ne kadar uzanan coğrafyada diplomatik krizlerin çözüm noktasıdır.",
+                summary: "1945'te Kahire Antlaşması ile kurulan Orta Doğu ve Kuzey Afrika'daki 22 Arap ülkesinin bölgesel örgütü.",
+                history: "Arap ülkelerinin bağımsızlıklarını pekiştirmek, Filistin davasını desteklemek ve üye ülkeler arasındaki diplomatik krizleri çözmek amacıyla kurulmuştur. Kuzey Afrika'dan Körfez'e kadar geniş bir coğrafyayı kapsar.",
                 membersTr: ["Mısır", "Suudi Arabistan", "Birleşik Arap Emirlikleri", "Filistin", "Irak", "Suriye", "Ürdün", "Cezayir", "Fas", "Tunus", "Libya", "Sudan", "Umman", "Yemen", "Kuveyt", "Katar", "Bahreyn", "Lübnan"],
                 membersEn: ["Egypt", "Saudi Arabia", "United Arab Emirates", "Palestine", "Iraq", "Syria", "Jordan", "Algeria", "Morocco", "Tunisia", "Libya", "Sudan", "Oman", "Yemen", "Kuwait", "Qatar", "Bahrain", "Lebanon"]
             }
         };
 
-        // 2. AKTİF ÇATIŞMA COĞRAFYALARI VERİTABANI
+        // 2. AKTİF ÇATIŞMA COĞRAFYALARI VE DERİN ASKERİ/SİYASİ ANALİZLERİ
         const conflictListData = [
             {
                 id: "UKR",
                 title: "Rusya - Ukrayna Savaşı",
-                sub: "Doğu Avrupa / Donbas & Karadeniz Hattı",
-                summary: "2022 Şubat ayında Rusya'nın Ukrayna'ya geniş çaplı müdahalesiyle başlayan, Soğuk Savaş sonrası Avrupa'nın en büyük kara savaşı.",
-                history: "2014 Kırım'ın ilhakı ve Donbas krizinin devamı niteliğindedir. Batı dünyası Ukrayna'ya devasa askeri ve finansal yardım sağlarken, Rusya savaşı yıpratma ve savunma sanayii seferberliğine dönüştürmüştür.",
+                sub: "Doğu Avrupa / Donbas & Karadeniz Cephesi",
+                summary: "24 Şubat 2022'de Rusya'nın 'Özel Askeri Operasyon' adı altında başlattığı müdahale, Soğuk Savaş sonrası Avrupa topraklarındaki en kanlı kara savaşına dönüşmüştür.\n\nSavaş; Rusya'nın Ukrayna'nın NATO üyeliğini engelleme ve tampon bölge oluşturma stratejisi ile Batı dünyasının Ukrayna'yı tahkim etme doktrini arasında seyretmektedir.",
+                history: "Krizin kökleri 2014 Kırım'ın ilhakı ve Donbas (Donetsk/Luhansk) ayrılıkçı savaşlarına dayanır.\n\nSavaş sadece iki ülke arasında kalmamış; Yaptırımlar Savaşları, Karadeniz Tahıl Koridoru diplomasisi, Kuzey Akım sabotajları ve NATO Doğu Kanadı sevkiyatlarıyla küresel bir Soğuk Savaş tırmanışına yol açmıştır.",
                 countries: {
                     "Russia": { role: "Saldıran / Taraf", color: "#ef4444" },
                     "Ukraine": { role: "Savunan / Taraf", color: "#38bdf8" },
-                    "United States": { role: "Ukrayna Destekçisi", color: "#22c55e" },
-                    "Belarus": { role: "Rusya Müttefiki", color: "#f59e0b" }
+                    "United States": { role: "Ukrayna Destekçisi (NATO)", color: "#22c55e" },
+                    "Belarus": { role: "Rusya Lojistik Müttefiki", color: "#f59e0b" }
                 }
             },
             {
                 id: "IRN",
-                title: "ABD - İran Gerilimi & Hürmüz Boğazı",
-                sub: "Orta Doğu & Basra Körfezi Koridoru",
-                summary: "İran'ın nükleer programı, Hürmüz Boğazı ticari seyrüsefer güvenliği ve bölgesel vekil güçler üzerinden ABD-İran gerilimi.",
-                history: "1979 İslam Devrimi ve elçilik baskınından bu yana süren düşmanlık; 2018 Nükleer Anlaşmadan (JCPOA) çekilme, Kasım Süleymani suikastı ve Körfez'deki tanker savaşlarıyla sıcak çatışma eşiğinde seyretmektedir.",
+                title: "ABD - İran Gerilimi & Hürmüz Kriz Koridoru",
+                sub: "Orta Doğu / Basra Körfezi & Kızıldeniz Hattı",
+                summary: "Dünya petrol sevkiyatının %20'sinin geçtiği Hürmüz Boğazı merkezli gerilim; İran'ın Uranüyüm zenginleştirme programı ve bölgesel 'Direniş Ekseni' stratejisi ile ABD-İsrail askeri caydırıcılık adımlarının çatışmasıdır.",
+                history: "1979 İslam Devrimi ve elçilik krizinden bu yana tırmanan süreç; 2018'de ABD'nin Nükleer Anlaşmadan (JCPOA) çekilmesi, Kasım Süleymani suikastı ve Kızıldeniz'deki Husilerin tanker saldırılarıyla bölgesel bir vekalet savaşına evrilmiştir.",
                 countries: {
-                    "Iran": { role: "Bölgesel Aktör", color: "#ef4444" },
-                    "United States": { role: "Küresel Güç", color: "#38bdf8" },
-                    "Israel": { role: "İran Karşıtı Cephe", color: "#22c55e" },
-                    "Saudi Arabia": { role: "Körfez Bloku", color: "#f59e0b" }
+                    "Iran": { role: "Bölgesel Aktör / Taraf", color: "#ef4444" },
+                    "United States": { role: "Küresel Deniz Gücü", color: "#38bdf8" },
+                    "Israel": { role: "İran Karşıtı İttifak", color: "#22c55e" },
+                    "Saudi Arabia": { role: "Körfez Güvenliği Bloku", color: "#f59e0b" }
                 }
             },
             {
                 id: "TWN",
-                title: "Çin - Tayvan Gerginliği",
-                sub: "Doğu Asya & Pasifik Hattı",
-                summary: "Çin Halk Cumhuriyeti'nin Tayvan'ı 'yeniden birleşme' hedefiyle baskı altına alması ve ABD'nin Tayvan Boğazı'ndaki caydırıcılık adımları.",
-                history: "1949 Çin İç Savaşı sonrasında Milliyetçilerin Tayvan'a çekilmesiyle başlayan kriz; yarı iletken (mikroçip) küresel arz zincirinin kalbinde yer aldığı için dünyayı III. Dünya Savaşı eşiğine getirebilecek en kritik fay hattıdır.",
+                title: "Çin - Tayvan Gerginliği & Pasifik Fay Hattı",
+                sub: "Doğu Asya / Tayvan Boğazı & Birinci Ada Zirvesi",
+                summary: "Çin Halk Cumhuriyeti'nin Tayvan'ı (Çin Cumhuriyeti) 'Tek Çin' ilkesi doğrultusunda gerekirse askeri güçle bünyesine katma hedefi ile Tayvan'ın bağımsız duruşu arasındaki yüksek riskli fay hattı.",
+                history: "1949 Çin İç Savaşı sonunda Çang Kay-şek liderliğindeki Milliyetçilerin adaya çekilmesiyle başlayan kriz; günümüzde küresel mikroçip (TSMC) arzının kalbi olması nedeniyle III. Dünya Savaşı potansiyeli taşıyan en kritik stratejik bölgedir. ABD 'Stratejik Muğlaklık' politikasıyla Tayvan'a askeri koruma sağlamaktadır.",
                 countries: {
-                    "China": { role: "Hak İddia Eden", color: "#ef4444" },
-                    "Taiwan": { role: "Savunan Ada", color: "#38bdf8" },
-                    "United States": { role: "Güvenlik Garantörü", color: "#22c55e" },
-                    "Japan": { role: "Bölgesel Müttefik", color: "#f59e0b" }
+                    "China": { role: "Hak İddia Eden Güç", color: "#ef4444" },
+                    "Taiwan": { role: "Savunan Ada Yönetimi", color: "#38bdf8" },
+                    "United States": { role: "Pasifik Güvenlik Garantörü", color: "#22c55e" },
+                    "Japan": { role: "Bölgesel Lojistik Müttefik", color: "#f59e0b" }
                 }
             },
             {
                 id: "ISR",
                 title: "İsrail - Filistin & Doğu Akdeniz Kriz Hattı",
-                sub: "Gazze, Batı Şeria & Lübnan Sınırı",
-                summary: "7 Ekim 2023 sonrası tırmanan Gazze savaşı, Lübnan Hizbullahı ile çatışmalar ve Doğu Akdeniz enerji hatlarındaki askeri hareketlilik.",
-                history: "1948 İsrail'in kuruluşu ve Orta Doğu Savaşları'na dayanan köklü kriz; iki devletli çözümün tıkanması ve bölgesel aktörlerin doğrudan müdahil olmasıyla insani ve askeri traşediye dönüşmüştür.",
+                sub: "Orta Doğu / Gazze, Batı Şeria & Lübnan Sınırı",
+                summary: "7 Ekim 2023 sonrası başlayan Gazze savaşı, Lübnan Hizbullahı ile sınır çatışmaları ve Doğu Akdeniz enerji/güvenlik denklemindeki devasa tırmanış.",
+                history: "1948 İsrail Devleti'nin kuruluşu, 1967 Altı Gün Savaşı ve Filistin topraklarının işgaliyle başlayan 75 yıllık kriz; İki Devletli Çözüm vizyonunun tıkanması, insani felaketler ve bölgesel aktörlerin doğrudan müdahil olmasıyla küresel bir fay hattına dönüşmüştür.",
                 countries: {
-                    "Israel": { role: "Askeri Aktör", color: "#ef4444" },
-                    "Palestine": { role: "Çatışma Alanı", color: "#38bdf8" },
-                    "Lebanon": { role: "Kuzey Cephesi", color: "#f59e0b" },
+                    "Israel": { role: "Askeri Müdahale Aktörü", color: "#ef4444" },
+                    "Palestine": { role: "Gazze & Batı Şeria", color: "#38bdf8" },
+                    "Lebanon": { role: "Kuzey Cephesi (Hizbullah)", color: "#f59e0b" },
                     "Iran": { role: "Vekil Güç Destekçisi", color: "#dc2626" }
                 }
             },
             {
                 id: "KSH",
                 title: "Hindistan - Pakistan Keşmir Nükleer Hattı",
-                sub: "Güney Asya / Himalayalar Sınır Hattı",
-                summary: "İki nükleer güç olan Hindistan ve Pakistan arasında Keşmir bölgesi üzerindeki egemenlik ihtilafı ve sınır çatışmaları.",
-                history: "1947 İngiliz sömürge yönetiminin çekilmesiyle başlayan bölünmeden bu yana 3 kez büyük savaşa yol açmış, iki ülkenin de nükleer silahlara erişmesiyle dünyanın en tehlikeli nükleer parlama noktalarından biri haline gelmiştir.",
+                sub: "Güney Asya / Himalayalar Sınır Çatışması",
+                summary: "Dünyanın iki nükleer gücü olan Hindistan ve Pakistan arasında Cammu Keşmir bölgesi üzerindeki egemenlik ihtilafı.",
+                history: "1947 İngiliz sömürgesinin çekilmesiyle başlayan bölünmeden bu yana 3 kez büyük savaşa yol açmış olan kriz; kontrol hattında (LoC) sürekli füzeli/topçu çatışmalarıyla dünyada nükleer tırmanma riski en yüksek coğrafyalardan biridir.",
                 countries: {
-                    "India": { role: "Kontrol Eden / Taraf", color: "#ef4444" },
-                    "Pakistan": { role: "Hak İddia Eden / Taraf", color: "#38bdf8" },
-                    "China": { role: "Aksai Çin Aktörü", color: "#f59e0b" }
+                    "India": { role: "Fiili Kontrol Eden Güç", color: "#ef4444" },
+                    "Pakistan": { role: "Hak İddia Eden Taraf", color: "#38bdf8" },
+                    "China": { role: "Aksai Çin Sınır Aktörü", color: "#f59e0b" }
                 }
             }
         ];
 
         let newsData = [];
         let selectedTagFilter = null;
-        let currentMainMode = 'news'; // 'news', 'orgs', 'conflicts'
+        let currentMainMode = 'news';
         let currentActiveItem = null;
 
         const map = L.map('map', { center: [30.0, 15.0], zoom: 2, zoomControl: true });
@@ -346,7 +385,6 @@
             document.getElementById('summaryText').innerText = "Haber verileri yüklenirken bir hata oluştu.";
         });
 
-        // ANA MENÜ MOD DEĞİŞTİRİCİ
         function switchMainMode(mode) {
             currentMainMode = mode;
             document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
@@ -366,7 +404,6 @@
             }
         }
 
-        // 1. HABER LİSTESİ
         function renderNewsList() {
             const listEl = document.getElementById('sidebarContentList');
             listEl.innerHTML = '';
@@ -392,7 +429,6 @@
             }
         }
 
-        // 2. ÖRGÜT LİSTESİ (SOL PANEL)
         function renderOrgList() {
             const listEl = document.getElementById('sidebarContentList');
             listEl.innerHTML = '';
@@ -410,7 +446,6 @@
             }
         }
 
-        // 3. ÇATIŞMA LİSTESİ (SOL PANEL)
         function renderConflictList() {
             const listEl = document.getElementById('sidebarContentList');
             listEl.innerHTML = '';
@@ -428,7 +463,6 @@
             }
         }
 
-        // SEÇİMLER VE HARİTA ÇİZİMLERİ
         function selectNews(news, cardEl) {
             currentActiveItem = { type: 'news', data: news };
             highlightCard(cardEl);
@@ -466,9 +500,9 @@
             const info = orgInfoData[orgId];
             if (!info) return;
 
-            document.getElementById('panelTitle').innerText = "Örgüt Analizi";
+            document.getElementById('panelTitle').innerText = "Örgüt Doktrini & Özeti";
             document.getElementById('legendTitle').innerText = "Üye Ülkeler Listesi";
-            document.getElementById('historyTitle').innerText = "Doktrin & Tarihsel Rolü";
+            document.getElementById('historyTitle').innerText = "Stratejik & Tarihsel Rolü";
 
             document.getElementById('summaryText').innerText = info.summary;
             document.getElementById('historyText').innerText = info.history;
