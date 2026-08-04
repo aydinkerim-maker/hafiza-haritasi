@@ -1,5 +1,25 @@
 [
     {
+        "title": "Trump, Washington Anıtı Havuzu'ndaki Vandalizm Suçlamalarının Düşürülmesi Nedeniyle Jeanine Pirro'yu Neden Hedef Aldı?",
+        "tags": [
+            "#ABD",
+            "#Amerika",
+            "#Washington",
+            "#Politika",
+            "#Adalet"
+        ],
+        "summary": "Amerika Birleşik Devletleri Başkanı Donald Trump, Washington'daki ünlü yansıtma havuzunda gerçekleştirilen vandalizm eylemine ilişkin suçlamaların düşürülmesinin ardından kendi atadığı Washington D.C. başsavcısını sert bir şekilde eleştirdi. Olay, başkentin sembolik alanlarından biri olan Lincoln Anıtı önündeki su havuzuna zarar verilmesiyle patlak verdi. Başkan Trump, bu tür eylemlere karşı hoşgörüsüz bir tutum sergilenmesi gerektiğini savunarak yargı sürecinin hafifletilmesine tepki gösterdi. Jeanine Pirro ve ilgili savcılık makamları, delil yetersizliği veya hukuki usuller nedeniyle suçlamaları düşürdüklerini savunurken, bu durum federal yönetim ile yerel adalet mekanizmaları arasında gerilime yol açtı. Tartışma, ABD'de kamu mülkiyetine karşı işlenen suçlarda izlenen cezalandırma politikalarını yeniden alevlendirdi. Olay, muhafazakâr çevrelerde ve Trump'ın destek tabanında adalet sisteminin yeterince sert olmadığını öne süren eleştirilerin hedefi oldu. Başsavcılığın aldığı karar, hem hukuki hem de siyasi düzlemde geniş yankı uyandırarak kamuoyunu ikiye böldü. Trump'ın sosyal medya üzerinden yaptığı çıkışlar, konunun ulusal gündemde kalmasını sağladı. Washington D.C.'deki yerel yönetim ile federal otorite arasındaki yetki sınırları ve suçla mücadele yöntemleri bir kez daha tartışmaya açıldı. Bu gelişme, Trump yönetiminin atadığı isimlerle yaşadığı iç politika anlaşmazlıklarının da bir yansıması olarak değerlendirildi.",
+        "history": "Amerika Birleşik Devletleri'nde başkent Washington D.C., federal binalar ile yerel idare arasındaki hukuki ve siyasi yetki paylaşımının merkezi olagelmiştir. Şehir, 1973 yılında kabul edilen Bölge Ev Yönetimi Yasası ile kendi yerel yönetim organlarına kavuşmuş olsa da, Kongre ve federal yürütme organı başkentteki yasa ve düzen üzerinde nihai denetim yetkisini elinde tutmaktadır. Tarihsel süreç boyunca, Washington'daki anıtlar ve kamusal alanlar sık sık siyasi protestoların, sivil itaatsizlik eylemlerinin ve zaman zaman vandalizm vakalarının hedefi olmuştur. Özellikle 1960'lı ve 70'li yıllardaki Vietnam Savaşı karşıtı gösterilerden bu yana, federal simgelere zarar verilmesi ulusal güvenlik ve kamu düzeni açısından hassas bir kırmızı çizgi olarak kabul edilmektedir. Başkanların başkentteki adli atamalara müdahale etmesi veya savcılık kararlarını kamuoyu önünde eleştirmesi Amerikan siyasi tarihinde eski bir geleneğe dayanmaktadır. Richard Nixon ve Ronald Reagan gibi liderler de başkentteki suç oranları ve adli kararlar konusunda doğrudan müdahaleci politikalar izlemişlerdir. Jeanine Pirro gibi medya ve hukuk dünyasından gelen isimlerin federal pozisyonlara getirilmesi, Trump yönetimi döneminde idari kadrolarla siyasi sadakat arasındaki çizgiyi belirsizleştiren bir uygulama olarak dikkat çekmiştir. Kamu mülkiyetine karşı işlenen suçlarda cezaların hafifletilmesi veya artırılması tartışmaları, ABD'de her zaman federal yasaların gücü ile yerel hak ve özgürlükler arasındaki dengenin bir parçası olmuştur. Bu olay, başkentin güvenliği ve federal otoritenin simgelerinin korunması meselesinin Amerikan iç politikasında ne denli kritik bir hassasiyet taşımaya devam ettiğini göstermektedir.",
+        "link": "https://www.aljazeera.com/news/2026/8/4/why-did-trump-attack-jeanine-pirro-over-us-reflecting-pool-vandalism?traffic_source=rss",
+        "countries": {
+            "United States": {
+                "role": "Aktör (Vandalizm davası ve başsavcının kararları üzerinden iç siyasi tartışma ve hukuki süreç yürütüyor)",
+                "color": "#38bdf8"
+            }
+        },
+        "id": 1
+    },
+    {
         "title": "Video, Rus insansız hava aracının 'insan safari' saldırısında Ukraynalı seyyar satıcıyı kovaladığını gösteriyor",
         "tags": [
             "#Ukrayna",
@@ -18,7 +38,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 1
+        "id": 2
     },
     {
         "title": "Hürmüz Boğazı'nın Yeniden Açılabileceği Umutlarıyla Petrol Fiyatları Düştü",
@@ -41,7 +61,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 2
+        "id": 3
     },
     {
         "title": "AB'den İspanya'nın Ceuta Göçmen Krizine 'Hızlı Yanıtına' Övgü",
@@ -67,7 +87,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 3
+        "id": 4
     },
     {
         "title": "İran'a Savaş: Trump'tan Tahran'a 'Son Şans' Uyarısı",
@@ -90,7 +110,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 4
+        "id": 5
     },
     {
         "title": "Bir SpaceX Roketi Aya Çarparsa Ne Olacak?",
@@ -109,7 +129,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 5
+        "id": 6
     },
     {
         "title": "Gazze'de 2023 İsrail Saldırısında Hayatını Kaybeden 112 Filistinli İçin Toplu Cenaze Töreni",
@@ -133,7 +153,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 6
+        "id": 7
     },
     {
         "title": "İran Savaşı ve Hürmüz Boğazı'nın Kapanması Arasında Petrol Şirketleri Neden Rekor Karlar Elde Ediyor?",
@@ -161,7 +181,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 7
+        "id": 8
     },
     {
         "title": "Hamas Müzakerecisi: Gazze'yi Kurtarmak İçin Silahsızlanma Anlaşması Gerekliydi",
@@ -197,7 +217,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 8
+        "id": 9
     },
     {
         "title": "İspanya Başbakanı Sanchez, AB Ceuta Göçmen Krizini Görüşürken Eleştirilerin Hedefinde",
@@ -222,7 +242,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 9
+        "id": 10
     },
     {
         "title": "Manş Denizi'nde Teknesi Alev Alan 150'den Fazla Düzensiz Göçmen Kurtarıldı",
@@ -246,7 +266,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 10
+        "id": 11
     },
     {
         "title": "Analiz: Trump, en yakın müttefiklerinden gelen soğuk gerçeklikle yüzleşiyor",
@@ -266,7 +286,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 11
+        "id": 12
     },
     {
         "title": "Ukrayna, Moskova bölgesinde beş kişinin öldüğü saldırının ardından daha fazla Wildberries tesisini vurdu",
@@ -291,7 +311,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 12
+        "id": 13
     },
     {
         "title": "Trump Media'nın Piyasaları Etkileyen Gönderilere Hızlı Erişim Satışı Neden Tartışmalı?",
@@ -311,7 +331,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 13
+        "id": 14
     },
     {
         "title": "Rus İşgali Altındaki Kırım'da Bir Asker Silahlı Saldırıda Dört Kişiyi Öldürdü",
@@ -335,7 +355,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 14
+        "id": 15
     },
     {
         "title": "AB, Ceuta'daki göçmen geçişlerinin ardından daha güçlü sınırlar çağrısında bulundu",
@@ -365,7 +385,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 15
+        "id": 16
     },
     {
         "title": "Rusya, Ukrayna İnsansız Hava Aracının Kalabalık Bir Plaja Çarpması Sonucu Yedi Kişinin Öldüğünü ve 40 Kişinin Yaralandığını Açıkladı",
@@ -389,7 +409,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 16
+        "id": 17
     },
     {
         "title": "Fransa'daki Orman Yangınları Köyde Yüzlerce 2. Dünya Savaşı Mühimmatını Ortaya Çıkardı",
@@ -413,7 +433,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 17
+        "id": 18
     },
     {
         "title": "Eşimi ve ikizlerimi geride bıraktım - Bu Nijeryalı adam neden Güney Afrika'dan kaçtı?",
@@ -439,7 +459,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 18
+        "id": 19
     },
     {
         "title": "ABD Eyaletleri, Onlarca Ülkeyi Etkileyen Trump Gümrük Vergilerini Engellemek İçin Dava Açtı",
@@ -463,7 +483,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 19
+        "id": 20
     },
     {
         "title": "Ren Nehri rekor seviyede düştü: Kuraklık Avrupa nehirlerini zorluyor",
@@ -500,7 +520,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 20
+        "id": 21
     },
     {
         "title": "Analistler: Orta Doğu'da Petrol Tankerlerine Yönelik Tehdit, İran Savaşı Başlangıcından Bu Yana En Kötü Seviyede",
@@ -529,7 +549,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 21
+        "id": 22
     },
     {
         "title": "Deprem Vuran Japonya AVM'sine Patronun Emriyle Giren İki İşçi Patlamada Öldü",
@@ -549,7 +569,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 22
+        "id": 23
     },
     {
         "title": "Ariana Grande, 'Bitmek Bilmeyen' Baskılar Nedeniyle Kamuoyundan Uzaklaşma Kararı Aldı",
@@ -573,7 +593,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 23
+        "id": 24
     },
     {
         "title": "Fas Kralı'nın Mektubu, Büyük Bir Otoyola Trump'ın Adının Verildiğini Doğruladı",
@@ -598,7 +618,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 24
+        "id": 25
     },
     {
         "title": "Massive Attack, Singapur'un Filistin Protestosu Yasağına Tepki Gösterdi",
@@ -627,7 +647,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 25
+        "id": 26
     },
     {
         "title": "ABD ve Japonya, Yen'i Desteklemek İçin Nadir Görülen Ortak Bir Adım Attı",
@@ -648,7 +668,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 26
+        "id": 27
     },
     {
         "title": "İran, Trump'ın Pazartesi günü yeni görüşmelerin başlayacağı yönündeki iddiasını yalanladı",
@@ -677,7 +697,7 @@
                 "color": "#10b981"
             }
         },
-        "id": 27
+        "id": 28
     },
     {
         "title": "Aung San Suu Kyi, 2,5 Yıl Sonra İlk Doğrulanan Dış Temasında Sağlıklı Görünüyor",
@@ -701,7 +721,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 28
+        "id": 29
     },
     {
         "title": "\"Tek oğlum adalet için ayaktayken vuruldu\" - Pakistan yönetimindeki Keşmir'de ölümcül protestoların pençesindeki şehirden izlenimler",
@@ -725,6 +745,6 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 29
+        "id": 30
     }
 ]
