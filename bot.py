@@ -43,7 +43,8 @@ def get_latest_news():
     return news_list
 
 def analyze_with_gemini(news_item):
-    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash"]
+    # TAM GÜNCEL MODELLER
+    models_to_try = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite"]
     
     prompt = f"""
     Aşağıdaki haberi analiz et. Eğer haber magazin, müzik, spor veya eğlence ile ilgiliyse SADECE "SKIPPED" yaz. 
