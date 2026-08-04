@@ -6,25 +6,13 @@
     <title>KÜRESEL HAFIZA | Stratejik Jeopolitik Analiz Portalı</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20'/><path d='M2 12h20'/></svg>">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- TÜRKÇE KARAKTER DESTEKLİ GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap&subset=latin,latin-ext" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        /* TÜRKÇE FONTLAR VE UYUMLU TİPOGRAFİ */
-        body { 
-            font-family: 'Rajdhani', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: #050811; 
-            color: #f1f5f9; 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; 
-        }
+        body { font-family: 'Rajdhani', 'Inter', sans-serif; background: #050811; color: #f1f5f9; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
         
         header { background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(16px); padding: 12px 20px; border-bottom: 2px solid #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.25); display: flex; flex-direction: column; gap: 10px; z-index: 1001; }
         .header-top { display: flex; justify-content: space-between; align-items: center; }
-        
         .logo { font-family: 'Orbitron', 'Rajdhani', sans-serif; font-size: 1.25rem; font-weight: 900; color: #38bdf8; letter-spacing: 2px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; text-shadow: 0 0 18px rgba(56, 189, 248, 0.6); cursor: pointer; user-select: none; }
         
         .radar-box { position: relative; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #22c55e; box-shadow: 0 0 12px #22c55e; overflow: hidden; }
@@ -36,7 +24,6 @@
         .header-controls { display: flex; flex-direction: column; gap: 8px; }
         .org-menu { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
         .org-menu::-webkit-scrollbar { display: none; }
-        
         .mode-btn { background: #0f172a; color: #94a3b8; border: 1px solid #1e293b; padding: 8px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
         .mode-btn:hover { background: #1e293b; color: #fff; border-color: #38bdf8; }
         .mode-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; box-shadow: 0 0 15px rgba(2, 132, 199, 0.6); }
@@ -48,6 +35,13 @@
         .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #050811; }
         
         .sidebar { width: 360px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
+        
+        /* ARAMA ÇUBUĞU TASARIMI */
+        .search-box { padding: 12px; background: #050811; border-bottom: 1px solid #1e293b; }
+        .search-box input { width: 100%; padding: 10px 12px; background: #0f172a; border: 1px solid #38bdf8; color: #f1f5f9; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; transition: box-shadow 0.2s; }
+        .search-box input:focus { box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
+        .search-box input::placeholder { color: #64748b; }
+
         .tag-search-info { display: none; padding: 8px 12px; background: rgba(56, 189, 248, 0.1); border-bottom: 1px solid rgba(56, 189, 248, 0.2); font-size: 0.78rem; color: #38bdf8; justify-content: space-between; align-items: center; }
         .clear-tag-btn { background: #ef4444; color: #fff; border: none; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
 
@@ -72,8 +66,6 @@
         .info-panel { width: 440px; background: #0a0f1d; border-left: 1px solid #1e293b; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; z-index: 10; }
         .panel-block { background: #0f172a; padding: 16px; border-radius: 6px; border: 1px solid #1e293b; }
         .panel-block h4 { font-family: 'Orbitron', 'Rajdhani', sans-serif; font-size: 0.82rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-        
-        /* TÜRKÇE OKUNAKLI ANALİZ METİNLERİ */
         .panel-block p { font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #cbd5e1; line-height: 1.7; white-space: pre-line; }
         
         .history-block { border-left: 4px solid #f59e0b; background: rgba(245, 158, 11, 0.03); border-top: 1px solid rgba(245, 158, 11, 0.2); border-right: 1px solid rgba(245, 158, 11, 0.2); border-bottom: 1px solid rgba(245, 158, 11, 0.2); }
@@ -128,6 +120,9 @@
 
     <div class="app-container">
         <div class="sidebar" id="sidebarSection">
+            <div class="search-box" id="searchBoxContainer">
+                <input type="text" id="newsSearchInput" placeholder="Haber, Ülke veya Etiket Ara..." onkeyup="executeSearch()">
+            </div>
             <div class="tag-search-info" id="tagSearchInfo">
                 <span>Filtre: <strong id="activeTagText">#Etiket</strong></span>
                 <button class="clear-tag-btn" onclick="clearTagFilter()">Sıfırla ✕</button>
@@ -222,14 +217,14 @@
             "NATO": {
                 title: "Kuzey Atlas Antlaşması Örgütü (NATO)",
                 summary: "1949 yılında Washington Antlaşması ile kurulan askeri ve siyasi ittifak. Temel direği, bir üyeye yapılan silahlı saldırıyı tüm üyelere yapılmış sayan meşhur 5. Madde doktrinidir.\n\nGünümüzde 32 müttefikiyle Atlantik'ten Hint-Pasifik sınırına kadar kolektif caydırıcılığın ana kalesidir.",
-                history: "Soğuk Savaş döneminde Varşova Paktı'na karşı Doğu Avrupa ve Boğazlar hattını korumuş, 1990 sonrasında Balkanlar ve Afganistan müdahaleleriyle kriz yönetimi örgütüne dönüşmüştür.\n\nRusya-Ukrayna savaşıyla birlikte tarihinin en büyük askeri sevkiyatını gerçekleştirerek Doğu Kanadını (Baltık-Karadeniz hattı) tamamen tahkim etmiş, İsveç ve Finlandiya'nın katılımıyla Kuzey Kutbu'nu da etki alanına almıştır.",
+                history: "Soğuk Savaş döneminde Varşova Paktı'na karşı Doğu Avrupa ve Boğazlar hattını korumuş, 1990 sonrasında Balkanlar ve Afganistan müdahaleleriyle kriz yönetimi örgütüne dönüşmüştür.\n\nRusya-Ukrayna savaşıyla birlikte tarihinin en büyük askeri sevkiyatını gerçekleştirerek Doğu Kanadını tamamen tahkim etmiş, İsveç ve Finlandiya'nın katılımıyla Kuzey Kutbu'nu etki alanına almıştır.",
                 membersTr: ["Türkiye", "ABD", "İngiltere", "Kanada", "Almanya", "Fransa", "İtalya", "İspanya", "Yunanistan", "Romanya", "Polonya", "Norveç", "Hollanda", "Belçika", "Portekiz", "Danimarka", "Finlandiya", "İsveç", "Bulgaristan", "Macaristan", "Slovakya", "Arnavutluk", "Litvanya", "Letonya", "Estonya", "Hırvatistan", "Slovenya", "Karadağ", "Kuzey Makedonya", "Çekya", "İzlanda", "Lüksemburg"],
                 membersEn: ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Latvia", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"]
             },
             "UN": {
                 title: "Birleşmiş Milletler (BM)",
                 summary: "İkinci Dünya Savaşı yıkımının ardından 1945'te San Francisco'da 51 ülke tarafından temelleri atılan, günümüzde 193 egemen devletin üye olduğu evrensel çatı örgüt.\n\nUluslararası barış, insan hakları, iklim ve küresel diplomasinin en üst karar organıdır.",
-                history: "Milletler Cemiyeti'nin başarısızlığı üzerine kurulan sistem, Güvenlik Konseyi (BMGK) etrafında şekillenmiştir. Daimi 5 üyenin (ABD, Rusya, Çin, İngiltere, Fransa) mutlak veto hakkı, Soğuk Savaş krizlerinde ve günümüz Orta Doğu/Ukrayna savaşlarında kilitlenme yarattığı için reform tartışmalarının odağındadır.",
+                history: "Milletler Cemiyeti'nin başarısızlığı üzerine kurulan sistem, Güvenlik Konseyi (BMGK) etrafında şekillenmiştir. Daimi 5 üyenin (ABD, Rusya, Çin, İngiltere, Fransa) mutlak veto hakkı, krizlerde kilitlenme yarattığı için reform tartışmalarının odağındadır.",
                 membersTr: ["Türkiye", "ABD", "Rusya", "Çin", "İngiltere", "Fransa", "Almanya", "Japonya", "Hindistan", "Brezilya", "...ve tüm bağımsız devletler (193 Üye)"],
                 membersEn: ["ALL"]
             },
@@ -242,36 +237,36 @@
             },
             "BRICS": {
                 title: "BRICS Küresel Ekonomik Paktı",
-                summary: "2006 yılında Brezilya, Rusya, Hindistan ve Çin'in (BRIC) kurduğu, 2010'da Güney Afrika'nın katıldığı küresel ekonomi paktı.\n\nTemel amacı, II. Dünya Savaşı sonrası kurulan Batı finansal sistemine (IMF, Dünya Bankası, SWIFT) alternatif küresel dengeler ve 'Dolarsızlaşma' mekanizmaları inşa etmektir.",
-                history: "2024 itibarıyla Mısır, Etiyopya, İran ve BAE'nin katılımıyla 'BRICS+' yapısına dönüşmüş; küresel petrol rezervlerinin ve ticaret hatlarının merkezine yerleşmiştir. Yeni Kalkınma Bankası (NDB) üzerinden yerel para birimleriyle ticaret projesini yürütmektedir.",
+                summary: "2006 yılında Brezilya, Rusya, Hindistan ve Çin'in (BRIC) kurduğu, 2010'da Güney Afrika'nın katıldığı küresel ekonomi paktı.\n\nTemel amacı, II. Dünya Savaşı sonrası kurulan Batı finansal sistemine alternatif küresel dengeler ve 'Dolarsızlaşma' mekanizmaları inşa etmektir.",
+                history: "2024 itibarıyla Mısır, Etiyopya, İran ve BAE'nin katılımıyla 'BRICS+' yapısına dönüşmüş; küresel petrol rezervlerinin ve ticaret hatlarının merkezine yerleşmiştir. Yeni Kalkınma Bankası (NDB) üzerinden yerel paralarla ticaret projesini yürütür.",
                 membersTr: ["Brezilya", "Rusya", "Hindistan", "Çin", "Güney Afrika", "Mısır", "İran", "Birleşik Arap Emirlikleri", "Etiyopya"],
                 membersEn: ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Ethiopia", "Iran", "United Arab Emirates"]
             },
             "TDT": {
                 title: "Türk Devletleri Teşkilatı (TDT)",
-                summary: "2009 Nahçıvan Anlaşması ile Türk Dili Konuşan Ülkeler İşbirliği Konseyi adıyla kurulan, 2021 İstanbul Zirvesi'nde Teşkilat yapısına kavuşan Türk dünyasının entegrasyon çatı örgütü.\n\nAdriyatik'ten Çin Seddi'ne uzanan jeopolitik hat üzerinde dil, kültür, siyaset, ekonomi ve savunma sanayii birliğini hedefler.",
-                history: "SSCB'nin dağılmasının ardından bağımsızlığına kavuşan Türk cumhuriyetlerinin stratejik ortaklığına dayanır. Ortak Türk Alfabesi projesi, Zengezur Koridoru bağlamındaki Hazar Geçişli Doğu-Batı Orta Koridoru ve savunma sanayiindeki müttefiklik adımları teşkilatın geleceğinde kritik rol oynamaktadır.",
+                summary: "2009 Nahçıvan Anlaşması ile kurulan, 2021 İstanbul Zirvesi'nde Teşkilat yapısına kavuşan Türk dünyasının entegrasyon çatı örgütü.\n\nAdriyatik'ten Çin Seddi'ne uzanan jeopolitik hat üzerinde dil, kültür, siyaset, ekonomi ve savunma sanayii birliğini hedefler.",
+                history: "SSCB'nin dağılmasının ardından bağımsızlığına kavuşan Türk cumhuriyetlerinin stratejik ortaklığına dayanır. Zengezur Koridoru bağlamındaki Doğu-Batı Orta Koridoru teşkilatın geleceğinde kritik rol oynamaktadır.",
                 membersTr: ["Türkiye", "Azerbaycan", "Kazakistan", "Özbekistan", "Kırgızistan", "Macaristan (Gözlemci)", "KKTC (Gözlemci)", "Türkmenistan (Gözlemci)"],
                 membersEn: ["Turkey", "Azerbaijan", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Hungary"]
             },
             "EU": {
                 title: "Avrupa Birliği (AB)",
-                summary: "1951 Kömür ve Çelik Topluluğu ve 1957 Roma Antlaşması ile temelleri atılan, 1992 Maastricht Antlaşması ile bugünkü siyasi, hukuki ve ekonomik birlik statüsünü alan 27 üyeli dev yapı.\n\nDünyanın en büyük tek pazarı ve Euro para birimiyle devasa bir jeoeonomik güçtür.",
-                history: "Avrupa kıtasındaki tarihsel savaşları tamamen engellemek için kurulan entegrasyon; Soğuk Savaş sonrası Doğu Bloku ülkelerini bünyesine katarak genişlemiştir. Günümüzde stratejik özerklik ve ortak savunma sanayii hamleleriyle yüzleşmektedir.",
+                summary: "1951 Kömür ve Çelik Topluluğu ile temelleri atılan, bugünkü siyasi, hukuki ve ekonomik birlik statüsünü alan 27 üyeli dev yapı.\n\nDünyanın en büyük tek pazarı ve Euro para birimiyle devasa bir jeoeonomik güçtür.",
+                history: "Avrupa kıtasındaki tarihsel savaşları tamamen engellemek için kurulan entegrasyon; Soğuk Savaş sonrası Doğu Bloku ülkelerini bünyesine katarak genişlemiştir. Günümüzde stratejik özerklik ve sınır güvenliği krizleriyle yüzleşmektedir.",
                 membersTr: ["Almanya", "Fransa", "İtalya", "İspanya", "Yunanistan", "Romanya", "Polonya", "Portekiz", "Hollanda", "Belçika", "Avusturya", "İsveç", "Finlandiya", "Danimarka", "İrlanda", "Slovakya", "Macaristan", "Bulgaristan", "Hırvatistan", "Slovenya", "Estonya", "Letonya", "Litvanya", "Güney Kıbrıs", "Çekya", "Lüksemburg", "Malta"],
                 membersEn: ["Germany", "France", "Italy", "Spain", "Greece", "Romania", "Poland", "Portugal", "Netherlands", "Belgium", "Austria", "Sweden", "Finland", "Denmark", "Ireland", "Slovakia", "Hungary", "Bulgaria", "Croatia", "Slovenia", "Estonia", "Latvia", "Lithuania", "Cyprus"]
             },
             "QUAD": {
                 title: "Dörtlü Güvenlik Diyaloğu (QUAD)",
                 summary: "ABD, Japonya, Avustralya ve Hindistan arasında Hint-Pasifik bölgesinin deniz güvenliğini ve serbest dolaşımını korumak amacıyla kurulan stratejik güvenlik ittifakı.",
-                history: "2004 Hint Okyanusu tsunamisi insani yardımlarıyla başlayan gayriresmi temaslar, Çin Halk Cumhuriyeti'nin Güney Çin Denizi ve Pasifik'teki hızlı askeri yayılmasına karşı 2017'de liderler düzeyinde kurumsal bir güvenlik bloğuna dönüştürülmüştür.",
+                history: "2004 Hint Okyanusu tsunamisi insani yardımlarıyla başlayan gayriresmi temaslar, Çin'in Güney Çin Denizi'ndeki hızlı askeri yayılmasına karşı 2017'de kurumsal bir güvenlik bloğuna dönüştürülmüştür.",
                 membersTr: ["ABD", "Japonya", "Avustralya", "Hindistan"],
                 membersEn: ["United States", "Japan", "Australia", "India"]
             },
             "G7": {
                 title: "G7 Sanayileşmiş Ülkeler Grubu",
                 summary: "Dünyanın en büyük gelişmiş ekonomilerine sahip 7 ülkesinin ve Avrupa Birliği temsilcilerinin oluşturduğu küresel ekonomik ve siyasi yönlendirme platformu.",
-                history: "1973 Petrol Krizinin ardından 1975'te kurulan grup; finansal istikrar, küresel güvenlik, enerji politikaları ve uluslararası krizlere (Rusya yaptırımları vb.) ortak tutum belirleme merkezi olarak çalışır.",
+                history: "1973 Petrol Krizinin ardından 1975'te kurulan grup; finansal istikrar, küresel güvenlik, enerji politikaları ve uluslararası krizlere ortak tutum belirleme merkezi olarak çalışır.",
                 membersTr: ["ABD", "İngiltere", "Almanya", "Fransa", "İtalya", "Kanada", "Japonya"],
                 membersEn: ["United States", "United Kingdom", "Germany", "France", "Italy", "Canada", "Japan"]
             },
@@ -285,14 +280,14 @@
             "OIC": {
                 title: "İslam İşbirliği Teşkilatı (İÖT)",
                 summary: "1969 yılında Mescid-i Aksa kundaklamasının ardından Rabat'ta kurulan, 57 üye ülkesiyle Birleşmiş Milletler'den sonraki en büyük ikinci hükümetlerarası uluslararası örgüt.",
-                history: "İslam dünyasının haklarını korumak, Filistin davasına diplomatik destek vermek ve üye ülkeler arasında ekonomik/kültürel dayanışmayı sağlamak amacıyla çalışır. Suudi Arabistan (Cidde) merkezlidir.",
+                history: "İslam dünyasının haklarını korumak, Filistin davasına diplomatik destek vermek ve üye ülkeler arasında dayanışmayı sağlamak amacıyla çalışır. Suudi Arabistan merkezlidir.",
                 membersTr: ["Türkiye", "Suudi Arabistan", "Pakistan", "İran", "Mısır", "Endonezya", "Malezya", "Azerbaycan", "Cezayir", "Fas", "...ve toplam 57 Üye Ülke"],
                 membersEn: ["Turkey", "Saudi Arabia", "Pakistan", "Iran", "Egypt", "Indonesia", "Malaysia", "Azerbaijan", "Algeria", "Morocco"]
             },
             "GCC": {
                 title: "Körfez İşbirliği Konseyi (KİK)",
                 summary: "1981 yılında Riyad'da kurulan Basra Körfezi'ne kıyısı olan 6 Arap monarşisinin ekonomik, askeri ve güvenlik paktı.",
-                history: "İran İslam Devrimi ve İran-Irak Savaşının yarattığı güvenlik tehdidine karşı kurulan konsey; petrol rezervleri, Ortak Yarımada Kalkanı askeri gücü ve ekonomik entegrasyonu ile Orta Doğu'nun finansal kalbidir.",
+                history: "İran İslam Devrimi ve İran-Irak Savaşının yarattığı güvenlik tehdidine karşı kurulan konsey; petrol rezervleri ve ekonomik entegrasyonu ile Orta Doğu'nun finansal kalbidir.",
                 membersTr: ["Suudi Arabistan", "Birleşik Arap Emirlikleri", "Katar", "Kuveyt", "Umman", "Bahreyn"],
                 membersEn: ["Saudi Arabia", "United Arab Emirates", "Qatar", "Kuwait", "Oman", "Bahrain"]
             },
@@ -305,70 +300,57 @@
             }
         };
 
-        // 2. DERİNLEŞTİRİLMİŞ ÇATIŞMA ANALİZLERİ (MINIMUM 5-10 CÜMLELİK ÖZETLER)
         const conflictListData = [
             {
                 id: "UKR",
                 title: "Rusya - Ukrayna Savaşı",
                 sub: "Doğu Avrupa / Donbas & Karadeniz Cephesi",
-                summary: "Rusya'nın 24 Şubat 2022 tarihinde Ukrayna topraklarına yönelik başlattığı geniş çaplı askeri müdahale, II. Dünya Savaşı'ndan bu yana Avrupa kıtasında gerçekleşen en büyük kara savaşına dönüşmüştür.\n\nKremlin yönetimi bu hamleyi Ukrayna'nın NATO'ya katılımını engellemek, Doğu Avrupa'daki stratejik nüfuz alanını korumak ve Karadeniz güvenlik mimarisini kendi lehine şekillendirmek amacıyla kurgulamıştır.\n\nUkrayna ise Batı paktından aldığı devasa tanksavar, topçu, hava savunma ve füze yardımlarıyla direnç göstererek Rus ordusunu uzun süreli bir yıpratma savaşına çekmiştir.\n\nSavaş sadece ön cephede kalmayıp Enerji Savaşları, Kuzey Akım boru hattı sabotajları, Karadeniz Tahıl Koridoru krizleri ve küresel gıda/enflasyon şokları üzerinden tüm dünya ekonomisini derinden etkilemiştir.\n\nGünümüzde çatışma, füzeler ve insansız hava araçlarının (İHA/SİHA) belirleyici olduğu çetin bir konvansiyonel mevzi savaşı olarak Doğu ve Güney Ukrayna hatlarında devam etmektedir.",
-                history: "Krizin tarihsel kökleri SSCB'nin 1991'deki dağılışına ve 2014 yılında Ukrayna'da gerçekleşen Batı yanlısı Turuncu Devrim/Euromaidan süreçlerine dayanmaktadır.\n\nRusya'nın 2014'te Kırım'ı yasadışı ilhak etmesi ve Donbas bölgesindeki (Donetsk ve Luhansk) ayrılıkçı güçleri silahlandırmasıyla patlak veren örtülü savaş, Minsk Anlaşmaları'nın başarısız olması sonucu 2022'deki Topyatık İstilaya evrilmiştir.",
+                summary: "Rusya'nın 24 Şubat 2022 tarihinde başlattığı geniş çaplı askeri müdahale, II. Dünya Savaşı'ndan bu yana Avrupa kıtasındaki en büyük kara savaşına dönüşmüştür.\n\nKremlin yönetimi bu hamleyi Ukrayna'nın NATO'ya katılımını engellemek amacıyla kurgulamıştır.\n\nUkrayna ise Batı paktından aldığı devasa yardımlarla direnç göstererek savaşı yıpratma savaşına çekmiştir.\n\nSavaş; Enerji Savaşları, Kuzey Akım sabotajları ve Karadeniz Tahıl Koridoru üzerinden tüm dünya ekonomisini etkilemiştir.",
+                history: "Krizin kökleri 2014 yılında Rusya'nın Kırım'ı yasadışı ilhak etmesi ve Donbas bölgesindeki ayrılıkçı güçleri silahlandırmasıyla patlak veren örtülü savaşa dayanmaktadır.",
                 countries: {
-                    "Russia": { role: "Saldıran / Taraf", color: "#ef4444" },
-                    "Ukraine": { role: "Savunan / Taraf", color: "#38bdf8" },
-                    "United States": { role: "Ukrayna Destekçisi (NATO)", color: "#22c55e" },
-                    "Belarus": { role: "Rusya Lojistik Müttefiki", color: "#f59e0b" }
+                    "Russia": { role: "Aktör (Saldırıyı başlatan taraf)", color: "#ef4444" },
+                    "Ukraine": { role: "Aktör (Savunma ve direniş hattı)", color: "#38bdf8" },
+                    "United States": { role: "Destekçi (Ukrayna'ya NATO kapsamında askeri donanım sağlıyor)", color: "#22c55e" },
+                    "Belarus": { role: "Lojistik Destekçi (Rusya'ya harekat üssü sağlıyor)", color: "#f59e0b" }
                 }
             },
             {
                 id: "IRN",
-                title: "ABD - İran Gerilimi & Hürmüz Kriz Koridoru",
-                sub: "Orta Doğu / Basra Körfezi & Kızıldeniz Hattı",
-                summary: "Dünya deniz yoluyla taşınan ham petrolünün üçte birinin geçtiği Hürmüz Boğazı, ABD ve İran arasındaki jeopolitik bilek güreşinin ana merkezidir.\n\nİran'ın nükleer tesislerinde yüksek düzeyde uranyum zenginleştirme faaliyetlerini sürdürmesi, ABD ve İsrail tarafından varoluşsal bir tehdit olarak algılanmakta ve askeri müdahale senaryolarını canlı tutmaktadır.\n\nTahran yönetimi, 'Direniş Ekseni' adını verdiği Hizbullah, Husiler ve Irak/Suriye'deki milis güçler üzerinden bölgedeki Amerikan askeri üslerine ve ticari gemi rotalarına karşı asimetrik güç kullanmaktadır.\n\nKızıldeniz ve Babilmendep Boğazı'nda ticaret gemilerine yönelik füze ve İHA saldırıları, küresel tedarik zincirini ve konteyner taşımacılığını ağır maliyet krizlerine sokmuştur.\n\nABD'nin Körfez bölgesine uçak gemisi filoları ve ilave konuşlandırmalar yapması, tarafların her an doğrudan bir bölgesel savaşa sürüklenebileceği hassas bir denge yaratmaktadır.",
-                history: "Kriz, 1979 İran İslam Devrimi ve Tahran'daki Amerikan Elçiliği'nin basılarak diplomatların rehin alınmasıyla iki ülke arasındaki diplomatik ilişkilerin tamamen kopmasına dayanır.\n\n2015 yılında imzalanan Kapsamlı Ortak Eylem Planı (Nükleer Anlaşma), 2018'de ABD'nin tek taraflı çekilmesiyle çökmüş; ardından Kasım Süleymani suikastı ve Körfez'deki tanker el koyma hamleleriyle tırmanış zirveye ulaşmıştır.",
+                title: "ABD - İran Gerilimi & Hürmüz",
+                sub: "Orta Doğu / Basra Körfezi",
+                summary: "Dünya petrolünün geçtiği Hürmüz Boğazı, ABD ve İran arasındaki jeopolitik bilek güreşinin ana merkezidir.\n\nİran'ın nükleer tesislerindeki faaliyetleri, ABD ve İsrail tarafından tehdit algılanmaktadır.\n\nTahran, 'Direniş Ekseni' üzerinden bölgedeki ticari gemi rotalarına karşı asimetrik güç kullanmaktadır.\n\nKızıldeniz'deki saldırılar, küresel tedarik zincirini ağır maliyet krizlerine sokmuştur.",
+                history: "Kriz, 1979 İran İslam Devrimi ve ABD Elçiliği'nin basılmasına dayanır. 2018'de ABD'nin Nükleer Anlaşmadan çekilmesiyle tırmanış zirveye ulaşmıştır.",
                 countries: {
-                    "Iran": { role: "Bölgesel Aktör / Taraf", color: "#ef4444" },
-                    "United States": { role: "Küresel Deniz Gücü", color: "#38bdf8" },
-                    "Israel": { role: "İran Karşıtı İttifak", color: "#22c55e" },
-                    "Saudi Arabia": { role: "Körfez Güvenliği Bloku", color: "#f59e0b" }
+                    "Iran": { role: "Aktör (Asimetrik askeri güç kullanıyor)", color: "#ef4444" },
+                    "United States": { role: "Aktör (Bölgeye uçak gemisi filoları konuşlandırdı)", color: "#38bdf8" },
+                    "Israel": { role: "Karşıt Güç (İran'a karşı istihbarat ve operasyon yürütüyor)", color: "#22c55e" },
+                    "Saudi Arabia": { role: "Gözlemci (Körfez güvenliğini sağlamaya çalışıyor)", color: "#f59e0b" }
                 }
             },
             {
                 id: "TWN",
-                title: "Çin - Tayvan Gerginliği & Pasifik Fay Hattı",
-                sub: "Doğu Asya / Tayvan Boğazı & Birinci Ada Zirvesi",
-                summary: "Çin Halk Cumhuriyeti'nin Tayvan adasını 'Ayrılmaz Bir Çin Toprağı' olarak görmesi ve barışçıl yollarla olmasa bile askeri güç kullanarak 'Yeniden Birleşme' hedefi, Pasifik'teki en tehlikeli krizdir.\n\nTayvan, dünyadaki gelişmiş mikroçip ve yarı iletken (TSMC) üretiminin %60'ından fazlasını elinde bulundurduğu için adanın işgali tüm küresel teknoloji ve savunma sanayiini felç etme potansiyeli taşır.\n\nPekin yönetimi, Tayvan Boğazı etrafında jetler, uçak gemileri ve amfibi çıkarma gemileriyle sürekli gözdağı tatbikatları düzenleyerek adayı ablukaya alma provası yapmaktadır.\n\nABD ise 'Tek Çin' politikasını tanımakla birlikte 'Tayvan İlişkileri Yasası' kapsamında adaya milyarlarca dolarlık gelişmiş hava savunma ve gemisavar füzeleri tedarik etmektedir.\n\nBölgedeki gerilimin doğrudan bir ABD-Çin askeri çatışmasına evrilmesi, dünya ekonomisini çökertebilecek ve III. Dünya Savaşı'nı tetikleyebilecek senaryoların başında gelir.",
-                history: "1949 yılında Çin İç Savaşı'nı Mao Zedong liderliğindeki Komünistlerin kazanması üzerine, Çang Kay-şek ve Milliyetçi Parti (KMT) kadroları Tayvan adasına çekilerek burada Çin Cumhuriyeti'ni sürdürmüştür.\n\nSoğuk Savaş boyunca Batı desteğiyle varlığını koruyan Tayvan, 1970'lerde BM'deki sandalyesini Pekin'e kaptırmış ancak ekonomik ve teknolojik bir dev haline gelmiştir.",
+                title: "Çin - Tayvan Gerginliği",
+                sub: "Doğu Asya / Tayvan Boğazı",
+                summary: "Çin'in Tayvan adasını askeri güç kullanarak bünyesine katma hedefi, Pasifik'teki en tehlikeli krizdir.\n\nTayvan, dünyadaki gelişmiş mikroçip üretiminin (TSMC) merkezi olduğu için işgali küresel teknolojiyi felç edebilir.\n\nPekin yönetimi, ada etrafında tatbikatlarla gözdağı vermektedir.\n\nABD ise adaya milyarlarca dolarlık gelişmiş hava savunma sistemleri tedarik etmektedir.",
+                history: "1949 yılında Çin İç Savaşı'nı Komünistlerin kazanması üzerine, Milliyetçilerin Tayvan'a çekilmesiyle başlayan kronik diplomatik krizdir.",
                 countries: {
-                    "China": { role: "Hak İddia Eden Güç", color: "#ef4444" },
-                    "Taiwan": { role: "Savunan Ada Yönetimi", color: "#38bdf8" },
-                    "United States": { role: "Pasifik Güvenlik Garantörü", color: "#22c55e" },
-                    "Japan": { role: "Bölgesel Lojistik Müttefik", color: "#f59e0b" }
+                    "China": { role: "Aktör (Adada hak iddia edip askeri tatbikat yapıyor)", color: "#ef4444" },
+                    "Taiwan": { role: "Aktör (Savunma konsepti geliştiriyor)", color: "#38bdf8" },
+                    "United States": { role: "Garantör (Tayvan'a askeri ve stratejik koruma sağlıyor)", color: "#22c55e" },
+                    "Japan": { role: "Stratejik Müttefik (Bölgesel güvenliği destekliyor)", color: "#f59e0b" }
                 }
             },
             {
                 id: "ISR",
-                title: "İsrail - Filistin & Doğu Akdeniz Kriz Hattı",
-                sub: "Orta Doğu / Gazze, Batı Şeria & Lübnan Sınırı",
-                summary: "7 Ekim 2023 tarihinde Hamas'ın İsrail'e yönelik saldırılarıyla patlak veren kriz, İsrail'in Gazze Şeridi'ne başlattığı topyekün askeri müdahale ile son onlarca yılın en büyük insani ve askeri felaketine dönüşmüştür.\n\nSavaş Gazze sınırlarını aşarak Lübnan'daki Hizbullah gücüyle karşılıklı füze/topçu çatışmalarına ve Yemen'deki Husilerin Kızıldeniz balistik füze saldırılarına yayılmıştır.\n\nİsrail'in Doğu Akdeniz'deki gaz sahaları ve güvenlik konsepti, bölgesel güç dengelerini yeniden biçimlendirmekte ve Mısır, Ürdün gibi komşu ülkelerin sınır güvenliğini zorlamaktadır.\n\nUluslararası Adalet Divanı'nda soykırım davalarına ve BM Genel Kurulu kararlarına konu olan kriz, Batı dünyasında kitlesel protestolara ve diplomatik bölünmelere yol açmıştır.\n\nİki Devletli Çözüm parametrelerinin tamamen çökme noktasına gelmesi, Orta Doğu'daki normalleşme (İbrahim Anlaşmaları) süreçlerini dondurmuş ve bölgeyi uzun süreli bir istikrarsızlığa hapsetmiştir.",
-                history: "Krizin tarihsel temelleri 1917 Balfour Deklarasyonu, 1948 İsrail Devleti'nin kuruluşu (Nakba) ve 1967 Altı Gün Savaşı'nda Filistin topraklarının işgal edilmesine dayanmaktadır.\n\n1993 Oslo Barış İlkeleri Anlaşması'nın bağımsız Filistin Devleti'ni kurmakta başarısız olması, Batı Şeria'daki yasadışı yerleşimlerin genişlemesi ve Gazze'nin 2007'den bu yana abluka altında tutulması çatışmayı sürekli patlamaya hazır tutmuştur.",
+                title: "İsrail - Filistin & Doğu Akdeniz",
+                sub: "Orta Doğu / Gazze, Batı Şeria",
+                summary: "İsrail'in Gazze Şeridi'ne yönelik topyekün askeri müdahalesi, bölgesel bir krize dönüşmüştür.\n\nSavaş, Lübnan'daki Hizbullah gücüyle karşılıklı sınır çatışmalarına yayılmıştır.\n\nUluslararası Adalet Divanı'ndaki davalar, Batı dünyasında diplomatik bölünmelere yol açmıştır.\n\nİki Devletli Çözüm parametrelerinin çökmesi, Orta Doğu'yu uzun süreli bir istikrarsızlığa hapsetmiştir.",
+                history: "Tarihsel temelleri 1948 İsrail Devleti'nin kuruluşu ve 1967 Altı Gün Savaşı'na dayanmaktadır. Oslo Barış Anlaşmalarının tıkanması krizin ateşleyicisidir.",
                 countries: {
-                    "Israel": { role: "Askeri Müdahale Aktörü", color: "#ef4444" },
-                    "Palestine": { role: "Gazze & Batı Şeria", color: "#38bdf8" },
-                    "Lebanon": { role: "Kuzey Cephesi (Hizbullah)", color: "#f59e0b" },
-                    "Iran": { role: "Vekil Güç Destekçisi", color: "#dc2626" }
-                }
-            },
-            {
-                id: "KSH",
-                title: "Hindistan - Pakistan Keşmir Nükleer Hattı",
-                sub: "Güney Asya / Himalayalar Sınır Çatışması",
-                summary: "Cammu Keşmir, 1947 yılında Hindistan ve Pakistan'ın İngiltere'den bağımsızlıklarını kazanmasından bu yana Güney Asya'daki en büyük askeri fay hattını oluşturmaktadır.\n\nNüfusunun çoğunluğu Müslüman olan bölge, bölünme sürecinde hükümdarın kararıyla Hindistan'a bağlanmış, bu durum iki ülke arasında günümüze kadar süren üç büyük savaşa ve sayısız sınır çatışmasına yol açmıştır.\n\nHem Hindistan hem de Pakistan'ın 1998 yılında ardı ardına nükleer silah testleri gerçekleştirerek resmi nükleer güç haline gelmesi, Keşmir'i dünyada konvansiyonel bir krizin doğrudan nükleer savaşa dönüşme riskinin en yüksek olduğu bölge yapmıştır.\n\nHindistan'ın 2019 yılında Anayasa'nın 370. maddesini iptal ederek Keşmir'in özel özerk statüsünü kaldırması ve doğrudan merkeze bağlaması, diplomatik temasları tamamen dondurmuştur.\n\nÇin'in de Aksai Çin bölgesi üzerinden krizde taraf olması, Himalayalar hattını üç nükleer gücün (Hindistan-Pakistan-Çin) doğrudan karşı karşıya geldiği benzersiz bir jeopolitik kilit noktasına dönüştürmüştür.",
-                history: "İngiliz Hindistanı'nın 1947'de dini temelde bölünmesi sırasında keşkekleşen Keşmir sorunu, 1947-48, 1965 ve 1999 Kargil Savaşları'na sebep olmuştur.\n\nBirleşmiş Milletler'in bölgede halk oylaması (referandum) yapılması yönündeki kararları sahadaki askeri blokajlar nedeniyle hiçbir zaman uygulanamamıştır.",
-                countries: {
-                    "India": { role: "Fiili Kontrol Eden Güç", color: "#ef4444" },
-                    "Pakistan": { role: "Hak İddia Eden Taraf", color: "#38bdf8" },
-                    "China": { role: "Aksai Çin Sınır Aktörü", color: "#f59e0b" }
+                    "Israel": { role: "Aktör (Geniş çaplı askeri operasyon yürütüyor)", color: "#ef4444" },
+                    "Palestine": { role: "Aktör (Çatışmaların merkezindeki bölge)", color: "#38bdf8" },
+                    "Lebanon": { role: "Sınır Aktörü (Kuzey cephesinden çatışmalara dahil oluyor)", color: "#f59e0b" },
+                    "Iran": { role: "Destekçi (Vekil güçlere finansal ve askeri lojistik sağlıyor)", color: "#dc2626" }
                 }
             }
         ];
@@ -402,76 +384,86 @@
             const activeBtn = document.getElementById(`btn-mode-${mode}`);
             if(activeBtn) activeBtn.classList.add('active');
 
+            if (mode === 'news') document.getElementById('searchBoxContainer').style.display = 'block';
+            else document.getElementById('searchBoxContainer').style.display = 'none';
+
+            executeSearch(); // Arama ve filtreleri uygular
+        }
+
+        function executeSearch() {
             const listEl = document.getElementById('sidebarContentList');
             listEl.innerHTML = '';
+            
+            let dataSource = [];
+            if(currentMainMode === 'news') dataSource = newsData;
+            else if(currentMainMode === 'orgs') dataSource = orgListData;
+            else if(currentMainMode === 'conflicts') dataSource = conflictListData;
+
+            const searchInput = document.getElementById('newsSearchInput');
+            const searchText = searchInput ? searchInput.value.toLowerCase().trim() : "";
+
+            const filteredData = dataSource.filter(item => {
+                let tagMatch = true;
+                if (currentMainMode === 'news' && selectedTagFilter) {
+                    const cleanSelected = selectedTagFilter.toLowerCase().replace('#', '').trim();
+                    tagMatch = item.tags && item.tags.some(t => t.toLowerCase().replace('#', '').trim().includes(cleanSelected));
+                }
+
+                let searchMatch = true;
+                if (searchText) {
+                    const titleMatch = (item.title || "").toLowerCase().includes(searchText);
+                    const summaryMatch = (item.summary || item.sub || "").toLowerCase().includes(searchText);
+                    
+                    let tagsMatch = false;
+                    if (item.tags) tagsMatch = item.tags.some(t => t.toLowerCase().includes(searchText));
+                    
+                    searchMatch = titleMatch || summaryMatch || tagsMatch;
+                }
+
+                return tagMatch && searchMatch;
+            });
+
+            filteredData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = `news-card ${index === 0 ? 'active' : ''}`;
+                
+                if (currentMainMode === 'news') {
+                    card.onclick = () => selectNews(item, card);
+                    const tagsHtml = item.tags ? item.tags.map(t => `<span class="tag" onclick="filterByTag('${t}', event)">${t}</span>`).join('') : '';
+                    card.innerHTML = `<h3>${item.title}</h3><div class="tags">${tagsHtml}</div>`;
+                } else if (currentMainMode === 'orgs') {
+                    card.onclick = () => selectOrg(item.id, card);
+                    card.innerHTML = `<h3>${item.title}</h3><p class="sub">${item.sub}</p>`;
+                } else if (currentMainMode === 'conflicts') {
+                    card.onclick = () => selectConflict(item, card);
+                    card.innerHTML = `<h3>${item.title}</h3><p class="sub">${item.sub}</p>`;
+                }
+                
+                listEl.appendChild(card);
+            });
+
+            if (filteredData.length > 0) {
+                if (currentMainMode === 'news') selectNews(filteredData[0], listEl.firstChild);
+                else if (currentMainMode === 'orgs') selectOrg(filteredData[0].id, listEl.firstChild);
+                else if (currentMainMode === 'conflicts') selectConflict(filteredData[0], listEl.firstChild);
+            } else {
+                document.getElementById('summaryText').innerText = "Arama kriterinize uygun sonuç bulunamadı.";
+            }
+        }
+
+        function filterByTag(tagName, event) {
+            if(event) event.stopPropagation();
+            selectedTagFilter = tagName;
+            document.getElementById('activeTagText').innerText = tagName;
+            document.getElementById('tagSearchInfo').style.display = 'flex';
+            if (currentMainMode !== 'news') switchMainMode('news');
+            else executeSearch();
+        }
+
+        function clearTagFilter() {
+            selectedTagFilter = null;
             document.getElementById('tagSearchInfo').style.display = 'none';
-
-            if (mode === 'news') {
-                renderNewsList();
-            } else if (mode === 'orgs') {
-                renderOrgList();
-            } else if (mode === 'conflicts') {
-                renderConflictList();
-            }
-        }
-
-        function renderNewsList() {
-            const listEl = document.getElementById('sidebarContentList');
-            listEl.innerHTML = '';
-
-            const filteredNews = newsData.filter(news => {
-                if (!selectedTagFilter) return true;
-                const cleanSelected = selectedTagFilter.toLowerCase().replace('#', '').trim();
-                return news.tags && news.tags.some(t => t.toLowerCase().replace('#', '').trim().includes(cleanSelected));
-            });
-
-            filteredNews.forEach((news, index) => {
-                const card = document.createElement('div');
-                card.className = `news-card ${index === 0 ? 'active' : ''}`;
-                card.onclick = () => selectNews(news, card);
-
-                const tagsHtml = news.tags ? news.tags.map(t => `<span class="tag" onclick="filterByTag('${t}', event)">${t}</span>`).join('') : '';
-                card.innerHTML = `<h3>${news.title}</h3><div class="tags">${tagsHtml}</div>`;
-                listEl.appendChild(card);
-            });
-
-            if (filteredNews.length > 0) {
-                selectNews(filteredNews[0], listEl.firstChild);
-            }
-        }
-
-        function renderOrgList() {
-            const listEl = document.getElementById('sidebarContentList');
-            listEl.innerHTML = '';
-
-            orgListData.forEach((org, index) => {
-                const card = document.createElement('div');
-                card.className = `news-card ${index === 0 ? 'active' : ''}`;
-                card.onclick = () => selectOrg(org.id, card);
-                card.innerHTML = `<h3>${org.title}</h3><p class="sub">${org.sub}</p>`;
-                listEl.appendChild(card);
-            });
-
-            if (orgListData.length > 0) {
-                selectOrg(orgListData[0].id, listEl.firstChild);
-            }
-        }
-
-        function renderConflictList() {
-            const listEl = document.getElementById('sidebarContentList');
-            listEl.innerHTML = '';
-
-            conflictListData.forEach((conf, index) => {
-                const card = document.createElement('div');
-                card.className = `news-card ${index === 0 ? 'active' : ''}`;
-                card.onclick = () => selectConflict(conf, card);
-                card.innerHTML = `<h3>${conf.title}</h3><p class="sub">${conf.sub}</p>`;
-                listEl.appendChild(card);
-            });
-
-            if (conflictListData.length > 0) {
-                selectConflict(conflictListData[0], listEl.firstChild);
-            }
+            executeSearch();
         }
 
         function selectNews(news, cardEl) {
@@ -496,8 +488,8 @@
                 const turkishName = countryProfiles[code]?.trName || trNameDict[code] || code;
                 legendEl.innerHTML += `
                     <div class="legend-item" style="cursor:pointer;" onclick="showCountryCard('${code}', '${code}')">
-                        <span><strong>${turkishName}</strong> (${info.role})</span>
-                        <span class="legend-color" style="background: ${info.color}"></span>
+                        <span><strong>${turkishName}</strong><br><small style="color:#94a3b8">${info.role}</small></span>
+                        <span class="legend-color" style="background: ${info.color}; align-self: center;"></span>
                     </div>
                 `;
             }
@@ -544,8 +536,8 @@
                 const turkishName = countryProfiles[code]?.trName || trNameDict[code] || code;
                 legendEl.innerHTML += `
                     <div class="legend-item" style="cursor:pointer;" onclick="showCountryCard('${code}', '${code}')">
-                        <span><strong>${turkishName}</strong> (${info.role})</span>
-                        <span class="legend-color" style="background: ${info.color}"></span>
+                        <span><strong>${turkishName}</strong><br><small style="color:#94a3b8">${info.role}</small></span>
+                        <span class="legend-color" style="background: ${info.color}; align-self: center;"></span>
                     </div>
                 `;
             }
@@ -646,7 +638,9 @@
                             if (checkExactMembership(countryName, [key])) {
                                 highlightedBounds.extend(layer.getBounds());
                                 const turkishName = countryProfiles[key]?.trName || trNameDict[countryName] || countryName;
-                                layer.bindPopup(`<b>${turkishName}</b><br>Rol: ${activeCountries[key].role}`);
+                                // Popup'taki rol açıklamasını kısalttık ki ekrana taşmasın
+                                const shortRole = activeCountries[key].role.split('(')[0].trim();
+                                layer.bindPopup(`<b>${turkishName}</b><br>Rol: ${shortRole}`);
                             }
                         }
                     }
@@ -681,21 +675,6 @@
             card.style.display = 'block';
         }
 
-        function filterByTag(tagName, event) {
-            if(event) event.stopPropagation();
-            selectedTagFilter = tagName;
-            document.getElementById('activeTagText').innerText = tagName;
-            document.getElementById('tagSearchInfo').style.display = 'flex';
-            if (currentMainMode !== 'news') switchMainMode('news');
-            else renderNewsList();
-        }
-
-        function clearTagFilter() {
-            selectedTagFilter = null;
-            document.getElementById('tagSearchInfo').style.display = 'none';
-            renderNewsList();
-        }
-
         function switchMobileTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
@@ -708,14 +687,11 @@
             mapSec.classList.remove('mobile-active');
             panel.classList.remove('mobile-active');
 
-            if (tabName === 'news') {
-                sidebar.classList.add('mobile-active');
-            } else if (tabName === 'map') {
+            if (tabName === 'news') sidebar.classList.add('mobile-active');
+            else if (tabName === 'map') {
                 mapSec.classList.add('mobile-active');
                 setTimeout(() => map.invalidateSize(), 200);
-            } else if (tabName === 'panel') {
-                panel.classList.add('mobile-active');
-            }
+            } else if (tabName === 'panel') panel.classList.add('mobile-active');
         }
     </script>
 </body>
