@@ -2,14 +2,14 @@ name: Gunluk Jeopolitik Haber Botu
 
 on:
   schedule:
-    - cron: '0 5 * * *'
-  workflow_dispatch:
+    # Türkiye Saati ile (UTC+3): 08:00, 12:00, 16:00, 20:00, 00:00
+    # UTC Karşılığı: 05:00, 09:00, 13:00, 17:00, 21:00
+    - cron: '0 5,9,13,17,21 * * *'
+  workflow_dispatch: # İstediğin an elle tetikleme butonu
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Depoyu Klonla
         uses: actions/checkout@v4
@@ -17,17 +17,16 @@ jobs:
       - name: Python Kur
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-python-version: '3.10'
 
       - name: Botu Çalıştır
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python bot.py
 
-      - name: Degisiklikleri Kaydet ve Push Et
+      - name: Değişiklikleri Kaydet ve Push Et
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m "Otomatik Gunluk Haber Guncellemesi" || exit 0
-          git push
+          git config --global user.name 'GitHub Action Bot'
+          git config --global user.email 'action@github.com'
+          git add newsData.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Otomatik Haber Güncellemesi" && git push)
