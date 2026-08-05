@@ -59,15 +59,23 @@
         .globe-container { flex: 1; position: relative; background: #02040a; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
         #globeViz { flex: 1; width: 100%; height: 100%; }
 
-        .timeline-container { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 80%; background: rgba(5, 8, 17, 0.9); backdrop-filter: blur(12px); border: 1px solid #38bdf8; padding: 14px 22px; border-radius: 8px; display: none; flex-direction: column; gap: 12px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); z-index: 100; }
-        .timeline-header { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; color: #38bdf8; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; }
-        .timeline-labels { display: flex; justify-content: space-between; color: #94a3b8; font-size: 0.75rem; font-weight: 600; font-family: 'Inter', sans-serif; position: relative; padding: 0 5px; }
+        /* BELİRGİN VE ÇİZGİLİ TARİHSEL ZAMAN ÇİZELGESİ (TIME SLIDER) */
+        .timeline-container { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 80%; background: rgba(5, 8, 17, 0.92); backdrop-filter: blur(12px); border: 1px solid #38bdf8; padding: 16px 24px; border-radius: 8px; display: none; flex-direction: column; gap: 14px; box-shadow: 0 0 25px rgba(56, 189, 248, 0.35); z-index: 100; }
+        .timeline-header { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; color: #38bdf8; font-size: 0.95rem; font-weight: 700; letter-spacing: 1px; }
+        .timeline-labels { display: flex; justify-content: space-between; color: #94a3b8; font-size: 0.8rem; font-weight: 700; font-family: 'Rajdhani', sans-serif; position: relative; padding: 0 4px; }
         
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 4px 0; }
+        input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; background: transparent; height: 24px; margin: 0; cursor: pointer; }
         input[type=range]:focus { outline: none; }
-        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #1e293b; border-radius: 4px; border: 1px solid #38bdf8; box-shadow: inset 0 0 5px rgba(56,189,248,0.5); }
-        input[type=range]::-webkit-slider-thumb { border: 2px solid #fff; height: 20px; width: 20px; border-radius: 50%; background: #ef4444; cursor: pointer; -webkit-appearance: none; margin-top: -6px; box-shadow: 0 0 12px #ef4444; transition: all 0.2s; }
-        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.25); }
+        
+        /* Chrome, Edge, Safari Çubuk Hattı */
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #091322; border-radius: 4px; border: 1.5px solid #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; border: 2px solid #ffffff; height: 22px; width: 22px; border-radius: 50%; background: #ef4444; cursor: pointer; margin-top: -8px; box-shadow: 0 0 14px #ef4444; transition: transform 0.15s ease, background-color 0.15s ease; }
+        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.25); background: #f87171; }
+        
+        /* Firefox Çubuk Hattı */
+        input[type=range]::-moz-range-track { width: 100%; height: 8px; cursor: pointer; background: #091322; border-radius: 4px; border: 1.5px solid #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+        input[type=range]::-moz-range-thumb { border: 2px solid #ffffff; height: 22px; width: 22px; border-radius: 50%; background: #ef4444; cursor: pointer; box-shadow: 0 0 14px #ef4444; transition: transform 0.15s ease; }
+        input[type=range]::-moz-range-thumb:hover { transform: scale(1.25); }
 
         .country-card { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(12px); border: 1px solid #38bdf8; border-radius: 6px; padding: 14px; width: 320px; display: none; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
         .country-card h3 { font-family: 'Syne', 'Rajdhani', sans-serif; font-size: 1rem; color: #38bdf8; margin-bottom: 8px; border-bottom: 1px solid #1e293b; padding-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
@@ -173,7 +181,7 @@
         return '#38bdf8';
     }
 
-    // TÜM DÜNYA ÜLKELERİ SÖZLÜĞÜ (TÜRKÇE İSİMLERİ VE EKSİKSİZ KOORDİNATLARIYLA)
+    // TÜM DÜNYA ÜLKELERİ SÖZLÜĞÜ (TÜRKÇE İSİMLERİ VE KOORDİNATLARI)
     const countryMasterDict = {
         "TUR": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT", names: ["turkey", "turkiye", "türkiye"] },
         "AZE": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan", founding: "1991", pop: "10.1 Milyon", area: "86,600 km²", pact: "TDT, İİT", names: ["azerbaijan", "azerbaycan"] },
@@ -248,7 +256,6 @@
         "COL": { lat: 4.5709, lng: -74.2973, trName: "Kolombiya", founding: "1810", pop: "51 Milyon", area: "1,141,748 km²", pact: "OAS", names: ["colombia", "kolombiya"] }
     };
 
-    // TAM 12 ULUSLARARASI ÖRGÜT
     const orgListData = [
         { id: "NATO", title: "Kuzey Atlas Antlaşması Örgütü (NATO)", sub: "32 Üye • Küresel Askeri İttifak" },
         { id: "EU", title: "Avrupa Birliği (AB)", sub: "27 Üye • Siyasi & Ekonomik Tek Pazar" },
@@ -264,73 +271,241 @@
         { id: "G20", title: "G20 En Büyük Ekonomiler", sub: "19 Ülke + 2 Birlik • Küresel Finans" }
     ];
 
-    // ÖRGÜTLERİN KIBRIS DÂHİL EKSİKSİZ ÜYE İSO LİSTESİ
+    // ÖRGÜTLERİN Kapsamlı ANALİZLERİ VE EKSİKSİZ ÜYE İSO LİSTELERİ
     const orgInfoData = {
-        "NATO": { title: "Kuzey Atlas Antlaşması Örgütü (NATO)", summary: "1949 Washington Antlaşması ile kurulan siyasi ve askeri ittifak. 5. Madde doktrinini esas alır.", history: "Soğuk Savaş'ta Varşova Paktı'na karşı kurulmuş, günümüzde Atlantik'ten Pasifik sınırına kadar caydırıcılık sağlar.", center: "BEL", membersIso: ["BEL", "CAN", "FRA", "DEU", "GRC", "ITA", "NOR", "POL", "ESP", "TUR", "GBR", "USA", "NLD", "PRT", "FIN", "SWE", "ROU", "HUN", "DNK", "CZE", "SVK", "HRV", "BGR", "EST", "LVA", "LTU", "LUX", "SVN"] },
-        "EU": { title: "Avrupa Birliği (AB)", summary: "27 Avrupa ülkesinin oluşturduğu siyasi, hukuki ve ekonomik tek pazar entegrasyonu.", history: "1951 Kömür ve Çelik Topluluğu ile başlayan süreç, günümüzün dev ekonomik gücüne dönüşmüştür.", center: "BEL", membersIso: ["BEL", "FRA", "DEU", "GRC", "ITA", "POL", "ESP", "NLD", "PRT", "AUT", "FIN", "SWE", "ROU", "HUN", "IRL", "DNK", "CZE", "SVK", "HRV", "BGR", "CYP", "EST", "LVA", "LTU", "LUX", "SVN", "MLT"] },
-        "TDT": { title: "Türk Devletleri Teşkilatı (TDT)", summary: "Türk dünyasının siyasi, ekonomik ve savunma alanlarındaki entegrasyonunu hedefleyen çatı teşkilat.", history: "2009 Nahçıvan Anlaşması ile temelleri atılmış; Doğu-Batı Orta Koridoru merkezine yerleşmiştir.", center: "TUR", membersIso: ["TUR", "AZE", "KAZ", "KGZ", "UZB", "HUN", "TKM", "CYP"] },
-        "BRICS": { title: "BRICS Küresel Ekonomik Paktı", summary: "Batı finansal sistemine alternatif küresel dengeler inşa etmeyi hedefleyen dev pakt.", history: "Mısır, Etiyopya, İran ve BAE'nin katılımıyla küresel enerji rezervlerinin kalbi haline gelmiştir.", center: "CHN", membersIso: ["BRA", "RUS", "IND", "CHN", "ZAF", "EGY", "ETH", "IRN", "ARE", "SAU"] },
-        "SCO": { title: "Şanghay İşbirliği Örgütü (ŞİÖ)", summary: "Avrasya coğrafyasında güvenlik, askeri ve ekonomik işbirliğini hedefleyen dev Avrasya bloğu.", history: "1996'da Şanghay Beşlisi olarak kurulan yapı küresel bir güç odağı olmuştur.", center: "CHN", membersIso: ["CHN", "RUS", "IND", "PAK", "IRN", "KAZ", "UZB", "KGZ", "BLR"] },
-        "UN": { title: "Birleşmiş Milletler (BM)", summary: "1945'te kurulan, küresel barışı, insan haklarını ve uluslararası hukuku korumayı amaçlayan 193 üyeli evrensel çatı örgüt.", history: "II. Dünya Savaşı yıkımının ardından Milletler Cemiyeti yerine temelleri atılmıştır.", center: "USA", membersIso: ["TUR", "USA", "RUS", "CHN", "GBR", "FRA", "DEU", "JPN", "IND", "BRA", "SAU", "CAN", "ITA", "EGY"] },
-        "ASEAN": { title: "Güneydoğu Asya Ulusları Birliği", summary: "Güneydoğu Asya'da ekonomik büyüme, sosyal ilerleme ve bölgesel barışı hızlandırır.", history: "1967 Bangkok Deklarasyonu ile kurulmuş, Asya Pasifik ticaretinin merkez üssüdür.", center: "IDN", membersIso: ["IDN", "THA", "VNM", "MYS", "PHL", "SGP"] },
-        "AU": { title: "Afrika Birliği (AU)", summary: "Afrika kıtasındaki 55 devletin siyasi ve sosyo-ekonomik entegrasyonunu amaçlar.", history: "2002'de kurulmuş, kıtasal serbest ticareti hedefler.", center: "ETH", membersIso: ["EGY", "SDN", "MLI", "NER", "BFA", "ETH", "ZAF"] },
-        "OAS": { title: "Amerikan Devletleri Örgütü (OAS)", summary: "Kuzey ve Güney Amerika ülkeleri arasında barış, güvenlik ve demokrasi ittifakı.", history: "1948 yılında Bogota'da kurulmuş, kıta içi diplomasiyi yönetir.", center: "USA", membersIso: ["USA", "CAN", "BRA", "MEX", "ARG", "COL"] },
-        "AL": { title: "Arap Devletleri Ligi", summary: "Arap coğrafyasındaki ülkelerin bağımsızlık ve işbirliğini savunan bölgesel örgüt.", history: "1945'te Kahire'de kurulmuş, Orta Doğu jeopolitiğinde kilit rol oynar.", center: "EGY", membersIso: ["EGY", "SAU", "SYR", "IRQ", "YEM", "SDN", "LBN", "PSE", "ARE"] },
-        "OIC": { title: "İslam İşbirliği Teşkilatı (İİT)", summary: "İslam dünyasının hak ve çıkarlarını korumayı hedefleyen 57 üyeli uluslararası yapı.", history: "1969 Mescid-i Aksa kundaklaması sonrası Rabat'ta kurulmuştur.", center: "SAU", membersIso: ["TUR", "AZE", "SAU", "IRN", "EGY", "PAK", "IDN", "KAZ", "UZB"] },
-        "G20": { title: "G20 En Büyük Ekonomiler", summary: "Dünya ekonomisinin %85'ini temsil eden uluslararası finans ve ekonomi forumu.", history: "1999 Asya finans krizinin ardından küresel ekonomik istikrarı sağlamak amacıyla kurulmuştur.", center: "USA", membersIso: ["TUR", "USA", "CHN", "JPN", "DEU", "GBR", "FRA", "ITA", "BRA", "IND", "SAU", "ZAF", "MEX", "ARG"] }
+        "NATO": { 
+            title: "Kuzey Atlas Antlaşması Örgütü (NATO)", 
+            summary: "1949 Washington Antlaşması ile kurulan siyasi ve askeri ittifak. Temel ilkesi 'Kolektif Savunma'yı düzenleyen 5. Madde'dir. Müttefiklerden birine yapılan silahlı saldırı, tüm üyelere yapılmış sayılır.\n\nİttifak; üye ülkelerin özgürlük ve güvenliğini siyasi ve askeri yollarla korumayı, Atlantik ötesi güvenlik bağlarını güçlendirmeyi ve kolektif caydırıcılığı en üst düzeyde tutmayı hedefler.", 
+            history: "Soğuk Savaş döneminde Sovyetler Birliği (SSCB) ve Varşova Paktı tehdidine karşı Atlantik ittifakını korumak amacıyla kurulan örgüt, Soğuk Savaş sonrası konsept değiştirmiştir.\n\n90'larda Balkanlar müdahaleleri, 11 Eylül sonrası Afganistan harekatı ve günümüzde Doğu Avrupa'daki genişleme dalgasıyla askeri varlığını Rusya sınırlarına kadar genişletmiştir. Türkiye, 1952 yılında katıldığı ittifakın en büyük ikinci kara ordusuna sahiptir.", 
+            center: "BEL", 
+            membersIso: ["BEL", "CAN", "FRA", "DEU", "GRC", "ITA", "NOR", "POL", "ESP", "TUR", "GBR", "USA", "NLD", "PRT", "FIN", "SWE", "ROU", "HUN", "DNK", "CZE", "SVK", "HRV", "BGR", "EST", "LVA", "LTU", "LUX", "SVN"] 
+        },
+        "EU": { 
+            title: "Avrupa Birliği (AB)", 
+            summary: "27 Avrupa ülkesinin oluşturduğu, ortak ekonomiyi, serbest dolaşımı (Schengen), hukuki standartları ve dış politikayı entegre eden devasa tek pazar ve siyasi yapı.\n\nKendi para birimi (Euro), parlamentoları, adalet divanı ve Merkez Bankası bulunan kurum; üye ülkeler arasındaki gümrük duvarlarını kaldırarak dünyanın en büyük ekonomik bloklarından birini inşa etmiştir.", 
+            history: "İkinci Dünya Savaşı'nın yıkımının ardından Fransa ve Almanya'nın öncülüğünde, yeni bir savaşı engelleyecek sanayi bağı kurmak amacıyla 1951'de Avrupa Kömür ve Çelik Topluluğu olarak temelleri atıldı.\n\n1957 Roma ve 1992 Maastricht Antlaşmaları ile günümüzdeki siyasi birliğe dönüşmüştür. Doğu Bloğu'nun çöküşüyle 2004 ve 2007 genişleme dalgalarıyla Doğu Avrupa ülkelerini bünyesine katmıştır.", 
+            center: "BEL", 
+            membersIso: ["BEL", "FRA", "DEU", "GRC", "ITA", "POL", "ESP", "NLD", "PRT", "AUT", "FIN", "SWE", "ROU", "HUN", "IRL", "DNK", "CZE", "SVK", "HRV", "BGR", "CYP", "EST", "LVA", "LTU", "LUX", "SVN", "MLT"] 
+        },
+        "TDT": { 
+            title: "Türk Devletleri Teşkilatı (TDT)", 
+            summary: "Türk dili konuşan ülkeler arasında kapsamlı işbirliğini teşvik etmek amacıyla kurulan uluslararası çatı örgüt.\n\nSiyasi, ekonomik, ulaştırma, savunma sanayii ve kültürel alanlarda tam entegrasyonu hedefler. Özellikle Asya ve Avrupa arasındaki ticaretin merkez üssü olan 'Orta Koridor' lojistik hattının güvenliği ve verimliliği Teşkilatın stratejik önceliklerindendir.", 
+            history: "3 Ekim 2009 tarihinde Türkiye, Azerbaycan, Kazakistan ve Kırgızistan tarafından imzalanan Nahçıvan Anlaşması ile 'Türk Konseyi' adıyla kuruldu.\n\n2021 İstanbul Zirvesi'nde adını Türk Devletleri Teşkilatı olarak değiştiren yapı; Özbekistan'ın katılımı, Macaristan, Türkmenistan ve KKTC'nin gözlemci üye statüsü kazanmasıyla Avrasya jeopolitiğinde kilit bir aktör haline gelmiştir.", 
+            center: "TUR", 
+            membersIso: ["TUR", "AZE", "KAZ", "KGZ", "UZB", "HUN", "TKM", "CYP"] 
+        },
+        "BRICS": { 
+            title: "BRICS Küresel Ekonomik Paktı", 
+            summary: "Batı merkezli finansal sisteme (IMF, Dünya Bankası, ABD Doları hegemonyası) alternatif çok kutuplu yeni bir küresel ekonomik denge inşa etmeyi hedefleyen dev pakt.\n\nKendi Kalkınma Bankası'nı (NDB) kuran grup, yerel para birimleriyle ticaret ve küresel finansal işlemlerde dolar bağımlılığını azaltma stratejileri yürütmektedir.", 
+            history: "2006 yılında Brezilya, Rusya, Hindistan ve Çin'in girişimiyle BRIC adıyla kuruldu; 2010'da Güney Afrika katıldı.\n\n2024 itibarıyla Mısır, Etiyopya, İran ve BAE'nin katılımıyla devasa bir genişleme süreci başlatmıştır. Küresel petrol üretiminin ve nüfusunun büyük bir kısmını kontrol eden yapı, küresel Güney'in sesine dönüşmektedir.", 
+            center: "CHN", 
+            membersIso: ["BRA", "RUS", "IND", "CHN", "ZAF", "EGY", "ETH", "IRN", "ARE", "SAU"] 
+        },
+        "SCO": { 
+            title: "Şanghay İşbirliği Örgütü (ŞİÖ)", 
+            summary: "Avrasya coğrafyasında güvenlik, askeri işbirliği, terörle mücadele ve bölgesel ticareti hedefleyen dev hükümetlerarası yapı.\n\n'Şanghay Ruhu' doktrini ile üye ülkelerin iç işlerine karışmama, karşılıklı güven ve ortak güvenlik konseptini esas alır. NATO'ya karşı Doğu dünyasının en büyük askeri ve jeopolitik denge unsurlarından biridir.", 
+            history: "1996 yılında Çin, Rusya, Kazakistan, Kırgızistan ve Tacikistan tarafından sınır güvenliğini sağlamak amacıyla 'Şanghay Beşlisi' adıyla kuruldu.\n\n2001'de Özbekistan'ın katılımıyla örgüte dönüştü. Hindistan, Pakistan, İran ve Beyaz Rusya'nın tam üye olmasıyla Avrasya nüfusunun ve karasal alanının yarısına yakınını temsil eder hale geldi.", 
+            center: "CHN", 
+            membersIso: ["CHN", "RUS", "IND", "PAK", "IRN", "KAZ", "UZB", "KGZ", "BLR"] 
+        },
+        "UN": { 
+            title: "Birleşmiş Milletler (BM)", 
+            summary: "Dünya barışını ve güvenliğini korumak, uluslararası iktisadi ve sosyal işbirliğini sağlamak amacıyla kurulan 193 üyeli evrensel çatı örgüt.\n\nGüvenlik Konseyi'nin (BMGK) 5 daimi üyesinin (ABD, Rusya, Çin, İngiltere, Fransa) veto hakkı bulunması, küresel krizlerin çözümünde kilitlenme yarattığı için sıklıkla reform tartışmalarının odak noktası olmaktadır.", 
+            history: "İkinci Dünya Savaşı'nın büyük yıkımının ardından, başarısız olan Milletler Cemiyeti'nin yerine 24 Ekim 1945'te San Francisco Konferansı ile kuruldu.\n\nSoğuk Savaş krizlerinde, Kore'de, Balkanlar'da ve Orta Doğu'da Barış Gücü harekatları yürütmüştür. Günümüzde iklim krizi, insani yardımlar ve küresel silahsızlanma başlıklarında en üst yetkili platformdur.", 
+            center: "USA", 
+            membersIso: ["TUR", "USA", "RUS", "CHN", "GBR", "FRA", "DEU", "JPN", "IND", "BRA", "SAU", "CAN", "ITA", "EGY"] 
+        },
+        "ASEAN": { 
+            title: "Güneydoğu Asya Ulusları Birliği", 
+            summary: "Güneydoğu Asya bölgesinde ekonomik büyümeyi, sosyal ilerlemeyi, kültürel gelişmeyi ve bölgesel barışı hızlandırmak amacıyla kurulan pakt.\n\nÇin ve ABD arasındaki Pasifik rekabetinde tarafsız kalma politikasını ('ASEAN Merkeziliği') korumaya çalışır.", 
+            history: "8 Ağustos 1967'de Endonezya, Malezya, Filipinler, Singapur ve Tayland tarafından imzalanan Bangkok Deklarasyonu ile kuruldu.\n\nSoğuk Savaş döneminde komünizm yayılmasına karşı kurulan yapı, günümüzde Vietnam, Kamboçya ve Laos'un katılımıyla Asya-Pasifik bölgesinin serbest ticaret ve sanayi merkezine dönüşmüştür.", 
+            center: "IDN", 
+            membersIso: ["IDN", "THA", "VNM", "MYS", "PHL", "SGP"] 
+        },
+        "AU": { 
+            title: "Afrika Birliği (AU)", 
+            summary: "Afrika kıtasındaki 55 devletin siyasi, askeri ve sosyo-ekonomik entegrasyonunu amaçlayan kıtasal çatı örgüt.\n\nAfrika Kıtasal Serbest Ticaret Alanı (AfCFTA) projesiyle kıta içi ticareti artırmayı ve dış müdahalelere karşı kollektif savunma diplomasi geliştirmeyi hedefler.", 
+            history: "Mayıs 1963'te sömürgecilikle mücadele amacıyla kurulan Afrika Birliği Örgütü'nün (OAU) yerini alarak, 9 Temmuz 2002'de Durban Zirvesi'nde resmen kuruldu.\n\nKıtada yaşanan darbeler, etnik çatışmalar ve insani krizlerde ara buluculuk ve barış koruma misyonları üstlenmektedir.", 
+            center: "ETH", 
+            membersIso: ["EGY", "SDN", "MLI", "NER", "BFA", "ETH", "ZAF"] 
+        },
+        "OAS": { 
+            title: "Amerikan Devletleri Örgütü (OAS)", 
+            summary: "Kuzey, Orta ve Güney Amerika'daki 35 bağımsız devleti bir araya getiren kıtasal diplomasi ve güvenlik platformu.\n\nDemokrasinin korunması, insan hakları ihlallerinin önlenmesi, kriz diplomasisi ve uluslararası uyuşturucu ticaretiyle mücadele temel çalışma alanlarıdır.", 
+            history: "30 Nisan 1948 tarihinde Bogota'da düzenlenen 9. Uluslararası Amerikan Devletleri Konferansı'nda kurulan örgüt, köklerini 19. yüzyıldaki Pan-Amerikan birlik ideallerinden alır.\n\nSoğuk Savaş boyunca Küba füze krizi ve Latin Amerika'daki rejim değişikliklerinde aktif roller oynamıştır.", 
+            center: "USA", 
+            membersIso: ["USA", "CAN", "BRA", "MEX", "ARG", "COL"] 
+        },
+        "AL": { 
+            title: "Arap Devletleri Ligi", 
+            summary: "Arap coğrafyasında yer alan bağımsız ülkelerin siyasi, ekonomik, askeri ve kültürel ilişkilerini koordine etmek amacıyla kurulan bölgesel örgüt.\n\nFilistin davasının savunulması, bölgesel egemenlik hakları ve üye ülkeler arasındaki sınır krizlerinin çözümü ana gündem maddeleridir.", 
+            history: "22 Mart 1945 tarihinde Mısır, Irak, Ürdün, Lübnan, Suudi Arabistan ve Suriye tarafından Kahire'de kuruldu.\n\nArap-İsrail savaşlarında ortak harekat kararları alan yapı; Körfez Savaşları ve 2011 Arap Baharı sürecinde iç bölünmeler yaşasa da Orta Doğu diplomasisinin kilit kurumudur.", 
+            center: "EGY", 
+            membersIso: ["EGY", "SAU", "SYR", "IRQ", "YEM", "SDN", "LBN", "PSE", "ARE"] 
+        },
+        "OIC": { 
+            title: "İslam İşbirliği Teşkilatı (İİT)", 
+            summary: "İslam dünyasının temsilcisi olarak Müslüman halkların haklarını, emniyetini ve çıkarlarını korumayı hedefleyen 57 üyeli uluslararası hükümetlerarası yapı.\n\nBM'den sonra dünyanın ikinci en büyük uluslararası örgütüdür. Filistin meselesi, İslamofobi ile mücadele ve insani yardımlar ana eksenini oluşturur.", 
+            history: "25 Eylül 1969 tarihinde Mescid-i Aksa'ya yapılan kundaklama saldırısının ardından Rabat'ta toplanan İslam ülkeleri liderleri tarafından kuruldu.\n\n2011 yılında adı İslam Konferansı Örgütü'nden İslam İşbirliği Teşkilatı olarak değiştirilmiştir. Türkiye, Teşkilatın kurucu ve en aktif üyelerindendir.", 
+            center: "SAU", 
+            membersIso: ["TUR", "AZE", "SAU", "IRN", "EGY", "PAK", "IDN", "KAZ", "UZB"] 
+        },
+        "G20": { 
+            title: "G20 En Büyük Ekonomiler", 
+            summary: "Dünya ekonomisinin %85'ini, küresel ticaretin %75'ini ve dünya nüfusunun üçte ikisini temsil eden küresel ekonomik ve finansal yönetim forumu.\n\nKüresel finansal istikrar, iklim finansmanı, borç yapılandırmaları ve uluslararası vergi reformları forumun ana kararlarını oluşturur.", 
+            history: "1999 yılındaki Doğu Asya ve Meksika finans krizlerinin ardından, gelişmekte olan yükselen ekonomileri finansal sisteme dahil etmek amacıyla Maliye Bakanları düzeyinde kuruldu.\n\n2008 Küresel Finans Krizinin ardından Liderler Zirvesi seviyesine yükseltilerek uluslararası kriz yönetiminin zirvesi haline gelmiştir.", 
+            center: "USA", 
+            membersIso: ["TUR", "USA", "CHN", "JPN", "DEU", "GBR", "FRA", "ITA", "BRA", "IND", "SAU", "ZAF", "MEX", "ARG"] 
+        }
     };
 
-    // TAM 7 AKTİF ÇATIŞMA BÖLGESİ
+    // TAM 7 AKTİF ÇATIŞMA BÖLGESİ VE ZENGİNLEŞTİRİLMİŞ TARİHSEL İSTİHBARAT AKIŞI
     const conflictListData = [
         {
             id: "UKR", title: "Rusya - Ukrayna Savaşı", sub: "Doğu Avrupa / Donbas",
             timeline: [
-                { year: 2014, sum: "Kırım'ın ilhakı ve Donbas bölgesinde vekalet savaşlarının başlaması.", hist: "Rusya, Kiev'deki Batı yanlısı devrime Kırım'ı ilhak ederek karşılık verdi.", countries: {"RUS": {role:"Müdahale Eden", color:"#ef4444"}, "UKR": {role:"Savunan", color:"#38bdf8"}}, heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#fde047'}] },
-                { year: 2022, sum: "Rusya'nın Ukrayna'yı topyekun işgal girişimi.", hist: "24 Şubat'ta Rus ordusu Kiev dahil birçok cepheden Ukrayna'yı işgale başladı.", countries: {"RUS": {role:"Saldıran", color:"#ef4444"}, "UKR": {role:"Direnen", color:"#38bdf8"}, "USA": {role:"Lojistik Destek", color:"#22c55e"}}, heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#fde047'}] },
-                { year: 2026, sum: "Doğu cephesinde yıpratma savaşı ve küresel mühimmat krizi.", hist: "Savaş siper muharebelerine ve yoğun insansız hava aracı saldırılarına dönüştü.", countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}, "BLR": {role:"Rusya Üssü", color:"#f59e0b"}}, heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#fde047'}] }
+                { 
+                    year: 2014, 
+                    sum: "Kırım'ın Yasadışı İlhakı & Donbas'ta Vekalet Savaşının Başlaması", 
+                    hist: "Ukrayna'da Batı yanlısı Euromaidan halk ayaklanması sonucu Rus destekli Devlet Başkanı Viktor Yanukoviç'in devrilmesi üzerine Rusya, Kırım Yarımadası'nı askeri güçle kuşatıp yasadışı bir referandumla ilhak etti.\n\nEş zamanlı olarak Donetsk ve Luhansk bölgelerinde Rus yanlısı ayrılıkçı milisler silahlandırılarak Kiev yönetimine karşı iç savaş başlatıldı. İmzalanan Minsk Anlaşmaları ateşi söndürmekte yetersiz kaldı.", 
+                    countries: {"RUS": {role:"Müdahale Eden Güç", color:"#ef4444"}, "UKR": {role:"Savunan Devlet", color:"#38bdf8"}}, 
+                    heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#fde047'}] 
+                },
+                { 
+                    year: 2022, 
+                    sum: "Topyekun Rus İşgal Girişimi & İkinci Dünya Savaşı Sonrası En Büyük Avrupa Savaşı", 
+                    hist: "24 Şubat 2022'de Vladimir Putin, Ukrayna'yı 'silahsızlandırmak ve nasyonalizmden arındırmak' gerekçesiyle Özel Askeri Operasyon başlattı. Rus ordusu Kiev, Harkiv ve Herson olmak üzere 4 ana cepheden saldırdı.\n\nKiev kapılarına kadar dayanan Rus birlikleri, Ukrayna ordusunun sert direnişi ve Batı'nın anlık istihbarat ile anti-tank silahı desteğiyle geri çekilmek zorunda kaldı. Savaş doğu ve güney cephelerine sıkıştı.", 
+                    countries: {"RUS": {role:"Saldıran Taraf", color:"#ef4444"}, "UKR": {role:"Direnen Taraf", color:"#38bdf8"}, "USA": {role:"Askeri & Finansal Destek", color:"#22c55e"}}, 
+                    heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#fde047'}, {lat: 48.0, lng: 37.8, w: 2, c: '#fde047'}] 
+                },
+                { 
+                    year: 2026, 
+                    sum: "Siper ve Dron Savaşında Yıpratıcı Kilitlenme & Mühimmat Krizi", 
+                    hist: "Çatışmalar I. Dünya Savaşı'nı andıran yoğun siper muharebeleri, devasa mayın tarlaları ve yüzbinlerce intihar dronunun kullanıldığı yıpratma savaşına dönüştü.\n\nRusya, sanayisini savaş ekonomisine geçirerek ve Kuzey Kore ile İran'dan mühimmat temin ederek sayısal üstünlüğünü korurken; Ukrayna, Batı'dan gelen F-16, Patriot ve uzun menzilli füzelerle Rus yakıt/lojistik altyapısını imha etmeyi hedeflemektedir.", 
+                    countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Mühimmat Sağlayıcı", color:"#22c55e"}, "BLR": {role:"Rusya Lojistik Üssü", color:"#f59e0b"}}, 
+                    heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#fde047'}, {lat: 47.1, lng: 37.5, w: 3, c: '#fde047'}] 
+                }
             ]
         },
         {
             id: "ISR", title: "İsrail - Filistin & Doğu Akdeniz", sub: "Orta Doğu / Gazze",
             timeline: [
-                { year: 1967, sum: "Altı Gün Savaşı ve işgal sınırlarının genişlemesi.", hist: "İsrail; Gazze, Batı Şeria ve Golan Tepeleri'ni işgal etti.", countries: {"ISR": {role:"İşgal Eden", color:"#ef4444"}, "PSE": {role:"İşgal Edilen", color:"#38bdf8"}}, heatpoints: [{lat: 31.7, lng: 35.2, w: 1, c: '#fde047'}] },
-                { year: 2023, sum: "7 Ekim olayları ve Gazze'ye yönelik ağır harekat.", hist: "İsrail, Gazze'yi kuşatarak bombardıman başlattı.", countries: {"ISR": {role:"Saldıran", color:"#ef4444"}, "PSE": {role:"Hedef", color:"#38bdf8"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}] },
-                { year: 2026, sum: "Çatışmanın Lübnan ve Kızıldeniz'e yayılması.", hist: "Lübnan'da Hizbullah ve Yemen'de Husiler savaşa dâhil oldu.", countries: {"ISR": {role:"Aktör", color:"#ef4444"}, "PSE": {role:"Bölge", color:"#38bdf8"}, "LBN": {role:"Sınır Cephesi", color:"#f59e0b"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}] }
+                { 
+                    year: 1967, 
+                    sum: "Altı Gün Savaşı ve Toprak İşgallerinin Başlaması", 
+                    hist: "İsrail'in Mısır, Suriye ve Ürdün'e karşı gerçekleştirdiği önleyici askeri harekat neticesinde Gazze Şeridi, Batı Şeria, Doğu Kudüs, Golan Tepeleri ve Sina Yarımadası İsrail kontrolüne geçti.\n\nBM Güvenlik Konseyi'nin 242 sayılı kararıyla işgal altındaki topraklardan çekilme çağrısı yapılsa da, bölgede onlarca yıl sürecek illegal yerleşim ve direniş dalgasının temel kırılma noktası bu savaş olmuştur.", 
+                    countries: {"ISR": {role:"İşgal Eden Güç", color:"#ef4444"}, "PSE": {role:"İşgal Edilen Halk", color:"#38bdf8"}, "EGY": {role:"Savaşan Arap Devleti", color:"#f59e0b"}}, 
+                    heatpoints: [{lat: 31.7, lng: 35.2, w: 1, c: '#fde047'}] 
+                },
+                { 
+                    year: 2023, 
+                    sum: "7 Ekim Aksa Tufanı Baskını ve Gazze'de Toplu Yıkım Harekatı", 
+                    hist: "Hamas'ın Gazze sınırını yararak gerçekleştirdiği ani askeri operasyonun ardından İsrail, abluka altındaki Gazze Şeridi'ne tarihin en yıkıcı hava ve kara harekatlarından birini başlattı.\n\nSivil altyapının, hastanelerin ve şehirlerin tamamen yok olduğu operasyonlar neticesinde on binlerce Filistinli yaşamını yitirdi, uluslararası mahkemelerde İsrail aleyhine soykırım davaları açıldı.", 
+                    countries: {"ISR": {role:"Saldıran / Kuşatan Güç", color:"#ef4444"}, "PSE": {role:"Hedef / Çatışma Alanı", color:"#38bdf8"}}, 
+                    heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}] 
+                },
+                { 
+                    year: 2026, 
+                    sum: "Bölgesel Savaş: Lübnan Cephesi, Kızıldeniz Tıkanması ve İran Gerilimi", 
+                    hist: "Gazze savaşı kontrolden çıkarak tüm Orta Doğu'yu kapsayan çok cepheli bir savaşa evrildi. İsrail ordusu kuzeyde Hizbullah ile Lübnan sınırında yoğun çatışmalara girerken, İran ile doğrudan füze ve dron misillemeleri yaşandı.\n\nYemen'deki Husi hareketi Kızıldeniz ticaret yolunu uluslararası gemilere kapatırken, kriz küresel enerji ve deniz lojistiğini felç eden boyutlara ulaştı.", 
+                    countries: {"ISR": {role:"Aktör", color:"#ef4444"}, "PSE": {role:"Bölge", color:"#38bdf8"}, "LBN": {role:"Kuzey Cephesi", color:"#f59e0b"}, "IRN": {role:"Vekil Güçler Destekçisi", color:"#dc2626"}}, 
+                    heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}, {lat: 33.2, lng: 35.5, w: 2, c: '#fde047'}] 
+                }
             ]
         },
         {
             id: "IRN", title: "ABD - İran & Hürmüz Krizi", sub: "Orta Doğu / Basra",
             timeline: [
-                { year: 2018, sum: "ABD'nin Nükleer Anlaşmadan tek taraflı çekilmesi.", hist: "Trump yönetimi anlaşmadan çekilip yaptırımları yeniden başlattı.", countries: {"IRN": {role:"Hedef", color:"#ef4444"}, "USA": {role:"Yaptırım Kararı", color:"#38bdf8"}}, heatpoints: [{lat: 35.6, lng: 51.3, w: 1, c: '#fde047'}] },
-                { year: 2026, sum: "Hürmüz Boğazı'nda doğrudan çatışma riski.", hist: "Basra Körfezi'nde petrol sevkiyatı tehdit altında.", countries: {"IRN": {role:"Aktör", color:"#ef4444"}, "USA": {role:"Karşıt Güç", color:"#38bdf8"}, "ISR": {role:"Karşıt Güç", color:"#22c55e"}}, heatpoints: [{lat: 26.5, lng: 56.2, w: 3, c: '#fde047'}] }
+                { 
+                    year: 2018, 
+                    sum: "ABD'nin Nükleer Anlaşmadan Çekilmesi & Maksimum Baskı Dönemi", 
+                    hist: "Trump yönetimindeki ABD, P5+1 ülkeleri ile İran arasında imzalanan Nükleer Anlaşmadan (JCPOA) tek taraflı olarak çekildiğini açıkladı.\n\nİran ekonomisini felç etmeyi hedefleyen felç edici enerji ve bankacılık yaptırımları ('Maksimum Baskı') uygulamaya koyuldu. İran ise yanıt olarak uranyum zenginleştirme seviyesini nükleer silah eşiğine kadar yükseltti.", 
+                    countries: {"IRN": {role:"Yaptırım Hedefi", color:"#ef4444"}, "USA": {role:"Yaptırım Uygulayan", color:"#38bdf8"}}, 
+                    heatpoints: [{lat: 35.6, lng: 51.3, w: 1, c: '#fde047'}] 
+                },
+                { 
+                    year: 2026, 
+                    sum: "Hürmüz Boğazı'nda Doğrudan Çatışma Riski ve Petrol Sevkiyat Tehdidi", 
+                    hist: "ABD donanmasının Basra Körfezi'ndeki varlığını artırması ve İran'ın tanker el koyma hamleleri, Hürmüz Boğazı'nı askeri kilitlenme noktasına getirdi.\n\nDünya petrol sevkiyatının %20'sinin geçtiği boğazdaki gerginlik, nükleer tesislerin hedef alınma riski ve tırmanan vekalet savaşları nedeniyle küresel bir enerji krizini tetikleme potansiyelini koruyor.", 
+                    countries: {"IRN": {role:"Boğazı Kontrol Eden", color:"#ef4444"}, "USA": {role:"Donanma Gücü", color:"#38bdf8"}, "ISR": {role:"Karşıt Güç", color:"#22c55e"}}, 
+                    heatpoints: [{lat: 26.5, lng: 56.2, w: 3, c: '#fde047'}] 
+                }
             ]
         },
         {
             id: "TWN", title: "Çin - Tayvan Gerginliği", sub: "Doğu Asya / Pasifik",
             timeline: [
-                { year: 2022, sum: "Nancy Pelosi'nin ziyareti ve Çin tatbikatları.", hist: "Pelosi'nin ziyareti sonrası Çin ada etrafında gerçek mermili tatbikat yaptı.", countries: {"CHN": {role:"Gözdağı Veren", color:"#ef4444"}, "TWN": {role:"Abluka Altında", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 2, c: '#fde047'}] },
-                { year: 2026, sum: "Pasifik'te silahlanma yarışı.", hist: "Tayvan Boğazı'nda hava sahası ihlalleri rutinleşti.", countries: {"CHN": {role:"Aktör", color:"#ef4444"}, "TWN": {role:"Savunan", color:"#38bdf8"}, "USA": {role:"Garantör", color:"#22c55e"}, "JPN": {role:"Gözlemci", color:"#f59e0b"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 3, c: '#fde047'}] }
+                { 
+                    year: 2022, 
+                    sum: "Pelosi Ziyareti ve Çin'in Adayı Kuşatan Devasa Askeri Tatbikatları", 
+                    hist: "ABD Temsilciler Meclisi Başkanı Nancy Pelosi'nin Çin'in tüm uyarılarına rağmen Taipei'yi ziyaret etmesi, Pekin tarafından 'Tek Çin' ilkesinin ihlali olarak değerlendirildi.\n\nÇin Halk Kurtuluş Ordusu (PLA), Tayvan etrafındaki 6 farklı bölgede füze denemeleri, deniz ablukası ve hava sahası ihlallerini içeren tarihindeki en büyük kuşatma tatbikatını gerçekleştirdi.", 
+                    countries: {"CHN": {role:"Gözdağı Veren Güç", color:"#ef4444"}, "TWN": {role:"Abluka Altındaki Ada", color:"#38bdf8"}, "USA": {role:"Tayvan Müttefiki", color:"#22c55e"}}, 
+                    heatpoints: [{lat: 24.0, lng: 119.5, w: 2, c: '#fde047'}] 
+                },
+                { 
+                    year: 2026, 
+                    sum: "Pasifik'te Çip Savaşı, Donanma Yığınağı ve İşgal Riski", 
+                    hist: "Çin savaş uçaklarının Tayvan Boğazı orta çizgisini geçmesi günlük askeri rutin haline geldi. ABD; Japonya, Avustralya ve Filipinler ile olan askeri üs anlaşmalarını genişleterek Çin'i birinci ada zincirinde çevreleme stratejisini sıkılaştırdı.\n\nKüresel yarı iletken (mikroçip) üretiminin kalbi olan adadaki bir sıcak temasın, dünya ekonomisini felç edeceği öngörülmektedir.", 
+                    countries: {"CHN": {role:"Aktör", color:"#ef4444"}, "TWN": {role:"Savunan", color:"#38bdf8"}, "USA": {role:"Garantör Güç", color:"#22c55e"}, "JPN": {role:"Bölgesel Müttefik", color:"#f59e0b"}}, 
+                    heatpoints: [{lat: 24.0, lng: 119.5, w: 3, c: '#fde047'}] 
+                }
             ]
         },
         {
             id: "SDN", title: "Sudan İç Savaşı", sub: "Kuzey Afrika / Nil Bölgesi",
             timeline: [
-                { year: 2023, sum: "Sudan Ordusu ile RSF arasında savaş başladı.", hist: "Hartum merkezli kanlı bir güç mücadelesi patlak verdi.", countries: {"SDN": {role:"Çatışma Merkezi", color:"#ef4444"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 2, c: '#fde047'}] },
-                { year: 2026, sum: "Devletin çöküşü ve devasa insani kriz.", hist: "Milyonlarca insan yerinden edildi, kıtlık baş gösterdi.", countries: {"SDN": {role:"Çöken Devlet", color:"#ef4444"}, "EGY": {role:"Sınır Aktörü", color:"#38bdf8"}, "ARE": {role:"Finansör", color:"#f59e0b"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 3, c: '#fde047'}] }
+                { 
+                    year: 2023, 
+                    sum: "Ordu ile Hızlı Destek Kuvvetleri (RSF) Arasında Şehir Savaşlarının Başlaması", 
+                    hist: "2019'da Ömer el-Beşir'in devrilmesinin ardından yönetimi paylaşamayan General Abdülfettah el-Burhan liderliğindeki Sudan Ordusu ile Muhammed Hamdan Dagalo (Hemedti) liderliğindeki RSF paramiliter grubu arasında çatışma çıktı.\n\nBaşkent Hartum sokaklarında başlayan ağır silahlı çatışmalar, kısa sürede tüm ülkeye ve insani felaket bölgelerine yayıldı.", 
+                    countries: {"SDN": {role:"Çatışma Merkezi / Taraf Ordular", color:"#ef4444"}}, 
+                    heatpoints: [{lat: 15.5, lng: 32.5, w: 2, c: '#fde047'}] 
+                },
+                { 
+                    year: 2026, 
+                    sum: "Devlet Sisteminin Çöküşü, Darfur'da Kıtlık ve Kıtasal İnsani Kriz", 
+                    hist: "Ülke fiilen ikiye bölündü. Darfur bölgesinde etnik temizlik iddiaları, milyonlarca sığınmacının komşu ülkelere kaçması ve Nil nehri havzasında tarımın durmasıyla BM tarihinin en ağır kıtlık krizlerinden biri patlak verdi.\n\nDış güçlerin vekalet desteği çatışmanın derinleşmesine neden olmaktadır.", 
+                    countries: {"SDN": {role:"Çöken Devlet", color:"#ef4444"}, "EGY": {role:"Sınır Komşusu / Destekçi", color:"#38bdf8"}, "ARE": {role:"Finansal / Vekalet Etkisi", color:"#f59e0b"}}, 
+                    heatpoints: [{lat: 15.5, lng: 32.5, w: 3, c: '#fde047'}] 
+                }
             ]
         },
         {
             id: "YEM", title: "Kızıldeniz & Yemen Krizi", sub: "Körfez / Babülmendep",
             timeline: [
-                { year: 2014, sum: "Husilerin Sana'yı ele geçirmesi.", hist: "İran destekli Husi hareketi yönetime el koydu.", countries: {"YEM": {role:"Çatışma Alanı", color:"#ef4444"}, "SAU": {role:"Koalisyon", color:"#38bdf8"}}, heatpoints: [{lat: 15.3, lng: 44.2, w: 2, c: '#fde047'}] },
-                { year: 2026, sum: "Kızıldeniz gemi saldırıları.", hist: "Husiler ticari gemileri vuruyor, ABD hava harekatı düzenliyor.", countries: {"YEM": {role:"Husiler", color:"#ef4444"}, "USA": {role:"Koalisyon Gücü", color:"#22c55e"}, "GBR": {role:"Koalisyon Gücü", color:"#38bdf8"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 12.5, lng: 43.3, w: 3, c: '#fde047'}] }
+                { 
+                    year: 2014, 
+                    sum: "Husilerin Başkenti Ele Geçirmesi ve Suudi Koalisyonunun Müdahalesi", 
+                    hist: "İran destekli Şii Ensarullah (Husi) hareketi, başkent Sana'yı ele geçirerek hükümeti devirdi. Suudi Arabistan ve BAE liderliğindeki Arap Koalisyonu şiddetli hava harekatlarıyla savaşa müdahil oldu.\n\nYıllar süren çatışmalar Yemen'i dünyanın en ağır insani kriz bölgelerinden birine dönüştürdü.", 
+                    countries: {"YEM": {role:"Çatışma Alanı", color:"#ef4444"}, "SAU": {role:"Koalisyon Lideri", color:"#38bdf8"}}, 
+                    heatpoints: [{lat: 15.3, lng: 44.2, w: 2, c: '#fde047'}] 
+                },
+                { 
+                    year: 2026, 
+                    sum: "Husilerin Kızıldeniz Saldırıları ve ABD-İngiltere Hava Operasyonları", 
+                    hist: "Gazze savaşına destek gerekçesiyle Husiler, Babülmendep Boğazı'ndan geçen Batılı ticari gemilere güdümlü füze ve dronlarla saldırmaya başladı. Küresel konteyner trafiği Ümit Burnu'na kaydı.\n\nABD ve İngiltere liderliğindeki uluslararası koalisyon, Yemen'deki Husi radar ve füze mevzilerine sürekli hava harekatları düzenlemektedir.", 
+                    countries: {"YEM": {role:"Husiler (Vuran / Vurulan)", color:"#ef4444"}, "USA": {role:"Koalisyon Gücü", color:"#22c55e"}, "GBR": {role:"Koalisyon Gücü", color:"#38bdf8"}, "IRN": {role:"Milis Destekçisi", color:"#dc2626"}}, 
+                    heatpoints: [{lat: 12.5, lng: 43.3, w: 3, c: '#fde047'}] 
+                }
             ]
         },
         {
             id: "AFL", title: "Sahel Çatışmaları & Darbeler", sub: "Batı Afrika",
             timeline: [
-                { year: 2023, sum: "Nijer, Mali ve Burkina Faso darbeleri.", hist: "Fransız askerleri kovuldu, Rus Wagner bölgeye yerleşti.", countries: {"MLI": {role:"Cunta", color:"#ef4444"}, "NER": {role:"Cunta", color:"#ef4444"}, "BFA": {role:"Cunta", color:"#ef4444"}, "FRA": {role:"Çıkan Güç", color:"#38bdf8"}}, heatpoints: [{lat: 17.6, lng: 8.0, w: 2, c: '#fde047'}] },
-                { year: 2026, sum: "Cihatçı terör tehdidinin tırmanması.", hist: "AES askeri paktı kuruldu ancak radikal terör yayılıyor.", countries: {"MLI": {role:"AES Üyesi", color:"#ef4444"}, "NER": {role:"AES Üyesi", color:"#ef4444"}, "BFA": {role:"AES Üyesi", color:"#ef4444"}, "RUS": {role:"Destek", color:"#dc2626"}}, heatpoints: [{lat: 14.0, lng: 0.0, w: 3, c: '#fde047'}] }
+                { 
+                    year: 2023, 
+                    sum: "Nijer, Mali ve Burkina Faso'da Anti-Fransız Askeri Darbeler", 
+                    hist: "Sahel kuşak ülkelerinde ordu komutanları, Fransız askeri varlığına ve cihatçı terörle mücadeledeki başarısızlığa tepki göstererek yönetime el koydu.\n\nFransız diplomatlar ve askerler ülkelerden kovuldu; Batı Afrika Devletleri Ekonomik Topluluğu (ECOWAS) ile ilişkiler kopma noktasına geldi.", 
+                    countries: {"MLI": {role:"Cunta Yönetimi", color:"#ef4444"}, "NER": {role:"Cunta Yönetimi", color:"#ef4444"}, "BFA": {role:"Cunta Yönetimi", color:"#ef4444"}, "FRA": {role:"Bölgeden Çıkarılan Güç", color:"#38bdf8"}}, 
+                    heatpoints: [{lat: 17.6, lng: 8.0, w: 2, c: '#fde047'}] 
+                },
+                { 
+                    year: 2026, 
+                    sum: "AES Askeri Paktı, Rus Wagner Varlığı ve Tırmanan Cihatçı Terör", 
+                    hist: "Darbe rejimleri Sahel Devletleri İttifakı'nı (AES) kurarak savunma paktı oluşturdu. Güvenlik boşluğu Rus Afrika Kolordusu (eski Wagner) askerleriyle doldurulmaya çalışılmaktadır.\n\nAncak devlet kontrolünün zayıfladığı iç kesimlerde DEAŞ ve El-Kaide bağlantılı grupların saldırıları artarak devam etmektedir.", 
+                    countries: {"MLI": {role:"AES Üyesi", color:"#ef4444"}, "NER": {role:"AES Üyesi", color:"#ef4444"}, "BFA": {role:"AES Üyesi", color:"#ef4444"}, "RUS": {role:"Askeri Desteği Sağlayan", color:"#dc2626"}}, 
+                    heatpoints: [{lat: 14.0, lng: 0.0, w: 3, c: '#fde047'}] 
+                }
             ]
         }
     ];
@@ -572,7 +747,6 @@
                     legendHtml += `<div class="legend-item"><span><strong>${matched.trName}</strong><br><small>${info.role}</small></span><span class="legend-color" style="background: ${col};"></span></div>`;
                     points.push({lat: matched.lat, lng: matched.lng, color: col});
 
-                    // AKIŞ ÇİZGİLERİ
                     if (!primaryCountry) {
                         primaryCountry = matched;
                     } else {
@@ -653,7 +827,7 @@
 
         if (tlData.heatpoints) {
             tlData.heatpoints.forEach(hp => {
-                rings.push({ lat: hp.lat, lng: hp.lng, w: hp.w * 1.5, c: hp.c }); 
+                rings.push({ lat:hp.lat, lng: hp.lng, w: hp.w * 1.5, c: hp.c }); 
             });
         }
 
