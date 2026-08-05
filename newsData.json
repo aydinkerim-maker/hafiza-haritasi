@@ -1,5 +1,52 @@
 [
     {
+        "title": "Rusya'nın Kiev'e Düzenlediği Balistik Füze Saldırısında En Az 14 Kişi Hayatını Kaybetti",
+        "tags": [
+            "#Rusya",
+            "#Ukrayna"
+        ],
+        "summary": "Rusya, Ukrayna'nın başkenti Kiev'e yönelik şiddetli ve kapsamlı bir balistik füze saldırısı gerçekleştirdi. Yetkililer, saldırı sonucunda aralarında sivillerin de bulunduğu en az 14 kişinin hayatını kaybettiğini duyurdu. Kiev askeri idaresinin başındaki isim, Rusya'nın başkent ve çevresindeki bölgeye bir kez daha devasa bir saldırı dalgası başlattığını belirtti. Saldırılar sonrasında bölgede hava savunma sistemleri devreye girerken, çok sayıda patlama ses duyuldu. Kurtarma ekipleri, füzelerin isabet ettiği yıkılan binalarda arama-kurtarma çalışmalarını sürdürüyor. Ukrayna makamları, sivillerin hedef alındığı bu saldırıların savaş suçları kapsamında değerlendirilmesi gerektiğini vurguladı. Başkentteki altyapı tesisleri de saldırılardan ağır hasar gördü. Uluslararası toplum, sivillere yönelik bu son saldırı sert bir dille kınadı. Saldırı, iki ülke arasındaki savaşın en şiddetli evrelerinden birinin devam ettiğini bir kez daha gözler önüne serdi. Bölgedeki gerilim bu hamleyle birlikte tehlikeli bir tırmanış gösterdi.",
+        "history": "Rusya ile Ukrayna arasındaki gerginlik, Sovyetler Birliği'nin dağılmasının ardından Kiev'in Batı yanlısı politikalar izlemesi ve NATO'ya üye olma isteğiyle yıllar içinde kademeli olarak tırmanmıştır. 2014 yılında Rusya'nın Kırım'ı yasadışı ilhakı ve Donbas bölgesindeki ayrılıkçı çatışmalar, iki komşu ülke arasındaki diplomatik ve askeri bağları tamamen koparmıştır. 24 Şubat 2022 tarihinde Rusya Devlet Başkanı Vladimir Putin'in emriyle başlatılan kapsamlı askeri müdahale, İkinci Dünya Savaşı'ndan bu yana Avrupa'daki en büyük devletler arası silahlı çatışmaya dönüşmüştür. Savaşın başından bu yana Rus ordusu, Ukrayna'nın enerji altyapısını, lojistik hatlarını ve başkent Kiev dahil olmak üzere büyük şehirlerini düzenli olarak füze ve insansız hava araçlarıyla hedef almaktadır. Ukrayna ise Batılı devletlerden aldığı gelişmiş hava savunma sistemleri ve askeri mühimmat desteğiyle bu saldırılara karşı koymaya çalışmaktadır. Başkent Kiev, stratejik ve sembolik önemi nedeniyle savaş boyunca sık sık Rus hava saldırılarının ana hedefi olmuştur. Savaş, milyonlarca Ukraynalının ülke içinde yerinden olmasına ve milyonlarcasının da Avrupa'ya mülteci olarak göç etmesine yol açmıştır. Taraflar arasındaki barış müzakereleri defalarca çıkmaza girmiş, diplomatik çözüm çabaları bugüne kadar somut bir sonuç vermemiştir. Batılı ülkelerin Ukrayna'ya sağladığı ekonomik ve askeri yardımlar, Moskova ile Washington ve Brüksel arasındaki jeopolitik rekabeti derinden etkilemiştir. Bu son saldırı, Rusya'nın Ukrayna'daki askeri baskıyı artırma stratejisinin ve sivilleri hedef alan taktiklerinin bir devamı niteliğindedir.",
+        "link": "https://www.bbc.co.uk/news/articles/c330pxyvzzyo?at_medium=RSS&at_campaign=rss",
+        "countries": {
+            "Russia": {
+                "role": "Saldırgan taraf (Kiev'e balistik füze saldırısı düzenleyerek can kaybına yol açıyor)",
+                "color": "#ef4444"
+            },
+            "Ukraine": {
+                "role": "Savunan taraf (Saldırıya uğrayan ve kayıplar veren ülke olarak hava savunma ve arama-kurtarma yürütüyor)",
+                "color": "#38bdf8"
+            }
+        },
+        "id": 1
+    },
+    {
+        "title": "Bangladeş'in Hakikat Avcısı",
+        "tags": [
+            "#Bangladeş",
+            "#Hindistan",
+            "#ABD"
+        ],
+        "summary": "Bangladeş'teki şiddetli siyasi çalkantılar ve rejim değişimleri sırasında, ülkenin demokratik geleceğini korumak için mücadele eden cesur bir gazeteci ön plana çıkmaktadır. Ülke genelinde hızla yayılan dezenformasyon ve sahte haberlerle mücadele eden bu hakikat avcısı, toplumsal barışı ve doğru bilgiyi savunmaktadır. Siyasi istikrarsızlığın ve sokak protestolarının doruğa ulaştığı bu süreçte, medya mensupları üzerindeki baskı tehlikeli boyutlara ulaşmıştır. Gazeteci, uluslararası standartlarda bağımsız habercilik yaparak halkın gerçekleri öğrenmesini sağlamaya çalışmaktadır. Yaşanan bu büyük kriz, Bangladeş'in demokratik kurumlarının ne kadar kırılgan olduğunu gözler önüne sermektedir. Medya ve ifade özgürlüğü, ülkenin gelecekteki siyasi yapılanmasında kritik bir rol oynamaktadır. Gerçeklerin örtbas edilmeye çalışıldığı bu dönemde, gazetecilik hayati bir kamusal görev üstlenmektedir. Haberde, Bangladeş'in içinden geçirdiği bu tarihi dönemeçte basının ve bireysel direnişin önemi vurgulanmaktadır. Uluslararası toplum da ülkedeki insan hakları ihvallerini ve medya üzerindeki kısıtlamaları yakından takip etmektedir.",
+        "history": "Bangladeş, 1971 yılında Pakistan'dan kanlı bir bağımsızlık savaşı vererek ayrıcalıklı bir ulus olarak kurulduğundan bu yana sık sık siyasi krizler ve askeri müdahalelerle sarsılmıştır. Ülkenin yakın tarihi, Şeyh Hasina gibi dominant figürlerin uzun süreli iktidarları ve son yıllarda artan otoriter eğilimleriyle karakterize olmuştur. Siyasi muhalefetin baskı altında tutulması, özgürlüklerin kısıtlanması ve seçimlerin adil yapılıp yapılmadığına dair süregelen tartışmalar toplumsal kutuplaşmayı derinleştirmiştir. Özellikle genç öğrencilerin öncülük ettiği kitlesel protestolar, ülkedeki kökleşmiş siyasi dengeleri sarsan en önemli dönüm noktalarından biri haline gelmiştir. Bangladeş'in jeopolitik konumu, bölgesel devler olan Hindistan ve Çin arasındaki rekabetin merkezinde yer almasına neden olmaktadır. Hindistan, Bangladeş'teki siyasi istikrarı kendi güvenlik sınırları açısından hayati görürken, Çin ekonomik yatırımlarıyla bölgedeki nüfuzunu artırmaya çalışmaktadır. Batılı ülkeler ve ABD ise ülkedeki insan hakları, basın özgürlüğü ve demokratik standartların iyileştirilmesi yönünde baskı yapmaktadır. Tarih boyunca sansür ve gazetecilere yönelik baskılar Bangladeş basın tarihinde kara lekeler olarak yer almıştır. Ancak her siyasi kriz döneminde, ülkenin bağımsız basın gelenekleri ve cesur gazetecileri otoriterliğe karşı direnç göstermiştir. Günümüzdeki çalkantılar, Bangladeş'in ya tam anlamıyla demokratikleşeceği ya da yeni bir otoriter sarmala gireceği tarihi bir kavşaklamayı temsil etmektedir.",
+        "link": "https://www.aljazeera.com/video/witness/2026/8/5/bangladesh-truth-seeker?traffic_source=rss",
+        "countries": {
+            "Bangladesh": {
+                "role": "Aktör (Siyasi çalkantılar ve demokratik geçiş süreci yaşayan taraf)",
+                "color": "#f97316"
+            },
+            "India": {
+                "role": "Gözlemci (Bölgesel istikrarı ve güvenlik dengelerini yakından izleyen komşu güç)",
+                "color": "#22c55e"
+            },
+            "United States": {
+                "role": "Gözlemci (Demokrasi, insan hakları ve basın özgürlüğünü savunan dış aktör)",
+                "color": "#38bdf8"
+            }
+        },
+        "id": 2
+    },
+    {
         "title": "Rus füzelerinin Ukrayna'nın başkenti Kiev'i vurmasıyla patlamalar meydana geldi",
         "tags": [
             "#Ukrayna",
@@ -18,7 +65,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 1
+        "id": 3
     },
     {
         "title": "Bir ABD Mahkemesi 6 Ocak Ayaklanması İçin Yeni Bir Zemin mi Hazırladı?",
@@ -35,7 +82,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 2
+        "id": 4
     },
     {
         "title": "Bolivya, Sınır Boyundaki Brezilyalı Çete Şiddetini Durdurmak İçin Asker Sevk Etti",
@@ -56,7 +103,7 @@
                 "color": "#f97316"
             }
         },
-        "id": 3
+        "id": 5
     },
     {
         "title": "Kuzey Koreli Kim Yo-jong'dan Japonya'nın Füze Testine Karşı Askeri Tehdit",
@@ -87,7 +134,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 4
+        "id": 6
     },
     {
         "title": "ABD Mahkemesinden Trump'ın İklim Hibe Programını İptal Etme Girişimine Darbe",
@@ -106,7 +153,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 5
+        "id": 7
     },
     {
         "title": "‘Kalandan Geriye Kalanı Kucaklamak İstedim’: Gazze Ailelerinin Cenaze İçin 3 Yıllık Bekleyişi",
@@ -133,7 +180,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 6
+        "id": 8
     },
     {
         "title": "Kosova, yetkililerin aramaları genişletmesiyle üçüncü savaş zamanı toplu mezar yeri buldu",
@@ -160,7 +207,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 7
+        "id": 9
     },
     {
         "title": "İsrail'in Yıkım Kararları Sonrası Dükkan Sahipleri İş Yerlerini Söküyor",
@@ -182,7 +229,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 8
+        "id": 10
     },
     {
         "title": "Trump, Washington Anıtı Havuzu'ndaki Vandalizm Suçlamalarının Düşürülmesi Nedeniyle Jeanine Pirro'yu Neden Hedef Aldı?",
@@ -202,7 +249,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 9
+        "id": 11
     },
     {
         "title": "Video, Rus insansız hava aracının 'insan safari' saldırısında Ukraynalı seyyar satıcıyı kovaladığını gösteriyor",
@@ -223,7 +270,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 10
+        "id": 12
     },
     {
         "title": "Hürmüz Boğazı'nın Yeniden Açılabileceği Umutlarıyla Petrol Fiyatları Düştü",
@@ -246,7 +293,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 11
+        "id": 13
     },
     {
         "title": "AB'den İspanya'nın Ceuta Göçmen Krizine 'Hızlı Yanıtına' Övgü",
@@ -272,7 +319,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 12
+        "id": 14
     },
     {
         "title": "İran'a Savaş: Trump'tan Tahran'a 'Son Şans' Uyarısı",
@@ -295,7 +342,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 13
+        "id": 15
     },
     {
         "title": "Bir SpaceX Roketi Aya Çarparsa Ne Olacak?",
@@ -314,7 +361,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 14
+        "id": 16
     },
     {
         "title": "Gazze'de 2023 İsrail Saldırısında Hayatını Kaybeden 112 Filistinli İçin Toplu Cenaze Töreni",
@@ -338,7 +385,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 15
+        "id": 17
     },
     {
         "title": "İran Savaşı ve Hürmüz Boğazı'nın Kapanması Arasında Petrol Şirketleri Neden Rekor Karlar Elde Ediyor?",
@@ -366,7 +413,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 16
+        "id": 18
     },
     {
         "title": "Hamas Müzakerecisi: Gazze'yi Kurtarmak İçin Silahsızlanma Anlaşması Gerekliydi",
@@ -402,7 +449,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 17
+        "id": 19
     },
     {
         "title": "İspanya Başbakanı Sanchez, AB Ceuta Göçmen Krizini Görüşürken Eleştirilerin Hedefinde",
@@ -427,7 +474,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 18
+        "id": 20
     },
     {
         "title": "Manş Denizi'nde Teknesi Alev Alan 150'den Fazla Düzensiz Göçmen Kurtarıldı",
@@ -451,7 +498,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 19
+        "id": 21
     },
     {
         "title": "Analiz: Trump, en yakın müttefiklerinden gelen soğuk gerçeklikle yüzleşiyor",
@@ -471,7 +518,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 20
+        "id": 22
     },
     {
         "title": "Ukrayna, Moskova bölgesinde beş kişinin öldüğü saldırının ardından daha fazla Wildberries tesisini vurdu",
@@ -496,7 +543,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 21
+        "id": 23
     },
     {
         "title": "Trump Media'nın Piyasaları Etkileyen Gönderilere Hızlı Erişim Satışı Neden Tartışmalı?",
@@ -516,7 +563,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 22
+        "id": 24
     },
     {
         "title": "Rus İşgali Altındaki Kırım'da Bir Asker Silahlı Saldırıda Dört Kişiyi Öldürdü",
@@ -540,7 +587,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 23
+        "id": 25
     },
     {
         "title": "AB, Ceuta'daki göçmen geçişlerinin ardından daha güçlü sınırlar çağrısında bulundu",
@@ -570,7 +617,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 24
+        "id": 26
     },
     {
         "title": "Rusya, Ukrayna İnsansız Hava Aracının Kalabalık Bir Plaja Çarpması Sonucu Yedi Kişinin Öldüğünü ve 40 Kişinin Yaralandığını Açıkladı",
@@ -594,7 +641,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 25
+        "id": 27
     },
     {
         "title": "Fransa'daki Orman Yangınları Köyde Yüzlerce 2. Dünya Savaşı Mühimmatını Ortaya Çıkardı",
@@ -618,7 +665,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 26
+        "id": 28
     },
     {
         "title": "Eşimi ve ikizlerimi geride bıraktım - Bu Nijeryalı adam neden Güney Afrika'dan kaçtı?",
@@ -644,7 +691,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 27
+        "id": 29
     },
     {
         "title": "ABD Eyaletleri, Onlarca Ülkeyi Etkileyen Trump Gümrük Vergilerini Engellemek İçin Dava Açtı",
@@ -668,7 +715,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 28
+        "id": 30
     },
     {
         "title": "Ren Nehri rekor seviyede düştü: Kuraklık Avrupa nehirlerini zorluyor",
@@ -705,7 +752,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 29
+        "id": 31
     },
     {
         "title": "Analistler: Orta Doğu'da Petrol Tankerlerine Yönelik Tehdit, İran Savaşı Başlangıcından Bu Yana En Kötü Seviyede",
@@ -734,7 +781,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 30
+        "id": 32
     },
     {
         "title": "Deprem Vuran Japonya AVM'sine Patronun Emriyle Giren İki İşçi Patlamada Öldü",
@@ -754,7 +801,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 31
+        "id": 33
     },
     {
         "title": "Ariana Grande, 'Bitmek Bilmeyen' Baskılar Nedeniyle Kamuoyundan Uzaklaşma Kararı Aldı",
@@ -778,7 +825,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 32
+        "id": 34
     },
     {
         "title": "Fas Kralı'nın Mektubu, Büyük Bir Otoyola Trump'ın Adının Verildiğini Doğruladı",
@@ -803,7 +850,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 33
+        "id": 35
     },
     {
         "title": "Massive Attack, Singapur'un Filistin Protestosu Yasağına Tepki Gösterdi",
@@ -832,7 +879,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 34
+        "id": 36
     },
     {
         "title": "ABD ve Japonya, Yen'i Desteklemek İçin Nadir Görülen Ortak Bir Adım Attı",
@@ -853,7 +900,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 35
+        "id": 37
     },
     {
         "title": "İran, Trump'ın Pazartesi günü yeni görüşmelerin başlayacağı yönündeki iddiasını yalanladı",
@@ -882,7 +929,7 @@
                 "color": "#10b981"
             }
         },
-        "id": 36
+        "id": 38
     },
     {
         "title": "Aung San Suu Kyi, 2,5 Yıl Sonra İlk Doğrulanan Dış Temasında Sağlıklı Görünüyor",
@@ -906,7 +953,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 37
+        "id": 39
     },
     {
         "title": "\"Tek oğlum adalet için ayaktayken vuruldu\" - Pakistan yönetimindeki Keşmir'de ölümcül protestoların pençesindeki şehirden izlenimler",
@@ -930,6 +977,6 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 38
+        "id": 40
     }
 ]
