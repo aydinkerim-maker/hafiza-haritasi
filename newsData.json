@@ -1,5 +1,93 @@
 [
     {
+        "title": "Ölümcül Kiev Saldırısının Ardından Ukrayna'dan Füze Uyarısı: Önleyici Füze Eksikliği Can Alıyor",
+        "tags": [
+            "#Ukrayna",
+            "#Rusya",
+            "#Amerika Birleşik Devletleri"
+        ],
+        "summary": "Ukrayna'nın başkenti Kiev'e düzenlenen ölümcül hava saldırısının ardından Ukraynalı yetkililer, acil bir uyarı yayınladı. Yapılan açıklamalara göre, hava savunma sistemleri için hayati önem taşıyan Patriot önleyici füzelerinin tükenmesi, ülkenin sahadaki savunmasını zayıflatıyor. Önleyici füze kıtlığı, Ukrayna hava sahasını Rus füze barajlarına karşı tamamen savunmasız bırakıyor. Bu durum, sivil yerleşim yerlerinin ve masum insanların doğrudan hedef olmasına yol açıyor. Saldırılarda artan can kayıpları, ülkenin batılı müttefiklerinden acil askeri mühimmat desteği almasının hayati önemini bir kez daha gözler önüne seriyor. Ukrayna yönetimi, özellikle hava savunma bataryalarının füzelerle takviye edilmemesi durumunda trajedilerin artacağı konusunda uyardı. Batılı ülkelerin mühimmat sevkiyatındaki gecikmeler, sahadaki askeri dengeleri Ukrayna aleyhine değiştiriyor. Uluslararası toplumun bu eksikliği gidermek için hızlı adımlar atması talep ediliyor. Aksi takdirde, hava savunmasız kalan şehirlerdeki insani krizin derinleşeceği belirtiliyor.",
+        "history": "Rusya'nın 2022 yılının Şubat ayında Ukrayna'ya karşı başlattığı kapsamlı askeri müdahale, Soğuk Savaş sonrası dönemin en büyük jeopolitik krizlerinden birini tetikledi. Savaşın ilk günlerinden itibaren Rus ordusu, Ukrayna'nın kritik altyapısını ve büyük şehirlerini hedef alan yoğun füze ve insansız hava aracı saldırıları gerçekleştirdi. Buna karşılık Ukrayna, özellikle ABD ve NATO müttefiklerinin sağladığı gelişmiş hava savunma sistemlerine bağımlı hale geldi. Patriot sistemleri, Kiev ve diğer stratejik şehirlerin korunmasında en kritik caydırıcı unsur olarak öne çıktı. Ancak zaman içinde Batılı ülkelerdeki stokların azalması ve siyasi onay süreçlerindeki tıkanıklıklar, Ukrayna'ya yapılan sevkiyatların aksamasına neden oldu. Tarihsel süreçte hava savunma kapasitesindeki her düşüş, Ukrayna şehirlerinde büyük sivil kayıplarla sonuçlanan yıkıcı hava saldırılarının artışıyla doğrudan örtüştü. Bu durum, Ukrayna'nın güvenlik mimarisinin dış yardımlara olan bağımlılığını ve bu yardımların kesintiye uğramasının yarattığı ölümcül sonuçları tarihsel bir gerçeklik olarak kayda geçirdi.",
+        "link": "https://www.bbc.co.uk/news/articles/cyvlgq2gp2eo?at_medium=RSS&at_campaign=rss",
+        "countries": {
+            "Ukraine": {
+                "role": "Aktör (Hava savunma füzesi eksikliği yaşadığını duyurarak müttefiklerinden acil yardım talep ediyor)",
+                "color": "#ef4444"
+            },
+            "Russia": {
+                "role": "Aktör (Ukrayna'nın kritik altyapısını ve şehirlerini füze barajlarıyla hedef alıyor)",
+                "color": "#38bdf8"
+            },
+            "United States": {
+                "role": "Destekçi (Ukrayna'ya Patriot ve hava savunma sistemleri ile mühimmat tedarik ediyor)",
+                "color": "#22c55e"
+            }
+        },
+        "id": 1
+    },
+    {
+        "title": "İsrail, Haftalar Sonra İlk Tahliye Uyarısının Ardından Güney Lübnan'ı Vurdu",
+        "tags": [
+            "#İsrail",
+            "#Lübnan",
+            "#Hizbullah"
+        ],
+        "summary": "İsrail ordusu, haftalar sonra ilk kez güney Lübnan için resmi tahliye uyarısında bulunduktan sonra bölgeye hava saldırıları düzenledi. Lübnan Sağlık Bakanlığı, gerçekleştirilen bu saldırılar sonucunda bir kişinin hayatını kaybettiğini açıkladı. İsrail tarafı, söz konusu saldırıların Hizbullah'ın ateşkes ihlallerine doğrudan bir yanıt olarak gerçekleştirildiğini savundu. Gerçekleşen bu askeri hamle, bölgede halihazırda kırılgan olan güvenlik durumunu daha da tehlikeli bir boyuta taşıdı. Tahliye uyarısının ardından bölgedeki siviller güvenli bölgelere kaçmaya çalışırken, yerel altyapı da ciddi zarar gördü. İsrail ile Hizbullah arasında varılan geçici ateşkesin bozulma riski uluslararası toplumda endişeyle karşılanıyor. Lübnanlı yetkililer, sivillere yönelik saldırıların ve ihlallerin durdurulması için uluslararası mekanizmalara çağrıda bulundu. Askeri hareketliliğin sınır hattında yeniden tırmanması, topyekün bir çatışma ihtimalini tekrar gündeme getirdi. Bölgedeki gözlemciler ve arabulucu ülkeler, tarafların itidal çağrılarına kulak vermemesi durumunda krizin derinleşeceği konusunda uyarıyor.",
+        "history": "İsrail ile Lübnan merkezli Hizbullah örgütü arasındaki düşmanlıklar onlarca yıllık derin köklere sahip bir çatışma geçmişine dayanmaktadır. 1982 yılındaki İsrail'in Lübnan'ı işgali sırasında kurulan Hizbullah, yıllar boyunca güney Lübnan'da İsrail güçlerine karşı uzun süreli bir gerilla savaşı yürütmüştür. 2000 yılında İsrail'in güney Lübnan'dan çekilmesine rağmen iki taraf arasındaki gerilim hiç bitmemiş, 2006 yılında ise 34 gün süren yıkıcı bir savaş patlak vermiştir. BM Güvenlik Konseyi'nin 1701 sayılı kararı bu savaşın ardından ateşkes sağlamış ve sınır bölgesinin silahsızlandırılmasını öngörmüş olsa da, karar tam olarak uygulanamamıştır. 2023 yılının sonlarında Gazze'de başlayan savaşla birlikte Hizbullah, Hamas'a destek amacıyla İsrail'in kuzeyine roket atmaya başlamış ve çatışmalar yeniden tırmanmıştır. 2024 yılının sonbaharında İsrail, Lübnan topraklarına yönelik kapsamlı hava saldırıları ve sınırlı kara harekatları düzenleyerek Hizbullah komuta kademesini hedef almıştır. Uluslararası diplomatik çabalar sık sık geçici ateşkesler ve anlaşmalar getirse de, taraflar arasındaki kalıcı güvensizlik her an yeni bir askeri tırmanışın zeminini hazırlamaktadır. Sınır hattı boyunca yaşanan her ihlal, geçmişteki büyük savaşların travmasını ve bölgenin jeopolitik kırılganlığını yeniden tetiklemektedir.",
+        "link": "https://www.bbc.co.uk/news/articles/c998711dyjvo?at_medium=RSS&at_campaign=rss",
+        "countries": {
+            "Israel": {
+                "role": "Aktör (Ateşkes ihlaline yanıt olarak güney Lübnan'a hava saldırıları düzenleyen taraf)",
+                "color": "#ef4444"
+            },
+            "Lebanon": {
+                "role": "Aktör (Saldırılar nedeniyle can kayıpları yaşayan ve topraklarında askeri hareketlilik barındıran taraf)",
+                "color": "#38bdf8"
+            }
+        },
+        "id": 2
+    },
+    {
+        "title": "Devrik Başbakan Şeyh Hasina Aralık Ayında Bangladeş'e Döneceğini Açıkladı",
+        "tags": [
+            "#Bangladeş",
+            "#Hindistan"
+        ],
+        "summary": "Görevden uzaklaştırılan Bangladeş Başbakanı Şeyh Hasina, Aralık ayında ülkesine geri döneceğini duyurdu. Bu açıklama, Bangladeş'teki siyasi dengelerin yeniden sarsılmasına neden olabilecek kritik bir gelişme olarak değerlendiriliyor. Hasina, geçtiğimiz dönemde yaşanan şiddetli protestolar ve halk ayaklanmaları sonucunda iktidarı bırakmak zorunda kalmış ve ülkeyi terk etmişti. Sürgündeki liderin dönüş tarihi vermesi, Bangladeş iç siyasetinde yeni bir gerilim dalgasının fitilini ateşleyebilir. Geçici hükümet ve güvenlik güçleri, Hasina'nın olası dönüşüne karşı hazırlıklarını gözden geçirirken, sokaklarda hareketlilik yaşanması bekleniyor. Ülkedeki muhalif gruplar ve öğrenci liderleri bu dönüşe sert tepki gösterirken, Hasina'nın partisi Avami Birliği taraftarları ise bu haberi umutla karşıladı. Uluslararası toplum, Bangladeş'teki bu ani gelişmeyi yakından takip ediyor ve ülkenin istikrarının bozulmasından endişe duyuyor. Hasina'nın dönüşünün hukuki ve siyasi sonuçları önümüzdeki günlerde netleşecek. Güvenlik birimleri, olası çatışmaları önlemek adına başkent Dakka başta olmak üzere ülke genelinde önlemleri artırma kararı aldı. Bu durum, Bangladeş'in yakın tarihindeki en büyük siyasi krizlerden birinin yeni bir evreye girdiğini gösteriyor.",
+        "history": "Bangladeş, 1971 yılında Pakistan'dan kanlı bir bağımsızlık mücadelesi sonucunda ayrıldı. Ülkenin kurucu lideri Mujibur Rahman'ın kızı olan Şeyh Hasina, Bangladeş siyasetinde onlarca yıldır dominant bir figür olarak öne çıkmaktadır. Hasina, ilk olarak 1996-2001 yılları arasında başbakanlık yapmış, ardından 2009 yılında yeniden iktidara gelerek kesintisiz bir şekilde ülkeyi yönetmiştir. Bu son dönemi, özellikle muhalefete yönelik baskılar, insan hakları ihlalleri ve tartışmalı seçimler nedeniyle yoğun eleştirilere maruz kalmıştır. 2024 yılının yaz aylarında, kamudaki tartışmalı işe alım kotaları nedeniyle başlayan öğrenci protestoları kısa sürede rejim karşıtı devasa bir halk ayaklanmasına dönüşmüştür. Güvenlik güçlerinin gösterilere sert müdahalesi yüzlerce kişinin ölümüne yol açmış ve baskılar karşısında direnemeyen Şeyh Hasina, Ağustos 2024'te helikopterle ülkeyi terk ederek Hindistan'a sığınmak zorunda kalmıştır. O tarihten bu yana Hindistan'da geçici olarak yaşayan Hasina, Bangladeş'teki geçici hükümet tarafından suçlamalarla karşı karşıyadır. Bangladeş'in yakın tarihi, askeri darbeler, suikastlar ve siyasi istikrarsızlıklarla dolu olup, Hasina'nın olası dönüşü bu kırılgan tarihi hafızayı yeniden canlandırma potansiyeli taşımaktadır. Ülke, demokratik kurumların inşa edilmesi sürecinde defalarca kesintiye uğramış ve siyasi kutuplaşma her zaman en üst seviyede kalmıştır.",
+        "link": "https://www.aljazeera.com/video/newsfeed/2026/8/5/05-08-sv-hasina-returns-bangladesh-bn?traffic_source=rss",
+        "countries": {
+            "Bangladesh": {
+                "role": "Aktör (Devrik liderin hedefi olan ve iç siyasi kriz yaşayan ülke)",
+                "color": "#38bdf8"
+            },
+            "India": {
+                "role": "Aktör (Devrik lider Şeyh Hasina'ya sığınma hakkı tanıyan komşu ülke)",
+                "color": "#22c55e"
+            }
+        },
+        "id": 3
+    },
+    {
+        "title": "Brezilya'da Flavio Bolsonaro, Alfredo Gaspar'ı Başkan Yardımcısı Adayı Olarak Açıkladı",
+        "tags": [
+            "#Brezilya",
+            "#Lula",
+            "#FlavioBolsonaro",
+            "#AlfredoGaspar"
+        ],
+        "summary": "Brezilya siyasetinde hareketli günler yaşanırken, Flavio Bolsonaro seçim yarışındaki stratejik hamlesini yaparak Alfredo Gaspar'ı başkan yardımcısı adayı olarak duyurdu. Bu kritik açıklama, mevcut Devlet Başkanı Luiz Inacio Lula da Silva'nın dış müdahalelere karşı yaptığı sert uyarıların hemen ardından geldi. Ülkede yaklaşan seçimler öncesinde yapılan son kamuoyu araştırmaları, yarışın, özellikle siyasi kutuplaşmanın derinleştiği bu dönemde oldukça çekişmeli geçtiğini gösteriyor. Bolsonaro kanadı, bu adaylıkla muhafazakar tabanı konsolide etmeyi ve oylarını artırmayı hedefliyor. Lula yönetimi ise dış aktörlerin seçim sürecine olası müdahalelerine karşı ulusal egemenlik vurgusunu artırmış durumda. Adaylık duyurusu, Brezilya genelinde siyasi tansiyonu tırmandırırken, medyanın ve seçmenlerin odak noktası haline geldi. İki taraf arasındaki çekişmenin önümüzdeki haftalarda daha da sertleşmesi bekleniyor. Siyasi analistler, bu hamlenin özellikle ülkenin kuzeydoğusundaki oy dengelerini değiştirebileceğini belirtiyor. Seçim kampanyalarının hız kazandığı bu süreçte, güvenlik ve ekonomi başlıkları da ön plana çıkıyor. Brezilya yüksek seçim mahkemesi de süreci yakından izleyerek olası dezenformasyon ve kural ihlallerine karşı uyarıda bulundu.",
+        "history": "Brezilya, Latin Amerika'nın en büyük demokrasisi olarak çalkantılı bir siyasi tarihe sahiptir. 20. yüzyılın ortalarında uzun süren askeri diktatörlük dönemleri yaşayan ülke, 1985 yılında yeniden sivil yönetime geçiş yapmıştır. Sol ve sağ akımların sert mücadelesine sahne olan Brezilya'da, İşçi Partisi (PT) lideri Luiz Inacio Lula da Silva'nın iktidarları dönemi ülkenin sosyal politikalarında çığır açmıştır. Ancak son yıllarda aşırı sağcı lider Jair Bolsonaro'nun yükselişi, ülkedeki ideolojik fay hatlarını derinleştirmiştir. Bolsonaro ailesinin Brezilya siyasetindeki etkisi, ordu ve muhafazakar taban arasındaki güçlü bağlardan beslenmektedir. Lula'nın yolsuzluk suçlamalarıyla ceza alması ve ardından bu kararların bozularak yeniden iktidara gelmesi, ülkedeki yargı ve siyaset ilişkilerini tartışmaya açmıştır. Brezilya demokrasisi, kurumsal yapılarının güçlü olmasına rağmen, sık sık populist liderlerin söylemleri ve ekonomik krizlerin gölgesinde kalmaktadır. Seçim süreçleri, her zaman ulusal ve uluslararası aktörlerin dikkatle izlediği jeopolitik bir dönüm noktası olmuştur. Tarihsel olarak dış güçlerin Latin Amerika siyasetine müdahale etme geçmişi, ülkedeki liderlerin bu konudaki hassasiyetlerini sürekli canlı tutmaktadır.",
+        "link": "https://www.aljazeera.com/news/2026/8/5/brazils-flavio-bolsonaro-names-alfredo-gaspar-as-running-mate?traffic_source=rss",
+        "countries": {
+            "Brazil": {
+                "role": "Aktör (Başkanlık seçimleri için adaylıkları açıklayan ve iç siyasi mücadeleyi yürüten taraf)",
+                "color": "#22c55e"
+            }
+        },
+        "id": 4
+    },
+    {
         "title": "Arap Yetkililerden Kudüs'teki Gerilimler İçin Eylem Çağrısı",
         "tags": [
             "#Filistin",
@@ -24,7 +112,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 1
+        "id": 5
     },
     {
         "title": "Soldan Siyasi Dışarıdan Biri Michigan'da Demokrat Senato Ön Seçimini Kazandı",
@@ -45,7 +133,7 @@
                 "color": "#94a3b8"
             }
         },
-        "id": 2
+        "id": 6
     },
     {
         "title": "BM İnsan Hakları Yüksek Komiseri, İran'daki İdam Artışından Endişeli",
@@ -67,7 +155,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 3
+        "id": 7
     },
     {
         "title": "Üst Düzey Arap ve Müslüman Diplomatlardan Kudüs'teki Dini Sit Alanlarını Koruma Planı",
@@ -95,7 +183,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 4
+        "id": 8
     },
     {
         "title": "İngiltere Mahkemesi Profesörün Siyonizm Karşıtlığının Yasal Olarak Korunan Bir İnanç Olduğunu Onayladı",
@@ -117,7 +205,7 @@
                 "color": "#f43f5e"
             }
         },
-        "id": 5
+        "id": 9
     },
     {
         "title": "Alman Havalimanında Patlayıcı Yüklü Drone Bulundu",
@@ -138,7 +226,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 6
+        "id": 10
     },
     {
         "title": "Pakistan Uluslararası Medya Çalışanlarına Yönelik Haber Dolaşımını Kısıtladı",
@@ -157,7 +245,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 7
+        "id": 11
     },
     {
         "title": "Bandar Abbas'ta Ateşkes Asla Gelmedi",
@@ -183,7 +271,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 8
+        "id": 12
     },
     {
         "title": "İran, Umman ve ABD Hürmüz Boğazı Anlaşmasına Yakın: Taraflar Ne İstiyor?",
@@ -211,7 +299,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 9
+        "id": 13
     },
     {
         "title": "Japonya, II. Dünya Savaşı Sonrası Statüsünden Uzaklaşarak ABD Yapımı Tomahawk Füzesini Test Etti",
@@ -234,7 +322,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 10
+        "id": 14
     },
     {
         "title": "Rusya'nın Kiev'e Düzenlediği Balistik Füze Saldırısında En Az 14 Kişi Hayatını Kaybetti",
@@ -255,7 +343,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 11
+        "id": 15
     },
     {
         "title": "Bangladeş'in Hakikat Avcısı",
@@ -281,7 +369,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 12
+        "id": 16
     },
     {
         "title": "Rus füzelerinin Ukrayna'nın başkenti Kiev'i vurmasıyla patlamalar meydana geldi",
@@ -302,7 +390,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 13
+        "id": 17
     },
     {
         "title": "Bir ABD Mahkemesi 6 Ocak Ayaklanması İçin Yeni Bir Zemin mi Hazırladı?",
@@ -319,7 +407,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 14
+        "id": 18
     },
     {
         "title": "Bolivya, Sınır Boyundaki Brezilyalı Çete Şiddetini Durdurmak İçin Asker Sevk Etti",
@@ -340,7 +428,7 @@
                 "color": "#f97316"
             }
         },
-        "id": 15
+        "id": 19
     },
     {
         "title": "Kuzey Koreli Kim Yo-jong'dan Japonya'nın Füze Testine Karşı Askeri Tehdit",
@@ -371,7 +459,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 16
+        "id": 20
     },
     {
         "title": "ABD Mahkemesinden Trump'ın İklim Hibe Programını İptal Etme Girişimine Darbe",
@@ -390,7 +478,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 17
+        "id": 21
     },
     {
         "title": "‘Kalandan Geriye Kalanı Kucaklamak İstedim’: Gazze Ailelerinin Cenaze İçin 3 Yıllık Bekleyişi",
@@ -417,7 +505,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 18
+        "id": 22
     },
     {
         "title": "Kosova, yetkililerin aramaları genişletmesiyle üçüncü savaş zamanı toplu mezar yeri buldu",
@@ -444,7 +532,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 19
+        "id": 23
     },
     {
         "title": "İsrail'in Yıkım Kararları Sonrası Dükkan Sahipleri İş Yerlerini Söküyor",
@@ -466,7 +554,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 20
+        "id": 24
     },
     {
         "title": "Trump, Washington Anıtı Havuzu'ndaki Vandalizm Suçlamalarının Düşürülmesi Nedeniyle Jeanine Pirro'yu Neden Hedef Aldı?",
@@ -486,7 +574,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 21
+        "id": 25
     },
     {
         "title": "Video, Rus insansız hava aracının 'insan safari' saldırısında Ukraynalı seyyar satıcıyı kovaladığını gösteriyor",
@@ -507,7 +595,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 22
+        "id": 26
     },
     {
         "title": "Hürmüz Boğazı'nın Yeniden Açılabileceği Umutlarıyla Petrol Fiyatları Düştü",
@@ -530,7 +618,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 23
+        "id": 27
     },
     {
         "title": "AB'den İspanya'nın Ceuta Göçmen Krizine 'Hızlı Yanıtına' Övgü",
@@ -556,7 +644,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 24
+        "id": 28
     },
     {
         "title": "İran'a Savaş: Trump'tan Tahran'a 'Son Şans' Uyarısı",
@@ -579,7 +667,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 25
+        "id": 29
     },
     {
         "title": "Bir SpaceX Roketi Aya Çarparsa Ne Olacak?",
@@ -598,7 +686,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 26
+        "id": 30
     },
     {
         "title": "Gazze'de 2023 İsrail Saldırısında Hayatını Kaybeden 112 Filistinli İçin Toplu Cenaze Töreni",
@@ -622,7 +710,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 27
+        "id": 31
     },
     {
         "title": "İran Savaşı ve Hürmüz Boğazı'nın Kapanması Arasında Petrol Şirketleri Neden Rekor Karlar Elde Ediyor?",
@@ -650,7 +738,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 28
+        "id": 32
     },
     {
         "title": "Hamas Müzakerecisi: Gazze'yi Kurtarmak İçin Silahsızlanma Anlaşması Gerekliydi",
@@ -686,7 +774,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 29
+        "id": 33
     },
     {
         "title": "İspanya Başbakanı Sanchez, AB Ceuta Göçmen Krizini Görüşürken Eleştirilerin Hedefinde",
@@ -711,7 +799,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 30
+        "id": 34
     },
     {
         "title": "Manş Denizi'nde Teknesi Alev Alan 150'den Fazla Düzensiz Göçmen Kurtarıldı",
@@ -735,7 +823,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 31
+        "id": 35
     },
     {
         "title": "Analiz: Trump, en yakın müttefiklerinden gelen soğuk gerçeklikle yüzleşiyor",
@@ -755,7 +843,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 32
+        "id": 36
     },
     {
         "title": "Ukrayna, Moskova bölgesinde beş kişinin öldüğü saldırının ardından daha fazla Wildberries tesisini vurdu",
@@ -780,7 +868,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 33
+        "id": 37
     },
     {
         "title": "Trump Media'nın Piyasaları Etkileyen Gönderilere Hızlı Erişim Satışı Neden Tartışmalı?",
@@ -800,7 +888,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 34
+        "id": 38
     },
     {
         "title": "Rus İşgali Altındaki Kırım'da Bir Asker Silahlı Saldırıda Dört Kişiyi Öldürdü",
@@ -824,7 +912,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 35
+        "id": 39
     },
     {
         "title": "AB, Ceuta'daki göçmen geçişlerinin ardından daha güçlü sınırlar çağrısında bulundu",
@@ -854,7 +942,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 36
+        "id": 40
     },
     {
         "title": "Rusya, Ukrayna İnsansız Hava Aracının Kalabalık Bir Plaja Çarpması Sonucu Yedi Kişinin Öldüğünü ve 40 Kişinin Yaralandığını Açıkladı",
@@ -878,7 +966,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 37
+        "id": 41
     },
     {
         "title": "Fransa'daki Orman Yangınları Köyde Yüzlerce 2. Dünya Savaşı Mühimmatını Ortaya Çıkardı",
@@ -902,7 +990,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 38
+        "id": 42
     },
     {
         "title": "Eşimi ve ikizlerimi geride bıraktım - Bu Nijeryalı adam neden Güney Afrika'dan kaçtı?",
@@ -928,7 +1016,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 39
+        "id": 43
     },
     {
         "title": "ABD Eyaletleri, Onlarca Ülkeyi Etkileyen Trump Gümrük Vergilerini Engellemek İçin Dava Açtı",
@@ -952,7 +1040,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 40
+        "id": 44
     },
     {
         "title": "Ren Nehri rekor seviyede düştü: Kuraklık Avrupa nehirlerini zorluyor",
@@ -989,7 +1077,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 41
+        "id": 45
     },
     {
         "title": "Analistler: Orta Doğu'da Petrol Tankerlerine Yönelik Tehdit, İran Savaşı Başlangıcından Bu Yana En Kötü Seviyede",
@@ -1018,7 +1106,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 42
+        "id": 46
     },
     {
         "title": "Deprem Vuran Japonya AVM'sine Patronun Emriyle Giren İki İşçi Patlamada Öldü",
@@ -1038,7 +1126,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 43
+        "id": 47
     },
     {
         "title": "Ariana Grande, 'Bitmek Bilmeyen' Baskılar Nedeniyle Kamuoyundan Uzaklaşma Kararı Aldı",
@@ -1062,7 +1150,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 44
+        "id": 48
     },
     {
         "title": "Fas Kralı'nın Mektubu, Büyük Bir Otoyola Trump'ın Adının Verildiğini Doğruladı",
@@ -1087,7 +1175,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 45
+        "id": 49
     },
     {
         "title": "Massive Attack, Singapur'un Filistin Protestosu Yasağına Tepki Gösterdi",
@@ -1116,7 +1204,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 46
+        "id": 50
     },
     {
         "title": "ABD ve Japonya, Yen'i Desteklemek İçin Nadir Görülen Ortak Bir Adım Attı",
@@ -1137,7 +1225,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 47
+        "id": 51
     },
     {
         "title": "İran, Trump'ın Pazartesi günü yeni görüşmelerin başlayacağı yönündeki iddiasını yalanladı",
@@ -1166,7 +1254,7 @@
                 "color": "#10b981"
             }
         },
-        "id": 48
+        "id": 52
     },
     {
         "title": "Aung San Suu Kyi, 2,5 Yıl Sonra İlk Doğrulanan Dış Temasında Sağlıklı Görünüyor",
@@ -1190,7 +1278,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 49
+        "id": 53
     },
     {
         "title": "\"Tek oğlum adalet için ayaktayken vuruldu\" - Pakistan yönetimindeki Keşmir'de ölümcül protestoların pençesindeki şehirden izlenimler",
@@ -1214,6 +1302,6 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 50
+        "id": 54
     }
 ]
