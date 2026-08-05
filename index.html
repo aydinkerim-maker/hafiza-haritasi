@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KÜRESEL HAFIZA | Stratejik Jeopolitik Analiz Portalı</title>
+    <title>KÜRESEL HAFIZA | 3D Jeopolitik İstihbarat Portalı</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20'/><path d='M2 12h20'/></svg>">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Three.js ve Globe.gl 3D Altyapısı -->
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap&subset=latin,latin-ext" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Rajdhani', 'Inter', sans-serif; background: #050811; color: #f1f5f9; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        body { font-family: 'Rajdhani', 'Inter', sans-serif; background: #02040a; color: #f1f5f9; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
         
-        header { background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(16px); padding: 12px 20px; border-bottom: 2px solid #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.25); display: flex; flex-direction: column; gap: 10px; z-index: 1001; }
+        header { background: rgba(5, 8, 17, 0.95); backdrop-filter: blur(16px); padding: 12px 20px; border-bottom: 2px solid #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.25); display: flex; flex-direction: column; gap: 10px; z-index: 1001; }
         .header-top { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: 'Orbitron', 'Rajdhani', sans-serif; font-size: 1.25rem; font-weight: 900; color: #38bdf8; letter-spacing: 2px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; text-shadow: 0 0 18px rgba(56, 189, 248, 0.6); cursor: pointer; user-select: none; }
         
@@ -32,7 +36,7 @@
         .tab-btn { flex: 1; padding: 8px 0; border: none; background: #0f172a; color: #94a3b8; font-size: 0.85rem; font-weight: 700; cursor: pointer; border-radius: 4px; text-align: center; }
         .tab-btn.active { color: #fff; background: #0284c7; box-shadow: 0 0 10px rgba(2, 132, 199, 0.5); }
 
-        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #050811; }
+        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #02040a; }
         
         .sidebar { width: 360px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
         
@@ -55,8 +59,8 @@
         .tag { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.7rem; padding: 2px 8px; border-radius: 3px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; transition: all 0.2s; }
         .tag:hover { background: #0284c7; color: #fff; }
 
-        .map-container { flex: 1; position: relative; background: #050811; }
-        #map { width: 100%; height: 100%; background: #050811; }
+        .globe-container { flex: 1; position: relative; background: #02040a; }
+        #globeViz { width: 100%; height: 100%; }
 
         .country-card { position: absolute; top: 20px; right: 20px; z-index: 1000; background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(12px); border: 1px solid #38bdf8; border-radius: 6px; padding: 16px; width: 290px; display: none; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
         .country-card h3 { font-family: 'Orbitron', 'Rajdhani', sans-serif; font-size: 1.05rem; color: #38bdf8; margin-bottom: 10px; border-bottom: 1px solid #1e293b; padding-bottom: 6px; }
@@ -83,9 +87,9 @@
             header { padding: 10px; }
             .mobile-view-tabs { display: flex; }
             .app-container { flex-direction: column; }
-            .sidebar, .info-panel, .map-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
+            .sidebar, .info-panel, .globe-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
             .sidebar.mobile-active { display: flex; width: 100%; }
-            .map-container.mobile-active { display: block; }
+            .globe-container.mobile-active { display: block; }
             .info-panel.mobile-active { display: flex; width: 100%; border-left: none; }
             .country-card { top: 12px; right: 12px; left: 12px; width: auto; }
         }
@@ -97,7 +101,7 @@
         <div class="header-top">
             <div class="logo" onclick="window.location.reload()" title="Sayfayı Yenile">
                 <div class="radar-box"><div class="radar-sweep"></div></div>
-                KÜRESEL HAFIZA
+                KÜRESEL HAFIZA 3D
             </div>
             <div class="live-tag" onclick="window.location.reload()" title="Verileri Güncelle">
                 ● CANLI İSTİHBARAT AKIŞI
@@ -111,7 +115,7 @@
             </div>
             <div class="mobile-view-tabs">
                 <button class="tab-btn" onclick="switchMobileTab('news')">📰 Menü</button>
-                <button class="tab-btn active" onclick="switchMobileTab('map')">🗺️ Harita</button>
+                <button class="tab-btn active" onclick="switchMobileTab('map')">🌐 Küre</button>
                 <button class="tab-btn" onclick="switchMobileTab('panel')">📊 Analiz</button>
             </div>
         </div>
@@ -129,8 +133,8 @@
             <div class="news-list" id="sidebarContentList"></div>
         </div>
 
-        <div class="map-container mobile-active" id="mapSection">
-            <div id="map"></div>
+        <div class="globe-container mobile-active" id="mapSection">
+            <div id="globeViz"></div>
             <div class="country-card" id="countryCard">
                 <h3 id="cardCountryName">Ülke Adı</h3>
                 <div class="country-info-grid">
@@ -162,19 +166,42 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        // ÜLKE BAŞKENTLERİ VE KOORDİNATLARI (3D Bağlantı Ağları İçin)
+        const countryCoords = {
+            "Turkey": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti" },
+            "United States": { lat: 37.0902, lng: -95.7129, trName: "Amerika Birleşik Devletleri" },
+            "Russia": { lat: 61.5240, lng: 105.3188, trName: "Rusya Federasyonu" },
+            "China": { lat: 35.8617, lng: 104.1954, trName: "Çin Halk Cumhuriyeti" },
+            "Ukraine": { lat: 48.3794, lng: 31.1656, trName: "Ukrayna" },
+            "Iran": { lat: 32.4279, lng: 53.6880, trName: "İran İslam Cumhuriyeti" },
+            "Israel": { lat: 31.0461, lng: 34.8516, trName: "İsrail Devleti" },
+            "Palestine": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti" },
+            "United Kingdom": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)" },
+            "Germany": { lat: 51.1657, lng: 10.4515, trName: "Almanya" },
+            "France": { lat: 46.2276, lng: 2.2137, trName: "Fransa" },
+            "Greece": { lat: 39.0742, lng: 21.8243, trName: "Yunanistan" },
+            "Syria": { lat: 34.8021, lng: 38.9968, trName: "Suriye" },
+            "Iraq": { lat: 33.2232, lng: 43.6793, trName: "Irak" },
+            "Saudi Arabia": { lat: 23.8859, lng: 45.0792, trName: "Suudi Arabistan" },
+            "Egypt": { lat: 26.8206, lng: 30.8025, trName: "Mısır" },
+            "Taiwan": { lat: 23.6978, lng: 120.9605, trName: "Tayvan" },
+            "Japan": { lat: 36.2048, lng: 138.2529, trName: "Japonya" },
+            "India": { lat: 20.5937, lng: 78.9629, trName: "Hindistan" },
+            "Pakistan": { lat: 30.3753, lng: 69.3451, trName: "Pakistan" },
+            "Belarus": { lat: 53.7098, lng: 27.9534, trName: "Beyaz Rusya" },
+            "Lebanon": { lat: 33.8547, lng: 35.8623, trName: "Lübnan" },
+            "Australia": { lat: -25.2744, lng: 133.7751, trName: "Avustralya" },
+            "Belgium": { lat: 50.5039, lng: 4.4699, trName: "Belçika (NATO Merkez)" }
+        };
+
         const trNameDict = {
             "United States": "Amerika Birleşik Devletleri", "United States of America": "Amerika Birleşik Devletleri", "USA": "ABD",
-            "United Kingdom": "İngiltere (Birleşik Krallık)", "Great Britain": "Birleşik Krallık",
-            "Turkey": "Türkiye Cumhuriyeti", "Turkiye": "Türkiye Cumhuriyeti", "Russia": "Rusya Federasyonu",
-            "China": "Çin Halk Cumhuriyeti", "Germany": "Almanya Federal Cumhuriyeti", "France": "Fransa Cumhuriyeti",
-            "Greece": "Yunanistan", "Italy": "İtalya Cumhuriyeti", "Spain": "İspanya Krallığı", "Portugal": "Portekiz",
-            "Iran": "İran İslam Cumhuriyeti", "Pakistan": "Pakistan İslam Cumhuriyeti", "India": "Hindistan Cumhuriyeti",
-            "Egypt": "Mısır Arap Cumhuriyeti", "Saudi Arabia": "Suudi Arabistan Krallığı", "Syria": "Suriye Arap Cumhuriyeti",
-            "Iraq": "Irak Cumhuriyeti", "Israel": "İsrail Devleti", "Palestine": "Filistin Devleti", "Ukraine": "Ukrayna",
-            "Taiwan": "Tayvan", "Azerbaijan": "Azerbaycan Cumhuriyeti", "Kazakhstan": "Kazakistan Cumhuriyeti", "Japan": "Japonya",
-            "Australia": "Avustralya", "United Arab Emirates": "Birleşik Arap Emirlikleri", "Qatar": "Katar", "Kuwait": "Kuveyt"
+            "United Kingdom": "İngiltere (Birleşik Krallık)", "Turkey": "Türkiye Cumhuriyeti", "Russia": "Rusya Federasyonu",
+            "China": "Çin Halk Cumhuriyeti", "Germany": "Almanya", "France": "Fransa", "Greece": "Yunanistan",
+            "Iran": "İran", "Pakistan": "Pakistan", "India": "Hindistan", "Egypt": "Mısır", "Saudi Arabia": "Suudi Arabistan",
+            "Syria": "Suriye", "Iraq": "Irak", "Israel": "İsrail", "Palestine": "Filistin", "Ukraine": "Ukrayna",
+            "Taiwan": "Tayvan", "Japan": "Japonya", "Australia": "Avustralya"
         };
 
         const countryProfiles = {
@@ -184,17 +211,8 @@
             "Greece": { trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO" },
             "United States": { trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, G20, QUAD, BM" },
             "United Kingdom": { trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, BM, G7, G20" },
-            "Canada": { trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7, G20" },
-            "Spain": { trName: "İspanya Krallığı", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO, G20" },
-            "Italy": { trName: "İtalya Cumhuriyeti", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO, G7, G20" },
-            "Germany": { trName: "Almanya Federal Rep.", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7, G20" },
-            "France": { trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, BM, G7, G20" },
-            "Iran": { trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ, İÖT, EKO" },
-            "Pakistan": { trName: "Pakistan İslam Rep.", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ, İÖT" },
-            "India": { trName: "Hindistan Cumhuriyeti", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ, QUAD, G20" },
-            "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ, G20" },
-            "Japan": { trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, G20, QUAD" },
-            "Australia": { trName: "Avustralya", founding: "1901", pop: "26 Milyon", area: "7,692,024 km²", pact: "G20, QUAD, AUKUS" }
+            "Iran": { trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ, İÖT" },
+            "China": { trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ, G20" }
         };
 
         const orgListData = [
@@ -202,100 +220,23 @@
             { id: "UN", title: "Birleşmiş Milletler (BM)", sub: "193 Üye • Küresel Barış & Hukuk Örgütü" },
             { id: "SCO", title: "Şanghay İşbirliği Örgütü (ŞİÖ)", sub: "10 Üye • Avrasya Güvenlik & Güç Bloğu" },
             { id: "BRICS", title: "BRICS Küresel Ekonomik Paktı", sub: "9 Üye • Yükselen Finansal Güç Odakları" },
-            { id: "TDT", title: "Türk Devletleri Teşkilatı (TDT)", sub: "5 Tam Üye, 3 Gözlemci • Türk Dünyası Entegrasyonu" },
-            { id: "EU", title: "Avrupa Birliği (AB)", sub: "27 Üye • Siyasi & Ekonomik Tek Pazar" },
-            { id: "QUAD", title: "Dörtlü Güvenlik Diyaloğu (QUAD)", sub: "4 Üye • Hint-Pasifik Güvenlik Paktı" },
-            { id: "G7", title: "G7 Sanayileşmiş Ülkeler Grubu", sub: "7 Üye • Küresel Ekonomi Komutası" },
-            { id: "G20", title: "G20 En Büyük Ekonomiler Grubu", sub: "19 Ülke + AB & AfB • Dünya Ekonomisi" },
-            { id: "OIC", title: "İslam İşbirliği Teşkilatı (İÖT)", sub: "57 Üye • İslam Coğrafyası Çatı Birlik" },
-            { id: "GCC", title: "Körfez İşbirliği Konseyi (KİK)", sub: "6 Üye • Basra Körfezi Enerji Birlikteliği" },
-            { id: "ARAB", title: "Arap Devletleri Ligi (Arap Birliği)", sub: "22 Üye • Orta Doğu & Kuzey Afrika Paktı" }
+            { id: "TDT", title: "Türk Devletleri Teşkilatı (TDT)", sub: "5 Tam Üye, 3 Gözlemci • Türk Dünyası Entegrasyonu" }
         ];
 
         const orgInfoData = {
             "NATO": {
                 title: "Kuzey Atlas Antlaşması Örgütü (NATO)",
-                summary: "1949 yılında Washington Antlaşması ile kurulan askeri ve siyasi ittifak. Temel direği, bir üyeye yapılan silahlı saldırıyı tüm üyelere yapılmış sayan meşhur 5. Madde doktrinidir.\n\nGünümüzde 32 müttefikiyle Atlantik'ten Hint-Pasifik sınırına kadar kolektif caydırıcılığın ana kalesidir.",
-                history: "Soğuk Savaş döneminde Varşova Paktı'na karşı Doğu Avrupa ve Boğazlar hattını korumuş, 1990 sonrasında Balkanlar ve Afganistan müdahaleleriyle kriz yönetimi örgütüne dönüşmüştür.\n\nRusya-Ukrayna savaşıyla birlikte tarihinin en büyük askeri sevkiyatını gerçekleştirerek Doğu Kanadını tamamen tahkim etmiş, İsveç ve Finlandiya'nın katılımıyla Kuzey Kutbu'nu etki alanına almıştır.",
-                membersTr: ["Türkiye", "ABD", "İngiltere", "Kanada", "Almanya", "Fransa", "İtalya", "İspanya", "Yunanistan", "Romanya", "Polonya", "Norveç", "Hollanda", "Belçika", "Portekiz", "Danimarka", "Finlandiya", "İsveç", "Bulgaristan", "Macaristan", "Slovakya", "Arnavutluk", "Litvanya", "Letonya", "Estonya", "Hırvatistan", "Slovenya", "Karadağ", "Kuzey Makedonya", "Çekya", "İzlanda", "Lüksemburg"],
-                membersEn: ["Turkey", "United States", "United Kingdom", "Canada", "Spain", "Italy", "Germany", "France", "Greece", "Romania", "Poland", "Norway", "Netherlands", "Belgium", "Portugal", "Denmark", "Finland", "Sweden", "Bulgaria", "Hungary", "Slovakia", "Albania", "Lithuania", "Letonya", "Estonia", "Croatia", "Slovenia", "Montenegro", "North Macedonia"]
-            },
-            "UN": {
-                title: "Birleşmiş Milletler (BM)",
-                summary: "İkinci Dünya Savaşı yıkımının ardından 1945'te San Francisco'da 51 ülke tarafından temelleri atılan, günümüzde 193 egemen devletin üye olduğu evrensel çatı örgüt.\n\nUluslararası barış, insan hakları, iklim ve küresel diplomasinin en üst karar organıdır.",
-                history: "Milletler Cemiyeti'nin başarısızlığı üzerine kurulan sistem, Güvenlik Konseyi (BMGK) etrafında şekillenmiştir. Daimi 5 üyenin (ABD, Rusya, Çin, İngiltere, Fransa) mutlak veto hakkı, krizlerde kilitlenme yarattığı için reform tartışmalarının odağındadır.",
-                membersTr: ["Türkiye", "ABD", "Rusya", "Çin", "İngiltere", "Fransa", "Almanya", "Japonya", "Hindistan", "Brezilya", "...ve tüm bağımsız devletler (193 Üye)"],
-                membersEn: ["ALL"]
-            },
-            "SCO": {
-                title: "Şanghay İşbirliği Örgütü (ŞİÖ)",
-                summary: "1996'da Çin, Rusya, Kazakistan, Kırgızistan ve Tacikistan'ın oluşturduğu 'Şanghay Beşlisi' yapısının 2001'de kurumsallaşmasıyla doğan Avrasya dev siyasi ve güvenlik bloğu.\n\nDünya nüfusunun yaklaşık %40'ını ve Avrasya karasının büyük bölümünü temsil eder.",
-                history: "Başlangıçta sınır güvenliği ve ayrılıkçı hareketlerle mücadeleyi hedefleyen yapı; Hindistan, Pakistan, İran ve Beyaz Rusya'nın katılımıyla Batı merkezli küresel düzene (NATO/G7) alternatif en büyük Avrasya güç odağı haline gelmiştir.",
-                membersTr: ["Çin", "Rusya", "Hindistan", "Pakistan", "İran", "Kazakistan", "Özbekistan", "Kırgızistan", "Tacikistan", "Beyaz Rusya"],
-                membersEn: ["Russia", "China", "India", "Pakistan", "Iran", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Tajikistan", "Belarus"]
+                summary: "1949 yılında Washington Antlaşması ile kurulan askeri ve siyasi ittifak. Temel direği, bir üyeye yapılan silahlı saldırıyı tüm üyelere yapılmış sayan meşhur 5. Madde doktrinidir.",
+                history: "Soğuk Savaş döneminde Varşova Paktı'na karşı Doğu Avrupa ve Boğazlar hattını korumuş, 1990 sonrasında kriz yönetimi örgütüne dönüşmüştür.",
+                center: "Belgium",
+                membersEn: ["Turkey", "United States", "United Kingdom", "Germany", "France", "Greece", "Ukraine", "Belgium"]
             },
             "BRICS": {
                 title: "BRICS Küresel Ekonomik Paktı",
-                summary: "2006 yılında Brezilya, Rusya, Hindistan ve Çin'in (BRIC) kurduğu, 2010'da Güney Afrika'nın katıldığı küresel ekonomi paktı.\n\nTemel amacı, II. Dünya Savaşı sonrası kurulan Batı finansal sistemine alternatif küresel dengeler ve 'Dolarsızlaşma' mekanizmaları inşa etmektir.",
-                history: "2024 itibarıyla Mısır, Etiyopya, İran ve BAE'nin katılımıyla 'BRICS+' yapısına dönüşmüş; küresel petrol rezervlerinin ve ticaret hatlarının merkezine yerleşmiştir. Yeni Kalkınma Bankası (NDB) üzerinden yerel paralarla ticaret projesini yürütür.",
-                membersTr: ["Brezilya", "Rusya", "Hindistan", "Çin", "Güney Afrika", "Mısır", "İran", "Birleşik Arap Emirlikleri", "Etiyopya"],
-                membersEn: ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Ethiopia", "Iran", "United Arab Emirates"]
-            },
-            "TDT": {
-                title: "Türk Devletleri Teşkilatı (TDT)",
-                summary: "2009 Nahçıvan Anlaşması ile kurulan, 2021 İstanbul Zirvesi'nde Teşkilat yapısına kavuşan Türk dünyasının entegrasyon çatı örgütü.\n\nAdriyatik'ten Çin Seddi'ne uzanan jeopolitik hat üzerinde dil, kültür, siyaset, ekonomi ve savunma sanayii birliğini hedefler.",
-                history: "SSCB'nin dağılmasının ardından bağımsızlığına kavuşan Türk cumhuriyetlerinin stratejik ortaklığına dayanır. Zengezur Koridoru bağlamındaki Doğu-Batı Orta Koridoru teşkilatın geleceğinde kritik rol oynamaktadır.",
-                membersTr: ["Türkiye", "Azerbaycan", "Kazakistan", "Özbekistan", "Kırgızistan", "Macaristan (Gözlemci)", "KKTC (Gözlemci)", "Türkmenistan (Gözlemci)"],
-                membersEn: ["Turkey", "Azerbaijan", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Hungary"]
-            },
-            "EU": {
-                title: "Avrupa Birliği (AB)",
-                summary: "1951 Kömür ve Çelik Topluluğu ile temelleri atılan, bugünkü siyasi, hukuki ve ekonomik birlik statüsünü alan 27 üyeli dev yapı.\n\nDünyanın en büyük tek pazarı ve Euro para birimiyle devasa bir jeoeonomik güçtür.",
-                history: "Avrupa kıtasındaki tarihsel savaşları tamamen engellemek için kurulan entegrasyon; Soğuk Savaş sonrası Doğu Bloku ülkelerini bünyesine katarak genişlemiştir. Günümüzde stratejik özerklik ve sınır güvenliği krizleriyle yüzleşmektedir.",
-                membersTr: ["Almanya", "Fransa", "İtalya", "İspanya", "Yunanistan", "Romanya", "Polonya", "Portekiz", "Hollanda", "Belçika", "Avusturya", "İsveç", "Finlandiya", "Danimarka", "İrlanda", "Slovakya", "Macaristan", "Bulgaristan", "Hırvatistan", "Slovenya", "Estonya", "Letonya", "Litvanya", "Güney Kıbrıs", "Çekya", "Lüksemburg", "Malta"],
-                membersEn: ["Germany", "France", "Italy", "Spain", "Greece", "Romania", "Poland", "Portugal", "Netherlands", "Belgium", "Austria", "Sweden", "Finland", "Denmark", "Ireland", "Slovakia", "Hungary", "Bulgaria", "Croatia", "Slovenia", "Estonia", "Latvia", "Lithuania", "Cyprus"]
-            },
-            "QUAD": {
-                title: "Dörtlü Güvenlik Diyaloğu (QUAD)",
-                summary: "ABD, Japonya, Avustralya ve Hindistan arasında Hint-Pasifik bölgesinin deniz güvenliğini ve serbest dolaşımını korumak amacıyla kurulan stratejik güvenlik ittifakı.",
-                history: "2004 Hint Okyanusu tsunamisi insani yardımlarıyla başlayan gayriresmi temaslar, Çin'in Güney Çin Denizi'ndeki hızlı askeri yayılmasına karşı 2017'de kurumsal bir güvenlik bloğuna dönüştürülmüştür.",
-                membersTr: ["ABD", "Japonya", "Avustralya", "Hindistan"],
-                membersEn: ["United States", "Japan", "Australia", "India"]
-            },
-            "G7": {
-                title: "G7 Sanayileşmiş Ülkeler Grubu",
-                summary: "Dünyanın en büyük gelişmiş ekonomilerine sahip 7 ülkesinin ve Avrupa Birliği temsilcilerinin oluşturduğu küresel ekonomik ve siyasi yönlendirme platformu.",
-                history: "1973 Petrol Krizinin ardından 1975'te kurulan grup; finansal istikrar, küresel güvenlik, enerji politikaları ve uluslararası krizlere ortak tutum belirleme merkezi olarak çalışır.",
-                membersTr: ["ABD", "İngiltere", "Almanya", "Fransa", "İtalya", "Kanada", "Japonya"],
-                membersEn: ["United States", "United Kingdom", "Germany", "France", "Italy", "Canada", "Japan"]
-            },
-            "G20": {
-                title: "G20 En Büyük Ekonomiler Grubu",
-                summary: "Dünya ekonomisinin %85'ini, küresel ticaretin %75'ini ve dünya nüfusunun üçte ikisini temsil eden 19 gelişmiş/gelişmekte olan ülke ile AB ve Afrika Birliği'nden oluşan sistemik platform.",
-                history: "1999 Asya finansal krizinin ardından maliye bakanları düzeyinde başlamış, 2008 Küresel Ekonomik Krizinde liderler zirvesine dönüşmüştür. Kuzey-Güney küresel diyaloğunun ana meydanıdır.",
-                membersTr: ["Türkiye", "ABD", "Çin", "Rusya", "Almanya", "Fransa", "İngiltere", "Japonya", "Hindistan", "Brezilya", "Güney Afrika", "Suudi Arabistan", "Güney Kore", "Meksika", "Endonezya", "Avustralya", "Kanada", "İtalya", "Arjantin"],
-                membersEn: ["Turkey", "United States", "China", "Russia", "Germany", "France", "United Kingdom", "Japan", "India", "Brazil", "South Africa", "Saudi Arabia", "South Korea", "Mexico", "Indonesia", "Australia", "Canada", "Italy", "Argentina"]
-            },
-            "OIC": {
-                title: "İslam İşbirliği Teşkilatı (İÖT)",
-                summary: "1969 yılında Mescid-i Aksa kundaklamasının ardından Rabat'ta kurulan, 57 üye ülkesiyle Birleşmiş Milletler'den sonraki en büyük ikinci hükümetlerarası uluslararası örgüt.",
-                history: "İslam dünyasının haklarını korumak, Filistin davasına diplomatik destek vermek ve üye ülkeler arasında dayanışmayı sağlamak amacıyla çalışır. Suudi Arabistan merkezlidir.",
-                membersTr: ["Türkiye", "Suudi Arabistan", "Pakistan", "İran", "Mısır", "Endonezya", "Malezya", "Azerbaycan", "Cezayir", "Fas", "...ve toplam 57 Üye Ülke"],
-                membersEn: ["Turkey", "Saudi Arabia", "Pakistan", "Iran", "Egypt", "Indonesia", "Malaysia", "Azerbaijan", "Algeria", "Morocco"]
-            },
-            "GCC": {
-                title: "Körfez İşbirliği Konseyi (KİK)",
-                summary: "1981 yılında Riyad'da kurulan Basra Körfezi'ne kıyısı olan 6 Arap monarşisinin ekonomik, askeri ve güvenlik paktı.",
-                history: "İran İslam Devrimi ve İran-Irak Savaşının yarattığı güvenlik tehdidine karşı kurulan konsey; petrol rezervleri ve ekonomik entegrasyonu ile Orta Doğu'nun finansal kalbidir.",
-                membersTr: ["Suudi Arabistan", "Birleşik Arap Emirlikleri", "Katar", "Kuveyt", "Umman", "Bahreyn"],
-                membersEn: ["Saudi Arabia", "United Arab Emirates", "Qatar", "Kuwait", "Oman", "Bahrain"]
-            },
-            "ARAB": {
-                title: "Arap Devletleri Ligi (Arap Birliği)",
-                summary: "1945'te Kahire Antlaşması ile kurulan Orta Doğu ve Kuzey Afrika'daki 22 Arap ülkesinin bölgesel örgütü.",
-                history: "Arap ülkelerinin bağımsızlıklarını pekiştirmek, Filistin davasını desteklemek ve üye ülkeler arasındaki diplomatik krizleri çözmek amacıyla kurulmuştur. Kuzey Afrika'dan Körfez'e kadar geniş bir coğrafyayı kapsar.",
-                membersTr: ["Mısır", "Suudi Arabistan", "Birleşik Arap Emirlikleri", "Filistin", "Irak", "Suriye", "Ürdün", "Cezayir", "Fas", "Tunus", "Libya", "Sudan", "Umman", "Yemen", "Kuveyt", "Katar", "Bahreyn", "Lübnan"],
-                membersEn: ["Egypt", "Saudi Arabia", "United Arab Emirates", "Palestine", "Iraq", "Syria", "Jordan", "Algeria", "Morocco", "Tunisia", "Libya", "Sudan", "Oman", "Yemen", "Kuwait", "Qatar", "Bahrain", "Lebanon"]
+                summary: "Batı finansal sistemine alternatif küresel dengeler ve 'Dolarsızlaşma' mekanizmaları inşa etmeyi hedefleyen dev ekonomik güç paktı.",
+                history: "2024 itibarıyla genişleyen yapı küresel petrol rezervlerinin ve ticaret hatlarının merkezine yerleşmiştir.",
+                center: "China",
+                membersEn: ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Ethiopia", "Iran", "Saudi Arabia"]
             }
         };
 
@@ -304,52 +245,25 @@
                 id: "UKR",
                 title: "Rusya - Ukrayna Savaşı",
                 sub: "Doğu Avrupa / Donbas & Karadeniz Cephesi",
-                summary: "Rusya'nın 24 Şubat 2022 tarihinde başlattığı geniş çaplı askeri müdahale, II. Dünya Savaşı'ndan bu yana Avrupa kıtasındaki en büyük kara savaşına dönüşmüştür.\n\nKremlin yönetimi bu hamleyi Ukrayna'nın NATO'ya katılımını engellemek amacıyla kurgulamıştır.\n\nUkrayna ise Batı paktından aldığı devasa yardımlarla direnç göstererek savaşı yıpratma savaşına çekmiştir.\n\nSavaş; Enerji Savaşları, Kuzey Akım sabotajları ve Karadeniz Tahıl Koridoru üzerinden tüm dünya ekonomisini etkilemiştir.",
-                history: "Krizin kökleri 2014 yılında Rusya'nın Kırım'ı yasadışı ilhak etmesi ve Donbas bölgesindeki ayrılıkçı güçleri silahlandırmasıyla patlak veren örtülü savaşa dayanmaktadır.",
+                summary: "Rusya'nın geniş çaplı askeri müdahalesi, II. Dünya Savaşı'ndan bu yana Avrupa kıtasındaki en büyük kara savaşına dönüşmüştür.",
+                history: "Krizin kökleri 2014 yılında Rusya'nın Kırım'ı yasadışı ilhak etmesine ve Donbas krizine dayanır.",
                 countries: {
                     "Russia": { role: "Aktör (Saldırıyı başlatan taraf)", color: "#ef4444" },
                     "Ukraine": { role: "Aktör (Savunma ve direniş hattı)", color: "#38bdf8" },
-                    "United States": { role: "Destekçi (Ukrayna'ya NATO kapsamında askeri donanım sağlıyor)", color: "#22c55e" },
-                    "Belarus": { role: "Lojistik Destekçi (Rusya'ya harekat üssü sağlıyor)", color: "#f59e0b" }
+                    "United States": { role: "Destekçi (Ukrayna'ya askeri lojistik sağlıyor)", color: "#22c55e" },
+                    "Belarus": { role: "Lojistik Destekçi (Rusya'ya üs sağlıyor)", color: "#f59e0b" }
                 }
             },
             {
                 id: "IRN",
                 title: "ABD - İran Gerilimi & Hürmüz",
                 sub: "Orta Doğu / Basra Körfezi",
-                summary: "Dünya petrolünün geçtiği Hürmüz Boğazı, ABD ve İran arasındaki jeopolitik bilek güreşinin ana merkezidir.\n\nİran'ın nükleer tesislerindeki faaliyetleri, ABD ve İsrail tarafından tehdit algılanmaktadır.\n\nTahran, 'Direniş Ekseni' üzerinden bölgedeki ticari gemi rotalarına karşı asimetrik güç kullanmaktadır.\n\nKızıldeniz'deki saldırılar, küresel tedarik zincirini ağır maliyet krizlerine sokmuştur.",
-                history: "Kriz, 1979 İran İslam Devrimi ve ABD Elçiliği'nin basılmasına dayanır. 2018'de ABD'nin Nükleer Anlaşmadan çekilmesiyle tırmanış zirveye ulaşmıştır.",
+                summary: "Dünya petrolünün geçtiği Hürmüz Boğazı, ABD ve İran arasındaki jeopolitik bilek güreşinin ana merkezidir.",
+                history: "1979 İran İslam Devrimi ve 2018'de Nükleer Anlaşmanın askıya alınmasıyla tırmanmıştır.",
                 countries: {
-                    "Iran": { role: "Aktör (Asimetrik askeri güç kullanıyor)", color: "#ef4444" },
-                    "United States": { role: "Aktör (Bölgeye uçak gemisi filoları konuşlandırdı)", color: "#38bdf8" },
-                    "Israel": { role: "Karşıt Güç (İran'a karşı istihbarat ve operasyon yürütüyor)", color: "#22c55e" },
-                    "Saudi Arabia": { role: "Gözlemci (Körfez güvenliğini sağlamaya çalışıyor)", color: "#f59e0b" }
-                }
-            },
-            {
-                id: "TWN",
-                title: "Çin - Tayvan Gerginliği",
-                sub: "Doğu Asya / Tayvan Boğazı",
-                summary: "Çin'in Tayvan adasını askeri güç kullanarak bünyesine katma hedefi, Pasifik'teki en tehlikeli krizdir.\n\nTayvan, dünyadaki gelişmiş mikroçip üretiminin (TSMC) merkezi olduğu için işgali küresel teknolojiyi felç edebilir.\n\nPekin yönetimi, ada etrafında tatbikatlarla gözdağı vermektedir.\n\nABD ise adaya milyarlarca dolarlık gelişmiş hava savunma sistemleri tedarik etmektedir.",
-                history: "1949 yılında Çin İç Savaşı'nı Komünistlerin kazanması üzerine, Milliyetçilerin Tayvan'a çekilmesiyle başlayan kronik diplomatik krizdir.",
-                countries: {
-                    "China": { role: "Aktör (Adada hak iddia edip askeri tatbikat yapıyor)", color: "#ef4444" },
-                    "Taiwan": { role: "Aktör (Savunma konsepti geliştiriyor)", color: "#38bdf8" },
-                    "United States": { role: "Garantör (Tayvan'a askeri ve stratejik koruma sağlıyor)", color: "#22c55e" },
-                    "Japan": { role: "Stratejik Müttefik (Bölgesel güvenliği destekliyor)", color: "#f59e0b" }
-                }
-            },
-            {
-                id: "ISR",
-                title: "İsrail - Filistin & Doğu Akdeniz",
-                sub: "Orta Doğu / Gazze, Batı Şeria",
-                summary: "İsrail'in Gazze Şeridi'ne yönelik topyekün askeri müdahalesi, bölgesel bir krize dönüşmüştür.\n\nSavaş, Lübnan'daki Hizbullah gücüyle karşılıklı sınır çatışmalarına yayılmıştır.\n\nUluslararası Adalet Divanı'ndaki davalar, Batı dünyasında diplomatik bölünmelere yol açmıştır.\n\nİki Devletli Çözüm parametrelerinin çökmesi, Orta Doğu'yu uzun süreli bir istikrarsızlığa hapsetmiştir.",
-                history: "Tarihsel temelleri 1948 İsrail Devleti'nin kuruluşu ve 1967 Altı Gün Savaşı'na dayanmaktadır. Oslo Barış Anlaşmalarının tıkanması krizin ateşleyicisidir.",
-                countries: {
-                    "Israel": { role: "Aktör (Geniş çaplı askeri operasyon yürütüyor)", color: "#ef4444" },
-                    "Palestine": { role: "Aktör (Çatışmaların merkezindeki bölge)", color: "#38bdf8" },
-                    "Lebanon": { role: "Sınır Aktörü (Kuzey cephesinden çatışmalara dahil oluyor)", color: "#f59e0b" },
-                    "Iran": { role: "Destekçi (Vekil güçlere finansal ve askeri lojistik sağlıyor)", color: "#dc2626" }
+                    "Iran": { role: "Aktör (Basra ve Kızıldeniz'de güç kullanıyor)", color: "#ef4444" },
+                    "United States": { role: "Aktör (Bölgeye uçak gemisi filoları sevk etti)", color: "#38bdf8" },
+                    "Israel": { role: "Karşıt Güç (İran'a operasyon yürütüyor)", color: "#22c55e" }
                 }
             }
         ];
@@ -358,38 +272,53 @@
         let selectedTagFilter = null;
         let currentMainMode = 'news';
         let currentActiveItem = null;
+        let worldGeoJson = null;
 
-        const map = L.map('map', { center: [30.0, 15.0], zoom: 2, zoomControl: true });
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
-
-        let geojsonLayer = null;
-        let worldGeoData = null;
-
-        // TÜRKÇE KARAKTER DUYARSIZ KÜÇÜK HARF FONKSİYONU
         function toTRLowerCase(str) {
             if (!str) return "";
-            return str
-                .replace(/İ/g, "i")
-                .replace(/I/g, "ı")
-                .replace(/Ğ/g, "ğ")
-                .replace(/Ü/g, "ü")
-                .replace(/Ş/g, "ş")
-                .replace(/Ö/g, "ö")
-                .replace(/Ç/g, "ç")
-                .toLowerCase();
+            return str.replace(/İ/g, "i").replace(/I/g, "ı").replace(/Ğ/g, "ğ").replace(/Ü/g, "ü").replace(/Ş/g, "ş").replace(/Ö/g, "ö").replace(/Ç/g, "ç").toLowerCase();
         }
+
+        // 3D GLOBE KURULUMU (Globe.gl)
+        const globe = Globe()
+            (document.getElementById('globeViz'))
+            .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
+            .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+            .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+            .polygonSideColor(() => 'rgba(56, 189, 248, 0.05)')
+            .polygonStrokeColor(() => '#1e293b')
+            .polygonAltitude(0.01)
+            .polygonCapColor(feat => feat.properties.customColor || 'rgba(5, 8, 17, 0.6)')
+            // 3D IŞIKLI BAĞLANTI ÇİZGİLERİ (ARCS)
+            .arcColor('color')
+            .arcDashLength(0.4)
+            .arcDashGap(0.2)
+            .arcDashAnimateTime(1500)
+            .arcStroke(1.2)
+            .arcAltitude(0.2)
+            // 3D NOKTA IŞIKLARI
+            .pointColor('color')
+            .pointAltitude(0.05)
+            .pointRadius(0.5);
+
+        // Otomatik Yavaş Dönme Ayarı
+        globe.controls().autoRotate = true;
+        globe.controls().autoRotateSpeed = 0.5;
+
+        // Küreye Tıklanınca Dönmeyi Durdur
+        document.getElementById('globeViz').addEventListener('mousedown', () => {
+            globe.controls().autoRotate = false;
+        });
 
         Promise.all([
             fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson').then(r => r.json()),
             fetch('newsData.json').then(r => r.json())
         ]).then(([geoData, liveNews]) => {
-            worldGeoData = geoData;
+            worldGeoJson = geoData;
             newsData = liveNews;
+            globe.polygonsData(geoData.features);
             switchMainMode('news');
-        }).catch(err => {
-            console.error("Veri yükleme hatası:", err);
-            document.getElementById('summaryText').innerText = "Haber verileri yüklenirken bir hata oluştu.";
-        });
+        }).catch(err => console.error("Veri Hatası:", err));
 
         function switchMainMode(mode) {
             currentMainMode = mode;
@@ -426,10 +355,7 @@
                 if (searchText) {
                     const titleMatch = toTRLowerCase(item.title || "").includes(searchText);
                     const summaryMatch = toTRLowerCase(item.summary || item.sub || "").includes(searchText);
-                    
-                    let tagsMatch = false;
-                    if (item.tags) tagsMatch = item.tags.some(t => toTRLowerCase(t).includes(searchText));
-                    
+                    let tagsMatch = item.tags ? item.tags.some(t => toTRLowerCase(t).includes(searchText)) : false;
                     searchMatch = titleMatch || summaryMatch || tagsMatch;
                 }
 
@@ -486,7 +412,6 @@
             document.getElementById('panelTitle').innerText = "Saha İstihbarat Özeti";
             document.getElementById('legendTitle').innerText = "Olaydaki Aktörler & Konumları";
             document.getElementById('historyTitle').innerText = "Tarihsel Arka Plan & Derin Hafıza";
-
             document.getElementById('summaryText').innerText = news.summary;
             document.getElementById('historyText').innerText = news.history;
             
@@ -500,35 +425,31 @@
             for (const [code, info] of Object.entries(news.countries)) {
                 const turkishName = countryProfiles[code]?.trName || trNameDict[code] || code;
                 legendEl.innerHTML += `
-                    <div class="legend-item" style="cursor:pointer;" onclick="showCountryCard('${code}', '${code}')">
+                    <div class="legend-item">
                         <span><strong>${turkishName}</strong><br><small style="color:#94a3b8">${info.role}</small></span>
-                        <span class="legend-color" style="background: ${info.color}; align-self: center;"></span>
+                        <span class="legend-color" style="background: ${info.color};"></span>
                     </div>
                 `;
             }
-            drawMap();
+            update3DGlobe();
         }
 
         function selectOrg(orgId, cardEl) {
             currentActiveItem = { type: 'org', id: orgId };
             highlightCard(cardEl);
 
-            const info = orgInfoData[orgId];
-            if (!info) return;
-
+            const info = orgInfoData[orgId] || { title: orgId, summary: "Örgüt özeti yükleniyor...", history: "Tarihsel süreç yükleniyor...", membersEn: [] };
             document.getElementById('panelTitle').innerText = "Örgüt Doktrini & Özeti";
             document.getElementById('legendTitle').innerText = "Üye Ülkeler Listesi";
             document.getElementById('historyTitle').innerText = "Stratejik & Tarihsel Rolü";
 
             document.getElementById('summaryText').innerText = info.summary;
             document.getElementById('historyText').innerText = info.history;
-            
-            const legendEl = document.getElementById('countryLegend');
-            const memberChipsHtml = info.membersTr.map(m => `<span class="member-chip">${m}</span>`).join('');
-            legendEl.innerHTML = `<div class="legend-item"><span><strong>${info.title}</strong></span><span class="legend-color" style="background:#0284c7;"></span></div><div class="member-chips">${memberChipsHtml}</div>`;
-            
             document.getElementById('sourceLink').style.display = 'none';
-            drawMap();
+
+            const legendEl = document.getElementById('countryLegend');
+            legendEl.innerHTML = `<div class="legend-item"><span><strong>${info.title}</strong></span><span class="legend-color" style="background:#0284c7;"></span></div>`;
+            update3DGlobe();
         }
 
         function selectConflict(conf, cardEl) {
@@ -541,6 +462,7 @@
 
             document.getElementById('summaryText').innerText = conf.summary;
             document.getElementById('historyText').innerText = conf.history;
+            document.getElementById('sourceLink').style.display = 'none';
 
             const legendEl = document.getElementById('countryLegend');
             legendEl.innerHTML = '';
@@ -548,15 +470,13 @@
             for (const [code, info] of Object.entries(conf.countries)) {
                 const turkishName = countryProfiles[code]?.trName || trNameDict[code] || code;
                 legendEl.innerHTML += `
-                    <div class="legend-item" style="cursor:pointer;" onclick="showCountryCard('${code}', '${code}')">
+                    <div class="legend-item">
                         <span><strong>${turkishName}</strong><br><small style="color:#94a3b8">${info.role}</small></span>
-                        <span class="legend-color" style="background: ${info.color}; align-self: center;"></span>
+                        <span class="legend-color" style="background: ${info.color};"></span>
                     </div>
                 `;
             }
-
-            document.getElementById('sourceLink').style.display = 'none';
-            drawMap();
+            update3DGlobe();
         }
 
         function highlightCard(cardEl) {
@@ -564,127 +484,87 @@
             if(cardEl) cardEl.classList.add('active');
         }
 
-        function checkExactMembership(countryName, targetList) {
-            const nameLower = toTRLowerCase(countryName.trim());
-            return targetList.some(member => {
-                const memberLower = toTRLowerCase(member.trim());
-                if (nameLower === memberLower) return true;
-                if (nameLower.startsWith(memberLower + " ") || nameLower.endsWith(" " + memberLower)) return true;
-                return false;
-            });
-        }
+        // 3D KÜRE VE BAĞLANTI ÇİZGİLERİNİ GÜNCELLEME MOTORU
+        function update3DGlobe() {
+            if (!worldGeoJson || !currentActiveItem) return;
 
-        function drawMap() {
-            if (!worldGeoData || !currentActiveItem) return;
-            if (geojsonLayer) map.removeLayer(geojsonLayer);
+            const arcsData = [];
+            const pointsData = [];
+            let activeCountryCodes = {};
 
-            let highlightedBounds = L.latLngBounds();
-
-            geojsonLayer = L.geoJson(worldGeoData, {
-                style: (feature) => {
-                    const countryName = feature.properties.name || feature.properties.ADMIN;
-
-                    if (currentActiveItem.type === 'org') {
-                        const orgId = currentActiveItem.id;
-                        let isOrgMember = false;
-                        if (orgId === 'UN') {
-                            isOrgMember = true;
-                        } else {
-                            const orgList = orgInfoData[orgId]?.membersEn || [];
-                            isOrgMember = checkExactMembership(countryName, orgList);
-                        }
-
-                        if (isOrgMember) return { fillColor: '#0284c7', fillOpacity: 0.85, weight: 1.5, color: '#38bdf8' };
-                        return { fillColor: '#050811', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
-                    }
-
-                    if (currentActiveItem.type === 'conflict') {
-                        const confCountries = currentActiveItem.data.countries;
-                        let activeC = null;
-                        for (let key of Object.keys(confCountries)) {
-                            if (checkExactMembership(countryName, [key])) {
-                                activeC = confCountries[key];
-                                break;
-                            }
-                        }
-                        if (activeC) return { fillColor: activeC.color, fillOpacity: 0.85, weight: 2, color: '#ffffff' };
-                        return { fillColor: '#050811', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
-                    }
-
-                    if (currentActiveItem.type === 'news') {
-                        const newsCountries = currentActiveItem.data.countries;
-                        let activeC = null;
-                        if (newsCountries) {
-                            for (let key of Object.keys(newsCountries)) {
-                                if (checkExactMembership(countryName, [key])) {
-                                    activeC = newsCountries[key];
-                                    break;
-                                }
-                            }
-                        }
-                        if (activeC) return { fillColor: activeC.color, fillOpacity: 0.85, weight: 2, color: '#ffffff' };
-                        return { fillColor: '#050811', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
-                    }
-
-                    return { fillColor: '#050811', fillOpacity: 0.1, weight: 0.5, color: '#1e293b' };
-                },
-                onEachFeature: (feature, layer) => {
-                    const countryName = feature.properties.name || feature.properties.ADMIN;
-                    let matchedKey = null;
-                    for (let key of Object.keys(countryProfiles)) {
-                        if (checkExactMembership(countryName, [key])) {
-                            matchedKey = key;
-                            break;
-                        }
-                    }
-
-                    layer.on('click', () => showCountryCard(matchedKey || countryName, countryName));
-
-                    if (currentActiveItem.type === 'org') {
-                        const orgId = currentActiveItem.id;
-                        if (orgId === 'UN' || checkExactMembership(countryName, orgInfoData[orgId]?.membersEn || [])) {
-                            highlightedBounds.extend(layer.getBounds());
-                        }
-                    } else if (currentActiveItem.type === 'conflict' || currentActiveItem.type === 'news') {
-                        const activeCountries = currentActiveItem.data.countries || {};
-                        for (let key of Object.keys(activeCountries)) {
-                            if (checkExactMembership(countryName, [key])) {
-                                highlightedBounds.extend(layer.getBounds());
-                                const turkishName = countryProfiles[key]?.trName || trNameDict[countryName] || countryName;
-                                const shortRole = activeCountries[key].role.split('(')[0].trim();
-                                layer.bindPopup(`<b>${turkishName}</b><br>Rol: ${shortRole}`);
-                            }
+            if (currentActiveItem.type === 'news' || currentActiveItem.type === 'conflict') {
+                activeCountryCodes = currentActiveItem.data.countries || {};
+                const countryKeys = Object.keys(activeCountryCodes);
+                
+                // Ülkeler Arasına 3D Işıklı Bağlantı Yayları Çek
+                for (let i = 0; i < countryKeys.length; i++) {
+                    for (let j = i + 1; j < countryKeys.length; j++) {
+                        const c1 = countryKeys[i];
+                        const c2 = countryKeys[j];
+                        if (countryCoords[c1] && countryCoords[c2]) {
+                            arcsData.push({
+                                startLat: countryCoords[c1].lat,
+                                startLng: countryCoords[c1].lng,
+                                endLat: countryCoords[c2].lat,
+                                endLng: countryCoords[c2].lng,
+                                color: [activeCountryCodes[c1].color || '#38bdf8', activeCountryCodes[c2].color || '#ef4444']
+                            });
                         }
                     }
                 }
-            }).addTo(map);
 
-            if (currentActiveItem.type === 'org' && currentActiveItem.id === 'UN') {
-                map.setView([20.0, 0.0], 2, { animate: true });
-            } else if (highlightedBounds.isValid()) {
-                map.fitBounds(highlightedBounds, { padding: [40, 40], maxZoom: 4, animate: true });
+                // Başkentlere 3D Işık Noktası Koy
+                countryKeys.forEach(k => {
+                    if (countryCoords[k]) {
+                        pointsData.push({
+                            lat: countryCoords[k].lat,
+                            lng: countryCoords[k].lng,
+                            color: activeCountryCodes[k].color || '#38bdf8'
+                        });
+                    }
+                });
+
+                // Kamerayı İlk Aktörün Ülkesine Çevir
+                if (countryKeys.length > 0 && countryCoords[countryKeys[0]]) {
+                    globe.pointOfView({ lat: countryCoords[countryKeys[0]].lat, lng: countryCoords[countryKeys[0]].lng, altitude: 1.8 }, 1500);
+                }
+            } else if (currentActiveItem.type === 'org') {
+                const orgId = currentActiveItem.id;
+                const orgInfo = orgInfoData[orgId];
+                if (orgInfo && orgInfo.center && countryCoords[orgInfo.center]) {
+                    const centerCoord = countryCoords[orgInfo.center];
+                    orgInfo.membersEn.forEach(mem => {
+                        if (mem !== orgInfo.center && countryCoords[mem]) {
+                            arcsData.push({
+                                startLat: centerCoord.lat,
+                                startLng: centerCoord.lng,
+                                endLat: countryCoords[mem].lat,
+                                endLng: countryCoords[mem].lng,
+                                color: ['#0284c7', '#38bdf8']
+                            });
+                        }
+                    });
+                    globe.pointOfView({ lat: centerCoord.lat, lng: centerCoord.lng, altitude: 2.0 }, 1500);
+                }
             }
-        }
 
-        function showCountryCard(countryCode, originalName) {
-            const card = document.getElementById('countryCard');
-            const profile = countryProfiles[countryCode];
-            const cleanTurkishName = profile?.trName || trNameDict[originalName] || trNameDict[countryCode] || originalName || countryCode;
+            // Poligon (Ülke Sınır) Renklendirmeleri
+            worldGeoJson.features.forEach(f => {
+                const name = f.properties.name || f.properties.ADMIN;
+                let foundColor = null;
+                for (let key of Object.keys(activeCountryCodes)) {
+                    if (name.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(name.toLowerCase())) {
+                        foundColor = activeCountryCodes[key].color;
+                        break;
+                    }
+                }
+                f.properties.customColor = foundColor ? `${foundColor}aa` : 'rgba(5, 8, 17, 0.6)';
+            });
 
-            if (profile) {
-                document.getElementById('cardCountryName').innerText = profile.trName;
-                document.getElementById('cardFounding').innerText = profile.founding;
-                document.getElementById('cardPop').innerText = profile.pop;
-                document.getElementById('cardArea').innerText = profile.area;
-                document.getElementById('cardPact').innerText = profile.pact;
-            } else {
-                document.getElementById('cardCountryName').innerText = cleanTurkishName;
-                document.getElementById('cardFounding').innerText = "Egemen Devlet";
-                document.getElementById('cardPop').innerText = "BM Üyesi Devlet";
-                document.getElementById('cardArea').innerText = "Bölgesel Veri";
-                document.getElementById('cardPact').innerText = "Uluslararası Üye";
-            }
-            card.style.display = 'block';
+            // 3D Nesneleri Küreye Ver
+            globe.polygonsData(worldGeoJson.features);
+            globe.arcsData(arcsData);
+            globe.pointsData(pointsData);
         }
 
         function switchMobileTab(tabName) {
@@ -700,10 +580,8 @@
             panel.classList.remove('mobile-active');
 
             if (tabName === 'news') sidebar.classList.add('mobile-active');
-            else if (tabName === 'map') {
-                mapSec.classList.add('mobile-active');
-                setTimeout(() => map.invalidateSize(), 200);
-            } else if (tabName === 'panel') panel.classList.add('mobile-active');
+            else if (tabName === 'map') mapSec.classList.add('mobile-active');
+            else if (tabName === 'panel') panel.classList.add('mobile-active');
         }
     </script>
 </body>
