@@ -47,11 +47,9 @@
     
     input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 5px 0; }
     input[type=range]:focus { outline: none; }
-    /* Chrome, Safari, Edge için Bar Çizgisi */
     input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: rgba(56, 189, 248, 0.25); border-radius: 4px; border: 1px solid #38bdf8; }
     input[type=range]::-webkit-slider-thumb { border: 2px solid #fff; height: 20px; width: 20px; border-radius: 50%; background: #ef4444; cursor: pointer; -webkit-appearance: none; margin-top: -7px; box-shadow: 0 0 12px #ef4444; transition: all 0.2s; }
     input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-    /* Firefox için Bar Çizgisi */
     input[type=range]::-moz-range-track { width: 100%; height: 8px; cursor: pointer; background: rgba(56, 189, 248, 0.25); border-radius: 4px; border: 1px solid #38bdf8; }
     input[type=range]::-moz-range-thumb { border: 2px solid #fff; height: 20px; width: 20px; border-radius: 50%; background: #ef4444; cursor: pointer; box-shadow: 0 0 12px #ef4444; transition: all 0.2s; }
 
@@ -102,7 +100,6 @@
     <div class="globe-container" id="mapSection">
         <div id="globeViz"></div>
         
-        <!-- TARİHSEL ZAMAN ÇİZELGESİ -->
         <div class="timeline-container" id="timelineContainer">
             <div class="timeline-header">
                 <span>Tarihsel Akış: <span id="currentYearDisplay" style="color:#ef4444;">-</span></span>
@@ -185,7 +182,19 @@
         "YEM": { lat: 15.5527, lng: 48.5164, trName: "Yemen", founding: "1990", pop: "33 Milyon", area: "527,968 km²", pact: "Arap Birliği", names: ["yemen"] },
         "MLI": { lat: 17.5707, lng: -3.9962, trName: "Mali", founding: "1960", pop: "21 Milyon", area: "1,240,192 km²", pact: "AES", names: ["mali"] },
         "NER": { lat: 17.6078, lng: 8.0817, trName: "Nijer", founding: "1960", pop: "25 Milyon", area: "1,267,000 km²", pact: "AES", names: ["niger", "nijer"] },
-        "BFA": { lat: 12.2383, lng: -1.5616, trName: "Burkina Faso", founding: "1960", pop: "22 Milyon", area: "274,200 km²", pact: "AES", names: ["burkina faso"] }
+        "BFA": { lat: 12.2383, lng: -1.5616, trName: "Burkina Faso", founding: "1960", pop: "22 Milyon", area: "274,200 km²", pact: "AES", names: ["burkina faso"] },
+        "PRK": { lat: 40.3399, lng: 127.5101, trName: "Kuzey Kore", founding: "1948", pop: "26 Milyon", area: "120,540 km²", pact: "Bağlantısızlar", names: ["north korea", "kuzey kore", "dem. rep. korea"] },
+        "KOR": { lat: 35.9078, lng: 127.7669, trName: "Güney Kore", founding: "1948", pop: "51 Milyon", area: "100,210 km²", pact: "G20, OECD", names: ["south korea", "guney kore", "korea"] },
+        "BEL": { lat: 50.5039, lng: 4.4699, trName: "Belçika", founding: "1830", pop: "11.6 Milyon", area: "30,528 km²", pact: "NATO, AB", names: ["belgium", "belcika"] },
+        "ARE": { lat: 23.4241, lng: 53.8478, trName: "B.A.E.", founding: "1971", pop: "9.9 Milyon", area: "83,600 km²", pact: "BRICS, KİK", names: ["united arab emirates", "uae", "bae", "birlesik arap emirlikleri"] },
+        "CAN": { lat: 56.1304, lng: -106.3468, trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7", names: ["canada", "kanada"] },
+        "ESP": { lat: 40.4637, lng: -3.7492, trName: "İspanya", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO", names: ["spain", "ispanya"] },
+        "ITA": { lat: 41.8719, lng: 12.5674, trName: "İtalya", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO", names: ["italy", "italya"] },
+        "NOR": { lat: 60.4720, lng: 8.4689, trName: "Norveç", founding: "1905", pop: "5.4 Milyon", area: "385,207 km²", pact: "NATO", names: ["norway", "norvec"] },
+        "POL": { lat: 51.9194, lng: 19.1451, trName: "Polonya", founding: "1918", pop: "38 Milyon", area: "312,696 km²", pact: "AB, NATO", names: ["poland", "polonya"] },
+        "KAZ": { lat: 48.0196, lng: 66.9237, trName: "Kazakistan", founding: "1991", pop: "19 Milyon", area: "2,725,000 km²", pact: "TDT, ŞİÖ", names: ["kazakhstan", "kazakistan"] },
+        "UZB": { lat: 41.3775, lng: 64.5853, trName: "Özbekistan", founding: "1991", pop: "35 Milyon", area: "448,978 km²", pact: "TDT, ŞİÖ", names: ["uzbekistan", "ozbekistan"] },
+        "KGZ": { lat: 41.2044, lng: 74.7661, trName: "Kırgızistan", founding: "1991", pop: "7 Milyon", area: "199,951 km²", pact: "TDT, ŞİÖ", names: ["kyrgyzstan", "kirgizistan"] }
     };
 
     const orgListData = [
@@ -203,32 +212,59 @@
         "BRICS": { title: "BRICS Küresel Ekonomik Paktı", summary: "Batı merkezli finansal sisteme (IMF/Dünya Bankası) alternatif olma hedefindeki çok kutuplu ekonomik pakt.", history: "Brezilya, Rusya, Hindistan, Çin ve Güney Afrika'nın öncülüğünde kurulan yapıya; Mısır, İran ve BAE'nin katılmasıyla küresel petrol üretiminin ve nüfusunun çok büyük bir kısmı bu blokta toplanmıştır.", center: "CHN", membersIso: ["BRA", "RUS", "IND", "CHN", "EGY", "IRN", "ARE", "SAU"] },
         "SCO": { title: "Şanghay İşbirliği Örgütü (ŞİÖ)", summary: "Avrasya coğrafyasında güvenlik, askeri ve ekonomik işbirliğini hedefleyen bölgesel blok.", history: "1996'da sınır güvenliğini sağlamak amacıyla 'Şanghay Beşlisi' olarak kurulan örgüt, zamanla Hindistan ve Pakistan'ı da içine alarak NATO'ya karşı Asya'nın en büyük güvenlik şemsiyesi konumuna evrilmiştir.", center: "CHN", membersIso: ["CHN", "RUS", "IND", "PAK", "IRN", "KAZ", "UZB", "KGZ", "BLR"] },
         "TDT": { title: "Türk Devletleri Teşkilatı (TDT)", summary: "Türk dünyasının siyasi, ekonomik, kültürel ve lojistik entegrasyonunu hedefleyen çatı teşkilat.", history: "2009 Nahçıvan Anlaşması ile Türk Konseyi olarak temelleri atıldı. Özellikle Çin-Avrupa arasındaki 'Orta Koridor' ticaret rotasının kilit sağlayıcısı olarak jeopolitik ağırlığını her geçen yıl artırmaktadır.", center: "TUR", membersIso: ["TUR", "KAZ", "UZB", "KGZ"] },
-        "UN": { title: "Birleşmiş Milletler (BM)", summary: "1945'te kurulan, küresel barışı, insan haklarını ve uluslararası hukuku korumayı amaçlayan çatı örgüt.", history: "II. Dünya Savaşı'nın yıkımının ardından kurulan BM'nin yapısında 5 daimi üyenin veto hakkı bulunur. Sistemin günümüz krizlerinde yetersiz kalması, reform çağrılarını (örn: 'Dünya 5'ten büyüktür') beraberinde getirmektedir.", center: "USA", membersIso: ["TUR", "USA", "RUS", "CHN", "GBR", "FRA", "DEU", "JPN", "IND", "BRA", "SAU", "CAN"] }
+        "UN": { title: "Birleşmiş Milletler (BM)", summary: "1945'te kurulan, küresel barışı, insan haklarını ve uluslararası hukuku korumayı amaçlayan çatı örgüt.", history: "II. Dünya Savaşı'nın yıkımının ardından kurulan BM'nin yapısında 5 daimi üyenin veto hakkı bulunur. Sistemin günümüz krizlerinde yetersiz kalması, reform çağrılarını beraberinde getirmektedir.", center: "USA", membersIso: ["TUR", "USA", "RUS", "CHN", "GBR", "FRA", "DEU", "JPN", "IND", "BRA", "SAU", "CAN"] }
     };
 
-    // TARİHSEL DETAYLARI ZENGİNLEŞTİRİLMİŞ ÇATIŞMALAR
     const conflictListData = [
         {
             id: "UKR", title: "Rusya - Ukrayna Savaşı", sub: "Doğu Avrupa / Donbas",
             timeline: [
-                { year: 2014, sum: "Kırım'ın ilhakı ve Donbas bölgesinde vekalet savaşlarının başlaması.", hist: "Rusya, Kiev'deki Batı yanlısı devrime Kırım'ı yasadışı şekilde ilhak ederek yanıt verdi. Eş zamanlı olarak Donetsk ve Luhansk bölgelerindeki Rus ayrılıkçıları silahlandırarak, Ukrayna'yı istikrarsızlaştırmayı ve NATO'ya girişini engellemeyi amaçlayan uzun soluklu bir vekalet savaşı başlattı.", countries: {"RUS": {role:"Müdahale Eden", color:"#ef4444"}, "UKR": {role:"Savunan", color:"#38bdf8"}}, heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#fde047'}] },
-                { year: 2022, sum: "Rusya'nın Ukrayna'yı topyekun işgal girişimi ve savaşın büyümesi.", hist: "24 Şubat'ta Vladimir Putin'in 'özel askeri operasyon' ilanıyla Rus ordusu, başkent Kiev dahil Ukrayna'ya dört bir koldan saldırdı. Beklenmedik bir direniş gösteren Ukrayna, ABD ve Avrupa'nın devasa askeri yardımlarıyla Rus ilerleyişini durdurup savaşı ülkenin doğusuna ve güneyine sıkıştırmayı başardı.", countries: {"RUS": {role:"Saldıran", color:"#ef4444"}, "UKR": {role:"Direnen", color:"#38bdf8"}, "USA": {role:"Lojistik Destek", color:"#22c55e"}}, heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#fde047'}, {lat: 48.0, lng: 37.8, w: 2, c: '#fde047'}] },
-                { year: 2026, sum: "Doğu cephesinde yıpratma savaşı ve küresel mühimmat krizi.", hist: "Savaş, I. Dünya Savaşı'nı andıran yoğun dron ve siper muharebelerine dönüştü. Rusya sayısal üstünlüğüyle yavaşça ilerlerken, Ukrayna Batı'dan gelen ileri teknoloji silahlarla Rus altyapısına derin saldırılar düzenliyor. Müzakere masası uzak, yıpratma savaşı her iki tarafın demografik yapısını çökertiyor.", countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}, "BLR": {role:"Rusya Üssü", color:"#f59e0b"}}, heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#fde047'}, {lat: 47.1, lng: 37.5, w: 3, c: '#fde047'}] }
+                { year: 2014, sum: "Kırım'ın ilhakı ve Donbas bölgesinde vekalet savaşlarının başlaması.", hist: "Rusya, Kiev'deki Batı yanlısı devrime Kırım'ı yasadışı şekilde ilhak ederek yanıt verdi. Eş zamanlı olarak ayrılıkçıları silahlandırarak vekalet savaşı başlattı.", countries: {"RUS": {role:"Müdahale Eden", color:"#ef4444"}, "UKR": {role:"Savunan", color:"#38bdf8"}}, heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#fde047'}] },
+                { year: 2022, sum: "Rusya'nın Ukrayna'yı topyekun işgal girişimi ve savaşın büyümesi.", hist: "24 Şubat'ta Rus ordusu, başkent Kiev dahil Ukrayna'ya dört bir koldan saldırdı. Beklenmedik bir direniş gösteren Ukrayna, ABD ve Avrupa yardımlarıyla Rus ilerleyişini durdurdu.", countries: {"RUS": {role:"Saldıran", color:"#ef4444"}, "UKR": {role:"Direnen", color:"#38bdf8"}, "USA": {role:"Lojistik Destek", color:"#22c55e"}}, heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#fde047'}, {lat: 48.0, lng: 37.8, w: 2, c: '#fde047'}] },
+                { year: 2026, sum: "Doğu cephesinde yıpratma savaşı ve küresel mühimmat krizi.", hist: "Savaş, yoğun dron ve siper muharebelerine dönüştü. Rusya sayısal üstünlüğüyle ilerlerken, Ukrayna Rus altyapısına derin saldırılar düzenliyor.", countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}, "BLR": {role:"Rusya Üssü", color:"#f59e0b"}}, heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#fde047'}, {lat: 47.1, lng: 37.5, w: 3, c: '#fde047'}] }
             ]
         },
         {
             id: "ISR", title: "İsrail - Filistin & Doğu Akdeniz", sub: "Orta Doğu / Gazze",
             timeline: [
-                { year: 1967, sum: "Altı Gün Savaşı ve İsrail'in işgal sınırlarını genişletmesi.", hist: "İsrail; Mısır, Ürdün ve Suriye'ye karşı yürüttüğü ani savaşın sonunda Gazze Şeridi, Batı Şeria, Golan Tepeleri ve Sina Yarımadası'nı işgal etti. BM'nin 'işgal altındaki topraklar' tanımı bu dönemde ortaya çıktı ve bugünkü krizin hukuki temelini oluşturdu.", countries: {"ISR": {role:"İşgal Eden", color:"#ef4444"}, "PSE": {role:"İşgal Edilen", color:"#38bdf8"}, "EGY": {role:"Savaşan", color:"#f59e0b"}}, heatpoints: [{lat: 31.7, lng: 35.2, w: 1, c: '#fde047'}] },
-                { year: 2023, sum: "7 Ekim olayları ve Gazze'ye yönelik eşi görülmemiş yıkım.", hist: "Hamas'ın 7 Ekim'deki ani baskınının ardından İsrail, Gazze'ye yönelik tarihin en yoğun sivil yerleşim yeri bombardımanlarından birini başlattı. Kuşatma altındaki bölgede altyapı tamamen çökerken, uluslararası mahkemelerde soykırım iddiaları gündeme taşındı.", countries: {"ISR": {role:"Saldıran", color:"#ef4444"}, "PSE": {role:"Hedef", color:"#38bdf8"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}] },
-                { year: 2026, sum: "Çatışmanın Lübnan ve Kızıldeniz'e yayılması, bölgesel kriz.", hist: "Gazze savaşı kontrolden çıkarak bölgesel bir denkleme oturdu. Kuzeyde Hizbullah ile İsrail ordusu doğrudan sıcak temasa girerken, İran destekli milislerin Yemen'den Kızıldeniz'deki ticari gemilere saldırmasıyla kriz küresel bir lojistik tehdide dönüştü.", countries: {"ISR": {role:"Aktör", color:"#ef4444"}, "PSE": {role:"Bölge", color:"#38bdf8"}, "LBN": {role:"Sınır Cephesi", color:"#f59e0b"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}, {lat: 33.2, lng: 35.5, w: 2, c: '#f97316'}] }
+                { year: 1967, sum: "Altı Gün Savaşı ve İsrail'in işgal sınırlarını genişletmesi.", hist: "İsrail; Mısır, Ürdün ve Suriye'ye karşı yürüttüğü savaşın sonunda Gazze, Batı Şeria, Golan Tepeleri ve Sina'yı işgal etti.", countries: {"ISR": {role:"İşgal Eden", color:"#ef4444"}, "PSE": {role:"İşgal Edilen", color:"#38bdf8"}, "EGY": {role:"Savaşan", color:"#f59e0b"}}, heatpoints: [{lat: 31.7, lng: 35.2, w: 1, c: '#fde047'}] },
+                { year: 2023, sum: "7 Ekim olayları ve Gazze'ye yönelik eşi görülmemiş yıkım.", hist: "Hamas'ın baskınının ardından İsrail, Gazze'ye yönelik yoğun bir bombardıman başlattı. Kuşatma altındaki bölgede altyapı tamamen çökerken, uluslararası mahkemelerde soykırım iddiaları gündeme taşındı.", countries: {"ISR": {role:"Saldıran", color:"#ef4444"}, "PSE": {role:"Hedef", color:"#38bdf8"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}] },
+                { year: 2026, sum: "Çatışmanın Lübnan ve Kızıldeniz'e yayılması, bölgesel kriz.", hist: "Gazze savaşı bölgesel bir denkleme oturdu. Kuzeyde Hizbullah ile doğrudan temas kurulurken, İran destekli milislerin Yemen'den saldırmasıyla kriz lojistik tehdide dönüştü.", countries: {"ISR": {role:"Aktör", color:"#ef4444"}, "PSE": {role:"Bölge", color:"#38bdf8"}, "LBN": {role:"Sınır Cephesi", color:"#f59e0b"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}, {lat: 33.2, lng: 35.5, w: 2, c: '#f97316'}] }
+            ]
+        },
+        {
+            id: "IRN", title: "ABD - İran & Hürmüz Krizi", sub: "Orta Doğu / Basra",
+            timeline: [
+                { year: 2018, sum: "ABD'nin Nükleer Anlaşmadan (JCPOA) tek taraflı çekilmesi.", hist: "Trump yönetimi anlaşmadan çekildi ve İran'a maksimum baskı politikasını başlattı.", countries: {"IRN": {role:"Hedef", color:"#ef4444"}, "USA": {role:"Yaptırım Kararı", color:"#38bdf8"}}, heatpoints: [{lat: 35.6, lng: 51.3, w: 1, c: '#fde047'}] },
+                { year: 2026, sum: "Hürmüz Boğazı'nda doğrudan çatışma riski ve enerji krizi.", hist: "İran destekli grupların saldırıları ve İsrail gerilimi, petrol geçiş güzergahını tehdit ediyor.", countries: {"IRN": {role:"Aktör", color:"#ef4444"}, "USA": {role:"Karşıt Güç", color:"#38bdf8"}, "ISR": {role:"Karşıt Güç", color:"#22c55e"}}, heatpoints: [{lat: 26.5, lng: 56.2, w: 3, c: '#fde047'}, {lat: 27.1, lng: 56.2, w: 2, c: '#f97316'}] }
             ]
         },
         {
             id: "TWN", title: "Çin - Tayvan Gerginliği", sub: "Doğu Asya / Pasifik",
             timeline: [
-                { year: 2022, sum: "Nancy Pelosi'nin ziyareti ve Çin'in adayı ablukaya alması.", hist: "ABD Temsilciler Meclisi Başkanı'nın Tayvan ziyareti, 'Tek Çin' politikasını ihlal olarak algılandı. Çin ordusu, adanın etrafını sararak gerçek mermili devasa tatbikatlar düzenledi ve ada üzerindeki fiili baskısını kalıcı olarak artırdı.", countries: {"CHN": {role:"Gözdağı Veren", color:"#ef4444"}, "TWN": {role:"Abluka Altında", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 2, c: '#fde047'}] },
-                { year: 2026, sum: "Pasifik'te silahlanma yarışı ve Tayvan Boğazı'nda sıcak temas riski.", hist: "Çin'in Tayvan hava sahasını ihlalleri günlük hale geldi. Buna karşılık ABD, Japonya ve Güney Kore ile askeri entegrasyonu hızlandırdı. Tayvan'ın küresel çip (yarı iletken) endüstrisindeki tekeli, buradaki bir savaşın dünya ekonomisini durdurma riskini taşıyor.", countries: {"CHN": {role:"Aktör", color:"#ef4444"}, "TWN": {role:"Savunan", color:"#38bdf8"}, "USA": {role:"Garantör", color:"#22c55e"}, "JPN": {role:"Gözlemci", color:"#f59e0b"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 3, c: '#fde047'}, {lat: 25.0, lng: 121.5, w: 2, c: '#fde047'}] }
+                { year: 2022, sum: "Nancy Pelosi'nin ziyareti ve Çin'in adayı ablukaya alması.", hist: "ABD yetkilisinin ziyareti, 'Tek Çin' politikasını ihlal olarak algılandı. Çin ordusu, adanın etrafını sararak devasa tatbikatlar düzenledi.", countries: {"CHN": {role:"Gözdağı Veren", color:"#ef4444"}, "TWN": {role:"Abluka Altında", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 2, c: '#fde047'}] },
+                { year: 2026, sum: "Pasifik'te silahlanma yarışı ve sıcak temas riski.", hist: "Çin'in hava sahası ihlalleri günlük hale geldi. Buna karşılık ABD, Japonya ve Güney Kore askeri entegrasyonu hızlandırdı.", countries: {"CHN": {role:"Aktör", color:"#ef4444"}, "TWN": {role:"Savunan", color:"#38bdf8"}, "USA": {role:"Garantör", color:"#22c55e"}, "JPN": {role:"Gözlemci", color:"#f59e0b"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 3, c: '#fde047'}, {lat: 25.0, lng: 121.5, w: 2, c: '#fde047'}] }
+            ]
+        },
+        {
+            id: "SDN", title: "Sudan İç Savaşı", sub: "Kuzey Afrika / Nil Bölgesi",
+            timeline: [
+                { year: 2023, sum: "Sudan Ordusu ile Hızlı Destek Kuvvetleri (RSF) arasında savaş başladı.", hist: "Başkent Hartum'da güç mücadelesi silahlı çatışmaya dönüştü, milyonlarca insan yerinden edildi.", countries: {"SDN": {role:"Çatışma Merkezi", color:"#ef4444"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 2, c: '#fde047'}] },
+                { year: 2026, sum: "Ülkenin fiilen ikiye bölünmesi ve devasa insani felaket.", hist: "Darfur bölgesindeki etnik temizlik iddiaları ve devletin çöküşü Afrika Boynuzu'nu tehdit ediyor.", countries: {"SDN": {role:"Çöken Devlet", color:"#ef4444"}, "EGY": {role:"Sınır Aktörü", color:"#38bdf8"}, "ARE": {role:"Finansör", color:"#f59e0b"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 3, c: '#fde047'}, {lat: 13.0, lng: 24.0, w: 3, c: '#f97316'}] }
+            ]
+        },
+        {
+            id: "YEM", title: "Kızıldeniz & Yemen Krizi", sub: "Körfez / Babülmendep",
+            timeline: [
+                { year: 2014, sum: "Husilerin başkent Sana'yı ele geçirmesi ve iç savaş.", hist: "İran destekli Husilerin yönetimi ele geçirmesi, Suudi liderliğindeki koalisyonun müdahalesini getirdi.", countries: {"YEM": {role:"Çatışma Alanı", color:"#ef4444"}, "SAU": {role:"Koalisyon", color:"#38bdf8"}}, heatpoints: [{lat: 15.3, lng: 44.2, w: 2, c: '#fde047'}] },
+                { year: 2026, sum: "Husilerin küresel ticareti felç eden Kızıldeniz saldırıları.", hist: "Gazze'ye destek gerekçesiyle ticari gemilere yapılan saldırılar, ABD ve İngiltere'nin Yemen'i vurmasına yol açtı.", countries: {"YEM": {role:"Husiler (Vuran)", color:"#ef4444"}, "USA": {role:"Koalisyon Gücü", color:"#22c55e"}, "GBR": {role:"Koalisyon Gücü", color:"#38bdf8"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 12.5, lng: 43.3, w: 3, c: '#fde047'}, {lat: 15.3, lng: 44.2, w: 2, c: '#f97316'}] }
+            ]
+        },
+        {
+            id: "AFL", title: "Sahel Çatışmaları & Darbeler", sub: "Batı Afrika",
+            timeline: [
+                { year: 2023, sum: "Nijer, Mali ve Burkina Faso'da art arda gelen askeri darbeler.", hist: "Fransa'nın bölgeden kovulması ve Rusya'nın (Wagner) boşluğu doldurması.", countries: {"MLI": {role:"Cunta Yönetimi", color:"#ef4444"}, "NER": {role:"Cunta Yönetimi", color:"#ef4444"}, "BFA": {role:"Cunta Yönetimi", color:"#ef4444"}, "FRA": {role:"Çıkan Güç", color:"#38bdf8"}}, heatpoints: [{lat: 17.6, lng: 8.0, w: 2, c: '#fde047'}, {lat: 17.5, lng: -3.9, w: 2, c: '#fde047'}] },
+                { year: 2026, sum: "Yeni İttifak (AES) ve artan cihatçı terör tehdidi.", hist: "Cunta rejimleri kendi askeri paktlarını kurdu, ancak kırsal kesimlerde terör örgütlerinin kontrolü artıyor.", countries: {"MLI": {role:"AES Üyesi", color:"#ef4444"}, "NER": {role:"AES Üyesi", color:"#ef4444"}, "BFA": {role:"AES Üyesi", color:"#ef4444"}, "RUS": {role:"Askeri Destek", color:"#dc2626"}}, heatpoints: [{lat: 14.0, lng: 0.0, w: 3, c: '#fde047'}] }
             ]
         }
     ];
@@ -280,12 +316,11 @@
         .pointColor('color')
         .pointAltitude(0.01)
         .pointRadius(0.3)
-        // RADAR/ISI HARİTASI AYARLARI (Yükseklik eklendi)
         .ringColor('c')
         .ringMaxRadius('w')
         .ringPropagationSpeed(1.2)
         .ringRepeatPeriod(800)
-        .ringAltitude(0.02); // Ülkelerin üzerine çıksın diye eklendi
+        .ringAltitude(0.02);
 
     globe.controls().autoRotate = true;
     globe.controls().autoRotateSpeed = 0.3;
@@ -305,7 +340,6 @@
                 globe.polygonsData(geoData.features);
                 switchMainMode('news');
             }).catch(err => {
-                // Hata alırsan boş veriyle devam et (Senin projende veriler sunucudan geliyor varsayıyoruz)
                 newsData = [
                     {
                         title: "Örnek Haber Verisi - Doğu Akdeniz Gerilimi",
@@ -418,7 +452,7 @@
             let legendHtml = '';
             activeColorMap = {};
             const arcs = [], points = [];
-            let primaryCountry = null; // Haberlerde çizgilerin merkezi olacak ilk ülke
+            let primaryCountry = null;
 
             for (const [code, info] of Object.entries(data.countries)) {
                 const matched = findMasterCountryByIso(code) || findMasterCountryByName(code);
@@ -428,7 +462,6 @@
                     legendHtml += `<div class="legend-item"><span><strong>${matched.trName}</strong><br><small>${info.role}</small></span><span class="legend-color" style="background: ${col};"></span></div>`;
                     points.push({lat: matched.lat, lng: matched.lng, color: col});
 
-                    // Çizgileri oluştur (İlk bulduğunu merkez alır, diğerlerine bağlar)
                     if (!primaryCountry) {
                         primaryCountry = matched;
                     } else {
@@ -443,7 +476,7 @@
             
             document.getElementById('countryLegend').innerHTML = legendHtml;
             globe.polygonCapColor(globe.polygonCapColor());
-            globe.arcsData(arcs); // Daha önce [] olan kısmı düzelttik
+            globe.arcsData(arcs);
             globe.ringsData([]);
             globe.pointsData(points);
             if (points.length > 0) globe.pointOfView({ lat: points[0].lat, lng: points[0].lng, altitude: 1.8 }, 1200);
@@ -515,7 +548,7 @@
 
         document.getElementById('countryLegend').innerHTML = legendHtml;
         globe.polygonCapColor(globe.polygonCapColor());
-        globe.arcsData([]); // Çatışma modunda çizgi kullanmıyoruz
+        globe.arcsData([]);
         globe.pointsData(points);
         globe.ringsData(rings); 
         
