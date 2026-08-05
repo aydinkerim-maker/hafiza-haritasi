@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KÜRESEL HAFIZA | 3D Jeopolitik İstihbarat Portalı</title>
+    <title>KÜRESEL HAFIZA | 3D Stratejik Analiz Portalı</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20'/><path d='M2 12h20'/></svg>">
     
     <script src="https://unpkg.com/three"></script>
@@ -35,10 +35,10 @@
         .tab-btn { flex: 1; padding: 8px 0; border: none; background: #0f172a; color: #94a3b8; font-size: 0.85rem; font-weight: 700; cursor: pointer; border-radius: 4px; text-align: center; }
         .tab-btn.active { color: #fff; background: #0284c7; box-shadow: 0 0 10px rgba(2, 132, 199, 0.5); }
 
-        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #02040a; }
+        /* MÜKEMMEL 3'LÜ GRID YAPI (SOL - KÜRE - SAĞ) */
+        .app-container { display: grid; grid-template-columns: 340px 1fr 380px; flex: 1; overflow: hidden; position: relative; background: #02040a; }
         
-        /* FERAH SOL MENÜ */
-        .sidebar { width: 340px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
+        .sidebar { background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; overflow: hidden; }
         
         .search-box { padding: 12px; background: #050811; border-bottom: 1px solid #1e293b; }
         .search-box input { width: 100%; padding: 10px 12px; background: #0f172a; border: 1px solid #38bdf8; color: #f1f5f9; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; }
@@ -47,36 +47,36 @@
         .clear-tag-btn { background: #ef4444; color: #fff; border: none; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
 
         .news-list { overflow-y: auto; flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
-        .news-card { padding: 12px; background: #0f172a; border-radius: 6px; border: 1px solid #1e293b; cursor: pointer; transition: all 0.2s ease; }
+        .news-card { padding: 14px; background: #0f172a; border-radius: 6px; border: 1px solid #1e293b; cursor: pointer; transition: all 0.2s ease; }
         .news-card:hover, .news-card.active { background: #1e293b; border-color: #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); }
-        .news-card h3 { font-size: 0.88rem; color: #f8fafc; line-height: 1.4; font-weight: 600; margin-bottom: 6px; }
+        .news-card h3 { font-size: 0.9rem; color: #f8fafc; line-height: 1.4; font-weight: 600; margin-bottom: 6px; }
         .news-card p.sub { font-size: 0.78rem; color: #94a3b8; }
         
         .tags { display: flex; gap: 4px; flex-wrap: wrap; }
         .tag { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.68rem; padding: 2px 6px; border-radius: 3px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; }
 
-        .globe-container { flex: 1; position: relative; background: #02040a; }
+        .globe-container { position: relative; background: #02040a; width: 100%; height: 100%; overflow: hidden; }
         #globeViz { width: 100%; height: 100%; }
 
-        /* YENİDEN EKLENEN SAĞ DETAYLI ANALİZ PANELİ */
-        .info-panel { width: 400px; background: #0a0f1d; border-left: 1px solid #1e293b; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; z-index: 10; }
-        .panel-block { background: #0f172a; padding: 16px; border-radius: 6px; border: 1px solid #1e293b; }
-        .panel-block h4 { font-family: 'Orbitron', 'Rajdhani', sans-serif; font-size: 0.82rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-        .panel-block p { font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #cbd5e1; line-height: 1.7; white-space: pre-line; }
+        /* SAĞ PANEL SABİTLENDİ VE SIKILAŞTIRILDI */
+        .info-panel { background: #0a0f1d; border-left: 1px solid #1e293b; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; z-index: 10; }
+        .panel-block { background: #0f172a; padding: 14px; border-radius: 6px; border: 1px solid #1e293b; }
+        .panel-block h4 { font-family: 'Orbitron', 'Rajdhani', sans-serif; font-size: 0.8rem; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .panel-block p { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; white-space: pre-line; }
         
         .history-block { border-left: 4px solid #f59e0b; background: rgba(245, 158, 11, 0.03); border-top: 1px solid rgba(245, 158, 11, 0.2); border-right: 1px solid rgba(245, 158, 11, 0.2); border-bottom: 1px solid rgba(245, 158, 11, 0.2); }
         .history-block h4 { color: #f59e0b; }
 
-        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; padding: 6px 0; border-bottom: 1px solid #1e293b; font-family: 'Inter', sans-serif; }
+        .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; padding: 6px 0; border-bottom: 1px solid #1e293b; font-family: 'Inter', sans-serif; }
         .legend-color { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
 
-        .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 12px; border-radius: 4px; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(2, 132, 199, 0.4); text-transform: uppercase; }
+        .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 10px; border-radius: 4px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(2, 132, 199, 0.4); text-transform: uppercase; }
         .source-btn:hover { background: #0369a1; }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             header { padding: 10px; }
             .mobile-view-tabs { display: flex; }
-            .app-container { flex-direction: column; }
+            .app-container { display: block; }
             .sidebar, .info-panel, .globe-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
             .sidebar.mobile-active { display: flex; width: 100%; }
             .globe-container.mobile-active { display: block; }
@@ -128,7 +128,7 @@
             <div id="globeViz"></div>
         </div>
 
-        <!-- SAĞ DETAYLI ANALİZ PANELİ (GERİ GELDİ) -->
+        <!-- SAĞ DETAYLI ANALİZ PANELİ -->
         <div class="info-panel" id="panelSection">
             <div class="panel-block">
                 <h4 id="panelTitle">Saha İstihbarat Özeti</h4>
@@ -150,7 +150,7 @@
     </div>
 
     <script>
-        // ÜLKELERİN DEV EŞLEŞTİRME HARİTASI (BAŞKENT/KOORDİNAT + GEOJSON ARAMA DİZİSİ)
+        // ÜLKELERİN MERKEZİ KOORDİNAT SÖZLÜĞÜ
         const countryMasterDict = {
             "Turkey": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", keys: ["turkey", "turkiye", "türkiye"] },
             "United States": { lat: 37.0902, lng: -95.7129, trName: "Amerika Birleşik Devletleri", keys: ["united states", "united states of america", "usa", "abd", "america"] },
@@ -159,8 +159,8 @@
             "Ukraine": { lat: 48.3794, lng: 31.1656, trName: "Ukrayna", keys: ["ukraine", "ukrayna"] },
             "Iran": { lat: 32.4279, lng: 53.6880, trName: "İran İslam Cumhuriyeti", keys: ["iran"] },
             "Israel": { lat: 31.0461, lng: 34.8516, trName: "İsrail Devleti", keys: ["israel", "israil"] },
-            "Palestine": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti", keys: ["palestine", "filistin", "west bank", "gaza"] },
-            "United Kingdom": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", keys: ["united kingdom", "great britain", "uk", "ingiltere", "birleşik krallık"] },
+            "Palestine": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti", keys: ["palestine", "filistin", "gaza"] },
+            "United Kingdom": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", keys: ["united kingdom", "great britain", "uk", "ingiltere"] },
             "Germany": { lat: 51.1657, lng: 10.4515, trName: "Almanya", keys: ["germany", "almanya"] },
             "France": { lat: 46.2276, lng: 2.2137, trName: "Fransa", keys: ["france", "fransa"] },
             "Greece": { lat: 39.0742, lng: 21.8243, trName: "Yunanistan", keys: ["greece", "yunanistan"] },
@@ -176,10 +176,15 @@
             "Lebanon": { lat: 33.8547, lng: 35.8623, trName: "Lübnan", keys: ["lebanon", "lübnan"] },
             "Brazil": { lat: -14.2350, lng: -51.9253, trName: "Brezilya", keys: ["brazil", "brezilya"] },
             "Bolivia": { lat: -16.2902, lng: -63.5887, trName: "Bolivya", keys: ["bolivia", "bolivya"] },
-            "North Korea": { lat: 40.3399, lng: 127.5101, trName: "Kuzey Kore", keys: ["north korea", "kuzey kore", "dem. rep. korea"] },
-            "South Korea": { lat: 35.9078, lng: 127.7669, trName: "Güney Kore", keys: ["south korea", "güney kore", "korea"] },
-            "Belgium": { lat: 50.5039, lng: 4.4699, trName: "Belçika", keys: ["belgium", "belçika"] },
-            "United Arab Emirates": { lat: 23.4241, lng: 53.8478, trName: "Birleşik Arap Emirlikleri", keys: ["united arab emirates", "uae", "bae"] }
+            "North Korea": { lat: 40.3399, lng: 127.5101, trName: "Kuzey Kore", keys: ["north korea", "kuzey kore"] },
+            "South Korea": { lat: 35.9078, lng: 127.7669, trName: "Güney Kore", keys: ["south korea", "güney kore"] },
+            "Belgium": { lat: 50.5039, lng: 4.4699, trName: "Belçika (NATO Merkez)", keys: ["belgium", "belçika"] },
+            "United Arab Emirates": { lat: 23.4241, lng: 53.8478, trName: "Birleşik Arap Emirlikleri", keys: ["united arab emirates", "uae", "bae"] },
+            "South Africa": { lat: -30.5595, lng: 22.9375, trName: "Güney Afrika", keys: ["south africa", "güney afrika"] },
+            "Kazakhstan": { lat: 48.0196, lng: 66.9237, trName: "Kazakistan", keys: ["kazakhstan", "kazakistan"] },
+            "Uzbekistan": { lat: 41.3775, lng: 64.5853, trName: "Özbekistan", keys: ["uzbekistan", "özbekistan"] },
+            "Kyrgyzstan": { lat: 41.2044, lng: 74.7661, trName: "Kırgızistan", keys: ["kyrgyzstan", "kırgızistan"] },
+            "Azerbaijan": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan", keys: ["azerbaijan", "azerbaycan"] }
         };
 
         const orgListData = [
@@ -198,16 +203,36 @@
                 center: "Belgium",
                 membersEn: ["Turkey", "United States", "United Kingdom", "Germany", "France", "Greece", "Ukraine", "Belgium"]
             },
+            "UN": {
+                title: "Birleşmiş Milletler (BM)",
+                summary: "1945 yılında kurulan, küresel barışı ve güvenliği korumayı amaçlayan 193 üyeli çatı uluslararası örgüt.",
+                history: "Milletler Cemiyeti'nin ardından II. Dünya Savaşı sonrası küresel diplomasi platformu olarak yapılandırılmıştır.",
+                center: "United States",
+                membersEn: ["Turkey", "United States", "Russia", "China", "United Kingdom", "France", "Germany", "Japan", "India", "Brazil", "Egypt", "Iran", "Saudi Arabia"]
+            },
+            "SCO": {
+                title: "Şanghay İşbirliği Örgütü (ŞİÖ)",
+                summary: "Avrasya coğrafyasında güvenlik, ekonomi ve askeri işbirliğini hedefleyen dev güç paktı.",
+                history: "1996'da Şanghay Beşlisi olarak başlayan yapı, Rusya, Çin, Hindistan, Pakistan ve İran'ın katılımıyla Avrasya'nın en büyük örgütüne dönüşmüştür.",
+                center: "China",
+                membersEn: ["China", "Russia", "India", "Pakistan", "Iran", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Belarus"]
+            },
             "BRICS": {
                 title: "BRICS Küresel Ekonomik Paktı",
                 summary: "Batı finansal sistemine alternatif küresel dengeler ve 'Dolarsızlaşma' mekanizmaları inşa etmeyi hedefleyen dev ekonomik güç paktı.",
                 history: "2024 itibarıyla Mısır, Etiyopya, İran ve BAE'nin katılımıyla genişlemiş; petrol rezervlerinin ana adresi olmuştur.",
                 center: "China",
                 membersEn: ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Iran", "United Arab Emirates"]
+            },
+            "TDT": {
+                title: "Türk Devletleri Teşkilatı (TDT)",
+                summary: "Türk dünyasının siyasi, ekonomik ve kültürel entegrasyonunu hedefleyen stratejik birlik.",
+                history: "2009 Nahçıvan Anlaşması ile temelleri atılmış, Doğu-Batı enerji ve ticaret koridorlarının merkezine yerleşmiştir.",
+                center: "Turkey",
+                membersEn: ["Turkey", "Azerbaijan", "Kazakhstan", "Uzbekistan", "Kyrgyzstan"]
             }
         };
 
-        // EKSİKSİZ TAM KADRO AKTİF ÇATIŞMALAR LİSTESİ
         const conflictListData = [
             {
                 id: "UKR",
@@ -263,7 +288,7 @@
                 id: "KOR",
                 title: "Kore Yarımadası Gerilimi",
                 sub: "Doğu Asya / 38. Paralel",
-                summary: "Kuzey Kore'nin Kıtalararası Balistik Füze (ICBM) ve nükleer denemeleri, Güney Kore ve Japonya hattında askeri alarm seviyesini yükseltmektedir.",
+                summary: "Kuzey Kore'nin Kıtalararası Balistik Füze (ICBM) denemeleri, Güney Kore ve Japonya hattında askeri alarm seviyesini yükseltmektedir.",
                 history: "1950-1953 Kore Savaşı'nın ateşkesle sona ermesi sonrası resmi barış antlaşmasının imzalanmamış olmasından kaynaklanır.",
                 countries: {
                     "North Korea": { role: "Aktör (Füze ve nükleer testler yürütüyor)", color: "#ef4444" },
@@ -285,26 +310,26 @@
             return str.replace(/İ/g, "i").replace(/I/g, "ı").replace(/Ğ/g, "ğ").replace(/Ü/g, "ü").replace(/Ş/g, "ş").replace(/Ö/g, "ö").replace(/Ç/g, "ç").toLowerCase();
         }
 
-        // PARLAK VE NET NASA UYDU DOKULU 3D KÜRE
+        // KOYU / NET / PARLAK SINIR ÇİZGİLİ SÜPER HİBRİT HARİTA DOKUSU
         const globe = Globe()
             (document.getElementById('globeViz'))
-            .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg') // Parlak denizler ve belirgin karalar
+            .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg') // Koyu gece zemin
             .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
             .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
             .showAtmosphere(true)
-            .atmosphereColor('#38bdf8')
-            .atmosphereAltitude(0.15)
-            .polygonSideColor(() => 'rgba(56, 189, 248, 0.15)')
-            .polygonStrokeColor(() => '#38bdf8')
-            .polygonAltitude(0.012)
-            .polygonCapColor(feat => feat.properties.customColor || 'rgba(10, 15, 29, 0.25)')
+            .atmosphereColor('#0284c7')
+            .atmosphereAltitude(0.12)
+            .polygonSideColor(() => 'rgba(2, 132, 199, 0.15)')
+            .polygonStrokeColor(() => '#38bdf8') // Sınır hatlarını neon mavi yapar
+            .polygonAltitude(0.015)
+            .polygonCapColor(feat => feat.properties.customColor || 'rgba(10, 15, 29, 0.75)')
             // 3D IŞIKLI BAĞLANTI YAYLARI (ARCS)
             .arcColor('color')
             .arcDashLength(0.5)
             .arcDashGap(0.2)
             .arcDashAnimateTime(1200)
             .arcStroke(1.5)
-            .arcAltitude(0.25)
+            .arcAltitude(0.22)
             // 3D BAŞKENT NOKTALARI
             .pointColor('color')
             .pointAltitude(0.06)
@@ -493,7 +518,6 @@
             if(cardEl) cardEl.classList.add('active');
         }
 
-        // ESNEK MÜKEMMEL ÜLKE BULUCU FONKSİYON
         function findMasterCountry(queryName) {
             if (!queryName) return null;
             const q = toTRLowerCase(queryName.trim());
@@ -505,7 +529,7 @@
             return null;
         }
 
-        // 3D GÜNCELLEME MOTORU (RENK + BAĞLANTI ÇİZGİSİ)
+        // 3D KÜRE BİRLEŞTİRME VE DÜZELTME KODU
         function update3DGlobe() {
             if (!worldGeoJson || !currentActiveItem) return;
 
@@ -516,7 +540,6 @@
             if (currentActiveItem.type === 'news' || currentActiveItem.type === 'conflict') {
                 const rawCountries = currentActiveItem.data.countries || {};
                 
-                // Ülkeleri eşleştirip koordinatlarını al
                 const validActors = [];
                 for (let [code, info] of Object.entries(rawCountries)) {
                     const matched = findMasterCountry(code);
@@ -526,7 +549,6 @@
                     }
                 }
 
-                // Her aktörün başkentine 3D Işık Noktası Koy
                 validActors.forEach(act => {
                     pointsData.push({
                         lat: act.coords.lat,
@@ -535,7 +557,6 @@
                     });
                 });
 
-                // Aktörler arasında 3D Işıklı Bağlantı Yayları Çek
                 for (let i = 0; i < validActors.length; i++) {
                     for (let j = i + 1; j < validActors.length; j++) {
                         arcsData.push({
@@ -577,7 +598,6 @@
                 }
             }
 
-            // Poligon Renklendirme (Tüm Ülke Karasını Kaplar)
             worldGeoJson.features.forEach(f => {
                 const geoName = f.properties.name || f.properties.ADMIN || "";
                 const matchedGeoMaster = findMasterCountry(geoName);
@@ -587,7 +607,7 @@
                     colorToApply = activeCountriesDict[matchedGeoMaster.key];
                 }
 
-                f.properties.customColor = colorToApply ? `${colorToApply}dd` : 'rgba(10, 15, 29, 0.25)';
+                f.properties.customColor = colorToApply ? `${colorToApply}dd` : 'rgba(10, 15, 29, 0.75)';
             });
 
             globe.polygonsData(worldGeoJson.features);
