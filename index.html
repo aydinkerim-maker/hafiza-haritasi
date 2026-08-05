@@ -43,26 +43,29 @@
         .search-box { padding: 12px; background: #050811; border-bottom: 1px solid #1e293b; }
         .search-box input { width: 100%; padding: 10px 12px; background: #0f172a; border: 1px solid #38bdf8; color: #f1f5f9; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; }
         
+        .tag-search-info { display: none; padding: 8px 12px; background: rgba(56, 189, 248, 0.1); border-bottom: 1px solid rgba(56, 189, 248, 0.2); font-size: 0.78rem; color: #38bdf8; justify-content: space-between; align-items: center; }
+        .clear-tag-btn { background: #ef4444; color: #fff; border: none; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
+
         .news-list { overflow-y: auto; flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
         .news-card { padding: 14px; background: #0f172a; border-radius: 6px; border: 1px solid #1e293b; cursor: pointer; transition: all 0.2s ease; }
         .news-card:hover, .news-card.active { background: #1e293b; border-color: #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); }
         .news-card h3 { font-size: 0.9rem; color: #f8fafc; line-height: 1.4; font-weight: 600; margin-bottom: 6px; }
         .news-card p.sub { font-size: 0.78rem; color: #94a3b8; }
         
+        .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tag { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.68rem; padding: 2px 6px; border-radius: 3px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; }
+
         .globe-container { flex: 1; position: relative; background: #02040a; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
         #globeViz { flex: 1; width: 100%; height: 100%; }
 
-        /* GÖRÜNÜR TIMELINE SLIDER STİLLERİ */
         .timeline-container { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 80%; background: rgba(5, 8, 17, 0.85); backdrop-filter: blur(12px); border: 1px solid #38bdf8; padding: 12px 20px; border-radius: 8px; display: none; flex-direction: column; gap: 10px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); z-index: 100; }
         .timeline-header { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; color: #38bdf8; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; }
         .timeline-labels { display: flex; justify-content: space-between; color: #94a3b8; font-size: 0.75rem; font-weight: 600; font-family: 'Inter', sans-serif; position: relative; padding: 0 10px; }
         
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0; }
         input[type=range]:focus { outline: none; }
-        /* BAR (TRACK) BELİRGİNLEŞTİRİLDİ */
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: rgba(56, 189, 248, 0.25); border-radius: 4px; border: 1px solid #38bdf8; }
         input[type=range]::-moz-range-track { width: 100%; height: 8px; cursor: pointer; background: rgba(56, 189, 248, 0.25); border-radius: 4px; border: 1px solid #38bdf8; }
-        
         input[type=range]::-webkit-slider-thumb { border: 2px solid #fff; height: 20px; width: 20px; border-radius: 50%; background: #ef4444; cursor: pointer; -webkit-appearance: none; margin-top: -7px; box-shadow: 0 0 12px #ef4444; transition: all 0.2s; }
         input[type=range]::-moz-range-thumb { border: 2px solid #fff; height: 20px; width: 20px; border-radius: 50%; background: #ef4444; cursor: pointer; box-shadow: 0 0 12px #ef4444; transition: all 0.2s; }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
@@ -84,6 +87,9 @@
         .legend-color { width: 12px; height: 12px; border-radius: 2px; display: inline-block; box-shadow: 0 0 5px currentColor; }
         .member-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; max-height: 180px; overflow-y: auto; }
         .member-chip { background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; padding: 3px 6px; border-radius: 4px; }
+
+        .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 10px; border-radius: 4px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(2, 132, 199, 0.4); text-transform: uppercase; }
+        .source-btn:hover { background: #0369a1; }
 
         @media (max-width: 900px) {
             header { padding: 10px; }
@@ -114,6 +120,11 @@
                 <button class="mode-btn" id="btn-mode-orgs" onclick="switchMainMode('orgs')">🌐 Uluslararası Örgütler</button>
                 <button class="mode-btn" id="btn-mode-conflicts" onclick="switchMainMode('conflicts')">⚔️ Aktif Çatışmalar</button>
             </div>
+            <div class="mobile-view-tabs">
+                <button class="tab-btn" onclick="switchMobileTab('news')">📰 Menü</button>
+                <button class="tab-btn active" onclick="switchMobileTab('map')">🌐 Küre</button>
+                <button class="tab-btn" onclick="switchMobileTab('panel')">📊 Analiz</button>
+            </div>
         </div>
     </header>
 
@@ -121,6 +132,10 @@
         <div class="sidebar" id="sidebarSection">
             <div class="search-box" id="searchBoxContainer">
                 <input type="text" id="newsSearchInput" placeholder="Haber, Ülke veya Etiket Ara..." onkeyup="executeSearch()">
+            </div>
+            <div class="tag-search-info" id="tagSearchInfo">
+                <span>Filtre: <strong id="activeTagText">#Etiket</strong></span>
+                <button class="clear-tag-btn" onclick="clearTagFilter()">Sıfırla ✕</button>
             </div>
             <div class="news-list" id="sidebarContentList"></div>
         </div>
@@ -168,7 +183,7 @@
     <script>
         function normalizeStr(str) {
             if (!str) return "";
-            return str.trim().toLowerCase().replace(/ı/g, "i").replace(/i̇/g, "i").replace(/ğ/g, "g").replace(/ü/g, "u").replace(/ş/g, "s").replace(/ö/g, "o").replace(/ç/g, "c");
+            return String(str).trim().toLowerCase().replace(/ı/g, "i").replace(/i̇/g, "i").replace(/ğ/g, "g").replace(/ü/g, "u").replace(/ş/g, "s").replace(/ö/g, "o").replace(/ç/g, "c");
         }
 
         function normalizeColor(c) {
@@ -184,6 +199,13 @@
             return '#38bdf8';
         }
 
+        function getTagsArray(tags) {
+            if (!tags) return [];
+            if (Array.isArray(tags)) return tags;
+            if (typeof tags === 'string') return tags.split(',').map(t => t.trim());
+            return [];
+        }
+
         const countryMasterDict = {
             "TUR": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT", names: ["turkey", "turkiye", "türkiye"] },
             "USA": { lat: 37.0902, lng: -95.7129, trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, G20", names: ["united states", "united states of america", "usa", "abd", "america", "amerika birlesik devletleri"] },
@@ -193,9 +215,9 @@
             "IRN": { lat: 32.4279, lng: 53.6880, trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ", names: ["iran", "islamic republic of iran", "iran islam cumhuriyeti"] },
             "ISR": { lat: 31.0461, lng: 34.8516, trName: "İsrail Devleti", founding: "1948", pop: "9.3 Milyon", area: "22,072 km²", pact: "OECD, BM", names: ["israel", "israil", "israil devleti"] },
             "PSE": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti", founding: "1988", pop: "5.1 Milyon", area: "6,020 km²", pact: "Arap Birliği", names: ["palestine", "filistin", "gaza", "west bank", "filistin devleti", "gazze"] },
-            "GBR": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, G7, G20", names: ["united kingdom", "great britain", "uk", "ingiltere", "england", "birlesik krallik"] },
-            "DEU": { lat: 51.1657, lng: 10.4515, trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7", names: ["germany", "almanya", "almanya federal rep"] },
-            "FRA": { lat: 46.2276, lng: 2.2137, trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, G7", names: ["france", "fransa", "fransa cumhuriyeti"] },
+            "GBR": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, G7, G20", names: ["united kingdom", "great britain", "uk", "ingiltere", "england"] },
+            "DEU": { lat: 51.1657, lng: 10.4515, trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7", names: ["germany", "almanya"] },
+            "FRA": { lat: 46.2276, lng: 2.2137, trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, G7", names: ["france", "fransa"] },
             "GRC": { lat: 39.0742, lng: 21.8243, trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO", names: ["greece", "yunanistan"] },
             "SYR": { lat: 34.8021, lng: 38.9968, trName: "Suriye", founding: "1946", pop: "21 Milyon", area: "185,180 km²", pact: "Arap Birliği", names: ["syria", "suriye", "suriye arap cumhuriyeti"] },
             "IRQ": { lat: 33.2232, lng: 43.6793, trName: "Irak", founding: "1932", pop: "43 Milyon", area: "438,317 km²", pact: "Arap Birliği", names: ["iraq", "irak", "irak cumhuriyeti"] },
@@ -235,7 +257,8 @@
             "SWE": { lat: 60.1282, lng: 18.6435, trName: "İsveç", founding: "1523", pop: "10.4 Milyon", area: "450,295 km²", pact: "NATO, AB", names: ["sweden", "isvec", "isvec kralligi"] },
             "ZAF": { lat: -30.5595, lng: 22.9375, trName: "Güney Afrika", founding: "1910", pop: "60 Milyon", area: "1,221,037 km²", pact: "BRICS", names: ["south africa", "guney afrika", "guney afrika cumhuriyeti"] },
             "KOS": { lat: 42.6026, lng: 20.9030, trName: "Kosova", founding: "2008", pop: "1.8 Milyon", area: "10,887 km²", pact: "-", names: ["kosovo", "kosova"] },
-            "SRB": { lat: 44.0165, lng: 21.0059, trName: "Sırbistan", founding: "2006", pop: "6.8 Milyon", area: "88,361 km²", pact: "BM", names: ["serbia", "sirbistan"] }
+            "SRB": { lat: 44.0165, lng: 21.0059, trName: "Sırbistan", founding: "2006", pop: "6.8 Milyon", area: "88,361 km²", pact: "BM", names: ["serbia", "sirbistan"] },
+            "ALB": { lat: 41.1533, lng: 20.1683, trName: "Arnavutluk", founding: "1912", pop: "2.8 Milyon", area: "28,748 km²", pact: "NATO", names: ["albania", "arnavutluk"] }
         };
 
         const orgListData = [
@@ -256,7 +279,6 @@
             "UN": { title: "Birleşmiş Milletler (BM)", summary: "1945'te kurulan, küresel barışı, insan haklarını ve uluslararası hukuku korumayı amaçlayan 193 üyeli evrensel çatı örgüt.", history: "II. Dünya Savaşı yıkımının ardından Milletler Cemiyeti yerine temelleri atılmıştır.", center: "USA", membersIso: ["TUR", "USA", "RUS", "CHN", "GBR", "FRA", "DEU", "JPN", "IND", "BRA", "SAU", "CAN"] }
         };
 
-        // ZENGİNLEŞTİRİLMİŞ TARİHSEL DETAYLAR VE NEON ISI HARİTASI (RING) RENKLERİ
         const conflictListData = [
             {
                 id: "UKR", title: "Rusya - Ukrayna Savaşı", sub: "Doğu Avrupa / Donbas",
@@ -301,7 +323,7 @@
         let currentMainMode = 'news';
         let currentActiveItem = null;
         let currentTimelineIndex = 0;
-        let worldGeoJson = null;
+        let activeColorMap = {};
 
         const globeContainer = document.getElementById('globeViz');
         const globe = Globe()(globeContainer)
@@ -332,7 +354,6 @@
             .pointColor('color')
             .pointAltitude(0.01)
             .pointRadius(0.3)
-            // NEON ISI HARİTASI AYARLARI
             .ringColor('c')
             .ringMaxRadius('w')
             .ringPropagationSpeed(1.2)
@@ -351,13 +372,22 @@
         fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
             .then(r => r.json())
             .then(geoData => {
-                worldGeoJson = geoData;
-                fetch('newsData.json').then(r => r.json()).then(liveNews => {
-                    newsData = liveNews;
+                fetch('newsData.json').then(r => {
+                    if (!r.ok) throw new Error("Ağ Hatası");
+                    return r.json();
+                }).then(liveNews => {
+                    newsData = Array.isArray(liveNews) ? liveNews : (liveNews.data || []);
                     globe.polygonsData(geoData.features);
                     switchMainMode('news');
                 }).catch(err => {
-                    newsData = [];
+                    console.error("Haberler yüklenemedi:", err);
+                    newsData = [{
+                        title: "Bağlantı Hatası: Haberler Yüklenemedi",
+                        summary: "newsData.json dosyası okunamadı veya JSON formatında kritik bir hata (virgül eksikliği vb.) var. Lütfen dosya yapısını kontrol edin.",
+                        history: "Eğer dosyayı doğrudan (file:///) açtıysanız CORS hatası almış olabilirsiniz. Sistemi bir Live Server üzerinden çalıştırmayı deneyin.",
+                        tags: ["#Sistem", "#Hata"],
+                        countries: { "TUR": { role: "Hata Merkezi", color: "#ef4444" } }
+                    }];
                     globe.polygonsData(geoData.features);
                     switchMainMode('news');
                 });
@@ -393,13 +423,36 @@
             listEl.innerHTML = '';
             let dataSource = (currentMainMode === 'news') ? newsData : (currentMainMode === 'orgs' ? orgListData : conflictListData);
             
-            dataSource.forEach((item, index) => {
+            const searchInput = document.getElementById('newsSearchInput');
+            const searchText = searchInput ? toTRLowerCase(searchInput.value.trim()) : "";
+
+            const filteredData = dataSource.filter(item => {
+                let tagMatch = true;
+                if (currentMainMode === 'news' && selectedTagFilter) {
+                    const cleanSelected = toTRLowerCase(selectedTagFilter.replace('#', '').trim());
+                    const tagsArr = getTagsArray(item.tags);
+                    tagMatch = tagsArr.some(t => toTRLowerCase(t.replace('#', '').trim()).includes(cleanSelected));
+                }
+
+                let searchMatch = true;
+                if (searchText) {
+                    const titleMatch = toTRLowerCase(item.title || "").includes(searchText);
+                    const summaryMatch = toTRLowerCase(item.summary || item.sub || "").includes(searchText);
+                    const tagsArr = getTagsArray(item.tags);
+                    let tagsMatch = tagsArr.some(t => toTRLowerCase(t).includes(searchText));
+                    searchMatch = titleMatch || summaryMatch || tagsMatch;
+                }
+                return tagMatch && searchMatch;
+            });
+
+            filteredData.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = `news-card ${index === 0 ? 'active' : ''}`;
                 card.onclick = () => selectItem(item, card);
                 
                 if (currentMainMode === 'news') {
-                    const tagsHtml = item.tags ? item.tags.map(t => `<span class="tag">${t}</span>`).join('') : '';
+                    const tagsArr = getTagsArray(item.tags);
+                    const tagsHtml = tagsArr.map(t => `<span class="tag" onclick="filterByTag('${t}', event)">${t}</span>`).join('');
                     card.innerHTML = `<h3>${item.title}</h3><div class="tags">${tagsHtml}</div>`;
                 } else {
                     card.innerHTML = `<h3>${item.title}</h3><p class="sub">${item.sub}</p>`;
@@ -407,10 +460,27 @@
                 listEl.appendChild(card);
             });
 
-            if (dataSource.length > 0) selectItem(dataSource[0], listEl.firstChild);
+            if (filteredData.length > 0) {
+                selectItem(filteredData[0], listEl.firstChild);
+            } else {
+                document.getElementById('summaryText').innerText = "Arama kriterinize uygun sonuç bulunamadı.";
+            }
         }
 
-        let activeColorMap = {};
+        function filterByTag(tagName, event) {
+            if(event) event.stopPropagation();
+            selectedTagFilter = tagName;
+            document.getElementById('activeTagText').innerText = tagName;
+            document.getElementById('tagSearchInfo').style.display = 'flex';
+            if (currentMainMode !== 'news') switchMainMode('news');
+            else executeSearch();
+        }
+
+        function clearTagFilter() {
+            selectedTagFilter = null;
+            document.getElementById('tagSearchInfo').style.display = 'none';
+            executeSearch();
+        }
 
         function selectItem(item, cardEl) {
             document.querySelectorAll('.news-card').forEach(c => c.classList.remove('active'));
@@ -458,29 +528,38 @@
             if (type === 'news') {
                 document.getElementById('panelTitle').innerText = "Saha İstihbarat Özeti";
                 document.getElementById('legendTitle').innerText = "Olaydaki Aktörler & Konumları";
-                document.getElementById('summaryText').innerText = data.summary;
-                document.getElementById('historyText').innerText = data.history;
-                
+                document.getElementById('historyTitle').innerText = "Tarihsel Arka Plan & Derin Hafıza";
+                document.getElementById('summaryText').innerText = data.summary || "-";
+                document.getElementById('historyText').innerText = data.history || "-";
+
+                const sourceBtn = document.getElementById('sourceLink');
+                if (sourceBtn) {
+                    sourceBtn.href = data.link || "#";
+                    sourceBtn.style.display = data.link ? 'block' : 'none';
+                }
+
                 let legendHtml = '';
                 activeColorMap = {};
                 const arcs = [], points = [];
 
-                for (const [code, info] of Object.entries(data.countries)) {
-                    const matched = findMasterCountryByIso(code) || findMasterCountryByName(code);
-                    if (matched) {
-                        const col = normalizeColor(info.color);
-                        activeColorMap[matched.isoKey] = col;
-                        legendHtml += `<div class="legend-item"><span><strong>${matched.trName}</strong><br><small>${info.role}</small></span><span class="legend-color" style="background: ${col};"></span></div>`;
-                        points.push({lat: matched.lat, lng: matched.lng, color: col});
+                if (data.countries) {
+                    for (const [code, info] of Object.entries(data.countries)) {
+                        const matched = findMasterCountryByIso(code) || findMasterCountryByName(code);
+                        if (matched) {
+                            const col = normalizeColor(info.color);
+                            activeColorMap[matched.isoKey] = col;
+                            legendHtml += `<div class="legend-item"><span style="cursor:pointer;" onclick="triggerCountryClick('${matched.isoKey}')"><strong>${matched.trName}</strong><br><small>${info.role}</small></span><span class="legend-color" style="background: ${col};"></span></div>`;
+                            points.push({lat: matched.lat, lng: matched.lng, color: col});
+                        }
                     }
                 }
                 
-                // HABERLER İÇİN EKSİK OLAN BAĞLANTI (ARC) ÇİZGİLERİ EKLENDİ
+                // HABERLERDEKİ EKSİK KAVİSLİ ÇİZGİLER (ARCS) EKLENDİ
                 for (let i = 0; i < points.length; i++) {
                     for (let j = i + 1; j < points.length; j++) {
                         arcs.push({
-                            startLat: points[i].lat, startLng: points[i].lng,
-                            endLat: points[j].lat, endLng: points[j].lng,
+                            startLat: points[i].lat || 0, startLng: points[i].lng || 0,
+                            endLat: points[j].lat || 0, endLng: points[j].lng || 0,
                             color: [points[i].color, points[j].color]
                         });
                     }
@@ -489,7 +568,7 @@
                 document.getElementById('countryLegend').innerHTML = legendHtml;
                 globe.polygonCapColor(globe.polygonCapColor());
                 globe.arcsData(arcs);
-                globe.ringsData([]);
+                globe.ringsData([]); // Çökme koruması
                 globe.pointsData(points);
                 if (points.length > 0) globe.pointOfView({ lat: points[0].lat, lng: points[0].lng, altitude: 1.8 }, 1200);
             } 
@@ -498,8 +577,12 @@
                 const info = orgInfoData[orgId];
                 document.getElementById('panelTitle').innerText = "Örgüt Doktrini & Özeti";
                 document.getElementById('legendTitle').innerText = "Üye Ülkeler Listesi";
+                document.getElementById('historyTitle').innerText = "Stratejik & Tarihsel Rolü";
                 document.getElementById('summaryText').innerText = info.summary;
                 document.getElementById('historyText').innerText = info.history;
+
+                const sourceBtn = document.getElementById('sourceLink');
+                if (sourceBtn) sourceBtn.style.display = 'none';
 
                 activeColorMap = {};
                 const arcs = [];
@@ -510,9 +593,9 @@
                     if(matched) {
                         activeColorMap[matched.isoKey] = '#0284c7';
                         if (centerMatched && matched.isoKey !== centerMatched.isoKey) {
-                            arcs.push({ startLat: centerMatched.lat, startLng: centerMatched.lng, endLat: matched.lat, endLng: matched.lng, color: ['#0284c7', '#38bdf8']});
+                            arcs.push({ startLat: centerMatched.lat || 0, startLng: centerMatched.lng || 0, endLat: matched.lat || 0, endLng: matched.lng || 0, color: ['#0284c7', '#38bdf8']});
                         }
-                        return `<span class="member-chip">${matched.trName}</span>`;
+                        return `<span class="member-chip" style="cursor:pointer;" onclick="triggerCountryClick('${iso}')">${matched.trName}</span>`;
                     }
                     return '';
                 }).join('');
@@ -534,8 +617,12 @@
             document.getElementById('currentYearDisplay').innerText = tlData.year;
             document.getElementById('panelTitle').innerText = `${tlData.year} - Saha İstihbarat Özeti`;
             document.getElementById('legendTitle').innerText = "Taraf Ülkeler & Rolleri";
+            document.getElementById('historyTitle').innerText = "Stratejik Arka Plan & Derin Hafıza";
             document.getElementById('summaryText').innerText = tlData.sum;
-            document.getElementById('historyText').innerText = tlData.hist; // ZENGİNLEŞTİRİLMİŞ TARİHSEL METİNLER BURAYA YANSIR
+            document.getElementById('historyText').innerText = tlData.hist;
+
+            const sourceBtn = document.getElementById('sourceLink');
+            if (sourceBtn) sourceBtn.style.display = 'none';
 
             let legendHtml = '';
             activeColorMap = {};
@@ -547,14 +634,14 @@
                 if (matched) {
                     const col = normalizeColor(info.color);
                     activeColorMap[matched.isoKey] = col;
-                    legendHtml += `<div class="legend-item"><span><strong>${matched.trName}</strong><br><small>${info.role}</small></span><span class="legend-color" style="background: ${col};"></span></div>`;
+                    legendHtml += `<div class="legend-item"><span style="cursor:pointer;" onclick="triggerCountryClick('${matched.isoKey}')"><strong>${matched.trName}</strong><br><small>${info.role}</small></span><span class="legend-color" style="background: ${col};"></span></div>`;
                     points.push({lat: matched.lat, lng: matched.lng, color: col});
                 }
             });
 
             if (tlData.heatpoints) {
                 tlData.heatpoints.forEach(hp => {
-                    rings.push({ lat: hp.lat, lng: hp.lng, w: hp.w * 1.5, c: hp.c }); 
+                    rings.push({ lat: hp.lat || 0, lng: hp.lng || 0, w: (hp.w || 1) * 1.5, c: hp.c || '#fde047' }); 
                 });
             }
 
@@ -566,6 +653,28 @@
             
             if (points.length > 0) globe.pointOfView({ lat: points[0].lat, lng: points[0].lng, altitude: 1.6 }, 1000);
             else if (rings.length > 0) globe.pointOfView({ lat: rings[0].lat, lng: rings[0].lng, altitude: 1.6 }, 1000);
+        }
+
+        function triggerCountryClick(countryCode) {
+            const matched = findMasterCountryByIso(countryCode) || findMasterCountryByName(countryCode);
+            if (matched) {
+                showCountryCard(matched);
+                globe.pointOfView({ lat: matched.lat, lng: matched.lng, altitude: 1.8 }, 1200);
+            }
+        }
+
+        function showCountryCard(countryData) {
+            const card = document.getElementById('countryCard');
+            document.getElementById('cardCountryName').innerText = countryData.trName || "Egemen Devlet";
+            document.getElementById('cardFounding').innerText = countryData.founding || "Egemen Devlet";
+            document.getElementById('cardPop').innerText = countryData.pop || "BM Üyesi";
+            document.getElementById('cardArea').innerText = countryData.area || "Bölgesel Veri";
+            document.getElementById('cardPact').innerText = countryData.pact || "Uluslararası Birlik";
+            card.style.display = 'block';
+        }
+
+        function hideCountryCard() {
+            document.getElementById('countryCard').style.display = 'none';
         }
 
         function switchMobileTab(tabName) {
