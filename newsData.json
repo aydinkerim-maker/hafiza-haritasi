@@ -1,5 +1,28 @@
 [
     {
+        "title": "Japonya, II. Dünya Savaşı Sonrası Statüsünden Uzaklaşarak ABD Yapımı Tomahawk Füzesini Test Etti",
+        "tags": [
+            "#Japonya",
+            "#AmerikaBirleşikDevletleri",
+            "#Pasifik",
+            "#Askeri"
+        ],
+        "summary": "Japonya, II. Dünya Savaşı sonrasında benimsediği pasifist savunma politikasından uzaklaşma sürecinde önemli bir adım atarak ilk kez ABD yapımı Tomahawk seyrüsefer füzesini test etti. 29 Temmuz'da Pasifik Okyanusu açıklarında Chokai savaş gemisinden gerçekleştirilen fırlatma testi başarıyla sonuçlandı. Bu hamle, Tokyo yönetiminin bölgedeki artan güvenlik tehditlerine karşı saldırı kapasitesi geliştirme çabasının somut bir göstergesi olarak değerlendiriliyor. Ülke, anayasasının savaş yetkilerini kısıtlayan maddelerine rağmen uzun menzilli taarruz silahsızlanmasından vazgeçmeye başladı. Tomahawk füzelerinin envantere girmesi, Japonya'nın caydırıcılık stratejisinde köklü bir değişim yaşandığını ortaya koyuyor. Test, uluslararası kamuoyunda ve özellikle komşu ülkelerde dikkatle takip edilen stratejik bir dönüm noktası oluşturdu. Washington ve Tokyo arasındaki askeri entegrasyonun derinleştiğini gösteren bu gelişme, Hint-Pasifik bölgesindeki güç dengelerini doğrudan etkileme potansiyeline sahip. Japon hükümeti, bu tür testlerin savunma amaçlı olduğunu ve bölgesel istikrara katkı sağlamayı amaçladığını savunuyor. Ancak Çin ve Kuzey Kore gibi aktörler, Japonya'nın bu silahlanma hamlesine karşı sert tepkiler gösteriyor. Füzelerin fiilen operasyonel hale gelmesiyle birlikte Japonya'nın askeri doktrinindeki İkinci Dünya Savaşı sonrası kısıtlamalar büyük ölçüde rafa kaldırılmış oluyor.",
+        "history": "1945 yılında İkinci Dünya Savaşı'ndan ağır bir yenilgiyle çıkan Japonya, galip devletlerin gözetiminde hazırlanan ve 1947'de yürürlüğe giren barışçıl anayasanın 9. maddesi gereği savaş açma hakkından ve daimi bir askeri güç bulundurmaktan resmen vazgeçmişti. Onlarca yıl boyunca ülkenin savunması yalnızca meşru müdafaa sınırlarıyla kısıtlı tutulmuş ve askeri harcamalar gayri safi millî hasılanın yüzde birini geçmeyecek şekilde sınırlandırılmıştı. Soğuk Savaş dönemi boyunca ABD'nin nükleer şemsiyesi ve güvenlik garantisi altında kalan Japonya, ekonomik kalkınmaya odaklanarak dünyanın en büyük ekonomilerinden biri haline geldi. Ancak 21. yüzyılda Çin'in Asya-Pasifik'teki ekonomik ve askeri yükselişi ile Kuzey Kore'nin nükleer ve füze denemeleri, Tokyo'daki güvenlik algısını kökten değiştirdi. Özellikle son on yılda Japon liderler, bölgesel tehditlerin artması gerekçesiyle anayasal kısıtlamaları esnetmek için çeşitli yasal düzenlemelere gittiler. Başbakan Shinzo Abe döneminde başlayan kolektif meşru müdafaa hakkının tanınması süreci, halihazırdaki hükümetler tarafından uzun menzilli karşı saldırı yeteneklerinin kazanılmasıyla bir üst seviyeye taşındı. ABD ile yapılan milyarlarca dolarlık savunma anlaşmaları ve Tomahawk füzesi tedariki, Japonya'nın savaş sonrası pasifist dış politikasından uzaklaşarak aktif bir askeri aktör olma yolundaki tarihsel dönüşümünü tamamlamaktadır.",
+        "link": "https://www.aljazeera.com/video/newsfeed/2026/8/5/japan-tests-us-tomahawk-missile-as-it-moves-away-from-post-wwii-status?traffic_source=rss",
+        "countries": {
+            "Japan": {
+                "role": "Aktör (Pasifik'te ABD yapımı Tomahawk füzesini test ederek askeri kapasitesini artırıyor)",
+                "color": "#ef4444"
+            },
+            "United States": {
+                "role": "Aktör (Japonya'ya stratejik silah satışı yaparak askeri iş birliğini derinleştiriyor)",
+                "color": "#38bdf8"
+            }
+        },
+        "id": 1
+    },
+    {
         "title": "Rusya'nın Kiev'e Düzenlediği Balistik Füze Saldırısında En Az 14 Kişi Hayatını Kaybetti",
         "tags": [
             "#Rusya",
@@ -18,7 +41,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 1
+        "id": 2
     },
     {
         "title": "Bangladeş'in Hakikat Avcısı",
@@ -44,7 +67,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 2
+        "id": 3
     },
     {
         "title": "Rus füzelerinin Ukrayna'nın başkenti Kiev'i vurmasıyla patlamalar meydana geldi",
@@ -65,7 +88,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 3
+        "id": 4
     },
     {
         "title": "Bir ABD Mahkemesi 6 Ocak Ayaklanması İçin Yeni Bir Zemin mi Hazırladı?",
@@ -82,7 +105,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 4
+        "id": 5
     },
     {
         "title": "Bolivya, Sınır Boyundaki Brezilyalı Çete Şiddetini Durdurmak İçin Asker Sevk Etti",
@@ -103,7 +126,7 @@
                 "color": "#f97316"
             }
         },
-        "id": 5
+        "id": 6
     },
     {
         "title": "Kuzey Koreli Kim Yo-jong'dan Japonya'nın Füze Testine Karşı Askeri Tehdit",
@@ -134,7 +157,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 6
+        "id": 7
     },
     {
         "title": "ABD Mahkemesinden Trump'ın İklim Hibe Programını İptal Etme Girişimine Darbe",
@@ -153,7 +176,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 7
+        "id": 8
     },
     {
         "title": "‘Kalandan Geriye Kalanı Kucaklamak İstedim’: Gazze Ailelerinin Cenaze İçin 3 Yıllık Bekleyişi",
@@ -180,7 +203,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 8
+        "id": 9
     },
     {
         "title": "Kosova, yetkililerin aramaları genişletmesiyle üçüncü savaş zamanı toplu mezar yeri buldu",
@@ -207,7 +230,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 9
+        "id": 10
     },
     {
         "title": "İsrail'in Yıkım Kararları Sonrası Dükkan Sahipleri İş Yerlerini Söküyor",
@@ -229,7 +252,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 10
+        "id": 11
     },
     {
         "title": "Trump, Washington Anıtı Havuzu'ndaki Vandalizm Suçlamalarının Düşürülmesi Nedeniyle Jeanine Pirro'yu Neden Hedef Aldı?",
@@ -249,7 +272,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 11
+        "id": 12
     },
     {
         "title": "Video, Rus insansız hava aracının 'insan safari' saldırısında Ukraynalı seyyar satıcıyı kovaladığını gösteriyor",
@@ -270,7 +293,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 12
+        "id": 13
     },
     {
         "title": "Hürmüz Boğazı'nın Yeniden Açılabileceği Umutlarıyla Petrol Fiyatları Düştü",
@@ -293,7 +316,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 13
+        "id": 14
     },
     {
         "title": "AB'den İspanya'nın Ceuta Göçmen Krizine 'Hızlı Yanıtına' Övgü",
@@ -319,7 +342,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 14
+        "id": 15
     },
     {
         "title": "İran'a Savaş: Trump'tan Tahran'a 'Son Şans' Uyarısı",
@@ -342,7 +365,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 15
+        "id": 16
     },
     {
         "title": "Bir SpaceX Roketi Aya Çarparsa Ne Olacak?",
@@ -361,7 +384,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 16
+        "id": 17
     },
     {
         "title": "Gazze'de 2023 İsrail Saldırısında Hayatını Kaybeden 112 Filistinli İçin Toplu Cenaze Töreni",
@@ -385,7 +408,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 17
+        "id": 18
     },
     {
         "title": "İran Savaşı ve Hürmüz Boğazı'nın Kapanması Arasında Petrol Şirketleri Neden Rekor Karlar Elde Ediyor?",
@@ -413,7 +436,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 18
+        "id": 19
     },
     {
         "title": "Hamas Müzakerecisi: Gazze'yi Kurtarmak İçin Silahsızlanma Anlaşması Gerekliydi",
@@ -449,7 +472,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 19
+        "id": 20
     },
     {
         "title": "İspanya Başbakanı Sanchez, AB Ceuta Göçmen Krizini Görüşürken Eleştirilerin Hedefinde",
@@ -474,7 +497,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 20
+        "id": 21
     },
     {
         "title": "Manş Denizi'nde Teknesi Alev Alan 150'den Fazla Düzensiz Göçmen Kurtarıldı",
@@ -498,7 +521,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 21
+        "id": 22
     },
     {
         "title": "Analiz: Trump, en yakın müttefiklerinden gelen soğuk gerçeklikle yüzleşiyor",
@@ -518,7 +541,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 22
+        "id": 23
     },
     {
         "title": "Ukrayna, Moskova bölgesinde beş kişinin öldüğü saldırının ardından daha fazla Wildberries tesisini vurdu",
@@ -543,7 +566,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 23
+        "id": 24
     },
     {
         "title": "Trump Media'nın Piyasaları Etkileyen Gönderilere Hızlı Erişim Satışı Neden Tartışmalı?",
@@ -563,7 +586,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 24
+        "id": 25
     },
     {
         "title": "Rus İşgali Altındaki Kırım'da Bir Asker Silahlı Saldırıda Dört Kişiyi Öldürdü",
@@ -587,7 +610,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 25
+        "id": 26
     },
     {
         "title": "AB, Ceuta'daki göçmen geçişlerinin ardından daha güçlü sınırlar çağrısında bulundu",
@@ -617,7 +640,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 26
+        "id": 27
     },
     {
         "title": "Rusya, Ukrayna İnsansız Hava Aracının Kalabalık Bir Plaja Çarpması Sonucu Yedi Kişinin Öldüğünü ve 40 Kişinin Yaralandığını Açıkladı",
@@ -641,7 +664,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 27
+        "id": 28
     },
     {
         "title": "Fransa'daki Orman Yangınları Köyde Yüzlerce 2. Dünya Savaşı Mühimmatını Ortaya Çıkardı",
@@ -665,7 +688,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 28
+        "id": 29
     },
     {
         "title": "Eşimi ve ikizlerimi geride bıraktım - Bu Nijeryalı adam neden Güney Afrika'dan kaçtı?",
@@ -691,7 +714,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 29
+        "id": 30
     },
     {
         "title": "ABD Eyaletleri, Onlarca Ülkeyi Etkileyen Trump Gümrük Vergilerini Engellemek İçin Dava Açtı",
@@ -715,7 +738,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 30
+        "id": 31
     },
     {
         "title": "Ren Nehri rekor seviyede düştü: Kuraklık Avrupa nehirlerini zorluyor",
@@ -752,7 +775,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 31
+        "id": 32
     },
     {
         "title": "Analistler: Orta Doğu'da Petrol Tankerlerine Yönelik Tehdit, İran Savaşı Başlangıcından Bu Yana En Kötü Seviyede",
@@ -781,7 +804,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 32
+        "id": 33
     },
     {
         "title": "Deprem Vuran Japonya AVM'sine Patronun Emriyle Giren İki İşçi Patlamada Öldü",
@@ -801,7 +824,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 33
+        "id": 34
     },
     {
         "title": "Ariana Grande, 'Bitmek Bilmeyen' Baskılar Nedeniyle Kamuoyundan Uzaklaşma Kararı Aldı",
@@ -825,7 +848,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 34
+        "id": 35
     },
     {
         "title": "Fas Kralı'nın Mektubu, Büyük Bir Otoyola Trump'ın Adının Verildiğini Doğruladı",
@@ -850,7 +873,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 35
+        "id": 36
     },
     {
         "title": "Massive Attack, Singapur'un Filistin Protestosu Yasağına Tepki Gösterdi",
@@ -879,7 +902,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 36
+        "id": 37
     },
     {
         "title": "ABD ve Japonya, Yen'i Desteklemek İçin Nadir Görülen Ortak Bir Adım Attı",
@@ -900,7 +923,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 37
+        "id": 38
     },
     {
         "title": "İran, Trump'ın Pazartesi günü yeni görüşmelerin başlayacağı yönündeki iddiasını yalanladı",
@@ -929,7 +952,7 @@
                 "color": "#10b981"
             }
         },
-        "id": 38
+        "id": 39
     },
     {
         "title": "Aung San Suu Kyi, 2,5 Yıl Sonra İlk Doğrulanan Dış Temasında Sağlıklı Görünüyor",
@@ -953,7 +976,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 39
+        "id": 40
     },
     {
         "title": "\"Tek oğlum adalet için ayaktayken vuruldu\" - Pakistan yönetimindeki Keşmir'de ölümcül protestoların pençesindeki şehirden izlenimler",
@@ -977,6 +1000,6 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 40
+        "id": 41
     }
 ]
