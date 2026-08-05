@@ -165,25 +165,26 @@
         <div class="info-panel" id="panelSection">
             <div class="panel-block">
                 <h4 id="panelTitle">Saha İstihbarat Özeti</h4>
-                <p id="summaryText">Lütfen bir gelişme veya konu seçin.</p>
+                <p id="summaryText">Sistem Başlatılıyor...</p>
             </div>
 
             <div class="panel-block">
                 <h4 id="legendTitle">Olaydaki Aktörler & Konumları</h4>
-                <div id="countryLegend"></div>
+                <div id="countryLegend">Bekleyiniz...</div>
             </div>
 
             <div class="panel-block history-block">
                 <h4 id="historyTitle">Tarihsel Arka Plan & Derin Hafıza</h4>
-                <p id="historyText">Tarihsel arka plan yükleniyor...</p>
+                <p id="historyText">Modüller yükleniyor...</p>
             </div>
             <a href="#" id="sourceLink" target="_blank" class="source-btn" style="display: none;">Kaynak Habere Git &rarr;</a>
         </div>
     </div>
 
     <script>
+        // ZIRHLI STRİNG TEMİZLEYİCİ
         function normalizeStr(str) {
-            if (str == null) return "";
+            if (str == null || typeof str === 'undefined') return "";
             return String(str).trim().toLowerCase()
                 .replace(/ı/g, "i").replace(/i̇/g, "i")
                 .replace(/ğ/g, "g").replace(/ü/g, "u")
@@ -205,8 +206,8 @@
 
         function getTagsArray(tags) {
             if (!tags) return [];
-            if (Array.isArray(tags)) return tags;
-            if (typeof tags === 'string') return tags.split(',').map(t => t.trim());
+            if (Array.isArray(tags)) return tags.map(t => String(t));
+            if (typeof tags === 'string') return tags.split(',').map(t => String(t).trim());
             return [];
         }
 
@@ -323,7 +324,15 @@
             }
         ];
 
-        let newsData = [];
+        // SİSTEM GÜVENLİ BAŞLATICI (KULLANICIYA ASLA BOŞ EKRAN GÖSTERMEZ)
+        let newsData = [{
+            title: "Sistem Başlatılıyor...",
+            summary: "Lütfen bekleyin, canlı veri tabanı ve haberler eşzamanlanıyor...",
+            history: "Bağlantı sağlanıyor...",
+            tags: ["#Sistem"],
+            countries: {}
+        }];
+        
         let currentMainMode = 'news';
         let currentActiveItem = null;
         let currentTimelineIndex = 0;
@@ -344,11 +353,13 @@
             .polygonStrokeColor(() => '#0ea5e9')
             .polygonAltitude(0.015)
             .polygonCapColor((feat) => {
-                const p = feat.properties;
-                const iso = p.ADM0_A3 || p.adm0_a3 || p.ISO_A3 || p.iso_a3 || p.ISO_A2 || "";
-                const matched = findMasterCountryByIso(iso);
-                if (matched && activeColorMap[matched.isoKey]) return activeColorMap[matched.isoKey] + 'dd';
-                return 'rgba(10, 15, 29, 0.65)';
+                try {
+                    const p = feat.properties;
+                    const iso = p.ADM0_A3 || p.adm0_a3 || p.ISO_A3 || p.iso_a3 || p.ISO_A2 || "";
+                    const matched = findMasterCountryByIso(iso);
+                    if (matched && activeColorMap[matched.isoKey]) return activeColorMap[matched.isoKey] + 'dd';
+                    return 'rgba(10, 15, 29, 0.65)';
+                } catch(e) { return 'rgba(10, 15, 29, 0.65)'; }
             })
             .arcColor('color')
             .arcDashLength(0.4)
@@ -374,41 +385,44 @@
 
         globeContainer.addEventListener('mousedown', () => { globe.controls().autoRotate = false; });
 
-        // TAM ZIRHLI FETCH BAĞLANTISI 
-        Promise.all([
-            fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
-                .then(r => r.ok ? r.json() : null).catch(e => null),
-            fetch('newsData.json')
-                .then(r => r.ok ? r.json() : null).catch(e => null)
-        ]).then(([geoData, liveNews]) => {
-            if (geoData && geoData.features) {
+        // ARAYÜZÜ BOŞ BIRAKMAMAK İÇİN İLK TETİKLEME
+        switchMainMode('news');
+
+        // YÜKSEK GÜVENİLİRLİKLİ (FALLBACK'Lİ) FETCH MİMARİSİ
+        fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
+            .then(r => { if(!r.ok) throw new Error("Harita URL Hatalı"); return r.json(); })
+            .then(geoData => {
                 worldGeoJson = geoData;
                 globe.polygonsData(geoData.features);
-            }
-            if (liveNews) {
-                newsData = Array.isArray(liveNews) ? liveNews : (liveNews.data || []);
-            }
-            if (!newsData || newsData.length === 0) {
+                
+                fetch('newsData.json')
+                    .then(r => { if(!r.ok) throw new Error("JSON Dosyası Bulunamadı"); return r.json(); })
+                    .then(liveNews => {
+                        newsData = Array.isArray(liveNews) ? liveNews : (liveNews.data || []);
+                        if(newsData.length === 0) throw new Error("JSON İçi Boş");
+                        switchMainMode('news');
+                    })
+                    .catch(err => {
+                        newsData = [{
+                            title: "Sistem Uyarısı: Veri Okunamadı",
+                            summary: "Haberler dosyası (newsData.json) okunurken bir sorun oluştu.",
+                            history: "Nedeni: " + err.message + "\nLütfen JSON dosyasındaki format hatalarını (eksik virgül, tırnak) veya sunucu bağlantınızı kontrol edin.",
+                            tags: ["#KritikHata"],
+                            countries: { "TUR": { role: "Hata Noktası", color: "#ef4444" } }
+                        }];
+                        switchMainMode('news');
+                    });
+            })
+            .catch(err => {
                 newsData = [{
-                    title: "Sistem Uyarısı: Bağlantı Kurulamadı",
-                    summary: "newsData.json okunamadı. Veri tabanı formatınızı kontrol edin.",
-                    history: "Hata detayı: JSON dosyası geçersiz veya CORS engeline takıldı.",
-                    tags: ["#Sistem", "#Hata"],
-                    countries: { "TUR": { role: "Hata Merkezi", color: "#ef4444" } }
+                    title: "Kritik Motor Hatası",
+                    summary: "Harita altyapısı yüklenemedi. İnternet bağlantınızı kontrol edin.",
+                    history: err.message,
+                    tags: ["#Fatal"],
+                    countries: {}
                 }];
-            }
-            switchMainMode('news');
-        }).catch(err => {
-            console.error("Kritik Çökme:", err);
-            newsData = [{
-                title: "Kritik Motor Hatası",
-                summary: "Sistem başlatılamadı. İnternet bağlantınızı kontrol edin.",
-                history: err.toString(),
-                tags: ["#Fatal"],
-                countries: {}
-            }];
-            switchMainMode('news');
-        });
+                switchMainMode('news');
+            });
 
         function findMasterCountryByIso(isoCode) {
             if (!isoCode || String(isoCode) === "-99") return null;
@@ -427,60 +441,69 @@
         }
 
         function switchMainMode(mode) {
-            currentMainMode = mode;
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`btn-mode-${mode}`).classList.add('active');
-            document.getElementById('searchBoxContainer').style.display = (mode === 'news') ? 'block' : 'none';
-            document.getElementById('timelineContainer').style.display = 'none';
-            executeSearch();
+            try {
+                currentMainMode = mode;
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                const btn = document.getElementById(`btn-mode-${mode}`);
+                if (btn) btn.classList.add('active');
+                
+                document.getElementById('searchBoxContainer').style.display = (mode === 'news') ? 'block' : 'none';
+                document.getElementById('timelineContainer').style.display = 'none';
+                executeSearch();
+            } catch(e) { console.error(e); }
         }
 
         function executeSearch() {
-            const listEl = document.getElementById('sidebarContentList');
-            listEl.innerHTML = '';
-            let dataSource = (currentMainMode === 'news') ? newsData : (currentMainMode === 'orgs' ? orgListData : conflictListData);
-            
-            const searchInput = document.getElementById('newsSearchInput');
-            const searchText = searchInput ? toTRLowerCase(searchInput.value.trim()) : "";
-
-            const filteredData = dataSource.filter(item => {
-                let tagMatch = true;
-                if (currentMainMode === 'news' && selectedTagFilter) {
-                    const cleanSelected = toTRLowerCase(selectedTagFilter.replace('#', '').trim());
-                    const tagsArr = getTagsArray(item.tags);
-                    tagMatch = tagsArr.some(t => toTRLowerCase(t.replace('#', '').trim()).includes(cleanSelected));
-                }
-
-                let searchMatch = true;
-                if (searchText) {
-                    const titleMatch = toTRLowerCase(item.title || "").includes(searchText);
-                    const summaryMatch = toTRLowerCase(item.summary || item.sub || "").includes(searchText);
-                    const tagsArr = getTagsArray(item.tags);
-                    let tagsMatch = tagsArr.some(t => toTRLowerCase(t).includes(searchText));
-                    searchMatch = titleMatch || summaryMatch || tagsMatch;
-                }
-                return tagMatch && searchMatch;
-            });
-
-            filteredData.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = `news-card ${index === 0 ? 'active' : ''}`;
-                card.onclick = () => selectItem(item, card);
+            try {
+                const listEl = document.getElementById('sidebarContentList');
+                listEl.innerHTML = '';
+                let dataSource = (currentMainMode === 'news') ? newsData : (currentMainMode === 'orgs' ? orgListData : conflictListData);
                 
-                if (currentMainMode === 'news') {
-                    const tagsArr = getTagsArray(item.tags);
-                    const tagsHtml = tagsArr.map(t => `<span class="tag" onclick="filterByTag('${t}', event)">${t}</span>`).join('');
-                    card.innerHTML = `<h3>${item.title}</h3><div class="tags">${tagsHtml}</div>`;
-                } else {
-                    card.innerHTML = `<h3>${item.title}</h3><p class="sub">${item.sub}</p>`;
-                }
-                listEl.appendChild(card);
-            });
+                const searchInput = document.getElementById('newsSearchInput');
+                const searchText = searchInput ? toTRLowerCase(searchInput.value.trim()) : "";
 
-            if (filteredData.length > 0) {
-                selectItem(filteredData[0], listEl.firstChild);
-            } else {
-                document.getElementById('summaryText').innerText = "Arama kriterinize uygun sonuç bulunamadı.";
+                const filteredData = dataSource.filter(item => {
+                    let tagMatch = true;
+                    if (currentMainMode === 'news' && selectedTagFilter) {
+                        const cleanSelected = toTRLowerCase(selectedTagFilter.replace('#', '').trim());
+                        const tagsArr = getTagsArray(item.tags);
+                        tagMatch = tagsArr.some(t => toTRLowerCase(t.replace('#', '').trim()).includes(cleanSelected));
+                    }
+
+                    let searchMatch = true;
+                    if (searchText) {
+                        const titleMatch = toTRLowerCase(item.title || "").includes(searchText);
+                        const summaryMatch = toTRLowerCase(item.summary || item.sub || "").includes(searchText);
+                        const tagsArr = getTagsArray(item.tags);
+                        let tagsMatch = tagsArr.some(t => toTRLowerCase(t).includes(searchText));
+                        searchMatch = titleMatch || summaryMatch || tagsMatch;
+                    }
+                    return tagMatch && searchMatch;
+                });
+
+                filteredData.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = `news-card ${index === 0 ? 'active' : ''}`;
+                    card.onclick = () => selectItem(item, card);
+                    
+                    if (currentMainMode === 'news') {
+                        const tagsArr = getTagsArray(item.tags);
+                        const tagsHtml = tagsArr.map(t => `<span class="tag" onclick="filterByTag('${t}', event)">${t}</span>`).join('');
+                        card.innerHTML = `<h3>${item.title || 'Başlıksız'}</h3><div class="tags">${tagsHtml}</div>`;
+                    } else {
+                        card.innerHTML = `<h3>${item.title || 'Başlıksız'}</h3><p class="sub">${item.sub || ''}</p>`;
+                    }
+                    listEl.appendChild(card);
+                });
+
+                if (filteredData.length > 0) {
+                    selectItem(filteredData[0], listEl.firstChild);
+                } else {
+                    document.getElementById('summaryText').innerText = "Arama kriterinize uygun sonuç bulunamadı.";
+                }
+            } catch(e) { 
+                console.error("Arama Hatası:", e);
+                document.getElementById('summaryText').innerText = "Hata oluştu: Lütfen sayfayı yenileyin.";
             }
         }
 
@@ -500,20 +523,22 @@
         }
 
         function selectItem(item, cardEl) {
-            document.querySelectorAll('.news-card').forEach(c => c.classList.remove('active'));
-            if(cardEl) cardEl.classList.add('active');
-            
-            currentActiveItem = { type: currentMainMode, data: item };
+            try {
+                document.querySelectorAll('.news-card').forEach(c => c.classList.remove('active'));
+                if(cardEl) cardEl.classList.add('active');
+                
+                currentActiveItem = { type: currentMainMode, data: item };
 
-            if (currentMainMode === 'conflicts') {
-                document.getElementById('timelineContainer').style.display = 'flex';
-                currentTimelineIndex = item.timeline.length - 1; 
-                initTimeline(item);
-                renderTimelineData();
-            } else {
-                document.getElementById('timelineContainer').style.display = 'none';
-                renderStaticData();
-            }
+                if (currentMainMode === 'conflicts') {
+                    document.getElementById('timelineContainer').style.display = 'flex';
+                    currentTimelineIndex = item.timeline.length - 1; 
+                    initTimeline(item);
+                    renderTimelineData();
+                } else {
+                    document.getElementById('timelineContainer').style.display = 'none';
+                    renderStaticData();
+                }
+            } catch(e) { console.error(e); }
         }
 
         function initTimeline(conflict) {
@@ -546,8 +571,8 @@
                 document.getElementById('panelTitle').innerText = "Saha İstihbarat Özeti";
                 document.getElementById('legendTitle').innerText = "Olaydaki Aktörler & Konumları";
                 document.getElementById('historyTitle').innerText = "Tarihsel Arka Plan & Derin Hafıza";
-                document.getElementById('summaryText').innerText = data.summary || "-";
-                document.getElementById('historyText').innerText = data.history || "-";
+                document.getElementById('summaryText').innerText = data.summary || "Özet metni bulunamadı.";
+                document.getElementById('historyText').innerText = data.history || "Tarihsel veri girilmemiş.";
 
                 const sourceBtn = document.getElementById('sourceLink');
                 if (sourceBtn) {
@@ -571,7 +596,7 @@
                     }
                 }
                 
-                // HABERLER İÇİN EKSİK KAVİSLİ ÇİZGİLER (ARCS)
+                // HABERLER İÇİN KAVİSLİ ÇİZGİLER (ARCS)
                 for (let i = 0; i < points.length; i++) {
                     for (let j = i + 1; j < points.length; j++) {
                         arcs.push({
@@ -645,16 +670,18 @@
             activeColorMap = {};
             const points = [], rings = [];
 
-            const actors = Object.entries(tlData.countries);
-            actors.forEach(([code, info]) => {
-                const matched = findMasterCountryByIso(code) || findMasterCountryByName(code);
-                if (matched) {
-                    const col = normalizeColor(info.color);
-                    activeColorMap[matched.isoKey] = col;
-                    legendHtml += `<div class="legend-item"><span style="cursor:pointer;" onclick="triggerCountryClick('${matched.isoKey}')"><strong>${matched.trName}</strong><br><small>${info.role}</small></span><span class="legend-color" style="background: ${col};"></span></div>`;
-                    points.push({lat: matched.lat, lng: matched.lng, color: col});
-                }
-            });
+            if (tlData.countries) {
+                const actors = Object.entries(tlData.countries);
+                actors.forEach(([code, info]) => {
+                    const matched = findMasterCountryByIso(code) || findMasterCountryByName(code);
+                    if (matched) {
+                        const col = normalizeColor(info.color);
+                        activeColorMap[matched.isoKey] = col;
+                        legendHtml += `<div class="legend-item"><span style="cursor:pointer;" onclick="triggerCountryClick('${matched.isoKey}')"><strong>${matched.trName}</strong><br><small>${info.role}</small></span><span class="legend-color" style="background: ${col};"></span></div>`;
+                        points.push({lat: matched.lat, lng: matched.lng, color: col});
+                    }
+                });
+            }
 
             if (tlData.heatpoints) {
                 tlData.heatpoints.forEach(hp => {
