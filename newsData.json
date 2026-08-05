@@ -1,5 +1,99 @@
 [
     {
+        "title": "Alman Havalimanında Patlayıcı Yüklü Drone Bulundu",
+        "tags": [
+            "#Almanya",
+            "#Ukrayna"
+        ],
+        "summary": "Almanya'daki bir havalimanının kargo alanında, bir Ukrayna uçağının yakınında patlayıcı taşıyan bir drone bulundu. Olay, havada kargo uçağıyla çarpıştığından şüphelenilen başka bir nesnenin tespit edilmesinin hemen ardından meydana geldi. Alman polisi, güvenlik tehdidi oluşturan bu olayla ilgili geniş çaplı bir soruşturma başlattı. Havalimanındaki kargo operasyonları geçici olarak güvenlik incelemelerine tabi tutuldu. Ukrayna bağlantılı bir uçağın hedef alınmış olabileceği ihtimali güvenlik birimlerini alarma geçirdi. Uzmanlar, drone'un türü ve patlayıcının menşei üzerinde teknik incelemeler yürütüyor. Olayın bir sabotaj girişimi olup olmadığı henüz netlik kazanmadı. Alman yetkililer, havalimanlarındaki güvenlik önlemlerini en üst seviyeye çıkardı. Soruşturma kapsamında hem ulusal hem de uluslararası güvenlik kurumları koordine şekilde çalışıyor. Olay, kritik altyapı güvenliği ve havacılık güvenliği konularında Avrupa genelinde yeni tartışmaları beraberinde getirdi.",
+        "history": "Almanya, son yıllarda kritik altyapı tesislerine yönelik artan sabotaj ve casusluk faaliyetleriyle mücadele etmektedir. Özellikle Rusya'nın Ukrayna'yı işgalinin ardından, Almanya içerisindeki hassas noktalarda güvenlik önlemleri defalarca artırılmıştır. Ülkedeki havalimanları ve askeri üsler, geçmişte de çeşitli güvenlik ihlalleri ve şüpheli drone uçuşlarıyla gündeme gelmiştir. Almanya, Ukrayna'ya askeri ve insani yardımlarda bulunan başlıca Avrupalı ülkeler arasında yer almaktadır. Bu durum, Alman topraklarını ve Alman şirketlerini çeşitli yabancı istihbarat servislerinin veya vekil aktörlerin hedefi haline getirebilmektedir. Havacılık güvenliği, 11 Eylül saldırılarından bu yana uluslararası toplumun en öncelikli güvenlik başlıklarından biridir. Son yıllarda ucuz ve kolay erişilebilir hale gelen ticari dronelar, asimetrik tehdit unsurları olarak askeri ve sivil otoritelerin en büyük endişelerinden biri olmuştur. Almanya'nın federal ve eyalet polis teşkilatları, bu tür hava aracı tehditlerine karşı anti-drone sistemleri geliştirmektedir. Tarihsel olarak, Almanya'da yabancı devlet bağlantılı sabotaj girişimleri Soğuk Savaş döneminden bu yana istihbarat raporlarında yer almaktadır. Günümüzde ise hibrit savaş taktikleri kapsamında siber saldırılar ve fiziksel sabotajlar bir arada kullanılmaktadır.",
+        "link": "https://www.bbc.co.uk/news/articles/cyvlg4q48l3o?at_medium=RSS&at_campaign=rss",
+        "countries": {
+            "Germany": {
+                "role": "Aktör (Havalimanında patlayıcı yüklü drone bulunan ve soruşturmayı yürüten ülke)",
+                "color": "#38bdf8"
+            },
+            "Ukraine": {
+                "role": "İlgili Taraf (Kargo alanı yakınında uçağı bulunan ülke)",
+                "color": "#eab308"
+            }
+        },
+        "id": 1
+    },
+    {
+        "title": "Pakistan Uluslararası Medya Çalışanlarına Yönelik Haber Dolaşımını Kısıtladı",
+        "tags": [
+            "#Pakistan",
+            "#BasınÖzgürlüğü",
+            "#Sansür",
+            "#Uluslararasıİlişkiler"
+        ],
+        "summary": "Pakistan hükümeti, ülkede görev yapan uluslararası medya çalışanlarına yönelik yeni ve katı kısıtlamalar getirdiğini duyurdu. Alınan yeni karara göre, yabancı basın kuruluşları için çalışan gazetecilerin belirli alanlar dışında haber takibi yapması zorlaştırıldı. Hem yabancı uyruklu hem de Pakistanlı gazeteciler, ülkenin üç büyük şehri dışındaki bölgelerden haber yapmak için artık resmi izin almak zorunda kalacak. İzin şartı getirilen bu üç ana şehir İslamabad, Lahor ve Karaçi olarak belirlenmiş durumdadır. Bu merkezlerin dışına çıkmak isteyen basın mensupları, hükümet birimlerinden özel haber takip izni talep etmekle yükümlü kılındı. Kararın arkasında güvenlik gerekçeleri ve ülkenin hassas bölgelerindeki haber akışını denetim altında tutma isteği yatıyor. İnsan hakları savunucuları ve uluslararası basın örgütleri karara tepki göstererek bunun açık bir kısıtlama olduğunu savundu. Gazetecilik meslek örgütleri, bu kısıtlamaların özellikle çatışmalı veya hassas bölgelerdeki durumun gizlenmesine yol açacağından endişe ediyor. Pakistan yönetimi ise bu adımın ulusal güvenlik dengelerini korumak ve yabancı unsurları izlemek amacıyla atıldığını vurguluyor. Yeni düzenlemenin ülkedeki uluslararası basın faaliyetlerini önemli ölçüde zorlaştıracağı ve bilgi akışını daraltacağı öngörülüyor.",
+        "history": "Pakistan, kuruluşundan bu yana sivil hükümetler ile güçlü askeri bürokrasi arasında sürekli bir nüfuz mücadelesine sahne olmuştur. Ülkede medyanın üzerindeki devlet denetimi ve güvenlik bürokrasisinin etkisi, geçmişten günümüze kadar kriz dönemlerinde şiddetini artıran kronik bir sorundur. Özellikle 11 Eylül sonrası dönemde Pakistan, ABD'nin Terörle Mücadele konsepti çerçevesinde küresel medyanın en çok odaklandığı merkezlerden biri haline geldi. Hayber Pahtunhva ve Afganistan sınır bölgelerindeki güvenlik sorunları, devletin bu alanlardaki yabancı gazetecileri sıkı takibe almasına neden oldu. Belucistan'da yıllardır süregelen ayrılıkçı gerilimler ve güvenlik operasyonları, bölgeyi uluslararası basın için her zaman girilmesi zorlu bir alan kıldı. Geçmişte de Pakistan İçişleri Bakanlığı ve istihbarat birimleri, yabancı gazetecilerin vize ve seyahat haklarını kısıtlayan benzer kararlar almıştır. Ülkede görev yapan birçok yabancı muhabir, resmi onay olmadan hassas bölgelerde haber yaptıkları gerekçesiyle geçmiş yıllarda sınır dışı edilmiştir. Son yıllarda artan ekonomik kriz ve siyasi çalkantılar, yönetimin kamuoyuna ve dış dünyaya yansıyan haberleri kontrol etme arzusunu daha da güçlendirmiştir. Uluslararası basının hareket alanının kısıtlanması, Pakistan'ın küresel ölçekteki demokrasi ve ifade özgürlüğü algısına tarihsel süreçte sürekli zarar vermiştir. Alınan bu son karar, İslamabad yönetiminin geçmişten gelen denetimci ve güvenlik odaklı medya politikalarının bir devamı niteliğindedir.",
+        "link": "https://www.bbc.co.uk/news/articles/cn0n9w95n70o?at_medium=RSS&at_campaign=rss",
+        "countries": {
+            "Pakistan": {
+                "role": "Sınırlayıcı Aktör (Yabancı basın çalışanlarının üç büyük şehir dışından haber yapmasını izne tabi tutarak kısıtlama getiren taraf)",
+                "color": "#ef4444"
+            }
+        },
+        "id": 2
+    },
+    {
+        "title": "Bandar Abbas'ta Ateşkes Asla Gelmedi",
+        "tags": [
+            "#İran",
+            "#ABD",
+            "#Türkiye"
+        ],
+        "summary": "Bandar Abbas'tan yalnız bir anne, tekrarlanan saldırılar altında yaşamanın korkusunu ve direncini anlatıyor. Şehirdeki siviller, devam eden çatışmalar ve patlamalar nedeniyle günlük yaşamda hayatta kalma mücadelesi veriyor. Uluslararası toplumun ilan ettiği ateşkesler bu bölgede sahaya yansımadı ve halk sürekli bir tehdit altında yaşamaya devam ediyor. Bölgedeki altyapı hasarları ve güvenlik endişeleri insani krizi derinleştiriyor. Savaşın getirdiği ekonomik zorluklar, çocuklu aileleri ve özellikle tek başına ayakta kalmaya çalışan anneleri daha da çaresiz bırakıyor. Saldırıların merkezindeki Bandar Abbas sakinleri, geleceklerine dair umutsuzluk ve kaygı duyuyor. Bölgedeki askeri hareketlilik hız kesmeden sürerken, sivil kayıplar artmaya devam ediyor. Yerel halk, uluslararası diplomatik girişimlerin sonuçsuz kalmasından ve bölgenin unutulmasından şikayetçi. Yaşanan bu trajik süreç, Orta Doğu'daki genel istikrarsızlığın sivil halk üzerindeki yıkıcı etkisini gözler önüne seriyor. Haberde, savaşın sadece cephede değil, evlerin içinde, annelerin yüreğinde nasıl yıkımlar yarattığı vurgulanıyor.",
+        "history": "Bandar Abbas, İran'ın stratejik açıdan en kritik liman kentlerinden biri olarak tarih boyunca pek çok çatışmanın merkezinde yer almıştır. Basra Körfezi'nin girişinde yer alması, şehri hem ekonomik hem de askeri açıdan jeopolitik bir cazibe merkezi yapmaktadır. Özellikle 20. yüzyıldan bu yana bölgede yaşanan bölgesel savaşlar ve Körfez krizleri Bandar Abbas'ı doğrudan etkilemiştir. İran ile Batılı devletler, özellikle Amerika Birleşik Devletleri arasındaki gerilimler, bu liman kentini her daim hedef haline getirmiştir. Geçmişteki çatışmalarda da kritik lojistik üs olması nedeniyle stratejik bir hedef olarak görülmüştür. Yıllar süren ambargolar ve bölgesel vekalet savaşları, şehrin ekonomik yapısını ve halkın refah seviyesini olumsuz etkilemiştir. Bölgedeki askeri yığınaklar ve nükleer krizler, Bandar Abbas halkının on yıllardır huzura kavuşmasını engellemiştir. Diplomatik anlaşmaların ve ateşkes müzakerelerinin kalıcı bir barış getirememesi, kenti sürekli bir çatışma potansiyeli altında tutmuştur. Tarihsel süreçte yaşanan her kriz, Bandar Abbas'ın sivilleri için yeni bir göç, yıkım ve hayatta kalma mücadelesi anlamına gelmiştir. Bugün yaşananlar, uzun yıllara dayanan bu jeopolitik ve mezhepsel/siyasi hesaplaşmaların sivil halk üzerindeki ağır faturasının devamı niteliğindedir.",
+        "link": "https://www.aljazeera.com/features/2026/8/5/in-bandar-abbas-the-ceasefire-never-came?traffic_source=rss",
+        "countries": {
+            "Iran": {
+                "role": "Aktör (Saldırıların hedefindeki bölgeyi ve sivilleri barındıran ülke)",
+                "color": "#ef4444"
+            },
+            "United States": {
+                "role": "Aktör (Bölgedeki askeri operasyonları ve gerilimi tetikleyen taraf)",
+                "color": "#38bdf8"
+            },
+            "Turkey": {
+                "role": "Arabulucu (Bölgesel çatışmaların durması için diplomatik çağrılar yapan taraf)",
+                "color": "#22c55e"
+            }
+        },
+        "id": 3
+    },
+    {
+        "title": "İran, Umman ve ABD Hürmüz Boğazı Anlaşmasına Yakın: Taraflar Ne İstiyor?",
+        "tags": [
+            "#İran",
+            "#Umman",
+            "#AmerikaBirleşikDevletleri",
+            "#HürmüzBoğazı",
+            "#OrtaDoğu"
+        ],
+        "summary": "İran, Umman ve Amerika Birleşik Devletleri, stratejik öneme sahip Hürmüz Boğazı'nda ticari gemilerin güvenli geçişini yeniden sağlayacak bir anlaşmaya varmak üzere olduklarını bildirdi. Olası bir mutabakat, kritik su yolunda yaşanan askeri ve ekonomik gerilimleri dindirmeyi amaçlıyor. Anlaşma sadece deniz ticaretini güvence altına almakla kalmayıp, aynı zamanda Tahran ile Washington arasında kapsamlı barış müzakerelerinin önünü açabilir. Hürmüz Boğazı, küresel petrol arzının önemli bir kısmının taşındığı dünyanın en hassas boğazlarından biri konumundadır. Umman, bu süreçte uzun süredir taraflar arasında kritik bir arabuluculuk rolü üstlenmektedir. ABD yönetimi, bölgedeki ticari serbestliği korumak ve güvenliği sağlamak için diplomatik kanalları zorlamaktadır. İran tarafı ise ekonomik yaptırımların hafifletilmesi ve bölgesel tansiyonun düşmesi yönünde adımlar beklemektedir. Uzmanlar, bu anlaşmanın gerçekleşmesi halinde Körfez bölgesindeki güvenlik dinamiklerinin kökten değişebileceğini belirtmektedir. Gözler şimdi üç başkentten gelecek resmi açıklamalara ve atılacak somut diplomatik adımlara çevrilmiştir.",
+        "history": "Hürmüz Boğazı, tarih boyunca küresel enerji arzının ve deniz ticaretinin en stratejik ve en çok tartışılan geçiş noktalarından biri olmuştur. 1980'lerdeki İran-Irak Savaşı sırasında yaşanan ve 'Tanker Savaşı' olarak bilinen dönemde, boğazdaki gemiler hedef alınmış ve uluslararası müdahaleler gündeme gelmiştir. Son yıllarda ise Amerika Birleşik Devletleri ile İran arasındaki nükleer anlaşmazlıklar ve yaptırımlar krizi, Hürmüz Boğazı'nı doğrudan bir çatışma alanına dönüştürmüştür. Tahran yönetimi, baskıların artması durumunda boğazı kapatma tehdidinde defalarca bulunmuştur. Washington ise bölgeye askeri yığınak yaparak deniz güvenliğini sağlama stratejisi izlemiştir. Umman Sultanlığı, soğuk savaş döneminden bu yana Batılı ülkeler ile İran arasında tarafsız bir köprü kurarak pek çok krizin masada çözülmesine öncülük etmiştir. Tarihsel süreçte bu su yolundaki her gerilim, doğrudan küresel petrol fiyatlarına ve dünya ekonomisine yansımıştır. ABD ve İran arasındaki güvensizlik, geçmişteki diplomatik girişimlerin birçoğunun sonuçsuz kalmasına neden olmuştur. Bu bağlamda, Umman'ın ev sahipliğinde yürütülen mevcut müzakereler, onlarca yıldır süren bölgesel gerilimlerin aşılması adına tarihi bir eşik olarak değerlendirilmektedir.",
+        "link": "https://www.aljazeera.com/news/2026/8/5/iran-oman-us-close-to-hormuz-deal-what-do-they-all-want?traffic_source=rss",
+        "countries": {
+            "Iran": {
+                "role": "Aktör (Boğazdaki geçişleri kontrol eden ve yaptırımların hafifletilmesini talep eden taraf)",
+                "color": "#ef4444"
+            },
+            "Oman": {
+                "role": "Arabulucu (Taraflar arasında diplomatik temasları yürüten ve barış zemini hazırlayan taraf)",
+                "color": "#22c55e"
+            },
+            "United States": {
+                "role": "Aktör (Bölgedeki deniz ticaret güvenliğini ve çıkarlarını korumak için müzakere yürüten taraf)",
+                "color": "#38bdf8"
+            }
+        },
+        "id": 4
+    },
+    {
         "title": "Japonya, II. Dünya Savaşı Sonrası Statüsünden Uzaklaşarak ABD Yapımı Tomahawk Füzesini Test Etti",
         "tags": [
             "#Japonya",
@@ -20,7 +114,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 1
+        "id": 5
     },
     {
         "title": "Rusya'nın Kiev'e Düzenlediği Balistik Füze Saldırısında En Az 14 Kişi Hayatını Kaybetti",
@@ -41,7 +135,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 2
+        "id": 6
     },
     {
         "title": "Bangladeş'in Hakikat Avcısı",
@@ -67,7 +161,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 3
+        "id": 7
     },
     {
         "title": "Rus füzelerinin Ukrayna'nın başkenti Kiev'i vurmasıyla patlamalar meydana geldi",
@@ -88,7 +182,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 4
+        "id": 8
     },
     {
         "title": "Bir ABD Mahkemesi 6 Ocak Ayaklanması İçin Yeni Bir Zemin mi Hazırladı?",
@@ -105,7 +199,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 5
+        "id": 9
     },
     {
         "title": "Bolivya, Sınır Boyundaki Brezilyalı Çete Şiddetini Durdurmak İçin Asker Sevk Etti",
@@ -126,7 +220,7 @@
                 "color": "#f97316"
             }
         },
-        "id": 6
+        "id": 10
     },
     {
         "title": "Kuzey Koreli Kim Yo-jong'dan Japonya'nın Füze Testine Karşı Askeri Tehdit",
@@ -157,7 +251,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 7
+        "id": 11
     },
     {
         "title": "ABD Mahkemesinden Trump'ın İklim Hibe Programını İptal Etme Girişimine Darbe",
@@ -176,7 +270,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 8
+        "id": 12
     },
     {
         "title": "‘Kalandan Geriye Kalanı Kucaklamak İstedim’: Gazze Ailelerinin Cenaze İçin 3 Yıllık Bekleyişi",
@@ -203,7 +297,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 9
+        "id": 13
     },
     {
         "title": "Kosova, yetkililerin aramaları genişletmesiyle üçüncü savaş zamanı toplu mezar yeri buldu",
@@ -230,7 +324,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 10
+        "id": 14
     },
     {
         "title": "İsrail'in Yıkım Kararları Sonrası Dükkan Sahipleri İş Yerlerini Söküyor",
@@ -252,7 +346,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 11
+        "id": 15
     },
     {
         "title": "Trump, Washington Anıtı Havuzu'ndaki Vandalizm Suçlamalarının Düşürülmesi Nedeniyle Jeanine Pirro'yu Neden Hedef Aldı?",
@@ -272,7 +366,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 12
+        "id": 16
     },
     {
         "title": "Video, Rus insansız hava aracının 'insan safari' saldırısında Ukraynalı seyyar satıcıyı kovaladığını gösteriyor",
@@ -293,7 +387,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 13
+        "id": 17
     },
     {
         "title": "Hürmüz Boğazı'nın Yeniden Açılabileceği Umutlarıyla Petrol Fiyatları Düştü",
@@ -316,7 +410,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 14
+        "id": 18
     },
     {
         "title": "AB'den İspanya'nın Ceuta Göçmen Krizine 'Hızlı Yanıtına' Övgü",
@@ -342,7 +436,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 15
+        "id": 19
     },
     {
         "title": "İran'a Savaş: Trump'tan Tahran'a 'Son Şans' Uyarısı",
@@ -365,7 +459,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 16
+        "id": 20
     },
     {
         "title": "Bir SpaceX Roketi Aya Çarparsa Ne Olacak?",
@@ -384,7 +478,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 17
+        "id": 21
     },
     {
         "title": "Gazze'de 2023 İsrail Saldırısında Hayatını Kaybeden 112 Filistinli İçin Toplu Cenaze Töreni",
@@ -408,7 +502,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 18
+        "id": 22
     },
     {
         "title": "İran Savaşı ve Hürmüz Boğazı'nın Kapanması Arasında Petrol Şirketleri Neden Rekor Karlar Elde Ediyor?",
@@ -436,7 +530,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 19
+        "id": 23
     },
     {
         "title": "Hamas Müzakerecisi: Gazze'yi Kurtarmak İçin Silahsızlanma Anlaşması Gerekliydi",
@@ -472,7 +566,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 20
+        "id": 24
     },
     {
         "title": "İspanya Başbakanı Sanchez, AB Ceuta Göçmen Krizini Görüşürken Eleştirilerin Hedefinde",
@@ -497,7 +591,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 21
+        "id": 25
     },
     {
         "title": "Manş Denizi'nde Teknesi Alev Alan 150'den Fazla Düzensiz Göçmen Kurtarıldı",
@@ -521,7 +615,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 22
+        "id": 26
     },
     {
         "title": "Analiz: Trump, en yakın müttefiklerinden gelen soğuk gerçeklikle yüzleşiyor",
@@ -541,7 +635,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 23
+        "id": 27
     },
     {
         "title": "Ukrayna, Moskova bölgesinde beş kişinin öldüğü saldırının ardından daha fazla Wildberries tesisini vurdu",
@@ -566,7 +660,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 24
+        "id": 28
     },
     {
         "title": "Trump Media'nın Piyasaları Etkileyen Gönderilere Hızlı Erişim Satışı Neden Tartışmalı?",
@@ -586,7 +680,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 25
+        "id": 29
     },
     {
         "title": "Rus İşgali Altındaki Kırım'da Bir Asker Silahlı Saldırıda Dört Kişiyi Öldürdü",
@@ -610,7 +704,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 26
+        "id": 30
     },
     {
         "title": "AB, Ceuta'daki göçmen geçişlerinin ardından daha güçlü sınırlar çağrısında bulundu",
@@ -640,7 +734,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 27
+        "id": 31
     },
     {
         "title": "Rusya, Ukrayna İnsansız Hava Aracının Kalabalık Bir Plaja Çarpması Sonucu Yedi Kişinin Öldüğünü ve 40 Kişinin Yaralandığını Açıkladı",
@@ -664,7 +758,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 28
+        "id": 32
     },
     {
         "title": "Fransa'daki Orman Yangınları Köyde Yüzlerce 2. Dünya Savaşı Mühimmatını Ortaya Çıkardı",
@@ -688,7 +782,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 29
+        "id": 33
     },
     {
         "title": "Eşimi ve ikizlerimi geride bıraktım - Bu Nijeryalı adam neden Güney Afrika'dan kaçtı?",
@@ -714,7 +808,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 30
+        "id": 34
     },
     {
         "title": "ABD Eyaletleri, Onlarca Ülkeyi Etkileyen Trump Gümrük Vergilerini Engellemek İçin Dava Açtı",
@@ -738,7 +832,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 31
+        "id": 35
     },
     {
         "title": "Ren Nehri rekor seviyede düştü: Kuraklık Avrupa nehirlerini zorluyor",
@@ -775,7 +869,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 32
+        "id": 36
     },
     {
         "title": "Analistler: Orta Doğu'da Petrol Tankerlerine Yönelik Tehdit, İran Savaşı Başlangıcından Bu Yana En Kötü Seviyede",
@@ -804,7 +898,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 33
+        "id": 37
     },
     {
         "title": "Deprem Vuran Japonya AVM'sine Patronun Emriyle Giren İki İşçi Patlamada Öldü",
@@ -824,7 +918,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 34
+        "id": 38
     },
     {
         "title": "Ariana Grande, 'Bitmek Bilmeyen' Baskılar Nedeniyle Kamuoyundan Uzaklaşma Kararı Aldı",
@@ -848,7 +942,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 35
+        "id": 39
     },
     {
         "title": "Fas Kralı'nın Mektubu, Büyük Bir Otoyola Trump'ın Adının Verildiğini Doğruladı",
@@ -873,7 +967,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 36
+        "id": 40
     },
     {
         "title": "Massive Attack, Singapur'un Filistin Protestosu Yasağına Tepki Gösterdi",
@@ -902,7 +996,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 37
+        "id": 41
     },
     {
         "title": "ABD ve Japonya, Yen'i Desteklemek İçin Nadir Görülen Ortak Bir Adım Attı",
@@ -923,7 +1017,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 38
+        "id": 42
     },
     {
         "title": "İran, Trump'ın Pazartesi günü yeni görüşmelerin başlayacağı yönündeki iddiasını yalanladı",
@@ -952,7 +1046,7 @@
                 "color": "#10b981"
             }
         },
-        "id": 39
+        "id": 43
     },
     {
         "title": "Aung San Suu Kyi, 2,5 Yıl Sonra İlk Doğrulanan Dış Temasında Sağlıklı Görünüyor",
@@ -976,7 +1070,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 40
+        "id": 44
     },
     {
         "title": "\"Tek oğlum adalet için ayaktayken vuruldu\" - Pakistan yönetimindeki Keşmir'de ölümcül protestoların pençesindeki şehirden izlenimler",
@@ -1000,6 +1094,6 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 41
+        "id": 45
     }
 ]
