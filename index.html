@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/three"></script>
     <script src="https://unpkg.com/globe.gl"></script>
     
+    <!-- Fütüristik & Türkçe Karakter Uyumlu Fontlar -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700;800&family=Syne:wght@700;800&display=swap&subset=latin,latin-ext" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -117,7 +118,6 @@
     </header>
 
     <div class="app-container">
-        <!-- SOL MENÜ -->
         <div class="sidebar" id="sidebarSection">
             <div class="search-box" id="searchBoxContainer">
                 <input type="text" id="newsSearchInput" placeholder="Haber, Ülke veya Etiket Ara..." onkeyup="executeSearch()">
@@ -129,7 +129,6 @@
             <div class="news-list" id="sidebarContentList"></div>
         </div>
 
-        <!-- ORTA 3D KÜRE ALANI -->
         <div class="globe-container mobile-active" id="mapSection">
             <div id="globeViz"></div>
             <div class="country-card" id="countryCard">
@@ -143,7 +142,6 @@
             </div>
         </div>
 
-        <!-- SAĞ DETAYLI ANALİZ PANELİ -->
         <div class="info-panel" id="panelSection">
             <div class="panel-block">
                 <h4 id="panelTitle">Saha İstihbarat Özeti</h4>
@@ -165,7 +163,7 @@
     </div>
 
     <script>
-        // DEV GENİŞLETİLMİŞ ÜLKE SÖZLÜĞÜ (KÜÇÜK ÜLKELER VE TÜM ÖRGÜT ÜYELERİ EKLENDİ)
+        // DEV GENİŞLETİLMİŞ & HİBRİT ÜLKE SÖZLÜĞÜ
         const countryMasterDict = {
             "TUR": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT, İÖT", names: ["turkey", "turkiye", "türkiye", "tur"] },
             "USA": { lat: 37.0902, lng: -95.7129, trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, G20, QUAD, BM", names: ["united states", "united states of america", "usa", "abd", "america"] },
@@ -265,7 +263,7 @@
             { id: "ARAB", title: "Arap Devletleri Ligi (Arap Birliği)", sub: "22 Üye • Orta Doğu & Kuzey Afrika Paktı" }
         ];
 
-        // %100 TAM KADRO RESMİ ÖRGÜT ÜYE LİSTELERİ
+        // SADECE NOKTA ATIŞI RESMİ ISO-3 KODLARI
         const orgInfoData = {
             "NATO": {
                 title: "Kuzey Atlas Antlaşması Örgütü (NATO)",
@@ -435,6 +433,9 @@
             return Math.max(300, window.innerWidth - sideWidth);
         }
 
+        // PERFORMANS VE YÜKSEK HIZ İÇİN GÜNCELLENEN RENKLENDİRME MOTORU
+        let activeColorMap = {};
+
         const globeContainer = document.getElementById('globeViz');
         const globe = Globe()
             (globeContainer)
@@ -449,11 +450,22 @@
             .polygonSideColor(() => 'rgba(2, 132, 199, 0.15)')
             .polygonStrokeColor(() => '#38bdf8')
             .polygonAltitude(0.015)
-            .polygonCapColor(feat => feat.properties.customColor || 'rgba(10, 15, 29, 0.75)')
+            .polygonCapColor((feat) => {
+                const geoProps = feat.properties;
+                const isoCode = (geoProps.ISO_A3 && geoProps.ISO_A3 !== "-99") ? geoProps.ISO_A3 : (geoProps.ISO_A2 || "");
+                const geoName = geoProps.name || geoProps.ADMIN || geoProps.NAME || "";
+                
+                const matched = findMasterCountryByIso(isoCode) || findMasterCountryByName(geoName);
+                if (matched && activeColorMap[matched.isoKey]) {
+                    return activeColorMap[matched.isoKey] + 'dd';
+                }
+                return 'rgba(10, 15, 29, 0.75)';
+            })
             .onPolygonClick((polygon) => {
                 const geoProps = polygon.properties;
-                const isoCode = geoProps.ISO_A3 || geoProps.iso_a3 || polygon.id || geoProps.ISO_A2 || "";
+                const isoCode = (geoProps.ISO_A3 && geoProps.ISO_A3 !== "-99") ? geoProps.ISO_A3 : (geoProps.ISO_A2 || "");
                 const geoName = geoProps.name || geoProps.ADMIN || geoProps.NAME || "";
+                
                 const matched = findMasterCountryByIso(isoCode) || findMasterCountryByName(geoName);
                 if (matched) {
                     showCountryCard(matched);
@@ -484,9 +496,9 @@
             globe.controls().autoRotate = false;
         });
 
-        // 110M YERİNE DETAYLI ÜLKE HARİTASINA GEÇİŞ (TÜM KÜÇÜK ÜLKELER DAHİL)
+        // HIZLI, OPTİMİZE, DONMA YAPMAYAN HARİTA VERİSİ
         Promise.all([
-            fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson').then(r => r.json()),
+            fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson').then(r => r.json()),
             fetch('newsData.json').then(r => r.json())
         ]).then(([geoData, liveNews]) => {
             worldGeoJson = geoData;
@@ -708,12 +720,13 @@
             }
         }
 
+        // PERFORMANS İÇİN SIFIRDAN YAZILMIŞ DONMA YAPMAYAN GÜNCELLEME DÖNGÜSÜ
         function update3DGlobe() {
             if (!worldGeoJson || !currentActiveItem) return;
 
             const arcsData = [];
             const pointsData = [];
-            let activeCountriesDict = {};
+            activeColorMap = {}; // Önceki renkleri sıfırla
 
             if (currentActiveItem.type === 'news' || currentActiveItem.type === 'conflict') {
                 const rawCountries = currentActiveItem.data.countries || {};
@@ -723,7 +736,7 @@
                     const matched = findMasterCountryByIso(code) || findMasterCountryByName(code);
                     if (matched) {
                         validActors.push({ masterKey: matched.isoKey, info: info, coords: matched });
-                        activeCountriesDict[matched.isoKey] = info.color;
+                        activeColorMap[matched.isoKey] = info.color;
                     }
                 }
 
@@ -759,7 +772,7 @@
                         orgInfo.membersIso.forEach(memIso => {
                             const memMaster = findMasterCountryByIso(memIso);
                             if (memMaster) {
-                                activeCountriesDict[memMaster.isoKey] = '#0284c7';
+                                activeColorMap[memMaster.isoKey] = '#0284c7';
                                 if (memMaster.isoKey !== centerMaster.isoKey) {
                                     arcsData.push({
                                         startLat: centerMaster.lat,
@@ -776,22 +789,9 @@
                 }
             }
 
-            worldGeoJson.features.forEach(f => {
-                const geoProps = f.properties;
-                const geoIso = geoProps.ISO_A3 || geoProps.iso_a3 || f.id || geoProps.ISO_A2 || "";
-                const geoName = geoProps.name || geoProps.ADMIN || geoProps.NAME || "";
-                
-                const matchedGeoMaster = findMasterCountryByIso(geoIso) || findMasterCountryByName(geoName);
-                
-                let colorToApply = null;
-                if (matchedGeoMaster && activeCountriesDict[matchedGeoMaster.isoKey]) {
-                    colorToApply = activeCountriesDict[matchedGeoMaster.isoKey];
-                }
-
-                f.properties.customColor = colorToApply ? `${colorToApply}dd` : 'rgba(10, 15, 29, 0.75)';
-            });
-
-            globe.polygonsData(worldGeoJson.features);
+            // SADECE RENKLERİ ANINDA YENİLE (DÜNYAYI BAŞTAN ÇİZMEZ = 0 DONMA)
+            globe.polygonCapColor(globe.polygonCapColor());
+            
             globe.arcsData(arcsData);
             globe.pointsData(pointsData);
         }
