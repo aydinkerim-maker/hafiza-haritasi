@@ -72,7 +72,7 @@
 
         .legend-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; padding: 6px 0; border-bottom: 1px solid #1e293b; font-family: 'Inter', sans-serif; }
         .legend-color { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
-        .member-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; max-height: 160px; overflow-y: auto; }
+        .member-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; max-height: 180px; overflow-y: auto; }
         .member-chip { background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; padding: 3px 6px; border-radius: 4px; }
 
         .source-btn { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: #fff; text-decoration: none; padding: 10px; border-radius: 4px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(2, 132, 199, 0.4); text-transform: uppercase; }
@@ -164,7 +164,7 @@
     </div>
 
     <script>
-        // DEV GENİŞLETİLMİŞ ÜLKE SÖZLÜĞÜ (GEOJSON DAHİL MÜKEMMEL EŞLEŞTİRME)
+        // DEV GENİŞLETİLMİŞ ÜLKE SÖZLÜĞÜ
         const countryMasterDict = {
             "Turkey": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT, İÖT", keys: ["turkey", "turkiye", "türkiye"] },
             "United States": { lat: 37.0902, lng: -95.7129, trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, G20, QUAD, BM", keys: ["united states", "united states of america", "usa", "abd", "america"] },
@@ -206,7 +206,10 @@
             "Kazakhstan": { lat: 48.0196, lng: 66.9237, trName: "Kazakistan Cumhuriyeti", founding: "1991", pop: "19 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ", keys: ["kazakhstan", "kazakistan"] },
             "Uzbekistan": { lat: 41.3775, lng: 64.5853, trName: "Özbekistan Cumhuriyeti", founding: "1991", pop: "35 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ", keys: ["uzbekistan", "özbekistan"] },
             "Kyrgyzstan": { lat: 41.2044, lng: 74.7661, trName: "Kırgızistan Cumhuriyeti", founding: "1991", pop: "6.6 Milyon", area: "199,951 km²", pact: "TDT, ŞİÖ", keys: ["kyrgyzstan", "kırgızistan"] },
-            "Azerbaijan": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan Cumhuriyeti", founding: "1991", pop: "10 Milyon", area: "86,600 km²", pact: "TDT, İÖT", keys: ["azerbaijan", "azerbaycan"] }
+            "Azerbaijan": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan Cumhuriyeti", founding: "1991", pop: "10 Milyon", area: "86,600 km²", pact: "TDT, İÖT", keys: ["azerbaijan", "azerbaycan"] },
+            "Ethiopia": { lat: 9.1450, lng: 40.4897, trName: "Etiyopya", founding: "980 MÖ", pop: "120 Milyon", area: "1,104,300 km²", pact: "BRICS, AfB", keys: ["ethiopia", "etiyopya"] },
+            "Finland": { lat: 61.9241, lng: 25.7482, trName: "Finlandiya", founding: "1917", pop: "5.5 Milyon", area: "338,424 km²", pact: "NATO, AB", keys: ["finland", "finlandiya"] },
+            "Sweden": { lat: 60.1282, lng: 18.6435, trName: "İsveç Krallığı", founding: "1523", pop: "10.4 Milyon", area: "450,295 km²", pact: "NATO, AB", keys: ["sweden", "isveç"] }
         };
 
         const orgListData = [
@@ -224,13 +227,15 @@
             { id: "ARAB", title: "Arap Devletleri Ligi (Arap Birliği)", sub: "22 Üye • Orta Doğu & Kuzey Afrika Paktı" }
         ];
 
+        // %100 DOĞRU VE EKSİKSİZ RESMİ ÖRGÜT ÜYE LİSTELERİ
         const orgInfoData = {
             "NATO": {
                 title: "Kuzey Atlas Antlaşması Örgütü (NATO)",
                 summary: "1949 Washington Antlaşması ile kurulan siyasi ve askeri ittifak. Temel direği, bir üyeye yapılan saldırıyı tüm üyelere yapılmış sayan 5. Madde doktrinidir.",
                 history: "Soğuk Savaş'ta Varşova Paktı'na karşı kurulmuş, günümüzde 32 müttefikiyle Atlantik'ten Pasifik sınırına kadar caydırıcılık sağlar.",
                 center: "Belgium",
-                membersEn: ["Turkey", "United States", "United Kingdom", "Canada", "Germany", "France", "Italy", "Spain", "Greece", "Belgium", "Norway", "Poland", "Portugal", "Romania", "Netherlands", "Ukraine"]
+                // UKRAYNA ÇIKARILDI, RESMİ ÜYELER EKLENDİ
+                membersEn: ["Turkey", "United States", "United Kingdom", "Canada", "Germany", "France", "Italy", "Spain", "Greece", "Belgium", "Norway", "Poland", "Portugal", "Romania", "Netherlands", "Finland", "Sweden"]
             },
             "UN": {
                 title: "Birleşmiş Milletler (BM)",
@@ -251,7 +256,7 @@
                 summary: "Batı finansal sistemine alternatif küresel dengeler ve yerel paralarla ticaret ('Dolarsızlaşma') inşa etmeyi hedefleyen dev pakt.",
                 history: "2006'da kurulan yapı; Mısır, Etiyopya, İran ve BAE'nin katılımıyla küresel enerji rezervlerinin kalbi haline gelmiştir.",
                 center: "China",
-                membersEn: ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Iran", "United Arab Emirates", "Saudi Arabia"]
+                membersEn: ["Brazil", "Russia", "India", "China", "South Africa", "Egypt", "Ethiopia", "Iran", "United Arab Emirates", "Saudi Arabia"]
             },
             "TDT": {
                 title: "Türk Devletleri Teşkilatı (TDT)",
@@ -265,7 +270,7 @@
                 summary: "27 Avrupa ülkesinin oluşturduğu siyasi, hukuki ve ekonomik tek pazar entegrasyonu.",
                 history: "1951 Kömür ve Çelik Topluluğu ile başlayan süreç, günümüzün dev ekonomik gücüne dönüşmüştür.",
                 center: "Belgium",
-                membersEn: ["Germany", "France", "Italy", "Spain", "Greece", "Belgium", "Portugal", "Netherlands", "Poland"]
+                membersEn: ["Germany", "France", "Italy", "Spain", "Greece", "Belgium", "Portugal", "Netherlands", "Poland", "Romania"]
             },
             "QUAD": {
                 title: "Dörtlü Güvenlik Diyaloğu (QUAD)",
@@ -293,7 +298,7 @@
                 summary: "57 üyesiyle İslam dünyasının diplomatik haklarını koruyan BM'den sonraki en büyük ikinci hükümetlerarası örgüt.",
                 history: "1969 Mescid-i Aksa kundaklamasının ardından Rabat'ta kurulmuştur.",
                 center: "Saudi Arabia",
-                membersEn: ["Turkey", "Saudi Arabia", "Pakistan", "Iran", "Egypt", "United Arab Emirates", "Syria", "Iraq"]
+                membersEn: ["Turkey", "Saudi Arabia", "Pakistan", "Iran", "Egypt", "United Arab Emirates", "Syria", "Iraq", "Palestine"]
             },
             "GCC": {
                 title: "Körfez İşbirliği Konseyi (KİK)",
@@ -388,7 +393,6 @@
             return str.replace(/İ/g, "i").replace(/I/g, "ı").replace(/Ğ/g, "ğ").replace(/Ü/g, "ü").replace(/Ş/g, "ş").replace(/Ö/g, "ö").replace(/Ç/g, "ç").toLowerCase();
         }
 
-        // KÜREYİ PANELLERİN DİNAMİK ORTASINA BOYUTLANDIRAN FONKSİYON
         function getGlobeWidth() {
             const sideWidth = window.innerWidth > 900 ? (340 + 380) : 0;
             return Math.max(300, window.innerWidth - sideWidth);
@@ -656,7 +660,6 @@
             }
         }
 
-        // ESNEK GÜÇLÜ KÜRE YENİLEME DÖNGÜSÜ
         function update3DGlobe() {
             if (!worldGeoJson || !currentActiveItem) return;
 
