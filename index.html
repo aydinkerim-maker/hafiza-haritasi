@@ -32,6 +32,10 @@
         .mode-btn:hover { background: #1e293b; color: #fff; border-color: #38bdf8; }
         .mode-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; box-shadow: 0 0 15px rgba(2, 132, 199, 0.6); }
 
+        .mobile-view-tabs { display: none; gap: 6px; background: #050811; padding: 4px; border-radius: 6px; border: 1px solid #1e293b; }
+        .tab-btn { flex: 1; padding: 8px 0; border: none; background: #0f172a; color: #94a3b8; font-size: 0.85rem; font-weight: 700; cursor: pointer; border-radius: 4px; text-align: center; }
+        .tab-btn.active { color: #fff; background: #0284c7; box-shadow: 0 0 10px rgba(2, 132, 199, 0.5); }
+
         .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #02040a; }
         
         .sidebar { width: 340px; min-width: 340px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; }
@@ -48,14 +52,19 @@
         .globe-container { flex: 1; position: relative; background: #02040a; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
         #globeViz { flex: 1; width: 100%; height: 100%; }
 
-        /* YENİ EKLENEN TARİHSEL ZAMAN ÇİZELGESİ (TIME SLIDER) */
+        /* GÖRÜNÜR TIMELINE SLIDER STİLLERİ */
         .timeline-container { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 80%; background: rgba(5, 8, 17, 0.85); backdrop-filter: blur(12px); border: 1px solid #38bdf8; padding: 12px 20px; border-radius: 8px; display: none; flex-direction: column; gap: 10px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); z-index: 100; }
         .timeline-header { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; color: #38bdf8; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; }
         .timeline-labels { display: flex; justify-content: space-between; color: #94a3b8; font-size: 0.75rem; font-weight: 600; font-family: 'Inter', sans-serif; position: relative; padding: 0 10px; }
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0; }
         input[type=range]:focus { outline: none; }
-        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: #1e293b; border-radius: 3px; border: 1px solid #38bdf8; }
-        input[type=range]::-webkit-slider-thumb { border: 2px solid #fff; height: 18px; width: 18px; border-radius: 50%; background: #ef4444; cursor: pointer; -webkit-appearance: none; margin-top: -7px; box-shadow: 0 0 10px #ef4444; transition: all 0.2s; }
+        /* BAR (TRACK) BELİRGİNLEŞTİRİLDİ */
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: rgba(56, 189, 248, 0.25); border-radius: 4px; border: 1px solid #38bdf8; }
+        input[type=range]::-moz-range-track { width: 100%; height: 8px; cursor: pointer; background: rgba(56, 189, 248, 0.25); border-radius: 4px; border: 1px solid #38bdf8; }
+        
+        input[type=range]::-webkit-slider-thumb { border: 2px solid #fff; height: 20px; width: 20px; border-radius: 50%; background: #ef4444; cursor: pointer; -webkit-appearance: none; margin-top: -7px; box-shadow: 0 0 12px #ef4444; transition: all 0.2s; }
+        input[type=range]::-moz-range-thumb { border: 2px solid #fff; height: 20px; width: 20px; border-radius: 50%; background: #ef4444; cursor: pointer; box-shadow: 0 0 12px #ef4444; transition: all 0.2s; }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 
         .country-card { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(12px); border: 1px solid #38bdf8; border-radius: 6px; padding: 14px; width: 320px; display: none; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
@@ -75,6 +84,16 @@
         .legend-color { width: 12px; height: 12px; border-radius: 2px; display: inline-block; box-shadow: 0 0 5px currentColor; }
         .member-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; max-height: 180px; overflow-y: auto; }
         .member-chip { background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; padding: 3px 6px; border-radius: 4px; }
+
+        @media (max-width: 900px) {
+            header { padding: 10px; }
+            .mobile-view-tabs { display: flex; }
+            .app-container { display: block; }
+            .sidebar, .info-panel, .globe-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
+            .sidebar.mobile-active { display: flex; width: 100%; }
+            .globe-container.mobile-active { display: block; }
+            .info-panel.mobile-active { display: flex; width: 100%; border-left: none; }
+        }
     </style>
 </head>
 <body>
@@ -109,7 +128,6 @@
         <div class="globe-container" id="mapSection">
             <div id="globeViz"></div>
             
-            <!-- TARİHSEL ZAMAN ÇİZELGESİ -->
             <div class="timeline-container" id="timelineContainer">
                 <div class="timeline-header">
                     <span>Tarihsel Akış: <span id="currentYearDisplay" style="color:#ef4444;">-</span></span>
@@ -175,21 +193,21 @@
             "IRN": { lat: 32.4279, lng: 53.6880, trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ", names: ["iran", "islamic republic of iran", "iran islam cumhuriyeti"] },
             "ISR": { lat: 31.0461, lng: 34.8516, trName: "İsrail Devleti", founding: "1948", pop: "9.3 Milyon", area: "22,072 km²", pact: "OECD, BM", names: ["israel", "israil", "israil devleti"] },
             "PSE": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti", founding: "1988", pop: "5.1 Milyon", area: "6,020 km²", pact: "Arap Birliği", names: ["palestine", "filistin", "gaza", "west bank", "filistin devleti", "gazze"] },
-            "GBR": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, G7, G20", names: ["united kingdom", "great britain", "uk", "ingiltere", "england"] },
-            "DEU": { lat: 51.1657, lng: 10.4515, trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7", names: ["germany", "almanya"] },
-            "FRA": { lat: 46.2276, lng: 2.2137, trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, G7", names: ["france", "fransa"] },
+            "GBR": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, G7, G20", names: ["united kingdom", "great britain", "uk", "ingiltere", "england", "birlesik krallik"] },
+            "DEU": { lat: 51.1657, lng: 10.4515, trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7", names: ["germany", "almanya", "almanya federal rep"] },
+            "FRA": { lat: 46.2276, lng: 2.2137, trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, G7", names: ["france", "fransa", "fransa cumhuriyeti"] },
             "GRC": { lat: 39.0742, lng: 21.8243, trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO", names: ["greece", "yunanistan"] },
             "SYR": { lat: 34.8021, lng: 38.9968, trName: "Suriye", founding: "1946", pop: "21 Milyon", area: "185,180 km²", pact: "Arap Birliği", names: ["syria", "suriye", "suriye arap cumhuriyeti"] },
-            "IRQ": { lat: 33.2232, lng: 43.6793, trName: "Irak", founding: "1932", pop: "43 Milyon", area: "438,317 km²", pact: "Arap Birliği", names: ["iraq", "irak"] },
-            "SAU": { lat: 23.8859, lng: 45.0792, trName: "Suudi Arabistan", founding: "1932", pop: "36 Milyon", area: "2,149,690 km²", pact: "G20, KİK", names: ["saudi arabia", "suudi arabistan"] },
-            "EGY": { lat: 26.8206, lng: 30.8025, trName: "Mısır", founding: "1922", pop: "109 Milyon", area: "1,010,408 km²", pact: "BRICS", names: ["egypt", "misir"] },
+            "IRQ": { lat: 33.2232, lng: 43.6793, trName: "Irak", founding: "1932", pop: "43 Milyon", area: "438,317 km²", pact: "Arap Birliği", names: ["iraq", "irak", "irak cumhuriyeti"] },
+            "SAU": { lat: 23.8859, lng: 45.0792, trName: "Suudi Arabistan", founding: "1932", pop: "36 Milyon", area: "2,149,690 km²", pact: "G20, KİK", names: ["saudi arabia", "suudi arabistan", "suudi arabistan kralligi"] },
+            "EGY": { lat: 26.8206, lng: 30.8025, trName: "Mısır", founding: "1922", pop: "109 Milyon", area: "1,010,408 km²", pact: "BRICS", names: ["egypt", "misir", "misir arap cumhuriyeti"] },
             "TWN": { lat: 23.6978, lng: 120.9605, trName: "Tayvan", founding: "1912", pop: "23.5 Milyon", area: "36,197 km²", pact: "-", names: ["taiwan", "tayvan"] },
             "JPN": { lat: 36.2048, lng: 138.2529, trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, G20", names: ["japan", "japonya"] },
-            "IND": { lat: 20.5937, lng: 78.9629, trName: "Hindistan", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ", names: ["india", "hindistan"] },
-            "PAK": { lat: 30.3753, lng: 69.3451, trName: "Pakistan", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ", names: ["pakistan"] },
+            "IND": { lat: 20.5937, lng: 78.9629, trName: "Hindistan", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ", names: ["india", "hindistan", "hindistan cumhuriyeti"] },
+            "PAK": { lat: 30.3753, lng: 69.3451, trName: "Pakistan", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ", names: ["pakistan", "pakistan islam cumhuriyeti"] },
             "BLR": { lat: 53.7098, lng: 27.9534, trName: "Beyaz Rusya", founding: "1991", pop: "9.2 Milyon", area: "207,600 km²", pact: "ŞİÖ", names: ["belarus", "beyaz rusya"] },
-            "LBN": { lat: 33.8547, lng: 35.8623, trName: "Lübnan", founding: "1943", pop: "5.5 Milyon", area: "10,452 km²", pact: "Arap Birliği", names: ["lebanon", "lubnan"] },
-            "BRA": { lat: -14.2350, lng: -51.9253, trName: "Brezilya", founding: "1822", pop: "214 Milyon", area: "8,515,767 km²", pact: "BRICS, G20", names: ["brazil", "brezilya"] },
+            "LBN": { lat: 33.8547, lng: 35.8623, trName: "Lübnan", founding: "1943", pop: "5.5 Milyon", area: "10,452 km²", pact: "Arap Birliği", names: ["lebanon", "lubnan", "lubnan cumhuriyeti"] },
+            "BRA": { lat: -14.2350, lng: -51.9253, trName: "Brezilya", founding: "1822", pop: "214 Milyon", area: "8,515,767 km²", pact: "BRICS, G20", names: ["brazil", "brezilya", "brezilya federal rep"] },
             "SDN": { lat: 12.8628, lng: 30.2176, trName: "Sudan", founding: "1956", pop: "45 Milyon", area: "1,886,068 km²", pact: "Arap Birliği", names: ["sudan"] },
             "YEM": { lat: 15.5527, lng: 48.5164, trName: "Yemen", founding: "1990", pop: "33 Milyon", area: "527,968 km²", pact: "Arap Birliği", names: ["yemen"] },
             "MLI": { lat: 17.5707, lng: -3.9962, trName: "Mali", founding: "1960", pop: "21 Milyon", area: "1,240,192 km²", pact: "AES", names: ["mali"] },
@@ -200,10 +218,24 @@
             "BEL": { lat: 50.5039, lng: 4.4699, trName: "Belçika", founding: "1830", pop: "11.6 Milyon", area: "30,528 km²", pact: "NATO, AB", names: ["belgium", "belcika"] },
             "ARE": { lat: 23.4241, lng: 53.8478, trName: "B.A.E.", founding: "1971", pop: "9.9 Milyon", area: "83,600 km²", pact: "BRICS, KİK", names: ["united arab emirates", "uae", "bae", "birlesik arap emirlikleri"] },
             "CAN": { lat: 56.1304, lng: -106.3468, trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7", names: ["canada", "kanada"] },
-            "ESP": { lat: 40.4637, lng: -3.7492, trName: "İspanya", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO", names: ["spain", "ispanya"] },
-            "ITA": { lat: 41.8719, lng: 12.5674, trName: "İtalya", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO", names: ["italy", "italya"] },
-            "NOR": { lat: 60.4720, lng: 8.4689, trName: "Norveç", founding: "1905", pop: "5.4 Milyon", area: "385,207 km²", pact: "NATO", names: ["norway", "norvec"] },
-            "POL": { lat: 51.9194, lng: 19.1451, trName: "Polonya", founding: "1918", pop: "38 Milyon", area: "312,696 km²", pact: "AB, NATO", names: ["poland", "polonya"] }
+            "ESP": { lat: 40.4637, lng: -3.7492, trName: "İspanya", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO", names: ["spain", "ispanya", "ispanya kralligi"] },
+            "ITA": { lat: 41.8719, lng: 12.5674, trName: "İtalya", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO", names: ["italy", "italya", "italya cumhuriyeti"] },
+            "NOR": { lat: 60.4720, lng: 8.4689, trName: "Norveç", founding: "1905", pop: "5.4 Milyon", area: "385,207 km²", pact: "NATO", names: ["norway", "norvec", "norvec kralligi"] },
+            "POL": { lat: 51.9194, lng: 19.1451, trName: "Polonya", founding: "1918", pop: "38 Milyon", area: "312,696 km²", pact: "AB, NATO", names: ["poland", "polonya", "polonya cumhuriyeti"] },
+            "PRT": { lat: 39.3999, lng: -8.2245, trName: "Portekiz", founding: "1143", pop: "10.3 Milyon", area: "92,212 km²", pact: "AB, NATO", names: ["portugal", "portekiz", "portekiz cumhuriyeti"] },
+            "ROU": { lat: 45.9432, lng: 24.9668, trName: "Romanya", founding: "1877", pop: "19 Milyon", area: "238,397 km²", pact: "AB, NATO", names: ["romania", "romanya"] },
+            "NLD": { lat: 52.1326, lng: 5.2913, trName: "Hollanda", founding: "1581", pop: "17.5 Milyon", area: "41,543 km²", pact: "AB, NATO", names: ["netherlands", "hollanda", "hollanda kralligi"] },
+            "AUS": { lat: -25.2744, lng: 133.7751, trName: "Avustralya", founding: "1901", pop: "26 Milyon", area: "7,692,024 km²", pact: "G20, QUAD", names: ["australia", "avustralya"] },
+            "KAZ": { lat: 48.0196, lng: 66.9237, trName: "Kazakistan", founding: "1991", pop: "19 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ", names: ["kazakhstan", "kazakistan", "kazakistan cumhuriyeti"] },
+            "UZB": { lat: 41.3775, lng: 64.5853, trName: "Özbekistan", founding: "1991", pop: "35 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ", names: ["uzbekistan", "ozbekistan", "ozbekistan cumhuriyeti"] },
+            "KGZ": { lat: 41.2044, lng: 74.7661, trName: "Kırgızistan", founding: "1991", pop: "6.6 Milyon", area: "199,951 km²", pact: "TDT, ŞİÖ", names: ["kyrgyzstan", "kirgizistan", "kirgizistan cumhuriyeti"] },
+            "AZE": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan", founding: "1991", pop: "10 Milyon", area: "86,600 km²", pact: "TDT", names: ["azerbaijan", "azerbaycan", "azerbaycan cumhuriyeti"] },
+            "ETH": { lat: 9.1450, lng: 40.4897, trName: "Etiyopya", founding: "980 MÖ", pop: "120 Milyon", area: "1,104,300 km²", pact: "BRICS", names: ["ethiopia", "etiyopya"] },
+            "FIN": { lat: 61.9241, lng: 25.7482, trName: "Finlandiya", founding: "1917", pop: "5.5 Milyon", area: "338,424 km²", pact: "NATO, AB", names: ["finland", "finlandiya"] },
+            "SWE": { lat: 60.1282, lng: 18.6435, trName: "İsveç", founding: "1523", pop: "10.4 Milyon", area: "450,295 km²", pact: "NATO, AB", names: ["sweden", "isvec", "isvec kralligi"] },
+            "ZAF": { lat: -30.5595, lng: 22.9375, trName: "Güney Afrika", founding: "1910", pop: "60 Milyon", area: "1,221,037 km²", pact: "BRICS", names: ["south africa", "guney afrika", "guney afrika cumhuriyeti"] },
+            "KOS": { lat: 42.6026, lng: 20.9030, trName: "Kosova", founding: "2008", pop: "1.8 Milyon", area: "10,887 km²", pact: "-", names: ["kosovo", "kosova"] },
+            "SRB": { lat: 44.0165, lng: 21.0059, trName: "Sırbistan", founding: "2006", pop: "6.8 Milyon", area: "88,361 km²", pact: "BM", names: ["serbia", "sirbistan"] }
         };
 
         const orgListData = [
@@ -224,94 +256,56 @@
             "UN": { title: "Birleşmiş Milletler (BM)", summary: "1945'te kurulan, küresel barışı, insan haklarını ve uluslararası hukuku korumayı amaçlayan 193 üyeli evrensel çatı örgüt.", history: "II. Dünya Savaşı yıkımının ardından Milletler Cemiyeti yerine temelleri atılmıştır.", center: "USA", membersIso: ["TUR", "USA", "RUS", "CHN", "GBR", "FRA", "DEU", "JPN", "IND", "BRA", "SAU", "CAN"] }
         };
 
-        // ZENGİNLEŞTİRİLMİŞ ÇATIŞMALAR & TIMELINE MİMARİSİ (8 Çatışma, Isı Haritası Verileri)
+        // ZENGİNLEŞTİRİLMİŞ TARİHSEL DETAYLAR VE NEON ISI HARİTASI (RING) RENKLERİ
         const conflictListData = [
             {
                 id: "UKR", title: "Rusya - Ukrayna Savaşı", sub: "Doğu Avrupa / Donbas",
                 timeline: [
-                    { year: 2014, sum: "Kırım'ın ilhakı ve Donbas bölgesinde vekalet savaşlarının başlaması.", hist: "Rusya, Kiev'deki Batı yanlısı hükümet değişikliğine Kırım'ı yasadışı ilhak ederek yanıt verdi.", countries: {"RUS": {role:"Müdahale Eden", color:"#ef4444"}, "UKR": {role:"Savunan", color:"#38bdf8"}}, heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#ef4444'}] },
-                    { year: 2022, sum: "Rusya'nın Ukrayna'yı topyekun işgal girişimi ve savaşın büyümesi.", hist: "24 Şubat'ta Rus ordusu Kiev dahil birçok cepheden Ukrayna'yı işgale başladı.", countries: {"RUS": {role:"Saldıran", color:"#ef4444"}, "UKR": {role:"Direnen", color:"#38bdf8"}, "USA": {role:"Lojistik Destek", color:"#22c55e"}}, heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#ef4444'}, {lat: 48.0, lng: 37.8, w: 2, c: '#ef4444'}] },
-                    { year: 2026, sum: "Doğu cephesinde yıpratma savaşı ve küresel mühimmat krizi.", hist: "Savaş siper savaşına döndü, her iki taraf da ağır kayıplar verirken ateşkes ufukta görünmüyor.", countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}, "BLR": {role:"Rusya Üssü", color:"#f59e0b"}}, heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#ef4444'}, {lat: 47.1, lng: 37.5, w: 3, c: '#f59e0b'}] }
+                    { year: 2014, sum: "Kırım'ın ilhakı ve Donbas bölgesinde vekalet savaşlarının başlaması.", hist: "Rusya, Kiev'deki Batı yanlısı hükümet değişikliğine Kırım'ı yasadışı ilhak ederek yanıt verdi. Aynı dönemde Donbas bölgesinde Rusya destekli ayrılıkçılar ile Ukrayna ordusu arasında düşük yoğunluklu ancak kalıcı bir vekalet savaşı başladı. Bu süreç, günümüzdeki topyekun savaşın zeminini hazırlayan en büyük jeopolitik kırılmadır.", countries: {"RUS": {role:"Müdahale Eden", color:"#ef4444"}, "UKR": {role:"Savunan", color:"#38bdf8"}}, heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#fde047'}] },
+                    { year: 2022, sum: "Rusya'nın Ukrayna'yı topyekun işgal girişimi ve savaşın büyümesi.", hist: "24 Şubat'ta Rusya, Ukrayna'yı tamamen silahsızlandırmak ve hükümeti devirmek amacıyla Kiev dahil birçok cepheden geniş çaplı bir işgal başlattı. Batı dünyası Ukrayna'ya görülmemiş bir silah ve istihbarat desteği sağlarken, Rusya ekonomisi ağır yaptırımlarla hedef alındı. Savaş, Avrupa'nın güvenlik mimarisini kökten değiştirdi.", countries: {"RUS": {role:"Saldıran", color:"#ef4444"}, "UKR": {role:"Direnen", color:"#38bdf8"}, "USA": {role:"Lojistik Destek", color:"#22c55e"}}, heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#fde047'}, {lat: 48.0, lng: 37.8, w: 2, c: '#fde047'}] },
+                    { year: 2026, sum: "Doğu cephesinde yıpratma savaşı ve küresel mühimmat krizi.", hist: "Savaş, her iki tarafın da ağır kayıplar verdiği ve cephe hatlarının kilitlendiği bir yıpratma savaşına dönüştü. Ukrayna'nın doğusunda topçu mühimmatı ve drone sürülerinin hakim olduğu bir siper savaşı yaşanırken, küresel mühimmat üretim kapasiteleri zorlanıyor. Müzakere masası uzak ihtimal olarak kalmaya devam ediyor.", countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}, "BLR": {role:"Rusya Üssü", color:"#f59e0b"}}, heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#fde047'}, {lat: 47.1, lng: 37.5, w: 3, c: '#ffffff'}] }
                 ]
             },
             {
                 id: "ISR", title: "İsrail - Filistin & Doğu Akdeniz", sub: "Orta Doğu / Gazze",
                 timeline: [
-                    { year: 1967, sum: "Altı Gün Savaşı ve İsrail'in işgal sınırlarını genişletmesi.", hist: "İsrail; Gazze, Batı Şeria, Golan Tepeleri ve Sina Yarımadasını işgal etti.", countries: {"ISR": {role:"İşgal Eden", color:"#ef4444"}, "PSE": {role:"İşgal Edilen", color:"#38bdf8"}, "EGY": {role:"Savaşan", color:"#f59e0b"}}, heatpoints: [{lat: 31.7, lng: 35.2, w: 1, c: '#ef4444'}] },
-                    { year: 2023, sum: "7 Ekim olayları ve Gazze'ye yönelik eşi görülmemiş yıkım.", hist: "Hamas'ın saldırısı sonrası İsrail, Gazze'yi tamamen kuşatarak ağır bir bombardıman başlattı.", countries: {"ISR": {role:"Saldıran", color:"#ef4444"}, "PSE": {role:"Hedef", color:"#38bdf8"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#ef4444'}] },
-                    { year: 2026, sum: "Çatışmanın Lübnan ve Kızıldeniz'e yayılması, bölgesel kriz.", hist: "Gazze savaşı bölgeselleşti; Hizbullah, Husiler ve İran doğrudan vekalet savaşına dahil oldu.", countries: {"ISR": {role:"Aktör", color:"#ef4444"}, "PSE": {role:"Bölge", color:"#38bdf8"}, "LBN": {role:"Sınır Cephesi", color:"#f59e0b"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#ef4444'}, {lat: 33.2, lng: 35.5, w: 2, c: '#f97316'}] }
+                    { year: 1967, sum: "Altı Gün Savaşı ve İsrail'in işgal sınırlarını genişletmesi.", hist: "İsrail'in ani hava saldırılarıyla başlayan savaş sonucunda Mısır, Ürdün ve Suriye ağır bir yenilgi aldı. İsrail; Gazze, Batı Şeria, Golan Tepeleri ve Sina Yarımadasını işgal etti. Bu savaşın yarattığı sınırlar ve mülteci krizi, modern Ortadoğu çatışmalarının çözülemeyen temel denklemini oluşturmaktadır.", countries: {"ISR": {role:"İşgal Eden", color:"#ef4444"}, "PSE": {role:"İşgal Edilen", color:"#38bdf8"}, "EGY": {role:"Savaşan", color:"#f59e0b"}}, heatpoints: [{lat: 31.7, lng: 35.2, w: 1, c: '#fde047'}] },
+                    { year: 2023, sum: "7 Ekim olayları ve Gazze'ye yönelik eşi görülmemiş yıkım.", hist: "Hamas'ın 7 Ekim'de İsrail'e yönelik geniş çaplı ve sürpriz saldırısı sonrası İsrail, Gazze'yi tamamen kuşatarak ağır bir bombardıman ve kara harekatı başlattı. Sivil kayıpların ve altyapı yıkımının ulaştığı boyut, uluslararası toplumda büyük insani kriz tartışmalarını ve soykırım suçlamalarını beraberinde getirdi.", countries: {"ISR": {role:"Saldıran", color:"#ef4444"}, "PSE": {role:"Hedef", color:"#38bdf8"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}] },
+                    { year: 2026, sum: "Çatışmanın Lübnan ve Kızıldeniz'e yayılması, bölgesel kriz.", hist: "Gazze savaşı kontrolden çıkarak bölgeselleşti. Kuzeyde Lübnan Hizbullah'ı ile İsrail ordusu arasında doğrudan sıcak çatışmalar yaşanırken, Yemen'deki Husiler Kızıldeniz ticaretini hedef aldı. İran destekli milis güçlerin 'Direniş Ekseni' stratejisi, ABD donanmasını ve İsrail'i bölgede yıpratma savaşına soktu.", countries: {"ISR": {role:"Aktör", color:"#ef4444"}, "PSE": {role:"Bölge", color:"#38bdf8"}, "LBN": {role:"Sınır Cephesi", color:"#f59e0b"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}, {lat: 33.2, lng: 35.5, w: 2, c: '#ffffff'}] }
                 ]
             },
             {
                 id: "IRN", title: "ABD - İran & Hürmüz Krizi", sub: "Orta Doğu / Basra",
                 timeline: [
-                    { year: 2018, sum: "ABD'nin Nükleer Anlaşmadan (JCPOA) tek taraflı çekilmesi.", hist: "Trump yönetimi anlaşmadan çekildi ve İran'a maksimum baskı politikasını başlattı.", countries: {"IRN": {role:"Hedef", color:"#ef4444"}, "USA": {role:"Yaptırım Kararı", color:"#38bdf8"}}, heatpoints: [{lat: 35.6, lng: 51.3, w: 1, c: '#f59e0b'}] },
-                    { year: 2026, sum: "Hürmüz Boğazı'nda doğrudan çatışma riski ve enerji krizi.", hist: "İran destekli grupların saldırıları ve İsrail gerilimi, petrol geçiş güzergahını tehdit ediyor.", countries: {"IRN": {role:"Aktör", color:"#ef4444"}, "USA": {role:"Karşıt Güç", color:"#38bdf8"}, "ISR": {role:"Karşıt Güç", color:"#22c55e"}}, heatpoints: [{lat: 26.5, lng: 56.2, w: 3, c: '#ef4444'}, {lat: 27.1, lng: 56.2, w: 2, c: '#f97316'}] }
+                    { year: 2018, sum: "ABD'nin Nükleer Anlaşmadan (JCPOA) tek taraflı çekilmesi.", hist: "Donald Trump yönetimi, 2015 yılında imzalanan tarihi nükleer anlaşmadan tek taraflı olarak çekildiğini açıkladı. Bu kararın ardından İran'a yönelik ağır ekonomik yaptırımlar (Maksimum Baskı politikası) yeniden devreye sokuldu. Bu durum, İran'ın nükleer programına yeniden hız vermesine ve bölgedeki proxy güçlerini aktive etmesine neden oldu.", countries: {"IRN": {role:"Hedef", color:"#ef4444"}, "USA": {role:"Yaptırım Kararı", color:"#38bdf8"}}, heatpoints: [{lat: 35.6, lng: 51.3, w: 1, c: '#fde047'}] },
+                    { year: 2026, sum: "Hürmüz Boğazı'nda doğrudan çatışma riski ve enerji krizi.", hist: "Dünya petrol ticaretinin şahdamarı olan Hürmüz Boğazı, İsrail-Filistin savaşının yansımalarıyla adeta mayın tarlasına döndü. İran Devrim Muhafızları'nın boğazı kapatma tehditleri ve bölgedeki tankerlere yönelik el koyma operasyonları, ABD'nin bölgeye uçak gemisi filoları sevk etmesiyle her an sıcak çatışmaya dönebilecek bir gerilim hattı yarattı.", countries: {"IRN": {role:"Aktör", color:"#ef4444"}, "USA": {role:"Karşıt Güç", color:"#38bdf8"}, "ISR": {role:"Karşıt Güç", color:"#22c55e"}}, heatpoints: [{lat: 26.5, lng: 56.2, w: 3, c: '#fde047'}, {lat: 27.1, lng: 56.2, w: 2, c: '#ffffff'}] }
                 ]
             },
             {
                 id: "TWN", title: "Çin - Tayvan Gerginliği", sub: "Doğu Asya / Pasifik",
                 timeline: [
-                    { year: 2022, sum: "Nancy Pelosi'nin ziyareti ve Çin'in adayı ablukaya alması.", hist: "ABD Temsilciler Meclisi Başkanının Tayvan ziyareti, Çin'in devasa askeri tatbikatlarını tetikledi.", countries: {"CHN": {role:"Gözdağı Veren", color:"#ef4444"}, "TWN": {role:"Abluka Altında", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 2, c: '#ef4444'}] },
-                    { year: 2026, sum: "Pasifik'te silahlanma yarışı ve Tayvan Boğazı'nda sıcak temas riski.", hist: "Çin'in hava sahası ihlalleri günlük hale geldi, ABD ise müttefikleriyle donanma varlığını artırdı.", countries: {"CHN": {role:"Aktör", color:"#ef4444"}, "TWN": {role:"Savunan", color:"#38bdf8"}, "USA": {role:"Garantör", color:"#22c55e"}, "JPN": {role:"Gözlemci", color:"#f59e0b"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 3, c: '#ef4444'}, {lat: 25.0, lng: 121.5, w: 2, c: '#f97316'}] }
+                    { year: 2022, sum: "Nancy Pelosi'nin ziyareti ve Çin'in adayı ablukaya alması.", hist: "ABD Temsilciler Meclisi Başkanı Nancy Pelosi'nin Tayvan'a yaptığı resmi ziyaret, Çin tarafından egemenlik haklarına doğrudan bir saldırı olarak kabul edildi. Pekin yönetimi, Tayvan adasının etrafını tamamen kuşatan ve fiili bir ablukanın provası niteliğini taşıyan devasa canlı ateşli askeri tatbikatlar başlattı.", countries: {"CHN": {role:"Gözdağı Veren", color:"#ef4444"}, "TWN": {role:"Abluka Altında", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 2, c: '#fde047'}] },
+                    { year: 2026, sum: "Pasifik'te silahlanma yarışı ve Tayvan Boğazı'nda sıcak temas riski.", hist: "Çin savaş uçaklarının Tayvan hava savunma sahasını (ADIZ) ihlal etmesi günlük ve rutin bir taktiğe dönüştü. Çin donanmasının adayı tecrit etme senaryolarına karşı ABD, Japonya ve Avustralya (QUAD ve AUKUS ittifakları) bölgede caydırıcı deniz gücü devriyelerini artırdı. Küresel çip üretiminin merkezi olan adanın güvenliği dünya ekonomisini tehdit ediyor.", countries: {"CHN": {role:"Aktör", color:"#ef4444"}, "TWN": {role:"Savunan", color:"#38bdf8"}, "USA": {role:"Garantör", color:"#22c55e"}, "JPN": {role:"Gözlemci", color:"#f59e0b"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 3, c: '#fde047'}, {lat: 25.0, lng: 121.5, w: 2, c: '#ffffff'}] }
                 ]
             },
             {
                 id: "SDN", title: "Sudan İç Savaşı", sub: "Kuzey Afrika / Nil Bölgesi",
                 timeline: [
-                    { year: 2023, sum: "Sudan Ordusu ile Hızlı Destek Kuvvetleri (RSF) arasında savaş başladı.", hist: "Başkent Hartum'da güç mücadelesi silahlı çatışmaya dönüştü, milyonlarca insan yerinden edildi.", countries: {"SDN": {role:"Çatışma Merkezi", color:"#ef4444"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 2, c: '#ef4444'}] },
-                    { year: 2026, sum: "Ülkenin fiilen ikiye bölünmesi ve devasa insani felaket.", hist: "Darfur bölgesindeki etnik temizlik iddiaları ve devletin çöküşü Afrika Boynuzu'nu tehdit ediyor.", countries: {"SDN": {role:"Çöken Devlet", color:"#ef4444"}, "EGY": {role:"Sınır Aktörü", color:"#38bdf8"}, "ARE": {role:"Finansör", color:"#f59e0b"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 3, c: '#ef4444'}, {lat: 13.0, lng: 24.0, w: 3, c: '#f97316'}] }
-                ]
-            },
-            {
-                id: "YEM", title: "Kızıldeniz & Yemen Krizi", sub: "Körfez / Babülmendep",
-                timeline: [
-                    { year: 2014, sum: "Husilerin başkent Sana'yı ele geçirmesi ve iç savaş.", hist: "İran destekli Husilerin yönetimi ele geçirmesi, Suudi liderliğindeki koalisyonun müdahalesini getirdi.", countries: {"YEM": {role:"Çatışma Alanı", color:"#ef4444"}, "SAU": {role:"Koalisyon", color:"#38bdf8"}}, heatpoints: [{lat: 15.3, lng: 44.2, w: 2, c: '#f59e0b'}] },
-                    { year: 2026, sum: "Husilerin küresel ticareti felç eden Kızıldeniz saldırıları.", hist: "Gazze'ye destek gerekçesiyle ticari gemilere yapılan saldırılar, ABD ve İngiltere'nin Yemen'i vurmasına yol açtı.", countries: {"YEM": {role:"Husiler (Vuran/Vurulan)", color:"#ef4444"}, "USA": {role:"Koalisyon Gücü", color:"#22c55e"}, "GBR": {role:"Koalisyon Gücü", color:"#38bdf8"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 12.5, lng: 43.3, w: 3, c: '#ef4444'}, {lat: 15.3, lng: 44.2, w: 2, c: '#f97316'}] }
-                ]
-            },
-            {
-                id: "AFL", title: "Sahel Çatışmaları & Darbeler", sub: "Batı Afrika",
-                timeline: [
-                    { year: 2023, sum: "Nijer, Mali ve Burkina Faso'da art arda gelen askeri darbeler.", hist: "Fransa'nın bölgeden kovulması ve Rusya'nın (Wagner/Afrika Kolordusu) boşluğu doldurması.", countries: {"MLI": {role:"Cunta Yönetimi", color:"#ef4444"}, "NER": {role:"Cunta Yönetimi", color:"#ef4444"}, "BFA": {role:"Cunta Yönetimi", color:"#ef4444"}, "FRA": {role:"Çıkan Güç", color:"#38bdf8"}}, heatpoints: [{lat: 17.6, lng: 8.0, w: 2, c: '#f59e0b'}, {lat: 17.5, lng: -3.9, w: 2, c: '#f59e0b'}] },
-                    { year: 2026, sum: "Yeni İttifak (AES) ve artan cihatçı terör tehdidi.", hist: "Cunta rejimleri kendi askeri paktlarını kurdu, ancak kırsal kesimlerde terör örgütlerinin kontrolü artıyor.", countries: {"MLI": {role:"AES Üyesi", color:"#ef4444"}, "NER": {role:"AES Üyesi", color:"#ef4444"}, "BFA": {role:"AES Üyesi", color:"#ef4444"}, "RUS": {role:"Askeri Destek (Paralı)", color:"#dc2626"}}, heatpoints: [{lat: 14.0, lng: 0.0, w: 3, c: '#ef4444'}] }
+                    { year: 2023, sum: "Sudan Ordusu ile Hızlı Destek Kuvvetleri (RSF) arasında savaş başladı.", hist: "Diktatör Ömer el-Beşir'in devrilmesinin ardından geçiş hükümetini kurması beklenen Sudan Silahlı Kuvvetleri (SAF) ile paramiliter Hızlı Destek Kuvvetleri (RSF) arasındaki güç mücadelesi başkent Hartum'da sokak çatışmalarına dönüştü. Çatışmalar kısa sürede tüm ülkeye yayıldı.", countries: {"SDN": {role:"Çatışma Merkezi", color:"#ef4444"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 2, c: '#fde047'}] },
+                    { year: 2026, sum: "Ülkenin fiilen ikiye bölünmesi ve devasa insani felaket.", hist: "Sudan devleti fiilen çöktü. Darfur bölgesinde etnik temizlik ve katliamlar yaşanırken, başkent Hartum hayalet şehre döndü. Milyonlarca insan komşu ülke Mısır ve Çad'a sığınmak zorunda kaldı. Dış aktörlerin (Körfez ülkeleri ve Rus Wagner grubu) savaş ağalarına silah ve altın ticareti üzerinden sağladığı destek krizi derinleştirdi.", countries: {"SDN": {role:"Çöken Devlet", color:"#ef4444"}, "EGY": {role:"Sınır Aktörü", color:"#38bdf8"}, "ARE": {role:"Finansör", color:"#f59e0b"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 3, c: '#fde047'}, {lat: 13.0, lng: 24.0, w: 3, c: '#ffffff'}] }
                 ]
             }
         ];
 
         let newsData = [];
-        let worldGeoJson = null;
         let currentMainMode = 'news';
         let currentActiveItem = null;
         let currentTimelineIndex = 0;
-        let activeColorMap = {};
-
-        function toTRLowerCase(str) {
-            if (!str) return "";
-            return str.trim().toLowerCase().replace(/ı/g, "i").replace(/i̇/g, "i").replace(/ğ/g, "g").replace(/ü/g, "u").replace(/ş/g, "s").replace(/ö/g, "o").replace(/ç/g, "c");
-        }
-
-        function normalizeColor(c) {
-            if (!c) return '#38bdf8';
-            let col = normalizeStr(String(c));
-            if(col === 'kirmizi' || col === 'red') return '#ef4444';
-            if(col === 'mavi' || col === 'blue') return '#38bdf8';
-            if(col === 'yesil' || col === 'green') return '#22c55e';
-            if(col === 'sari' || col === 'yellow') return '#f59e0b';
-            if(col === 'turuncu' || col === 'orange') return '#f97316';
-            if (/^#([0-9a-f]{6})$/i.test(col)) return col;
-            if (/^([0-9a-f]{6})$/i.test(col)) return '#' + col;
-            return '#38bdf8';
-        }
-
-        function getGlobeWidth() {
-            const sideWidth = window.innerWidth > 900 ? 720 : 0;
-            return Math.max(300, window.innerWidth - sideWidth);
-        }
+        let worldGeoJson = null;
 
         const globeContainer = document.getElementById('globeViz');
         const globe = Globe()(globeContainer)
-            .width(getGlobeWidth())
+            .width(Math.max(300, window.innerWidth - (window.innerWidth > 900 ? 720 : 0)))
             .height(window.innerHeight - 80)
             .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
             .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
@@ -323,12 +317,10 @@
             .polygonStrokeColor(() => '#0ea5e9')
             .polygonAltitude(0.015)
             .polygonCapColor((feat) => {
-                const geoProps = feat.properties;
-                const isoCode = geoProps.ADM0_A3 || geoProps.adm0_a3 || geoProps.ISO_A3 || geoProps.iso_a3 || geoProps.ISO_A2 || "";
-                const matched = findMasterCountryByIso(isoCode);
-                if (matched && activeColorMap[matched.isoKey]) {
-                    return activeColorMap[matched.isoKey] + 'dd';
-                }
+                const p = feat.properties;
+                const iso = p.ADM0_A3 || p.adm0_a3 || p.ISO_A3 || p.iso_a3 || p.ISO_A2 || "";
+                const matched = findMasterCountryByIso(iso);
+                if (matched && activeColorMap[matched.isoKey]) return activeColorMap[matched.isoKey] + 'dd';
                 return 'rgba(10, 15, 29, 0.65)';
             })
             .arcColor('color')
@@ -340,7 +332,7 @@
             .pointColor('color')
             .pointAltitude(0.01)
             .pointRadius(0.3)
-            // RADAR/ISI HARİTASI AYARLARI
+            // NEON ISI HARİTASI AYARLARI
             .ringColor('c')
             .ringMaxRadius('w')
             .ringPropagationSpeed(1.2)
@@ -350,7 +342,7 @@
         globe.controls().autoRotateSpeed = 0.3;
 
         window.addEventListener('resize', () => {
-            globe.width(getGlobeWidth());
+            globe.width(Math.max(300, window.innerWidth - (window.innerWidth > 900 ? 720 : 0)));
             globe.height(window.innerHeight - 80);
         });
 
@@ -392,7 +384,7 @@
             document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(`btn-mode-${mode}`).classList.add('active');
             document.getElementById('searchBoxContainer').style.display = (mode === 'news') ? 'block' : 'none';
-            document.getElementById('timelineContainer').style.display = 'none'; // Kapat
+            document.getElementById('timelineContainer').style.display = 'none';
             executeSearch();
         }
 
@@ -418,6 +410,8 @@
             if (dataSource.length > 0) selectItem(dataSource[0], listEl.firstChild);
         }
 
+        let activeColorMap = {};
+
         function selectItem(item, cardEl) {
             document.querySelectorAll('.news-card').forEach(c => c.classList.remove('active'));
             if(cardEl) cardEl.classList.add('active');
@@ -426,7 +420,7 @@
 
             if (currentMainMode === 'conflicts') {
                 document.getElementById('timelineContainer').style.display = 'flex';
-                currentTimelineIndex = item.timeline.length - 1; // En güncel yıla ayarla
+                currentTimelineIndex = item.timeline.length - 1; 
                 initTimeline(item);
                 renderTimelineData();
             } else {
@@ -442,7 +436,7 @@
             
             const labels = document.getElementById('timelineLabels');
             labels.innerHTML = '';
-            conflict.timeline.forEach((tl, idx) => {
+            conflict.timeline.forEach(tl => {
                 const span = document.createElement('span');
                 span.innerText = tl.year;
                 labels.appendChild(span);
@@ -463,7 +457,7 @@
 
             if (type === 'news') {
                 document.getElementById('panelTitle').innerText = "Saha İstihbarat Özeti";
-                document.getElementById('legendTitle').innerText = "Olaydaki Aktörler";
+                document.getElementById('legendTitle').innerText = "Olaydaki Aktörler & Konumları";
                 document.getElementById('summaryText').innerText = data.summary;
                 document.getElementById('historyText').innerText = data.history;
                 
@@ -480,9 +474,21 @@
                         points.push({lat: matched.lat, lng: matched.lng, color: col});
                     }
                 }
+                
+                // HABERLER İÇİN EKSİK OLAN BAĞLANTI (ARC) ÇİZGİLERİ EKLENDİ
+                for (let i = 0; i < points.length; i++) {
+                    for (let j = i + 1; j < points.length; j++) {
+                        arcs.push({
+                            startLat: points[i].lat, startLng: points[i].lng,
+                            endLat: points[j].lat, endLng: points[j].lng,
+                            color: [points[i].color, points[j].color]
+                        });
+                    }
+                }
+
                 document.getElementById('countryLegend').innerHTML = legendHtml;
                 globe.polygonCapColor(globe.polygonCapColor());
-                globe.arcsData([]);
+                globe.arcsData(arcs);
                 globe.ringsData([]);
                 globe.pointsData(points);
                 if (points.length > 0) globe.pointOfView({ lat: points[0].lat, lng: points[0].lng, altitude: 1.8 }, 1200);
@@ -529,11 +535,11 @@
             document.getElementById('panelTitle').innerText = `${tlData.year} - Saha İstihbarat Özeti`;
             document.getElementById('legendTitle').innerText = "Taraf Ülkeler & Rolleri";
             document.getElementById('summaryText').innerText = tlData.sum;
-            document.getElementById('historyText').innerText = tlData.hist;
+            document.getElementById('historyText').innerText = tlData.hist; // ZENGİNLEŞTİRİLMİŞ TARİHSEL METİNLER BURAYA YANSIR
 
             let legendHtml = '';
             activeColorMap = {};
-            const arcs = [], points = [], rings = [];
+            const points = [], rings = [];
 
             const actors = Object.entries(tlData.countries);
             actors.forEach(([code, info]) => {
@@ -546,10 +552,9 @@
                 }
             });
 
-            // ISI HARİTASI (RADAR RINGS) VERİSİ EKLENİYOR
             if (tlData.heatpoints) {
                 tlData.heatpoints.forEach(hp => {
-                    rings.push({ lat: hp.lat, lng: hp.lng, w: hp.w * 1.5, c: hp.c }); // Ağırlığa göre yarıçap büyür
+                    rings.push({ lat: hp.lat, lng: hp.lng, w: hp.w * 1.5, c: hp.c }); 
                 });
             }
 
@@ -557,7 +562,7 @@
             globe.polygonCapColor(globe.polygonCapColor());
             globe.arcsData([]);
             globe.pointsData(points);
-            globe.ringsData(rings); // Nabız dalgaları
+            globe.ringsData(rings); 
             
             if (points.length > 0) globe.pointOfView({ lat: points[0].lat, lng: points[0].lng, altitude: 1.6 }, 1000);
             else if (rings.length > 0) globe.pointOfView({ lat: rings[0].lat, lng: rings[0].lng, altitude: 1.6 }, 1000);
