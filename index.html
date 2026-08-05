@@ -52,6 +52,9 @@
         .news-card h3 { font-size: 0.9rem; color: #f8fafc; line-height: 1.4; font-weight: 600; margin-bottom: 6px; }
         .news-card p.sub { font-size: 0.78rem; color: #94a3b8; }
         
+        .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tag { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.68rem; padding: 2px 6px; border-radius: 3px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; }
+
         .globe-container { flex: 1; position: relative; background: #02040a; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
         #globeViz { flex: 1; width: 100%; height: 100%; }
 
@@ -208,58 +211,58 @@
         }
 
         const countryMasterDict = {
-            "TUR": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT", names: ["turkey", "turkiye", "turkiye cumhuriyeti"] },
+            "TUR": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT", names: ["turkey", "turkiye", "türkiye", "tur"] },
             "USA": { lat: 37.0902, lng: -95.7129, trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, G20", names: ["united states", "united states of america", "usa", "abd", "america", "amerika birlesik devletleri", "amerika"] },
-            "RUS": { lat: 61.5240, lng: 105.3188, trName: "Rusya Federasyonu", founding: "1991", pop: "144 Milyon", area: "17,098,242 km²", pact: "BM, ŞİÖ, BRICS", names: ["russia", "russian federation", "rusya", "rusya federasyonu"] },
-            "CHN": { lat: 35.8617, lng: 104.1954, trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ", names: ["china", "cin", "cin halk cumhuriyeti"] },
-            "UKR": { lat: 48.3794, lng: 31.1656, trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı", names: ["ukraine", "ukrayna"] },
-            "IRN": { lat: 32.4279, lng: 53.6880, trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ", names: ["iran", "islamic republic of iran", "iran islam cumhuriyeti"] },
-            "ISR": { lat: 31.0461, lng: 34.8516, trName: "İsrail Devleti", founding: "1948", pop: "9.3 Milyon", area: "22,072 km²", pact: "OECD, BM", names: ["israel", "israil", "israil devleti"] },
-            "PSE": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti", founding: "1988", pop: "5.1 Milyon", area: "6,020 km²", pact: "Arap Birliği", names: ["palestine", "filistin", "gaza", "west bank", "filistin devleti", "gazze"] },
-            "GBR": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, G7, G20", names: ["united kingdom", "great britain", "uk", "ingiltere", "england", "birlesik krallik"] },
-            "DEU": { lat: 51.1657, lng: 10.4515, trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7", names: ["germany", "almanya", "almanya federal rep"] },
-            "FRA": { lat: 46.2276, lng: 2.2137, trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, G7", names: ["france", "fransa", "fransa cumhuriyeti"] },
-            "GRC": { lat: 39.0742, lng: 21.8243, trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO", names: ["greece", "yunanistan"] },
-            "SYR": { lat: 34.8021, lng: 38.9968, trName: "Suriye", founding: "1946", pop: "21 Milyon", area: "185,180 km²", pact: "Arap Birliği", names: ["syria", "suriye", "suriye arap cumhuriyeti"] },
-            "IRQ": { lat: 33.2232, lng: 43.6793, trName: "Irak", founding: "1932", pop: "43 Milyon", area: "438,317 km²", pact: "Arap Birliği", names: ["iraq", "irak", "irak cumhuriyeti"] },
-            "SAU": { lat: 23.8859, lng: 45.0792, trName: "Suudi Arabistan", founding: "1932", pop: "36 Milyon", area: "2,149,690 km²", pact: "G20, KİK", names: ["saudi arabia", "suudi arabistan", "suudi arabistan kralligi"] },
-            "EGY": { lat: 26.8206, lng: 30.8025, trName: "Mısır", founding: "1922", pop: "109 Milyon", area: "1,010,408 km²", pact: "BRICS", names: ["egypt", "misir", "misir arap cumhuriyeti"] },
-            "TWN": { lat: 23.6978, lng: 120.9605, trName: "Tayvan", founding: "1912", pop: "23.5 Milyon", area: "36,197 km²", pact: "-", names: ["taiwan", "tayvan"] },
-            "JPN": { lat: 36.2048, lng: 138.2529, trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, G20", names: ["japan", "japonya"] },
-            "IND": { lat: 20.5937, lng: 78.9629, trName: "Hindistan", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ", names: ["india", "hindistan", "hindistan cumhuriyeti"] },
-            "PAK": { lat: 30.3753, lng: 69.3451, trName: "Pakistan", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ", names: ["pakistan", "pakistan islam cumhuriyeti"] },
-            "BLR": { lat: 53.7098, lng: 27.9534, trName: "Beyaz Rusya", founding: "1991", pop: "9.2 Milyon", area: "207,600 km²", pact: "ŞİÖ", names: ["belarus", "beyaz rusya"] },
-            "LBN": { lat: 33.8547, lng: 35.8623, trName: "Lübnan", founding: "1943", pop: "5.5 Milyon", area: "10,452 km²", pact: "Arap Birliği", names: ["lebanon", "lubnan", "lubnan cumhuriyeti"] },
-            "BRA": { lat: -14.2350, lng: -51.9253, trName: "Brezilya", founding: "1822", pop: "214 Milyon", area: "8,515,767 km²", pact: "BRICS, G20", names: ["brazil", "brezilya", "brezilya federal rep"] },
-            "SDN": { lat: 12.8628, lng: 30.2176, trName: "Sudan", founding: "1956", pop: "45 Milyon", area: "1,886,068 km²", pact: "Arap Birliği", names: ["sudan"] },
-            "YEM": { lat: 15.5527, lng: 48.5164, trName: "Yemen", founding: "1990", pop: "33 Milyon", area: "527,968 km²", pact: "Arap Birliği", names: ["yemen"] },
-            "MLI": { lat: 17.5707, lng: -3.9962, trName: "Mali", founding: "1960", pop: "21 Milyon", area: "1,240,192 km²", pact: "AES", names: ["mali"] },
-            "NER": { lat: 17.6078, lng: 8.0817, trName: "Nijer", founding: "1960", pop: "25 Milyon", area: "1,267,000 km²", pact: "AES", names: ["niger", "nijer"] },
-            "BFA": { lat: 12.2383, lng: -1.5616, trName: "Burkina Faso", founding: "1960", pop: "22 Milyon", area: "274,200 km²", pact: "AES", names: ["burkina faso"] },
-            "PRK": { lat: 40.3399, lng: 127.5101, trName: "Kuzey Kore", founding: "1948", pop: "26 Milyon", area: "120,540 km²", pact: "Bağlantısızlar", names: ["north korea", "kuzey kore", "dem. rep. korea"] },
-            "KOR": { lat: 35.9078, lng: 127.7669, trName: "Güney Kore", founding: "1948", pop: "51 Milyon", area: "100,210 km²", pact: "G20, OECD", names: ["south korea", "guney kore", "korea"] },
-            "BEL": { lat: 50.5039, lng: 4.4699, trName: "Belçika", founding: "1830", pop: "11.6 Milyon", area: "30,528 km²", pact: "NATO, AB", names: ["belgium", "belcika"] },
-            "ARE": { lat: 23.4241, lng: 53.8478, trName: "B.A.E.", founding: "1971", pop: "9.9 Milyon", area: "83,600 km²", pact: "BRICS, KİK", names: ["united arab emirates", "uae", "bae", "birlesik arap emirlikleri"] },
-            "CAN": { lat: 56.1304, lng: -106.3468, trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7", names: ["canada", "kanada"] },
-            "ESP": { lat: 40.4637, lng: -3.7492, trName: "İspanya", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO", names: ["spain", "ispanya", "ispanya kralligi"] },
-            "ITA": { lat: 41.8719, lng: 12.5674, trName: "İtalya", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO", names: ["italy", "italya", "italya cumhuriyeti"] },
-            "NOR": { lat: 60.4720, lng: 8.4689, trName: "Norveç", founding: "1905", pop: "5.4 Milyon", area: "385,207 km²", pact: "NATO", names: ["norway", "norvec", "norvec kralligi"] },
-            "POL": { lat: 51.9194, lng: 19.1451, trName: "Polonya", founding: "1918", pop: "38 Milyon", area: "312,696 km²", pact: "AB, NATO", names: ["poland", "polonya", "polonya cumhuriyeti"] },
-            "PRT": { lat: 39.3999, lng: -8.2245, trName: "Portekiz", founding: "1143", pop: "10.3 Milyon", area: "92,212 km²", pact: "AB, NATO", names: ["portugal", "portekiz", "portekiz cumhuriyeti"] },
-            "ROU": { lat: 45.9432, lng: 24.9668, trName: "Romanya", founding: "1877", pop: "19 Milyon", area: "238,397 km²", pact: "AB, NATO", names: ["romania", "romanya"] },
-            "NLD": { lat: 52.1326, lng: 5.2913, trName: "Hollanda", founding: "1581", pop: "17.5 Milyon", area: "41,543 km²", pact: "AB, NATO", names: ["netherlands", "hollanda", "hollanda kralligi"] },
-            "AUS": { lat: -25.2744, lng: 133.7751, trName: "Avustralya", founding: "1901", pop: "26 Milyon", area: "7,692,024 km²", pact: "G20, QUAD", names: ["australia", "avustralya"] },
-            "KAZ": { lat: 48.0196, lng: 66.9237, trName: "Kazakistan", founding: "1991", pop: "19 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ", names: ["kazakhstan", "kazakistan", "kazakistan cumhuriyeti"] },
-            "UZB": { lat: 41.3775, lng: 64.5853, trName: "Özbekistan", founding: "1991", pop: "35 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ", names: ["uzbekistan", "ozbekistan", "ozbekistan cumhuriyeti"] },
-            "KGZ": { lat: 41.2044, lng: 74.7661, trName: "Kırgızistan", founding: "1991", pop: "6.6 Milyon", area: "199,951 km²", pact: "TDT, ŞİÖ", names: ["kyrgyzstan", "kirgizistan", "kirgizistan cumhuriyeti"] },
-            "AZE": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan", founding: "1991", pop: "10 Milyon", area: "86,600 km²", pact: "TDT", names: ["azerbaijan", "azerbaycan", "azerbaycan cumhuriyeti"] },
-            "ETH": { lat: 9.1450, lng: 40.4897, trName: "Etiyopya", founding: "980 MÖ", pop: "120 Milyon", area: "1,104,300 km²", pact: "BRICS", names: ["ethiopia", "etiyopya"] },
-            "FIN": { lat: 61.9241, lng: 25.7482, trName: "Finlandiya", founding: "1917", pop: "5.5 Milyon", area: "338,424 km²", pact: "NATO, AB", names: ["finland", "finlandiya"] },
-            "SWE": { lat: 60.1282, lng: 18.6435, trName: "İsveç", founding: "1523", pop: "10.4 Milyon", area: "450,295 km²", pact: "NATO, AB", names: ["sweden", "isvec", "isvec kralligi"] },
-            "ZAF": { lat: -30.5595, lng: 22.9375, trName: "Güney Afrika", founding: "1910", pop: "60 Milyon", area: "1,221,037 km²", pact: "BRICS", names: ["south africa", "guney afrika", "guney afrika cumhuriyeti"] },
-            "KOS": { lat: 42.6026, lng: 20.9030, trName: "Kosova", founding: "2008", pop: "1.8 Milyon", area: "10,887 km²", pact: "-", names: ["kosovo", "kosova"] },
-            "SRB": { lat: 44.0165, lng: 21.0059, trName: "Sırbistan", founding: "2006", pop: "6.8 Milyon", area: "88,361 km²", pact: "BM", names: ["serbia", "sirbistan"] },
-            "ALB": { lat: 41.1533, lng: 20.1683, trName: "Arnavutluk", founding: "1912", pop: "2.8 Milyon", area: "28,748 km²", pact: "NATO", names: ["albania", "arnavutluk"] }
+            "RUS": { lat: 61.5240, lng: 105.3188, trName: "Rusya Federasyonu", founding: "1991", pop: "144 Milyon", area: "17,098,242 km²", pact: "BM, ŞİÖ, BRICS", names: ["russia", "russian federation", "rusya", "rusya federasyonu", "rus"] },
+            "CHN": { lat: 35.8617, lng: 104.1954, trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ", names: ["china", "cin", "cin halk cumhuriyeti", "chn"] },
+            "UKR": { lat: 48.3794, lng: 31.1656, trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı", names: ["ukraine", "ukrayna", "ukr"] },
+            "IRN": { lat: 32.4279, lng: 53.6880, trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ", names: ["iran", "islamic republic of iran", "iran islam cumhuriyeti", "irn"] },
+            "ISR": { lat: 31.0461, lng: 34.8516, trName: "İsrail Devleti", founding: "1948", pop: "9.3 Milyon", area: "22,072 km²", pact: "OECD, BM", names: ["israel", "israil", "israil devleti", "isr"] },
+            "PSE": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti", founding: "1988", pop: "5.1 Milyon", area: "6,020 km²", pact: "Arap Birliği", names: ["palestine", "filistin", "gaza", "west bank", "filistin devleti", "gazze", "pse"] },
+            "GBR": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, G7, G20", names: ["united kingdom", "great britain", "uk", "ingiltere", "england", "birlesik krallik", "gbr"] },
+            "DEU": { lat: 51.1657, lng: 10.4515, trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7", names: ["germany", "almanya", "almanya federal rep", "deu"] },
+            "FRA": { lat: 46.2276, lng: 2.2137, trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, G7", names: ["france", "fransa", "fransa cumhuriyeti", "fra"] },
+            "GRC": { lat: 39.0742, lng: 21.8243, trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO", names: ["greece", "yunanistan", "grc"] },
+            "SYR": { lat: 34.8021, lng: 38.9968, trName: "Suriye", founding: "1946", pop: "21 Milyon", area: "185,180 km²", pact: "Arap Birliği", names: ["syria", "suriye", "suriye arap cumhuriyeti", "syr"] },
+            "IRQ": { lat: 33.2232, lng: 43.6793, trName: "Irak", founding: "1932", pop: "43 Milyon", area: "438,317 km²", pact: "Arap Birliği", names: ["iraq", "irak", "irak cumhuriyeti", "irq"] },
+            "SAU": { lat: 23.8859, lng: 45.0792, trName: "Suudi Arabistan", founding: "1932", pop: "36 Milyon", area: "2,149,690 km²", pact: "G20, KİK", names: ["saudi arabia", "suudi arabistan", "suudi arabistan kralligi", "sau"] },
+            "EGY": { lat: 26.8206, lng: 30.8025, trName: "Mısır", founding: "1922", pop: "109 Milyon", area: "1,010,408 km²", pact: "BRICS", names: ["egypt", "misir", "misir arap cumhuriyeti", "egy"] },
+            "TWN": { lat: 23.6978, lng: 120.9605, trName: "Tayvan", founding: "1912", pop: "23.5 Milyon", area: "36,197 km²", pact: "-", names: ["taiwan", "tayvan", "twn"] },
+            "JPN": { lat: 36.2048, lng: 138.2529, trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, G20", names: ["japan", "japonya", "jpn"] },
+            "IND": { lat: 20.5937, lng: 78.9629, trName: "Hindistan", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ", names: ["india", "hindistan", "hindistan cumhuriyeti", "ind"] },
+            "PAK": { lat: 30.3753, lng: 69.3451, trName: "Pakistan", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ", names: ["pakistan", "pakistan islam cumhuriyeti", "pak"] },
+            "BLR": { lat: 53.7098, lng: 27.9534, trName: "Beyaz Rusya", founding: "1991", pop: "9.2 Milyon", area: "207,600 km²", pact: "ŞİÖ", names: ["belarus", "beyaz rusya", "blr"] },
+            "LBN": { lat: 33.8547, lng: 35.8623, trName: "Lübnan", founding: "1943", pop: "5.5 Milyon", area: "10,452 km²", pact: "Arap Birliği", names: ["lebanon", "lubnan", "lubnan cumhuriyeti", "lbn"] },
+            "BRA": { lat: -14.2350, lng: -51.9253, trName: "Brezilya", founding: "1822", pop: "214 Milyon", area: "8,515,767 km²", pact: "BRICS, G20", names: ["brazil", "brezilya", "brezilya federal rep", "bra"] },
+            "SDN": { lat: 12.8628, lng: 30.2176, trName: "Sudan", founding: "1956", pop: "45 Milyon", area: "1,886,068 km²", pact: "Arap Birliği", names: ["sudan", "sdn"] },
+            "YEM": { lat: 15.5527, lng: 48.5164, trName: "Yemen", founding: "1990", pop: "33 Milyon", area: "527,968 km²", pact: "Arap Birliği", names: ["yemen", "yem"] },
+            "MLI": { lat: 17.5707, lng: -3.9962, trName: "Mali", founding: "1960", pop: "21 Milyon", area: "1,240,192 km²", pact: "AES", names: ["mali", "mli"] },
+            "NER": { lat: 17.6078, lng: 8.0817, trName: "Nijer", founding: "1960", pop: "25 Milyon", area: "1,267,000 km²", pact: "AES", names: ["niger", "nijer", "ner"] },
+            "BFA": { lat: 12.2383, lng: -1.5616, trName: "Burkina Faso", founding: "1960", pop: "22 Milyon", area: "274,200 km²", pact: "AES", names: ["burkina faso", "bfa"] },
+            "PRK": { lat: 40.3399, lng: 127.5101, trName: "Kuzey Kore", founding: "1948", pop: "26 Milyon", area: "120,540 km²", pact: "Bağlantısızlar", names: ["north korea", "kuzey kore", "dem. rep. korea", "prk"] },
+            "KOR": { lat: 35.9078, lng: 127.7669, trName: "Güney Kore", founding: "1948", pop: "51 Milyon", area: "100,210 km²", pact: "G20, OECD", names: ["south korea", "guney kore", "korea", "kor"] },
+            "BEL": { lat: 50.5039, lng: 4.4699, trName: "Belçika", founding: "1830", pop: "11.6 Milyon", area: "30,528 km²", pact: "NATO, AB", names: ["belgium", "belcika", "bel"] },
+            "ARE": { lat: 23.4241, lng: 53.8478, trName: "B.A.E.", founding: "1971", pop: "9.9 Milyon", area: "83,600 km²", pact: "BRICS, KİK", names: ["united arab emirates", "uae", "bae", "birlesik arap emirlikleri", "are"] },
+            "CAN": { lat: 56.1304, lng: -106.3468, trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7", names: ["canada", "kanada", "can"] },
+            "ESP": { lat: 40.4637, lng: -3.7492, trName: "İspanya", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO", names: ["spain", "ispanya", "ispanya kralligi", "esp"] },
+            "ITA": { lat: 41.8719, lng: 12.5674, trName: "İtalya", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO", names: ["italy", "italya", "italya cumhuriyeti", "ita"] },
+            "NOR": { lat: 60.4720, lng: 8.4689, trName: "Norveç", founding: "1905", pop: "5.4 Milyon", area: "385,207 km²", pact: "NATO", names: ["norway", "norvec", "norvec kralligi", "nor"] },
+            "POL": { lat: 51.9194, lng: 19.1451, trName: "Polonya", founding: "1918", pop: "38 Milyon", area: "312,696 km²", pact: "AB, NATO", names: ["poland", "polonya", "polonya cumhuriyeti", "pol"] },
+            "PRT": { lat: 39.3999, lng: -8.2245, trName: "Portekiz", founding: "1143", pop: "10.3 Milyon", area: "92,212 km²", pact: "AB, NATO", names: ["portugal", "portekiz", "portekiz cumhuriyeti", "prt"] },
+            "ROU": { lat: 45.9432, lng: 24.9668, trName: "Romanya", founding: "1877", pop: "19 Milyon", area: "238,397 km²", pact: "AB, NATO", names: ["romania", "romanya", "rou"] },
+            "NLD": { lat: 52.1326, lng: 5.2913, trName: "Hollanda", founding: "1581", pop: "17.5 Milyon", area: "41,543 km²", pact: "AB, NATO", names: ["netherlands", "hollanda", "hollanda kralligi", "nld"] },
+            "AUS": { lat: -25.2744, lng: 133.7751, trName: "Avustralya", founding: "1901", pop: "26 Milyon", area: "7,692,024 km²", pact: "G20, QUAD", names: ["australia", "avustralya", "aus"] },
+            "KAZ": { lat: 48.0196, lng: 66.9237, trName: "Kazakistan", founding: "1991", pop: "19 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ", names: ["kazakhstan", "kazakistan", "kazakistan cumhuriyeti", "kaz"] },
+            "UZB": { lat: 41.3775, lng: 64.5853, trName: "Özbekistan", founding: "1991", pop: "35 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ", names: ["uzbekistan", "ozbekistan", "ozbekistan cumhuriyeti", "uzb"] },
+            "KGZ": { lat: 41.2044, lng: 74.7661, trName: "Kırgızistan", founding: "1991", pop: "6.6 Milyon", area: "199,951 km²", pact: "TDT, ŞİÖ", names: ["kyrgyzstan", "kirgizistan", "kirgizistan cumhuriyeti", "kgz"] },
+            "AZE": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan", founding: "1991", pop: "10 Milyon", area: "86,600 km²", pact: "TDT", names: ["azerbaijan", "azerbaycan", "azerbaycan cumhuriyeti", "aze"] },
+            "ETH": { lat: 9.1450, lng: 40.4897, trName: "Etiyopya", founding: "980 MÖ", pop: "120 Milyon", area: "1,104,300 km²", pact: "BRICS", names: ["ethiopia", "etiyopya", "eth"] },
+            "FIN": { lat: 61.9241, lng: 25.7482, trName: "Finlandiya", founding: "1917", pop: "5.5 Milyon", area: "338,424 km²", pact: "NATO, AB", names: ["finland", "finlandiya", "fin"] },
+            "SWE": { lat: 60.1282, lng: 18.6435, trName: "İsveç", founding: "1523", pop: "10.4 Milyon", area: "450,295 km²", pact: "NATO, AB", names: ["sweden", "isvec", "isvec kralligi", "swe"] },
+            "ZAF": { lat: -30.5595, lng: 22.9375, trName: "Güney Afrika", founding: "1910", pop: "60 Milyon", area: "1,221,037 km²", pact: "BRICS", names: ["south africa", "guney afrika", "guney afrika cumhuriyeti", "zaf"] },
+            "KOS": { lat: 42.6026, lng: 20.9030, trName: "Kosova", founding: "2008", pop: "1.8 Milyon", area: "10,887 km²", pact: "-", names: ["kosovo", "kosova", "kos"] },
+            "SRB": { lat: 44.0165, lng: 21.0059, trName: "Sırbistan", founding: "2006", pop: "6.8 Milyon", area: "88,361 km²", pact: "BM", names: ["serbia", "sirbistan", "srb"] },
+            "ALB": { lat: 41.1533, lng: 20.1683, trName: "Arnavutluk", founding: "1912", pop: "2.8 Milyon", area: "28,748 km²", pact: "NATO", names: ["albania", "arnavutluk", "alb"] }
         };
 
         const orgListData = [
@@ -371,9 +374,9 @@
 
         globeContainer.addEventListener('mousedown', () => { globe.controls().autoRotate = false; });
 
-        // AĞ HATASINA KARŞI %100 ZIRHLI FETCH (PROMISE.ALL İLE)
+        // TAM ZIRHLI FETCH BAĞLANTISI 
         Promise.all([
-            fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
+            fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
                 .then(r => r.ok ? r.json() : null).catch(e => null),
             fetch('newsData.json')
                 .then(r => r.ok ? r.json() : null).catch(e => null)
@@ -387,21 +390,22 @@
             }
             if (!newsData || newsData.length === 0) {
                 newsData = [{
-                    title: "Sistem Uyarısı: Veri Bağlantı Hatası",
-                    summary: "newsData.json dosyası veya Harita verisi okunamadı.",
-                    history: "Sistemi yerel olarak (file:///) açtıysanız tarayıcınız veri okumayı engellemiş olabilir. Live Server kullanın veya JSON formatınızdaki virgül hatalarını kontrol edin.",
-                    tags: ["#SistemHatasi"],
+                    title: "Sistem Uyarısı: Bağlantı Kurulamadı",
+                    summary: "newsData.json okunamadı. Veri tabanı formatınızı kontrol edin.",
+                    history: "Hata detayı: JSON dosyası geçersiz veya CORS engeline takıldı.",
+                    tags: ["#Sistem", "#Hata"],
                     countries: { "TUR": { role: "Hata Merkezi", color: "#ef4444" } }
                 }];
             }
             switchMainMode('news');
         }).catch(err => {
+            console.error("Kritik Çökme:", err);
             newsData = [{
-                title: "Kritik Sistem Hatası",
-                summary: "Arayüz yüklenirken beklenmeyen bir hata oluştu.",
+                title: "Kritik Motor Hatası",
+                summary: "Sistem başlatılamadı. İnternet bağlantınızı kontrol edin.",
                 history: err.toString(),
                 tags: ["#Fatal"],
-                countries: { "TUR": { role: "Hata Merkezi", color: "#ef4444" } }
+                countries: {}
             }];
             switchMainMode('news');
         });
@@ -567,7 +571,7 @@
                     }
                 }
                 
-                // HABERLERDEKİ EKSİK KAVİSLİ ÇİZGİLER (ARCS) EKLENDİ
+                // HABERLER İÇİN EKSİK KAVİSLİ ÇİZGİLER (ARCS)
                 for (let i = 0; i < points.length; i++) {
                     for (let j = i + 1; j < points.length; j++) {
                         arcs.push({
