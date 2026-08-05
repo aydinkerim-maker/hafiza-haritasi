@@ -30,6 +30,7 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action Bot'
           git config --global user.email 'action@github.com'
-          git pull origin main --rebase
           git add newsData.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Otomatik Haber Güncellemesi" && git push)
+          git diff --staged --quiet || git commit -m "Otomatik Haber Güncellemesi"
+          git pull origin main --rebase -X ours || git pull origin main --no-rebase
+          git push origin main
