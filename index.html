@@ -179,10 +179,12 @@
     </div>
 
     <script>
-        // SİSTEM EMNİYET KEMERLERİ: Yabancı karakter ve Array hatalarını engeller
         function normalizeStr(str) {
-            if (!str) return "";
-            return String(str).trim().toLowerCase().replace(/ı/g, "i").replace(/i̇/g, "i").replace(/ğ/g, "g").replace(/ü/g, "u").replace(/ş/g, "s").replace(/ö/g, "o").replace(/ç/g, "c");
+            if (str == null) return "";
+            return String(str).trim().toLowerCase()
+                .replace(/ı/g, "i").replace(/i̇/g, "i")
+                .replace(/ğ/g, "g").replace(/ü/g, "u")
+                .replace(/ş/g, "s").replace(/ö/g, "o").replace(/ç/g, "c");
         }
 
         function normalizeColor(c) {
@@ -205,93 +207,59 @@
             return [];
         }
 
-        // BİREBİR EŞLEŞEN İSİMLER SÖZLÜĞÜ
         const countryMasterDict = {
-            "TUR": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT", names: ["turkey", "turkiye", "türkiye", "tur"] },
-            "USA": { lat: 37.0902, lng: -95.7129, trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, G20", names: ["united states", "united states of america", "usa", "abd", "america", "amerika birlesik devletleri"] },
+            "TUR": { lat: 38.9637, lng: 35.2433, trName: "Türkiye Cumhuriyeti", founding: "1923", pop: "85 Milyon", area: "783,562 km²", pact: "NATO, G20, TDT", names: ["turkey", "turkiye", "turkiye cumhuriyeti"] },
+            "USA": { lat: 37.0902, lng: -95.7129, trName: "Amerika Birleşik Devletleri", founding: "1776", pop: "331 Milyon", area: "9,833,520 km²", pact: "NATO, G7, G20", names: ["united states", "united states of america", "usa", "abd", "america", "amerika birlesik devletleri", "amerika"] },
             "RUS": { lat: 61.5240, lng: 105.3188, trName: "Rusya Federasyonu", founding: "1991", pop: "144 Milyon", area: "17,098,242 km²", pact: "BM, ŞİÖ, BRICS", names: ["russia", "russian federation", "rusya", "rusya federasyonu"] },
             "CHN": { lat: 35.8617, lng: 104.1954, trName: "Çin Halk Cumhuriyeti", founding: "1949", pop: "1.4 Milyar", area: "9,596,961 km²", pact: "BM, BRICS, ŞİÖ", names: ["china", "cin", "cin halk cumhuriyeti"] },
-            "UKR": { lat: 48.3794, lng: 31.1656, trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı", names: ["ukraine", "ukrayna", "ukr"] },
-            "IRN": { lat: 32.4279, lng: 53.6880, trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ", names: ["iran", "islamic republic of iran", "iran islam cumhuriyeti", "irn"] },
-            "ISR": { lat: 31.0461, lng: 34.8516, trName: "İsrail Devleti", founding: "1948", pop: "9.3 Milyon", area: "22,072 km²", pact: "OECD, BM", names: ["israel", "israil", "israil devleti", "isr"] },
-            "PSE": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti", founding: "1988", pop: "5.1 Milyon", area: "6,020 km²", pact: "Arap Birliği", names: ["palestine", "filistin", "gaza", "west bank", "filistin devleti", "gazze", "pse"] },
-            "GBR": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, G7, G20", names: ["united kingdom", "great britain", "uk", "ingiltere", "england", "birlesik krallik", "gbr"] },
-            "DEU": { lat: 51.1657, lng: 10.4515, trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7", names: ["germany", "almanya", "almanya federal rep", "deu"] },
-            "FRA": { lat: 46.2276, lng: 2.2137, trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, G7", names: ["france", "fransa", "fransa cumhuriyeti", "fra"] },
-            "GRC": { lat: 39.0742, lng: 21.8243, trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO", names: ["greece", "yunanistan", "grc"] },
-            "SYR": { lat: 34.8021, lng: 38.9968, trName: "Suriye", founding: "1946", pop: "21 Milyon", area: "185,180 km²", pact: "Arap Birliği", names: ["syria", "suriye", "suriye arap cumhuriyeti", "syr"] },
-            "IRQ": { lat: 33.2232, lng: 43.6793, trName: "Irak", founding: "1932", pop: "43 Milyon", area: "438,317 km²", pact: "Arap Birliği", names: ["iraq", "irak", "irak cumhuriyeti", "irq"] },
-            "SAU": { lat: 23.8859, lng: 45.0792, trName: "Suudi Arabistan", founding: "1932", pop: "36 Milyon", area: "2,149,690 km²", pact: "G20, KİK", names: ["saudi arabia", "suudi arabistan", "suudi arabistan kralligi", "sau"] },
-            "EGY": { lat: 26.8206, lng: 30.8025, trName: "Mısır", founding: "1922", pop: "109 Milyon", area: "1,010,408 km²", pact: "BRICS", names: ["egypt", "misir", "misir arap cumhuriyeti", "egy"] },
-            "TWN": { lat: 23.6978, lng: 120.9605, trName: "Tayvan", founding: "1912", pop: "23.5 Milyon", area: "36,197 km²", pact: "-", names: ["taiwan", "tayvan", "twn"] },
-            "JPN": { lat: 36.2048, lng: 138.2529, trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, G20", names: ["japan", "japonya", "jpn"] },
-            "IND": { lat: 20.5937, lng: 78.9629, trName: "Hindistan", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ", names: ["india", "hindistan", "hindistan cumhuriyeti", "ind"] },
-            "PAK": { lat: 30.3753, lng: 69.3451, trName: "Pakistan", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ", names: ["pakistan", "pakistan islam cumhuriyeti", "pak"] },
-            "BLR": { lat: 53.7098, lng: 27.9534, trName: "Beyaz Rusya", founding: "1991", pop: "9.2 Milyon", area: "207,600 km²", pact: "ŞİÖ", names: ["belarus", "beyaz rusya", "blr"] },
-            "LBN": { lat: 33.8547, lng: 35.8623, trName: "Lübnan", founding: "1943", pop: "5.5 Milyon", area: "10,452 km²", pact: "Arap Birliği", names: ["lebanon", "lubnan", "lubnan cumhuriyeti", "lbn"] },
-            "BRA": { lat: -14.2350, lng: -51.9253, trName: "Brezilya", founding: "1822", pop: "214 Milyon", area: "8,515,767 km²", pact: "BRICS, G20", names: ["brazil", "brezilya", "brezilya federal rep", "bra"] },
-            "SDN": { lat: 12.8628, lng: 30.2176, trName: "Sudan", founding: "1956", pop: "45 Milyon", area: "1,886,068 km²", pact: "Arap Birliği", names: ["sudan", "sdn"] },
-            "YEM": { lat: 15.5527, lng: 48.5164, trName: "Yemen", founding: "1990", pop: "33 Milyon", area: "527,968 km²", pact: "Arap Birliği", names: ["yemen", "yem"] },
-            "MLI": { lat: 17.5707, lng: -3.9962, trName: "Mali", founding: "1960", pop: "21 Milyon", area: "1,240,192 km²", pact: "AES", names: ["mali", "mli"] },
-            "NER": { lat: 17.6078, lng: 8.0817, trName: "Nijer", founding: "1960", pop: "25 Milyon", area: "1,267,000 km²", pact: "AES", names: ["niger", "nijer", "ner"] },
-            "BFA": { lat: 12.2383, lng: -1.5616, trName: "Burkina Faso", founding: "1960", pop: "22 Milyon", area: "274,200 km²", pact: "AES", names: ["burkina faso", "bfa"] },
-            "PRK": { lat: 40.3399, lng: 127.5101, trName: "Kuzey Kore", founding: "1948", pop: "26 Milyon", area: "120,540 km²", pact: "Bağlantısızlar", names: ["north korea", "kuzey kore", "dem. rep. korea", "prk"] },
-            "KOR": { lat: 35.9078, lng: 127.7669, trName: "Güney Kore", founding: "1948", pop: "51 Milyon", area: "100,210 km²", pact: "G20, OECD", names: ["south korea", "guney kore", "korea", "kor"] },
-            "BEL": { lat: 50.5039, lng: 4.4699, trName: "Belçika", founding: "1830", pop: "11.6 Milyon", area: "30,528 km²", pact: "NATO, AB", names: ["belgium", "belcika", "bel"] },
-            "ARE": { lat: 23.4241, lng: 53.8478, trName: "B.A.E.", founding: "1971", pop: "9.9 Milyon", area: "83,600 km²", pact: "BRICS, KİK", names: ["united arab emirates", "uae", "bae", "birlesik arap emirlikleri", "are"] },
-            "CAN": { lat: 56.1304, lng: -106.3468, trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7", names: ["canada", "kanada", "can"] },
-            "ESP": { lat: 40.4637, lng: -3.7492, trName: "İspanya", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO", names: ["spain", "ispanya", "ispanya kralligi", "esp"] },
-            "ITA": { lat: 41.8719, lng: 12.5674, trName: "İtalya", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO", names: ["italy", "italya", "italya cumhuriyeti", "ita"] },
-            "NOR": { lat: 60.4720, lng: 8.4689, trName: "Norveç", founding: "1905", pop: "5.4 Milyon", area: "385,207 km²", pact: "NATO", names: ["norway", "norvec", "norvec kralligi", "nor"] },
-            "POL": { lat: 51.9194, lng: 19.1451, trName: "Polonya", founding: "1918", pop: "38 Milyon", area: "312,696 km²", pact: "AB, NATO", names: ["poland", "polonya", "polonya cumhuriyeti", "pol"] },
-            "PRT": { lat: 39.3999, lng: -8.2245, trName: "Portekiz", founding: "1143", pop: "10.3 Milyon", area: "92,212 km²", pact: "AB, NATO", names: ["portugal", "portekiz", "portekiz cumhuriyeti", "prt"] },
-            "ROU": { lat: 45.9432, lng: 24.9668, trName: "Romanya", founding: "1877", pop: "19 Milyon", area: "238,397 km²", pact: "AB, NATO", names: ["romania", "romanya", "rou"] },
-            "NLD": { lat: 52.1326, lng: 5.2913, trName: "Hollanda", founding: "1581", pop: "17.5 Milyon", area: "41,543 km²", pact: "AB, NATO", names: ["netherlands", "hollanda", "hollanda kralligi", "nld"] },
-            "AUS": { lat: -25.2744, lng: 133.7751, trName: "Avustralya", founding: "1901", pop: "26 Milyon", area: "7,692,024 km²", pact: "G20, QUAD", names: ["australia", "avustralya", "aus"] },
-            "KAZ": { lat: 48.0196, lng: 66.9237, trName: "Kazakistan", founding: "1991", pop: "19 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ", names: ["kazakhstan", "kazakistan", "kazakistan cumhuriyeti", "kaz"] },
-            "UZB": { lat: 41.3775, lng: 64.5853, trName: "Özbekistan", founding: "1991", pop: "35 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ", names: ["uzbekistan", "ozbekistan", "ozbekistan cumhuriyeti", "uzb"] },
-            "KGZ": { lat: 41.2044, lng: 74.7661, trName: "Kırgızistan", founding: "1991", pop: "6.6 Milyon", area: "199,951 km²", pact: "TDT, ŞİÖ", names: ["kyrgyzstan", "kirgizistan", "kirgizistan cumhuriyeti", "kgz"] },
-            "AZE": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan", founding: "1991", pop: "10 Milyon", area: "86,600 km²", pact: "TDT", names: ["azerbaijan", "azerbaycan", "azerbaycan cumhuriyeti", "aze"] },
-            "ETH": { lat: 9.1450, lng: 40.4897, trName: "Etiyopya", founding: "980 MÖ", pop: "120 Milyon", area: "1,104,300 km²", pact: "BRICS", names: ["ethiopia", "etiyopya", "eth"] },
-            "FIN": { lat: 61.9241, lng: 25.7482, trName: "Finlandiya", founding: "1917", pop: "5.5 Milyon", area: "338,424 km²", pact: "NATO, AB", names: ["finland", "finlandiya", "fin"] },
-            "SWE": { lat: 60.1282, lng: 18.6435, trName: "İsveç", founding: "1523", pop: "10.4 Milyon", area: "450,295 km²", pact: "NATO, AB", names: ["sweden", "isvec", "isvec kralligi", "swe"] },
-            "ZAF": { lat: -30.5595, lng: 22.9375, trName: "Güney Afrika", founding: "1910", pop: "60 Milyon", area: "1,221,037 km²", pact: "BRICS", names: ["south africa", "guney afrika", "guney afrika cumhuriyeti", "zaf"] },
-            "KOS": { lat: 42.6026, lng: 20.9030, trName: "Kosova", founding: "2008", pop: "1.8 Milyon", area: "10,887 km²", pact: "-", names: ["kosovo", "kosova", "kos"] },
-            "SRB": { lat: 44.0165, lng: 21.0059, trName: "Sırbistan", founding: "2006", pop: "6.8 Milyon", area: "88,361 km²", pact: "BM", names: ["serbia", "sirbistan", "srb"] },
-            "ALB": { lat: 41.1533, lng: 20.1683, trName: "Arnavutluk", founding: "1912", pop: "2.8 Milyon", area: "28,748 km²", pact: "NATO", names: ["albania", "arnavutluk", "alb"] },
-            "ARG": { lat: -38.4161, lng: -63.6167, trName: "Arjantin", founding: "1816", pop: "46 Milyon", area: "2,780,400 km²", pact: "G20", names: ["argentina", "arjantin", "arg"] },
-            "AUT": { lat: 47.5162, lng: 14.5501, trName: "Avusturya", founding: "1955", pop: "9 Milyon", area: "83,871 km²", pact: "AB", names: ["austria", "avusturya", "aut"] },
-            "BHR": { lat: 26.0667, lng: 50.5577, trName: "Bahreyn", founding: "1971", pop: "1.5 Milyon", area: "765 km²", pact: "KİK", names: ["bahrain", "bahreyn", "bhr"] },
-            "BGD": { lat: 23.6850, lng: 90.3563, trName: "Bangladeş", founding: "1971", pop: "170 Milyon", area: "148,460 km²", pact: "İÖT", names: ["bangladesh", "banglades", "bgd"] },
-            "BGR": { lat: 42.7339, lng: 25.4858, trName: "Bulgaristan", founding: "1908", pop: "6.5 Milyon", area: "110,994 km²", pact: "AB, NATO", names: ["bulgaria", "bulgaristan", "bgr"] },
-            "HRV": { lat: 45.1000, lng: 15.2000, trName: "Hırvatistan", founding: "1991", pop: "3.8 Milyon", area: "56,594 km²", pact: "AB, NATO", names: ["croatia", "hirvatistan", "hrv"] },
-            "CYP": { lat: 35.1264, lng: 33.4299, trName: "Kıbrıs", founding: "1960", pop: "1.2 Milyon", area: "9,251 km²", pact: "AB", names: ["cyprus", "kibris", "cyp"] },
-            "CZE": { lat: 49.8175, lng: 15.4730, trName: "Çekya", founding: "1993", pop: "10.5 Milyon", area: "78,865 km²", pact: "AB, NATO", names: ["czechia", "czech republic", "cekya", "cek cumhuriyeti", "cze"] },
-            "DNK": { lat: 56.2639, lng: 9.5018, trName: "Danimarka", founding: "8. Yüzyıl", pop: "5.8 Milyon", area: "42,933 km²", pact: "AB, NATO", names: ["denmark", "danimarka", "dnk"] },
-            "DZA": { lat: 28.0339, lng: 1.6596, trName: "Cezayir", founding: "1962", pop: "44 Milyon", area: "2,381,741 km²", pact: "Arap Birliği", names: ["algeria", "cezayir", "dza"] },
-            "EST": { lat: 58.5953, lng: 25.0136, trName: "Estonya", founding: "1918", pop: "1.3 Milyon", area: "45,227 km²", pact: "AB, NATO", names: ["estonia", "estonya", "est"] },
-            "HUN": { lat: 47.1625, lng: 19.5033, trName: "Macaristan", founding: "1000", pop: "9.7 Milyon", area: "93,028 km²", pact: "AB, NATO", names: ["hungary", "macaristan", "hun"] },
-            "IDN": { lat: -0.7893, lng: 113.9213, trName: "Endonezya", founding: "1945", pop: "275 Milyon", area: "1,904,569 km²", pact: "G20", names: ["indonesia", "endonezya", "idn"] },
-            "IRL": { lat: 53.1424, lng: -7.6921, trName: "İrlanda", founding: "1922", pop: "5 Milyon", area: "70,273 km²", pact: "AB", names: ["ireland", "irlanda", "irl"] },
-            "ISL": { lat: 64.9631, lng: -19.0208, trName: "İzlanda", founding: "1944", pop: "370 Bin", area: "103,000 km²", pact: "NATO", names: ["iceland", "izlanda", "isl"] },
-            "JOR": { lat: 30.5852, lng: 36.2384, trName: "Ürdün", founding: "1946", pop: "11 Milyon", area: "89,342 km²", pact: "Arap Birliği", names: ["jordan", "urdun", "jor"] },
-            "KWT": { lat: 29.3117, lng: 47.4818, trName: "Kuveyt", founding: "1961", pop: "4.3 Milyon", area: "17,818 km²", pact: "KİK", names: ["kuwait", "kuveyt", "kwt"] },
-            "LBY": { lat: 26.3351, lng: 17.2283, trName: "Libya", founding: "1951", pop: "7 Milyon", area: "1,759,540 km²", pact: "Arap Birliği", names: ["libya", "lby"] },
-            "LVA": { lat: 56.8796, lng: 24.6032, trName: "Letonya", founding: "1918", pop: "1.9 Milyon", area: "64,589 km²", pact: "AB, NATO", names: ["latvia", "letonya", "lva"] },
-            "LTU": { lat: 55.1694, lng: 23.8813, trName: "Litvanya", founding: "1918", pop: "2.8 Milyon", area: "65,300 km²", pact: "AB, NATO", names: ["lithuania", "litvanya", "ltu"] },
-            "LUX": { lat: 49.8153, lng: 6.1296, trName: "Lüksemburg", founding: "1815", pop: "640 Bin", area: "2,586 km²", pact: "AB, NATO", names: ["luxembourg", "luksemburg", "lux"] },
-            "MAR": { lat: 31.7917, lng: -7.0926, trName: "Fas", founding: "1956", pop: "37 Milyon", area: "710,850 km²", pact: "Arap Birliği", names: ["morocco", "fas", "mar"] },
-            "MLT": { lat: 35.9375, lng: 14.3754, trName: "Malta", founding: "1964", pop: "518 Bin", area: "316 km²", pact: "AB", names: ["malta", "mlt"] },
-            "MEX": { lat: 23.6345, lng: -102.5528, trName: "Meksika", founding: "1810", pop: "128 Milyon", area: "1,964,375 km²", pact: "G20", names: ["mexico", "meksika", "mex"] },
-            "MNE": { lat: 42.7087, lng: 19.3744, trName: "Karadağ", founding: "2006", pop: "620 Bin", area: "13,812 km²", pact: "NATO", names: ["montenegro", "karadag", "mne"] },
-            "MYS": { lat: 4.2105, lng: 101.9758, trName: "Malezya", founding: "1957", pop: "33 Milyon", area: "330,803 km²", pact: "ASEAN", names: ["malaysia", "malezya", "mys"] },
-            "MKD": { lat: 41.6086, lng: 21.7453, trName: "Kuzey Makedonya", founding: "1991", pop: "2 Milyon", area: "25,713 km²", pact: "NATO", names: ["north macedonia", "kuzey makedonya", "mkd"] },
-            "OMN": { lat: 21.4735, lng: 55.9754, trName: "Umman", founding: "1970", pop: "5.2 Milyon", area: "309,500 km²", pact: "KİK", names: ["oman", "umman", "omn"] },
-            "QAT": { lat: 25.3548, lng: 51.1839, trName: "Katar", founding: "1971", pop: "2.9 Milyon", area: "11,581 km²", pact: "KİK", names: ["qatar", "katar", "qat"] },
-            "SVK": { lat: 48.6690, lng: 19.6990, trName: "Slovakya", founding: "1993", pop: "5.4 Milyon", area: "49,035 km²", pact: "AB, NATO", names: ["slovakia", "slovakya", "svk"] },
-            "SVN": { lat: 46.1512, lng: 14.9955, trName: "Slovenya", founding: "1991", pop: "2.1 Milyon", area: "20,271 km²", pact: "AB, NATO", names: ["slovenia", "slovenya", "svn"] },
-            "TJK": { lat: 38.8610, lng: 71.2761, trName: "Tacikistan", founding: "1991", pop: "9.7 Milyon", area: "143,100 km²", pact: "ŞİÖ", names: ["tajikistan", "tacikistan", "tjk"] },
-            "TUN": { lat: 33.8869, lng: 9.5375, trName: "Tunus", founding: "1956", pop: "12 Milyon", area: "163,610 km²", pact: "Arap Birliği", names: ["tunisia", "tunus", "tun"] }
+            "UKR": { lat: 48.3794, lng: 31.1656, trName: "Ukrayna", founding: "1991", pop: "38 Milyon", area: "603,628 km²", pact: "AB Adayı", names: ["ukraine", "ukrayna"] },
+            "IRN": { lat: 32.4279, lng: 53.6880, trName: "İran İslam Cumhuriyeti", founding: "1979", pop: "88 Milyon", area: "1,648,195 km²", pact: "BRICS, ŞİÖ", names: ["iran", "islamic republic of iran", "iran islam cumhuriyeti"] },
+            "ISR": { lat: 31.0461, lng: 34.8516, trName: "İsrail Devleti", founding: "1948", pop: "9.3 Milyon", area: "22,072 km²", pact: "OECD, BM", names: ["israel", "israil", "israil devleti"] },
+            "PSE": { lat: 31.9522, lng: 35.2332, trName: "Filistin Devleti", founding: "1988", pop: "5.1 Milyon", area: "6,020 km²", pact: "Arap Birliği", names: ["palestine", "filistin", "gaza", "west bank", "filistin devleti", "gazze"] },
+            "GBR": { lat: 55.3781, lng: -3.4360, trName: "İngiltere (Birleşik Krallık)", founding: "1707", pop: "67 Milyon", area: "242,495 km²", pact: "NATO, G7, G20", names: ["united kingdom", "great britain", "uk", "ingiltere", "england", "birlesik krallik"] },
+            "DEU": { lat: 51.1657, lng: 10.4515, trName: "Almanya", founding: "1871", pop: "84 Milyon", area: "357,022 km²", pact: "AB, NATO, G7", names: ["germany", "almanya", "almanya federal rep"] },
+            "FRA": { lat: 46.2276, lng: 2.2137, trName: "Fransa Cumhuriyeti", founding: "1789", pop: "68 Milyon", area: "551,695 km²", pact: "AB, NATO, G7", names: ["france", "fransa", "fransa cumhuriyeti"] },
+            "GRC": { lat: 39.0742, lng: 21.8243, trName: "Yunanistan", founding: "1830", pop: "10.4 Milyon", area: "131,957 km²", pact: "AB, NATO", names: ["greece", "yunanistan"] },
+            "SYR": { lat: 34.8021, lng: 38.9968, trName: "Suriye", founding: "1946", pop: "21 Milyon", area: "185,180 km²", pact: "Arap Birliği", names: ["syria", "suriye", "suriye arap cumhuriyeti"] },
+            "IRQ": { lat: 33.2232, lng: 43.6793, trName: "Irak", founding: "1932", pop: "43 Milyon", area: "438,317 km²", pact: "Arap Birliği", names: ["iraq", "irak", "irak cumhuriyeti"] },
+            "SAU": { lat: 23.8859, lng: 45.0792, trName: "Suudi Arabistan", founding: "1932", pop: "36 Milyon", area: "2,149,690 km²", pact: "G20, KİK", names: ["saudi arabia", "suudi arabistan", "suudi arabistan kralligi"] },
+            "EGY": { lat: 26.8206, lng: 30.8025, trName: "Mısır", founding: "1922", pop: "109 Milyon", area: "1,010,408 km²", pact: "BRICS", names: ["egypt", "misir", "misir arap cumhuriyeti"] },
+            "TWN": { lat: 23.6978, lng: 120.9605, trName: "Tayvan", founding: "1912", pop: "23.5 Milyon", area: "36,197 km²", pact: "-", names: ["taiwan", "tayvan"] },
+            "JPN": { lat: 36.2048, lng: 138.2529, trName: "Japonya", founding: "660 MÖ", pop: "125 Milyon", area: "377,975 km²", pact: "G7, G20", names: ["japan", "japonya"] },
+            "IND": { lat: 20.5937, lng: 78.9629, trName: "Hindistan", founding: "1947", pop: "1.4 Milyar", area: "3,287,263 km²", pact: "BRICS, ŞİÖ", names: ["india", "hindistan", "hindistan cumhuriyeti"] },
+            "PAK": { lat: 30.3753, lng: 69.3451, trName: "Pakistan", founding: "1947", pop: "240 Milyon", area: "881,913 km²", pact: "ŞİÖ", names: ["pakistan", "pakistan islam cumhuriyeti"] },
+            "BLR": { lat: 53.7098, lng: 27.9534, trName: "Beyaz Rusya", founding: "1991", pop: "9.2 Milyon", area: "207,600 km²", pact: "ŞİÖ", names: ["belarus", "beyaz rusya"] },
+            "LBN": { lat: 33.8547, lng: 35.8623, trName: "Lübnan", founding: "1943", pop: "5.5 Milyon", area: "10,452 km²", pact: "Arap Birliği", names: ["lebanon", "lubnan", "lubnan cumhuriyeti"] },
+            "BRA": { lat: -14.2350, lng: -51.9253, trName: "Brezilya", founding: "1822", pop: "214 Milyon", area: "8,515,767 km²", pact: "BRICS, G20", names: ["brazil", "brezilya", "brezilya federal rep"] },
+            "SDN": { lat: 12.8628, lng: 30.2176, trName: "Sudan", founding: "1956", pop: "45 Milyon", area: "1,886,068 km²", pact: "Arap Birliği", names: ["sudan"] },
+            "YEM": { lat: 15.5527, lng: 48.5164, trName: "Yemen", founding: "1990", pop: "33 Milyon", area: "527,968 km²", pact: "Arap Birliği", names: ["yemen"] },
+            "MLI": { lat: 17.5707, lng: -3.9962, trName: "Mali", founding: "1960", pop: "21 Milyon", area: "1,240,192 km²", pact: "AES", names: ["mali"] },
+            "NER": { lat: 17.6078, lng: 8.0817, trName: "Nijer", founding: "1960", pop: "25 Milyon", area: "1,267,000 km²", pact: "AES", names: ["niger", "nijer"] },
+            "BFA": { lat: 12.2383, lng: -1.5616, trName: "Burkina Faso", founding: "1960", pop: "22 Milyon", area: "274,200 km²", pact: "AES", names: ["burkina faso"] },
+            "PRK": { lat: 40.3399, lng: 127.5101, trName: "Kuzey Kore", founding: "1948", pop: "26 Milyon", area: "120,540 km²", pact: "Bağlantısızlar", names: ["north korea", "kuzey kore", "dem. rep. korea"] },
+            "KOR": { lat: 35.9078, lng: 127.7669, trName: "Güney Kore", founding: "1948", pop: "51 Milyon", area: "100,210 km²", pact: "G20, OECD", names: ["south korea", "guney kore", "korea"] },
+            "BEL": { lat: 50.5039, lng: 4.4699, trName: "Belçika", founding: "1830", pop: "11.6 Milyon", area: "30,528 km²", pact: "NATO, AB", names: ["belgium", "belcika"] },
+            "ARE": { lat: 23.4241, lng: 53.8478, trName: "B.A.E.", founding: "1971", pop: "9.9 Milyon", area: "83,600 km²", pact: "BRICS, KİK", names: ["united arab emirates", "uae", "bae", "birlesik arap emirlikleri"] },
+            "CAN": { lat: 56.1304, lng: -106.3468, trName: "Kanada", founding: "1867", pop: "38 Milyon", area: "9,984,670 km²", pact: "NATO, G7", names: ["canada", "kanada"] },
+            "ESP": { lat: 40.4637, lng: -3.7492, trName: "İspanya", founding: "1479", pop: "47 Milyon", area: "505,990 km²", pact: "AB, NATO", names: ["spain", "ispanya", "ispanya kralligi"] },
+            "ITA": { lat: 41.8719, lng: 12.5674, trName: "İtalya", founding: "1861", pop: "59 Milyon", area: "301,340 km²", pact: "AB, NATO", names: ["italy", "italya", "italya cumhuriyeti"] },
+            "NOR": { lat: 60.4720, lng: 8.4689, trName: "Norveç", founding: "1905", pop: "5.4 Milyon", area: "385,207 km²", pact: "NATO", names: ["norway", "norvec", "norvec kralligi"] },
+            "POL": { lat: 51.9194, lng: 19.1451, trName: "Polonya", founding: "1918", pop: "38 Milyon", area: "312,696 km²", pact: "AB, NATO", names: ["poland", "polonya", "polonya cumhuriyeti"] },
+            "PRT": { lat: 39.3999, lng: -8.2245, trName: "Portekiz", founding: "1143", pop: "10.3 Milyon", area: "92,212 km²", pact: "AB, NATO", names: ["portugal", "portekiz", "portekiz cumhuriyeti"] },
+            "ROU": { lat: 45.9432, lng: 24.9668, trName: "Romanya", founding: "1877", pop: "19 Milyon", area: "238,397 km²", pact: "AB, NATO", names: ["romania", "romanya"] },
+            "NLD": { lat: 52.1326, lng: 5.2913, trName: "Hollanda", founding: "1581", pop: "17.5 Milyon", area: "41,543 km²", pact: "AB, NATO", names: ["netherlands", "hollanda", "hollanda kralligi"] },
+            "AUS": { lat: -25.2744, lng: 133.7751, trName: "Avustralya", founding: "1901", pop: "26 Milyon", area: "7,692,024 km²", pact: "G20, QUAD", names: ["australia", "avustralya"] },
+            "KAZ": { lat: 48.0196, lng: 66.9237, trName: "Kazakistan", founding: "1991", pop: "19 Milyon", area: "2,724,900 km²", pact: "TDT, ŞİÖ", names: ["kazakhstan", "kazakistan", "kazakistan cumhuriyeti"] },
+            "UZB": { lat: 41.3775, lng: 64.5853, trName: "Özbekistan", founding: "1991", pop: "35 Milyon", area: "447,400 km²", pact: "TDT, ŞİÖ", names: ["uzbekistan", "ozbekistan", "ozbekistan cumhuriyeti"] },
+            "KGZ": { lat: 41.2044, lng: 74.7661, trName: "Kırgızistan", founding: "1991", pop: "6.6 Milyon", area: "199,951 km²", pact: "TDT, ŞİÖ", names: ["kyrgyzstan", "kirgizistan", "kirgizistan cumhuriyeti"] },
+            "AZE": { lat: 40.1431, lng: 47.5769, trName: "Azerbaycan", founding: "1991", pop: "10 Milyon", area: "86,600 km²", pact: "TDT", names: ["azerbaijan", "azerbaycan", "azerbaycan cumhuriyeti"] },
+            "ETH": { lat: 9.1450, lng: 40.4897, trName: "Etiyopya", founding: "980 MÖ", pop: "120 Milyon", area: "1,104,300 km²", pact: "BRICS", names: ["ethiopia", "etiyopya"] },
+            "FIN": { lat: 61.9241, lng: 25.7482, trName: "Finlandiya", founding: "1917", pop: "5.5 Milyon", area: "338,424 km²", pact: "NATO, AB", names: ["finland", "finlandiya"] },
+            "SWE": { lat: 60.1282, lng: 18.6435, trName: "İsveç", founding: "1523", pop: "10.4 Milyon", area: "450,295 km²", pact: "NATO, AB", names: ["sweden", "isvec", "isvec kralligi"] },
+            "ZAF": { lat: -30.5595, lng: 22.9375, trName: "Güney Afrika", founding: "1910", pop: "60 Milyon", area: "1,221,037 km²", pact: "BRICS", names: ["south africa", "guney afrika", "guney afrika cumhuriyeti"] },
+            "KOS": { lat: 42.6026, lng: 20.9030, trName: "Kosova", founding: "2008", pop: "1.8 Milyon", area: "10,887 km²", pact: "-", names: ["kosovo", "kosova"] },
+            "SRB": { lat: 44.0165, lng: 21.0059, trName: "Sırbistan", founding: "2006", pop: "6.8 Milyon", area: "88,361 km²", pact: "BM", names: ["serbia", "sirbistan"] },
+            "ALB": { lat: 41.1533, lng: 20.1683, trName: "Arnavutluk", founding: "1912", pop: "2.8 Milyon", area: "28,748 km²", pact: "NATO", names: ["albania", "arnavutluk"] }
         };
 
         const orgListData = [
@@ -307,7 +275,7 @@
             "NATO": { title: "Kuzey Atlas Antlaşması Örgütü (NATO)", summary: "1949 Washington Antlaşması ile kurulan siyasi ve askeri ittifak. 5. Madde doktrinini esas alır.", history: "Soğuk Savaş'ta Varşova Paktı'na karşı kurulmuş, günümüzde Atlantik'ten Pasifik sınırına kadar caydırıcılık sağlar.", center: "BEL", membersIso: ["BEL", "CAN", "FRA", "DEU", "GRC", "ITA", "NOR", "POL", "ESP", "TUR", "GBR", "USA"] },
             "EU": { title: "Avrupa Birliği (AB)", summary: "27 Avrupa ülkesinin oluşturduğu siyasi, hukuki ve ekonomik tek pazar entegrasyonu.", history: "1951 Kömür ve Çelik Topluluğu ile başlayan süreç, günümüzün dev ekonomik gücüne dönüşmüştür.", center: "BEL", membersIso: ["BEL", "FRA", "DEU", "GRC", "ITA", "POL", "ESP"] },
             "BRICS": { title: "BRICS Küresel Ekonomik Paktı", summary: "Batı finansal sistemine alternatif küresel dengeler inşa etmeyi hedefleyen dev pakt.", history: "Mısır, Etiyopya, İran ve BAE'nin katılımıyla küresel enerji rezervlerinin kalbi haline gelmiştir.", center: "CHN", membersIso: ["BRA", "RUS", "IND", "CHN", "EGY", "IRN", "ARE", "SAU"] },
-            "SCO": { title: "Şanghay İşbirliği Örgütü (ŞİÖ)", summary: "Avrasya coğrafyasında güvenlik, askeri ve ekonomik işbirliğini hedefleyen dev Avrasya bloğu.", history: "1996'da Şanghay Beşlisi olarak kurulan yapı küresel bir güç odağı olmuştur.", center: "CHN", membersIso: ["CHN", "RUS", "IND", "PAK", "IRN", "KAZ", "UZB", "KGZ", "BLR"] },
+            "SCO": { title: "Şanghay İşbirliği Örgütü (ŞİÖ)", summary: "Avrasya coğrafyasında güvenlik, askeri ve ekonomik işbirliğini hedefleyen dev Avrasya bloğu.", history: "1996'da Şanghay Beşlisi olarak kurulan yapı küresel güç odağı olmuştur.", center: "CHN", membersIso: ["CHN", "RUS", "IND", "PAK", "IRN", "KAZ", "UZB", "KGZ", "BLR"] },
             "TDT": { title: "Türk Devletleri Teşkilatı (TDT)", summary: "Türk dünyasının siyasi, ekonomik ve savunma alanlarındaki entegrasyonunu hedefleyen çatı teşkilat.", history: "2009 Nahçıvan Anlaşması ile temelleri atılmış; Doğu-Batı Orta Koridoru merkezine yerleşmiştir.", center: "TUR", membersIso: ["TUR", "KAZ", "UZB", "KGZ"] },
             "UN": { title: "Birleşmiş Milletler (BM)", summary: "1945'te kurulan, küresel barışı, insan haklarını ve uluslararası hukuku korumayı amaçlayan 193 üyeli evrensel çatı örgüt.", history: "II. Dünya Savaşı yıkımının ardından Milletler Cemiyeti yerine temelleri atılmıştır.", center: "USA", membersIso: ["TUR", "USA", "RUS", "CHN", "GBR", "FRA", "DEU", "JPN", "IND", "BRA", "SAU", "CAN"] }
         };
@@ -316,38 +284,38 @@
             {
                 id: "UKR", title: "Rusya - Ukrayna Savaşı", sub: "Doğu Avrupa / Donbas",
                 timeline: [
-                    { year: 2014, sum: "Kırım'ın ilhakı ve Donbas bölgesinde vekalet savaşlarının başlaması.", hist: "Rusya, Kiev'deki Batı yanlısı hükümet değişikliğine Kırım'ı yasadışı ilhak ederek yanıt verdi. Aynı dönemde Donbas bölgesinde Rusya destekli ayrılıkçılar ile Ukrayna ordusu arasında düşük yoğunluklu ancak kalıcı bir vekalet savaşı başladı. Bu süreç, günümüzdeki topyekun savaşın zeminini hazırlayan en büyük jeopolitik kırılmadır.", countries: {"RUS": {role:"Müdahale Eden", color:"#ef4444"}, "UKR": {role:"Savunan", color:"#38bdf8"}}, heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#fde047'}] },
-                    { year: 2022, sum: "Rusya'nın Ukrayna'yı topyekun işgal girişimi ve savaşın büyümesi.", hist: "24 Şubat'ta Rusya, Ukrayna'yı tamamen silahsızlandırmak ve hükümeti devirmek amacıyla Kiev dahil birçok cepheden geniş çaplı bir işgal başlattı. Batı dünyası Ukrayna'ya görülmemiş bir silah ve istihbarat desteği sağlarken, Rusya ekonomisi ağır yaptırımlarla hedef alındı. Savaş, Avrupa'nın güvenlik mimarisini kökten değiştirdi.", countries: {"RUS": {role:"Saldıran", color:"#ef4444"}, "UKR": {role:"Direnen", color:"#38bdf8"}, "USA": {role:"Lojistik Destek", color:"#22c55e"}}, heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#fde047'}, {lat: 48.0, lng: 37.8, w: 2, c: '#fde047'}] },
-                    { year: 2026, sum: "Doğu cephesinde yıpratma savaşı ve küresel mühimmat krizi.", hist: "Savaş, her iki tarafın da ağır kayıplar verdiği ve cephe hatlarının kilitlendiği bir yıpratma savaşına dönüştü. Ukrayna'nın doğusunda topçu mühimmatı ve drone sürülerinin hakim olduğu bir siper savaşı yaşanırken, küresel mühimmat üretim kapasiteleri zorlanıyor. Müzakere masası uzak ihtimal olarak kalmaya devam ediyor.", countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}, "BLR": {role:"Rusya Üssü", color:"#f59e0b"}}, heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#fde047'}, {lat: 47.1, lng: 37.5, w: 3, c: '#ffffff'}] }
+                    { year: 2014, sum: "Kırım'ın ilhakı ve Donbas bölgesinde vekalet savaşlarının başlaması.", hist: "Rusya, Kiev'deki Batı yanlısı hükümet değişikliğine Kırım'ı yasadışı ilhak ederek yanıt verdi. Aynı dönemde Donbas bölgesinde düşük yoğunluklu ancak kalıcı bir vekalet savaşı başladı.", countries: {"RUS": {role:"Müdahale Eden", color:"#ef4444"}, "UKR": {role:"Savunan", color:"#38bdf8"}}, heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#fde047'}] },
+                    { year: 2022, sum: "Rusya'nın Ukrayna'yı topyekun işgal girişimi ve savaşın büyümesi.", hist: "24 Şubat'ta Rusya, Ukrayna'yı tamamen silahsızlandırmak amacıyla geniş çaplı bir işgal başlattı. Batı dünyası Ukrayna'ya görülmemiş bir silah desteği sağladı.", countries: {"RUS": {role:"Saldıran", color:"#ef4444"}, "UKR": {role:"Direnen", color:"#38bdf8"}, "USA": {role:"Lojistik Destek", color:"#22c55e"}}, heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#fde047'}, {lat: 48.0, lng: 37.8, w: 2, c: '#fde047'}] },
+                    { year: 2026, sum: "Doğu cephesinde yıpratma savaşı ve küresel mühimmat krizi.", hist: "Savaş siper ve drone savaşına dönüştü. Küresel mühimmat üretim kapasiteleri zorlanıyor. Müzakere masası uzak ihtimal olarak kalmaya devam ediyor.", countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}, "BLR": {role:"Rusya Üssü", color:"#f59e0b"}}, heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#fde047'}] }
                 ]
             },
             {
                 id: "ISR", title: "İsrail - Filistin & Doğu Akdeniz", sub: "Orta Doğu / Gazze",
                 timeline: [
-                    { year: 1967, sum: "Altı Gün Savaşı ve İsrail'in işgal sınırlarını genişletmesi.", hist: "İsrail'in ani hava saldırılarıyla başlayan savaş sonucunda Mısır, Ürdün ve Suriye ağır bir yenilgi aldı. İsrail; Gazze, Batı Şeria, Golan Tepeleri ve Sina Yarımadasını işgal etti. Bu savaşın yarattığı sınırlar ve mülteci krizi, modern Ortadoğu çatışmalarının çözülemeyen temel denklemini oluşturmaktadır.", countries: {"ISR": {role:"İşgal Eden", color:"#ef4444"}, "PSE": {role:"İşgal Edilen", color:"#38bdf8"}, "EGY": {role:"Savaşan", color:"#f59e0b"}}, heatpoints: [{lat: 31.7, lng: 35.2, w: 1, c: '#fde047'}] },
-                    { year: 2023, sum: "7 Ekim olayları ve Gazze'ye yönelik eşi görülmemiş yıkım.", hist: "Hamas'ın 7 Ekim'de İsrail'e yönelik geniş çaplı ve sürpriz saldırısı sonrası İsrail, Gazze'yi tamamen kuşatarak ağır bir bombardıman ve kara harekatı başlattı. Sivil kayıpların ve altyapı yıkımının ulaştığı boyut, uluslararası toplumda büyük insani kriz tartışmalarını ve soykırım suçlamalarını beraberinde getirdi.", countries: {"ISR": {role:"Saldıran", color:"#ef4444"}, "PSE": {role:"Hedef", color:"#38bdf8"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}] },
-                    { year: 2026, sum: "Çatışmanın Lübnan ve Kızıldeniz'e yayılması, bölgesel kriz.", hist: "Gazze savaşı kontrolden çıkarak bölgeselleşti. Kuzeyde Lübnan Hizbullah'ı ile İsrail ordusu arasında doğrudan sıcak çatışmalar yaşanırken, Yemen'deki Husiler Kızıldeniz ticaretini hedef aldı. İran destekli milis güçlerin 'Direniş Ekseni' stratejisi, ABD donanmasını ve İsrail'i bölgede yıpratma savaşına soktu.", countries: {"ISR": {role:"Aktör", color:"#ef4444"}, "PSE": {role:"Bölge", color:"#38bdf8"}, "LBN": {role:"Sınır Cephesi", color:"#f59e0b"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}, {lat: 33.2, lng: 35.5, w: 2, c: '#ffffff'}] }
+                    { year: 1967, sum: "Altı Gün Savaşı ve İsrail'in işgal sınırlarını genişletmesi.", hist: "İsrail'in ani hava saldırılarıyla başlayan savaşta Mısır, Ürdün ve Suriye yenildi. Gazze ve Batı Şeria işgal edildi.", countries: {"ISR": {role:"İşgal Eden", color:"#ef4444"}, "PSE": {role:"İşgal Edilen", color:"#38bdf8"}, "EGY": {role:"Savaşan", color:"#f59e0b"}}, heatpoints: [{lat: 31.7, lng: 35.2, w: 1, c: '#fde047'}] },
+                    { year: 2023, sum: "7 Ekim olayları ve Gazze'ye yönelik eşi görülmemiş yıkım.", hist: "Hamas'ın 7 Ekim saldırısı sonrası İsrail, Gazze'yi tamamen kuşatarak ağır bir bombardıman ve kara harekatı başlattı.", countries: {"ISR": {role:"Saldıran", color:"#ef4444"}, "PSE": {role:"Hedef", color:"#38bdf8"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}] },
+                    { year: 2026, sum: "Çatışmanın Lübnan ve Kızıldeniz'e yayılması, bölgesel kriz.", hist: "Kuzeyde Lübnan Hizbullah'ı ile sıcak çatışmalar yaşanırken, Yemen'deki Husiler Kızıldeniz ticaretini hedef aldı.", countries: {"ISR": {role:"Aktör", color:"#ef4444"}, "PSE": {role:"Bölge", color:"#38bdf8"}, "LBN": {role:"Sınır Cephesi", color:"#f59e0b"}, "IRN": {role:"Destekçi", color:"#dc2626"}}, heatpoints: [{lat: 31.5, lng: 34.4, w: 3, c: '#fde047'}, {lat: 33.2, lng: 35.5, w: 2, c: '#ffffff'}] }
                 ]
             },
             {
                 id: "IRN", title: "ABD - İran & Hürmüz Krizi", sub: "Orta Doğu / Basra",
                 timeline: [
-                    { year: 2018, sum: "ABD'nin Nükleer Anlaşmadan (JCPOA) tek taraflı çekilmesi.", hist: "Donald Trump yönetimi, 2015 yılında imzalanan tarihi nükleer anlaşmadan tek taraflı olarak çekildiğini açıkladı. Bu kararın ardından İran'a yönelik ağır ekonomik yaptırımlar (Maksimum Baskı politikası) yeniden devreye sokuldu. Bu durum, İran'ın nükleer programına yeniden hız vermesine ve bölgedeki proxy güçlerini aktive etmesine neden oldu.", countries: {"IRN": {role:"Hedef", color:"#ef4444"}, "USA": {role:"Yaptırım Kararı", color:"#38bdf8"}}, heatpoints: [{lat: 35.6, lng: 51.3, w: 1, c: '#fde047'}] },
-                    { year: 2026, sum: "Hürmüz Boğazı'nda doğrudan çatışma riski ve enerji krizi.", hist: "Dünya petrol ticaretinin şahdamarı olan Hürmüz Boğazı, İsrail-Filistin savaşının yansımalarıyla adeta mayın tarlasına döndü. İran Devrim Muhafızları'nın boğazı kapatma tehditleri ve bölgedeki tankerlere yönelik el koyma operasyonları, ABD'nin bölgeye uçak gemisi filoları sevk etmesiyle her an sıcak çatışmaya dönebilecek bir gerilim hattı yarattı.", countries: {"IRN": {role:"Aktör", color:"#ef4444"}, "USA": {role:"Karşıt Güç", color:"#38bdf8"}, "ISR": {role:"Karşıt Güç", color:"#22c55e"}}, heatpoints: [{lat: 26.5, lng: 56.2, w: 3, c: '#fde047'}, {lat: 27.1, lng: 56.2, w: 2, c: '#ffffff'}] }
+                    { year: 2018, sum: "ABD'nin Nükleer Anlaşmadan (JCPOA) tek taraflı çekilmesi.", hist: "Donald Trump yönetimi anlaşmadan çekildi ve İran'a maksimum baskı politikasını başlattı.", countries: {"IRN": {role:"Hedef", color:"#ef4444"}, "USA": {role:"Yaptırım Kararı", color:"#38bdf8"}}, heatpoints: [{lat: 35.6, lng: 51.3, w: 1, c: '#fde047'}] },
+                    { year: 2026, sum: "Hürmüz Boğazı'nda doğrudan çatışma riski ve enerji krizi.", hist: "İran Devrim Muhafızları'nın boğazı kapatma tehditleri ve tankerlere yönelik operasyonları sıcak çatışma riski yarattı.", countries: {"IRN": {role:"Aktör", color:"#ef4444"}, "USA": {role:"Karşıt Güç", color:"#38bdf8"}, "ISR": {role:"Karşıt Güç", color:"#22c55e"}}, heatpoints: [{lat: 26.5, lng: 56.2, w: 3, c: '#fde047'}, {lat: 27.1, lng: 56.2, w: 2, c: '#ffffff'}] }
                 ]
             },
             {
                 id: "TWN", title: "Çin - Tayvan Gerginliği", sub: "Doğu Asya / Pasifik",
                 timeline: [
-                    { year: 2022, sum: "Nancy Pelosi'nin ziyareti ve Çin'in adayı ablukaya alması.", hist: "ABD Temsilciler Meclisi Başkanı Nancy Pelosi'nin Tayvan'a yaptığı resmi ziyaret, Çin tarafından egemenlik haklarına doğrudan bir saldırı olarak kabul edildi. Pekin yönetimi, Tayvan adasının etrafını tamamen kuşatan ve fiili bir ablukanın provası niteliğini taşıyan devasa canlı ateşli askeri tatbikatlar başlattı.", countries: {"CHN": {role:"Gözdağı Veren", color:"#ef4444"}, "TWN": {role:"Abluka Altında", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 2, c: '#fde047'}] },
-                    { year: 2026, sum: "Pasifik'te silahlanma yarışı ve Tayvan Boğazı'nda sıcak temas riski.", hist: "Çin savaş uçaklarının Tayvan hava savunma sahasını (ADIZ) ihlal etmesi günlük ve rutin bir taktiğe dönüştü. Çin donanmasının adayı tecrit etme senaryolarına karşı ABD, Japonya ve Avustralya (QUAD ve AUKUS ittifakları) bölgede caydırıcı deniz gücü devriyelerini artırdı. Küresel çip üretiminin merkezi olan adanın güvenliği dünya ekonomisini tehdit ediyor.", countries: {"CHN": {role:"Aktör", color:"#ef4444"}, "TWN": {role:"Savunan", color:"#38bdf8"}, "USA": {role:"Garantör", color:"#22c55e"}, "JPN": {role:"Gözlemci", color:"#f59e0b"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 3, c: '#fde047'}, {lat: 25.0, lng: 121.5, w: 2, c: '#ffffff'}] }
+                    { year: 2022, sum: "Nancy Pelosi'nin ziyareti ve Çin'in adayı ablukaya alması.", hist: "ABD Temsilciler Meclisi Başkanının Tayvan ziyareti, Çin'in devasa askeri tatbikatlarını tetikledi.", countries: {"CHN": {role:"Gözdağı Veren", color:"#ef4444"}, "TWN": {role:"Abluka Altında", color:"#38bdf8"}, "USA": {role:"Destekçi", color:"#22c55e"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 2, c: '#fde047'}] },
+                    { year: 2026, sum: "Pasifik'te silahlanma yarışı ve Tayvan Boğazı'nda sıcak temas riski.", hist: "Çin savaş uçaklarının Tayvan hava savunma sahasını ihlal etmesi rutinleşti. QUAD ve AUKUS devriyelerini artırdı.", countries: {"CHN": {role:"Aktör", color:"#ef4444"}, "TWN": {role:"Savunan", color:"#38bdf8"}, "USA": {role:"Garantör", color:"#22c55e"}, "JPN": {role:"Gözlemci", color:"#f59e0b"}}, heatpoints: [{lat: 24.0, lng: 119.5, w: 3, c: '#fde047'}, {lat: 25.0, lng: 121.5, w: 2, c: '#ffffff'}] }
                 ]
             },
             {
                 id: "SDN", title: "Sudan İç Savaşı", sub: "Kuzey Afrika / Nil Bölgesi",
                 timeline: [
-                    { year: 2023, sum: "Sudan Ordusu ile Hızlı Destek Kuvvetleri (RSF) arasında savaş başladı.", hist: "Diktatör Ömer el-Beşir'in devrilmesinin ardından geçiş hükümetini kurması beklenen Sudan Silahlı Kuvvetleri (SAF) ile paramiliter Hızlı Destek Kuvvetleri (RSF) arasındaki güç mücadelesi başkent Hartum'da sokak çatışmalarına dönüştü. Çatışmalar kısa sürede tüm ülkeye yayıldı.", countries: {"SDN": {role:"Çatışma Merkezi", color:"#ef4444"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 2, c: '#fde047'}] },
-                    { year: 2026, sum: "Ülkenin fiilen ikiye bölünmesi ve devasa insani felaket.", hist: "Sudan devleti fiilen çöktü. Darfur bölgesinde etnik temizlik ve katliamlar yaşanırken, başkent Hartum hayalet şehre döndü. Milyonlarca insan komşu ülke Mısır ve Çad'a sığınmak zorunda kaldı. Dış aktörlerin (Körfez ülkeleri ve Rus Wagner grubu) savaş ağalarına silah ve altın ticareti üzerinden sağladığı destek krizi derinleştirdi.", countries: {"SDN": {role:"Çöken Devlet", color:"#ef4444"}, "EGY": {role:"Sınır Aktörü", color:"#38bdf8"}, "ARE": {role:"Finansör", color:"#f59e0b"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 3, c: '#fde047'}, {lat: 13.0, lng: 24.0, w: 3, c: '#ffffff'}] }
+                    { year: 2023, sum: "Sudan Ordusu ile Hızlı Destek Kuvvetleri (RSF) arasında savaş başladı.", hist: "Silahlı Kuvvetler ile paramiliter Hızlı Destek Kuvvetleri (RSF) arasındaki güç mücadelesi çatışmaya dönüştü.", countries: {"SDN": {role:"Çatışma Merkezi", color:"#ef4444"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 2, c: '#fde047'}] },
+                    { year: 2026, sum: "Ülkenin fiilen ikiye bölünmesi ve devasa insani felaket.", hist: "Sudan devleti çöktü. Darfur bölgesinde etnik temizlik yaşanırken, dış aktörlerin savaş ağalarına desteği krizi derinleştirdi.", countries: {"SDN": {role:"Çöken Devlet", color:"#ef4444"}, "EGY": {role:"Sınır Aktörü", color:"#38bdf8"}, "ARE": {role:"Finansör", color:"#f59e0b"}}, heatpoints: [{lat: 15.5, lng: 32.5, w: 3, c: '#fde047'}, {lat: 13.0, lng: 24.0, w: 3, c: '#ffffff'}] }
                 ]
             }
         ];
@@ -403,34 +371,44 @@
 
         globeContainer.addEventListener('mousedown', () => { globe.controls().autoRotate = false; });
 
-        fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
-            .then(r => r.json())
-            .then(geoData => {
+        // AĞ HATASINA KARŞI %100 ZIRHLI FETCH (PROMISE.ALL İLE)
+        Promise.all([
+            fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
+                .then(r => r.ok ? r.json() : null).catch(e => null),
+            fetch('newsData.json')
+                .then(r => r.ok ? r.json() : null).catch(e => null)
+        ]).then(([geoData, liveNews]) => {
+            if (geoData && geoData.features) {
                 worldGeoJson = geoData;
-                fetch('newsData.json').then(r => {
-                    if (!r.ok) throw new Error("Ağ Hatası");
-                    return r.json();
-                }).then(liveNews => {
-                    newsData = Array.isArray(liveNews) ? liveNews : (liveNews.data || []);
-                    globe.polygonsData(geoData.features);
-                    switchMainMode('news');
-                }).catch(err => {
-                    console.error("Haberler yüklenemedi:", err);
-                    newsData = [{
-                        title: "Bağlantı Hatası: Haberler Yüklenemedi",
-                        summary: "newsData.json dosyası okunamadı veya JSON formatında hata var.",
-                        history: "Lütfen dosya yapısını kontrol edin. Sistemi Local Server üzerinden çalıştırmayı deneyin.",
-                        tags: ["#Hata"],
-                        countries: { "TUR": { role: "Sistem", color: "#ef4444" } }
-                    }];
-                    globe.polygonsData(geoData.features);
-                    switchMainMode('news');
-                });
-            });
+                globe.polygonsData(geoData.features);
+            }
+            if (liveNews) {
+                newsData = Array.isArray(liveNews) ? liveNews : (liveNews.data || []);
+            }
+            if (!newsData || newsData.length === 0) {
+                newsData = [{
+                    title: "Sistem Uyarısı: Veri Bağlantı Hatası",
+                    summary: "newsData.json dosyası veya Harita verisi okunamadı.",
+                    history: "Sistemi yerel olarak (file:///) açtıysanız tarayıcınız veri okumayı engellemiş olabilir. Live Server kullanın veya JSON formatınızdaki virgül hatalarını kontrol edin.",
+                    tags: ["#SistemHatasi"],
+                    countries: { "TUR": { role: "Hata Merkezi", color: "#ef4444" } }
+                }];
+            }
+            switchMainMode('news');
+        }).catch(err => {
+            newsData = [{
+                title: "Kritik Sistem Hatası",
+                summary: "Arayüz yüklenirken beklenmeyen bir hata oluştu.",
+                history: err.toString(),
+                tags: ["#Fatal"],
+                countries: { "TUR": { role: "Hata Merkezi", color: "#ef4444" } }
+            }];
+            switchMainMode('news');
+        });
 
         function findMasterCountryByIso(isoCode) {
-            if (!isoCode || isoCode === "-99") return null;
-            const code = isoCode.toUpperCase().trim();
+            if (!isoCode || String(isoCode) === "-99") return null;
+            const code = String(isoCode).toUpperCase().trim();
             if (countryMasterDict[code]) return { isoKey: code, ...countryMasterDict[code] };
             return null;
         }
@@ -589,6 +567,7 @@
                     }
                 }
                 
+                // HABERLERDEKİ EKSİK KAVİSLİ ÇİZGİLER (ARCS) EKLENDİ
                 for (let i = 0; i < points.length; i++) {
                     for (let j = i + 1; j < points.length; j++) {
                         arcs.push({
