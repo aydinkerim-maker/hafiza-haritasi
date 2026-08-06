@@ -35,12 +35,12 @@
         .mode-btn:hover { background: #1e293b; color: #fff; border-color: #38bdf8; }
         .mode-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; box-shadow: 0 0 15px rgba(2, 132, 199, 0.6); }
 
-        /* MOBİL SEKME BUTONLARI (SADECE MOBİLDE GÖRÜNÜR) */
+        /* MOBİL SEKME BUTONLARI */
         .mobile-tabs { display: none; background: #050811; border-bottom: 1px solid #1e293b; padding: 6px 10px; gap: 6px; }
         .tab-btn { flex: 1; padding: 8px; background: #0f172a; border: 1px solid #1e293b; color: #94a3b8; border-radius: 4px; font-size: 0.75rem; font-weight: 700; cursor: pointer; text-align: center; }
         .tab-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
 
-        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #02040a; }
+        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; background: #02040a; width: 100%; height: 100%; }
         
         .sidebar { width: 340px; min-width: 340px; background: #0a0f1d; border-right: 1px solid #1e293b; display: flex; flex-direction: column; z-index: 10; position: relative; }
         
@@ -60,8 +60,9 @@
         .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
         .tag { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.68rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; cursor: pointer; }
 
-        .globe-container { flex: 1; position: relative; background: #02040a; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
-        #globeViz { flex: 1; width: 100%; height: 100%; }
+        /* ORTALANMIŞ 3D HARİTA ALANI */
+        .globe-container { flex: 1; position: relative; background: #02040a; height: 100%; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #globeViz { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
         /* BELİRGİN SLIDER BAR */
         .timeline-container { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 80%; background: rgba(5, 8, 17, 0.92); backdrop-filter: blur(12px); border: 1px solid #38bdf8; padding: 14px 20px; border-radius: 8px; display: none; flex-direction: column; gap: 10px; box-shadow: 0 0 25px rgba(56, 189, 248, 0.35); z-index: 100; }
@@ -93,7 +94,7 @@
         .member-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; max-height: 150px; overflow-y: auto; }
         .member-chip { background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.7rem; padding: 2px 5px; border-radius: 4px; }
 
-        /* MOBİL RESPONSIVE MEDIA KONTROLLERİ (MOBİL SIKIŞMASINI TAM ÇÖZER) */
+        /* MOBİL MEDIA QUERY */
         @media (max-width: 900px) {
             body { height: 100vh; }
             .mobile-tabs { display: flex; }
@@ -133,7 +134,6 @@
     </div>
 </header>
 
-<!-- MOBİL GEÇİŞ SEKMELERİ -->
 <div class="mobile-tabs">
     <button class="tab-btn active" id="tab-btn-sidebar" onclick="switchMobileTab('sidebarSection')">📋 İçerik Listesi</button>
     <button class="tab-btn" id="tab-btn-map" onclick="switchMobileTab('mapSection')">🌐 3D Harita</button>
@@ -389,21 +389,21 @@
                 { 
                     year: 2014, 
                     sum: "Kırım'ın Yasadışı İlhakı & Donbas'ta Vekalet Savaşının Başlaması", 
-                    hist: "Ukrayna'da Batı yanlısı Euromaidan halk ayaklanması sonucu Rus destekli Yanukoviç'in devrilmesi üzerine Rusya, Kırım Yarımadası'nı askeri güçle kuşatıp yasadışı bir referandumla ilhak etti.\n\nEş zamanlı olarak Donetsk ve Luhansk bölgelerinde Rus yanlısı ayrılıkçı milisler silahlandırılarak Kiev yönetimine karşı iç savaş başlatıldı. İmzalanan Minsk Anlaşmaları ateşi söndürmekte yetersiz kaldı.", 
+                    hist: "Ukrayna'da Batı yanlısı Euromaidan halk ayaklanması sonucu Rus destekli Yanukoviç'in devrilmesi üzerine Rusya, Kırım Yarımadası'nı ilhak etti.\n\nDonetsk ve Luhansk bölgelerinde ayrılıkçı milisler silahlandırılarak iç savaş başlatıldı.", 
                     countries: {"RUS": {role:"Müdahale Eden Güç", color:"#ef4444"}, "UKR": {role:"Savunan Devlet", color:"#38bdf8"}}, 
                     heatpoints: [{lat: 45.3, lng: 34.4, w: 1, c: '#fde047'}] 
                 },
                 { 
                     year: 2022, 
                     sum: "Topyekun Rus İşgal Girişimi & Avrupa Savaşı", 
-                    hist: "24 Şubat 2022'de Vladimir Putin, Ukrayna'yı 'silahsızlandırmak' gerekçesiyle Özel Askeri Operasyon başlattı. Rus ordusu Kiev, Harkiv ve Herson olmak üzere 4 ana cepheden saldırdı.\n\nKiev kapılarına kadar dayanan Rus birlikleri, Ukrayna ordusunun sert direnişi ve Batı'nın desteğiyle geri çekilmek zorunda kaldı. Savaş doğu cephelerine sıkıştı.", 
+                    hist: "24 Şubat 2022'de Vladimir Putin, Özel Askeri Operasyon başlattı. Rus ordusu Kiev, Harkiv ve Herson olmak üzere 4 ana cepheden saldırdı.\n\nKiev kapılarına dayanan birlikler sert direnişle geri çekilmek zorunda kaldı.", 
                     countries: {"RUS": {role:"Saldıran Taraf", color:"#ef4444"}, "UKR": {role:"Direnen Taraf", color:"#38bdf8"}, "USA": {role:"Askeri & Finansal Destek", color:"#22c55e"}}, 
                     heatpoints: [{lat: 50.4, lng: 30.5, w: 2, c: '#fde047'}, {lat: 48.0, lng: 37.8, w: 2, c: '#fde047'}] 
                 },
                 { 
                     year: 2026, 
                     sum: "Siper ve Dron Savaşında Yıpratıcı Kilitlenme", 
-                    hist: "Çatışmalar I. Dünya Savaşı'nı andıran yoğun siper muharebeleri, devasa mayın tarlaları ve yüzbinlerce intihar dronunun kullanıldığı yıpratma savaşına dönüştü.\n\nRusya mühimmat üstünlüğüyle yavaşça ilerlerken; Ukrayna, Batı'dan gelen uzun menzilli füzelerle Rus lojistik altyapısını imha etmeyi hedeflemektedir.", 
+                    hist: "Çatışmalar I. Dünya Savaşı'nı andıran yoğun siper muharebelerine ve yüzbinlerce intihar dronunun kullanıldığı yıpratma savaşına dönüştü.", 
                     countries: {"RUS": {role:"Aktör", color:"#ef4444"}, "UKR": {role:"Aktör", color:"#38bdf8"}, "USA": {role:"Mühimmat Sağlayıcı", color:"#22c55e"}, "BLR": {role:"Rusya Lojistik Üssü", color:"#f59e0b"}}, 
                     heatpoints: [{lat: 48.0, lng: 37.8, w: 3, c: '#fde047'}, {lat: 47.1, lng: 37.5, w: 3, c: '#fde047'}] 
                 }
@@ -539,9 +539,13 @@
     let currentTimelineIndex = 0;
     let activeColorMap = {};
 
+    /* MASAÜSTÜNDE DÜZGÜN HESAPLAYAN HASSAS GENİŞLİK FONKSİYONU */
     function getGlobeWidth() {
-        const sideWidth = window.innerWidth > 900 ? 720 : window.innerWidth;
-        return Math.max(280, sideWidth);
+        if (window.innerWidth <= 900) {
+            return window.innerWidth;
+        }
+        // Masaüstü: Sol panel (340px) + Sağ panel (380px) = 720px düşülür
+        return Math.max(300, window.innerWidth - 720);
     }
 
     const globeContainer = document.getElementById('globeViz');
@@ -638,7 +642,6 @@
         return null;
     }
 
-    /* MOBİL SEKME GEÇİŞ İŞLEVLERİ */
     function switchMobileTab(tabId) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.sidebar, .globe-container, .info-panel').forEach(el => el.classList.remove('mobile-active'));
@@ -671,6 +674,12 @@
 
         hideCountryCard();
         executeSearch();
+        
+        // Yeniden boyutlandırmayı tetikle
+        setTimeout(() => {
+            globe.width(getGlobeWidth());
+            globe.height(window.innerHeight - 80);
+        }, 50);
     }
 
     function executeSearch() {
