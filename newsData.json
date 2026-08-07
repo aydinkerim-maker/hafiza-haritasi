@@ -1,5 +1,55 @@
 [
     {
+        "title": "BM Genel Sekreteri'nden Savaşın Tırmanması Üzerine Hem Ukrayna'ya Hem de Rusya'ya Kınama",
+        "tags": [
+            "#Ukrayna",
+            "#Rusya",
+            "#BirleşmişMilletler"
+        ],
+        "summary": "Birleşmiş Milletler Genel Sekreteri Antonio Guterres, Rusya ile Ukrayna arasındaki çatışmaların şiddetlenmesi üzerine her iki tarafa da sert eleştirilerde bulundu. Guterres, artan saldırıların sivilleri ve kritik altyapıları hedef aldığını belirterek bu durumun kabul edilemez olduğunu vurguladı. Taraflara derhal ateşkes çağrısı yapan BM lideri, askeri tırmanışın bölgesel ve küresel istikrarı tehlikeye attığının altını çizdi. Açıklamada, tarafların uluslararası insancıl hukuka riayet etmesi gerektiği yinelendi. BM, insani koridorların güvenliğinin sağlanması ve yardımların ulaştırılması için taraflarla temasların sürdüğünü bildirdi. Diplomatik çabaların yetersiz kaldığına işaret eden Guterres, barış masasına dönülmesi için uluslararası toplumun daha baskı yapması gerektiğini ifade etti. Çatışmaların sahadaki yıkıcı etkisinin giderek arttığına dikkat çekildi. Uzmanlar, kış mevsimine girilirken enerji altyapısına yönelik saldırıların insani krizi derinleştireceği konusunda uyarıyor. BM Güvenlik Konseyi'nin konuyu görüşmek üzere acil toplanması bekleniyor. Son gelişmeler, iki ülke arasındaki diplomatik çözüm umutlarını daha da zayıflatıyor.",
+        "history": "Rusya ile Ukrayna arasındaki gerilim, Sovyetler Birliği'nin dağılmasının ardından bağımsızlığını kazanan Ukrayna'nın Batı entegrasyonu ve NATO üyeliği hedefleriyle yıllar içinde tırmanmıştır. 2014 yılında Kırım'ın Rusya tarafından ilhakı ve Donbas bölgesinde çıkan çatışmalar, iki ülke arasındaki ilişkileri kopma noktasına getirmiştir. Şubat 2022'de Moskova'nın başlattığı 'özel askeri operasyon' adı altındaki geniş çaplı işgal girişimi, İkinci Dünya Savaşı'ndan bu yana Avrupa'da yaşanan en büyük devletler arası savaşa yol açmıştır. Ukrayna, Batılı devletlerden aldığı yoğun askeri ve mali destekle direniş gösterirken, Rusya ise Batı'nın uyguladığı ağır ekonomik yaptırımlara rağmen askeri baskıyı sürdürmektedir. Birleşmiş Milletler ve uluslararası toplum, savaşın başından bu yana defalarca ateşkes ve diplomatik çözüm çağrısında bulunmuş, ancak tarafların toprak bütünlüğü ve güvenlik mimarisi hakkındaki uzlaşmaz tutumları nedeniyle kalıcı bir barış sağlanamamıştır. Tarihsel süreç boyunca bu coğrafya, büyük güçlerin rekabet alanına dönüşmüş ve küresel gıda ve enerji arz güvenliğini doğrudan etkileyen krizlerin merkez üssü olmuştur.",
+        "link": "https://www.aljazeera.com/video/newsfeed/2026/8/7/un-chief-condemns-both-ukraine-and-russia-amid-escalation-in-war?traffic_source=rss",
+        "countries": {
+            "Ukraine": {
+                "role": "Aktör (Saldırıların hedefindeki ülke olarak savunma operasyonları yürütüyor ve uluslararası destek arıyor)",
+                "color": "#38bdf8"
+            },
+            "Russia": {
+                "role": "Aktör (Askeri operasyonları ve saldırıları yoğunlaştıran taraf konumunda)",
+                "color": "#ef4444"
+            },
+            "United Nations": {
+                "role": "Gözlemci ve Arabulucu (Tarafları kınayarak acil ateşkes ve de-eskalasyon çağrısı yapıyor)",
+                "color": "#eab308"
+            }
+        },
+        "id": 1
+    },
+    {
+        "title": "İran'ın Ticaret Üzerindeki Kontrolü Güçlü Bir Silah Ancak Son Kullanma Tarihi Var",
+        "tags": [
+            "#İran",
+            "#ABD",
+            "#BasraKörfezi",
+            "#HürmüzBoğazı",
+            "#OrtaDoğu"
+        ],
+        "summary": "İran, Hürmüz Boğazı üzerindeki stratejik konumu sayesinde küresel ticaret ve enerji sevkiyatı üzerinde önemli bir baskı kurma kapasitesine sahiptir. Ülke, mevcut jeopolitik gerilimlerde bu bağımlılığı bir koz olarak kullanarak rakiplerine karşı caydırıcılık sağlamaya çalışmaktadır. Ancak bu durumun sürdürülebilirliği tartışmalıdır çünkü uzun süreli bir ticaret kesintisi, Tahran'ın bu nüfuzunu yavaş yavaş aşındıracaktır. Enerji arzındaki aksamalar küresel ekonomiyi sarssa da, büyük güçlerin alternatif rotalar aramasına ve İran'a karşı daha sert önlemler almasına yol açacaktır. Boğazın kapanması veya sürekli bir tehdit altında kalması, nihayetinde İran'ın kendi ekonomik çıkarlarına da zarar verecektir. Çünkü Tahran yönetimi de dış ticarete ve petrolden elde edilen gelirlere son derece bağımlıdır. Uzun vadede bu durum, İran'ın ticaret üzerindeki kaldıraç etkisinin süresinin sınırlı olduğunu göstermektedir. Küresel aktörler bu tür krizler karşısında tedbirlerini artırmakta ve teknolojik ile lojistik alternatifler geliştirmektedir. Dolayısıyla İran'ın elindeki bu güçlü silah, zamanla etkisini yitirme riski taşımaktadır. Sonuç olarak, Tahran'ın boğazı bir baskı aracı olarak kullanması kısa vadede sonuç verse de, stratejik olarak miadını doldurmaya mahkumdur.",
+        "history": "Hürmüz Boğazı, tarih boyunca dünyanın en kritik enerji geçiş noktalarından biri olmuştur. Özellikle 1979 İslam Devrimi'nden bu yana İran, Batı dünyası ve bölge ülkeleriyle yaşadığı krizlerde bu su yolunu sık sık bir jeopolitik kaldıraç olarak kullanmıştır. 1980'lerdeki İran-Irak Savaşı sırasında yaşanan 'Tanker Savaşı', boğazın ne kadar kırılgan bir ekonomik damar olduğunu tescillemiştir. Geçmişte yaşanan benzer krizlerde ABD ve müttefikleri bölgedeki askeri varlıklarını artırarak ticaret yollarını açık tutmaya çalışmıştır. İran ise ekonomik ambargolarla sıkıştırıldığında bu boğazı kapatma tehdidiniimi bir nükleer ve siyasi pazarlık unsuru olarak masaya sürmiştir. Tarihsel süreç, Basra Körfezi'ndeki bu güç mücadelesinin küresel petrol piyasalarını ve uluslararası diplomasiyi doğrudan etkilediğini defalarca kanıtlamıştır. Yıllar boyunca yapılan askeri yığınaklar ve güvenlik anlaşmaları, bu su yolunun korunmasını uluslararası hukukun ve güvenliğin temel taşlarından biri haline getirmiştir. İran'ın bu bölgedeki caydırıcılık stratejisi, ülkenin dış politika DNA'sının merkezinde yer almaktadır. Ancak geçmişteki tecrübeler, bu tür stratejik abluka girişimlerinin her zaman uluslararası toplumdan çok sert ekonomik ve askeri karşılıklar gördüğünü göstermektedir. Dolayısıyla Tahran'ın bu alandaki tarihi manevra alanı, küresel tepkiler ve ekonomik gerçeklikler nedeniyle sürekli bir daralma trendi içindedir.",
+        "link": "https://www.aljazeera.com/opinions/2026/8/7/irans-grip-on-trade-is-a-potent-weapon-but-it-has-an-expiry-date?traffic_source=rss",
+        "countries": {
+            "Iran": {
+                "role": "Aktör (Hürmüz Boğazı üzerindeki kontrolünü ve ticaret kısıtlamalarını jeopolitik bir baskı unsuru olarak kullanıyor)",
+                "color": "#f97316"
+            },
+            "United States": {
+                "role": "Aktör (Bölgedeki ticaret yollarının güvenliğini sağlamak ve İran'ın baskısını dengelemek için askeri ve stratejik hamleler yapıyor)",
+                "color": "#38bdf8"
+            }
+        },
+        "id": 2
+    },
+    {
         "title": "Suudi Arabistan, Türkiye ve Pakistan'dan Savunma Paktı",
         "tags": [
             "#SuudiArabistan",
@@ -24,7 +74,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 1
+        "id": 3
     },
     {
         "title": "Husilerin hükümet güçlerine yönelik saldırıları, Yemen'de büyük bir savaşın yaklaştığının sinyalini veriyor",
@@ -56,7 +106,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 2
+        "id": 4
     },
     {
         "title": "Suudi Arabistan, Pakistan ve Türkiye Bölgesel Kriz Ortasında Savunma Anlaşması İmzaladı",
@@ -82,7 +132,7 @@
                 "color": "#facc15"
             }
         },
-        "id": 3
+        "id": 5
     },
     {
         "title": "Trump Neden İran ile Bir 'Tırmandırma Tuzağı'na Yakalandı?",
@@ -104,7 +154,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 4
+        "id": 6
     },
     {
         "title": "Gerçeğin Peşinde: 30 Yıl Önce Öldürülen Sih Aktivistin Kızı",
@@ -127,7 +177,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 5
+        "id": 7
     },
     {
         "title": "Meksika, ABD'nin İthalatı Durdurmasının Ardından Avokado Bölgesine Asker Sevk Etti",
@@ -148,7 +198,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 6
+        "id": 8
     },
     {
         "title": "Yapay Zeka Kullanılarak Doğada Bulunmayan Virüsler İlk Kez Üretildi",
@@ -168,7 +218,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 7
+        "id": 9
     },
     {
         "title": "Hindistan'ın Assam Eyaletinde Şiddetli Muson Yağmurları ve Seller Milyondan Fazla İnsanı Etkiledi",
@@ -185,7 +235,7 @@
                 "color": "#f97316"
             }
         },
-        "id": 8
+        "id": 10
     },
     {
         "title": "Trump, Yeni Kararnamelerle ABD'de Doğumla Vatandaşlık Hakkını Sınırlamayı Yeniden Deniyor",
@@ -204,7 +254,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 9
+        "id": 11
     },
     {
         "title": "Nijerya Güçleri Tarafından Kurtarılan 308 Kişiyle Özel Rapor",
@@ -221,7 +271,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 10
+        "id": 12
     },
     {
         "title": "İsrail'in Batı Şeria'daki Kalandiya Baskını 51 Filistinliyi Yaraladı",
@@ -247,7 +297,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 11
+        "id": 13
     },
     {
         "title": "Trump ABD'nin silah sıkıntısını reddetti ve bilgi sızdıranların avlandığını söyledi",
@@ -264,7 +314,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 12
+        "id": 14
     },
     {
         "title": "Binlerce Göçmen Sınır Krizinin Ardından Hala Ceuta'da, Yerel Lider Açıklaması",
@@ -290,7 +340,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 13
+        "id": 15
     },
     {
         "title": "Trump: Savaş Çok Uzun Süremez, Hürmüz Anlaşması Yakın",
@@ -318,7 +368,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 14
+        "id": 16
     },
     {
         "title": "Seyahat Kısıtlamaları ve Abluka, Gazze'deki Öğrencileri Geleceklerinden Ediyor",
@@ -345,7 +395,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 15
+        "id": 17
     },
     {
         "title": "ABD, Çin'in Robotik ve Teknoloji Yükselişini Yavaşlatabilir mi?",
@@ -369,7 +419,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 16
+        "id": 18
     },
     {
         "title": "Myanmar Lideri, Uluslararası Meşruiyet Arayışıyla Tayland'ı Ziyaret Etti",
@@ -391,7 +441,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 17
+        "id": 19
     },
     {
         "title": "Odesa'da Hiç Kimse Rusya'nın Yeni Karadeniz Saldırılarından Güvende Değil",
@@ -412,7 +462,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 18
+        "id": 20
     },
     {
         "title": "Fransa neden yeni bir nükleer strateji geliştiriyor?",
@@ -438,7 +488,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 19
+        "id": 21
     },
     {
         "title": "Rusya'nın Ukrayna'ya Düzenlediği Saldırılarda Altı Kişi Hayatını Kaybetti",
@@ -459,7 +509,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 20
+        "id": 22
     },
     {
         "title": "Trump'tan Michigan Zaferi Sonrası Abdul El-Sayed'e 'Yahudi Düşmanı' Suçlaması",
@@ -476,7 +526,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 21
+        "id": 23
     },
     {
         "title": "İran Savaşı Donald Trump’ın Siyasi Mirasını Rayından Çıkarabilir mi?",
@@ -498,7 +548,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 22
+        "id": 24
     },
     {
         "title": "Trump Yönetimi, Yüksek Mahkeme'nin İptal Ettiği 100 Milyar Dolarlık Gümrük Vergisini İade Ediyor",
@@ -515,7 +565,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 23
+        "id": 25
     },
     {
         "title": "Mamdani, El-Sayed'in Zaferini Kutladı ve 'Mini Mamdani' Benzetmesini Reddetti",
@@ -533,7 +583,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 24
+        "id": 26
     },
     {
         "title": "İran, Hürmüz Boğazı Deniz Ticareti Rotası İçin Umman ile Anlaştığını Açıkladı",
@@ -554,7 +604,7 @@
                 "color": "#14b8a6"
             }
         },
-        "id": 25
+        "id": 27
     },
     {
         "title": "İran Savaşı Canlı: Tahran ve Umman Hürmüz Anlaşmasına Yaklaşıyor; Husiler Tankerlere Saldırdı",
@@ -600,7 +650,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 26
+        "id": 28
     },
     {
         "title": "Nijerya Kaçırılan 308 Vatandaşının Kurtarıldığını Açıkladı",
@@ -616,7 +666,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 27
+        "id": 29
     },
     {
         "title": "Ölümcül Kiev Saldırısının Ardından Ukrayna'dan Füze Uyarısı: Önleyici Füze Eksikliği Can Alıyor",
@@ -642,7 +692,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 28
+        "id": 30
     },
     {
         "title": "İsrail, Haftalar Sonra İlk Tahliye Uyarısının Ardından Güney Lübnan'ı Vurdu",
@@ -664,7 +714,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 29
+        "id": 31
     },
     {
         "title": "Devrik Başbakan Şeyh Hasina Aralık Ayında Bangladeş'e Döneceğini Açıkladı",
@@ -685,7 +735,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 30
+        "id": 32
     },
     {
         "title": "Brezilya'da Flavio Bolsonaro, Alfredo Gaspar'ı Başkan Yardımcısı Adayı Olarak Açıkladı",
@@ -704,7 +754,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 31
+        "id": 33
     },
     {
         "title": "Arap Yetkililerden Kudüs'teki Gerilimler İçin Eylem Çağrısı",
@@ -731,7 +781,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 32
+        "id": 34
     },
     {
         "title": "Soldan Siyasi Dışarıdan Biri Michigan'da Demokrat Senato Ön Seçimini Kazandı",
@@ -752,7 +802,7 @@
                 "color": "#94a3b8"
             }
         },
-        "id": 33
+        "id": 35
     },
     {
         "title": "BM İnsan Hakları Yüksek Komiseri, İran'daki İdam Artışından Endişeli",
@@ -774,7 +824,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 34
+        "id": 36
     },
     {
         "title": "Üst Düzey Arap ve Müslüman Diplomatlardan Kudüs'teki Dini Sit Alanlarını Koruma Planı",
@@ -802,7 +852,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 35
+        "id": 37
     },
     {
         "title": "İngiltere Mahkemesi Profesörün Siyonizm Karşıtlığının Yasal Olarak Korunan Bir İnanç Olduğunu Onayladı",
@@ -824,7 +874,7 @@
                 "color": "#f43f5e"
             }
         },
-        "id": 36
+        "id": 38
     },
     {
         "title": "Alman Havalimanında Patlayıcı Yüklü Drone Bulundu",
@@ -845,7 +895,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 37
+        "id": 39
     },
     {
         "title": "Pakistan Uluslararası Medya Çalışanlarına Yönelik Haber Dolaşımını Kısıtladı",
@@ -864,7 +914,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 38
+        "id": 40
     },
     {
         "title": "Bandar Abbas'ta Ateşkes Asla Gelmedi",
@@ -890,7 +940,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 39
+        "id": 41
     },
     {
         "title": "İran, Umman ve ABD Hürmüz Boğazı Anlaşmasına Yakın: Taraflar Ne İstiyor?",
@@ -918,7 +968,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 40
+        "id": 42
     },
     {
         "title": "Japonya, II. Dünya Savaşı Sonrası Statüsünden Uzaklaşarak ABD Yapımı Tomahawk Füzesini Test Etti",
@@ -941,7 +991,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 41
+        "id": 43
     },
     {
         "title": "Rusya'nın Kiev'e Düzenlediği Balistik Füze Saldırısında En Az 14 Kişi Hayatını Kaybetti",
@@ -962,7 +1012,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 42
+        "id": 44
     },
     {
         "title": "Bangladeş'in Hakikat Avcısı",
@@ -988,7 +1038,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 43
+        "id": 45
     },
     {
         "title": "Rus füzelerinin Ukrayna'nın başkenti Kiev'i vurmasıyla patlamalar meydana geldi",
@@ -1009,7 +1059,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 44
+        "id": 46
     },
     {
         "title": "Bir ABD Mahkemesi 6 Ocak Ayaklanması İçin Yeni Bir Zemin mi Hazırladı?",
@@ -1026,7 +1076,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 45
+        "id": 47
     },
     {
         "title": "Bolivya, Sınır Boyundaki Brezilyalı Çete Şiddetini Durdurmak İçin Asker Sevk Etti",
@@ -1047,7 +1097,7 @@
                 "color": "#f97316"
             }
         },
-        "id": 46
+        "id": 48
     },
     {
         "title": "Kuzey Koreli Kim Yo-jong'dan Japonya'nın Füze Testine Karşı Askeri Tehdit",
@@ -1078,7 +1128,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 47
+        "id": 49
     },
     {
         "title": "ABD Mahkemesinden Trump'ın İklim Hibe Programını İptal Etme Girişimine Darbe",
@@ -1097,7 +1147,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 48
+        "id": 50
     },
     {
         "title": "‘Kalandan Geriye Kalanı Kucaklamak İstedim’: Gazze Ailelerinin Cenaze İçin 3 Yıllık Bekleyişi",
@@ -1124,7 +1174,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 49
+        "id": 51
     },
     {
         "title": "Kosova, yetkililerin aramaları genişletmesiyle üçüncü savaş zamanı toplu mezar yeri buldu",
@@ -1151,7 +1201,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 50
+        "id": 52
     },
     {
         "title": "İsrail'in Yıkım Kararları Sonrası Dükkan Sahipleri İş Yerlerini Söküyor",
@@ -1173,7 +1223,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 51
+        "id": 53
     },
     {
         "title": "Trump, Washington Anıtı Havuzu'ndaki Vandalizm Suçlamalarının Düşürülmesi Nedeniyle Jeanine Pirro'yu Neden Hedef Aldı?",
@@ -1193,7 +1243,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 52
+        "id": 54
     },
     {
         "title": "Video, Rus insansız hava aracının 'insan safari' saldırısında Ukraynalı seyyar satıcıyı kovaladığını gösteriyor",
@@ -1214,7 +1264,7 @@
                 "color": "#38bdf8"
             }
         },
-        "id": 53
+        "id": 55
     },
     {
         "title": "Hürmüz Boğazı'nın Yeniden Açılabileceği Umutlarıyla Petrol Fiyatları Düştü",
@@ -1237,7 +1287,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 54
+        "id": 56
     },
     {
         "title": "AB'den İspanya'nın Ceuta Göçmen Krizine 'Hızlı Yanıtına' Övgü",
@@ -1263,7 +1313,7 @@
                 "color": "#eab308"
             }
         },
-        "id": 55
+        "id": 57
     },
     {
         "title": "İran'a Savaş: Trump'tan Tahran'a 'Son Şans' Uyarısı",
@@ -1286,7 +1336,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 56
+        "id": 58
     },
     {
         "title": "Bir SpaceX Roketi Aya Çarparsa Ne Olacak?",
@@ -1305,7 +1355,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 57
+        "id": 59
     },
     {
         "title": "Gazze'de 2023 İsrail Saldırısında Hayatını Kaybeden 112 Filistinli İçin Toplu Cenaze Töreni",
@@ -1329,7 +1379,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 58
+        "id": 60
     },
     {
         "title": "İran Savaşı ve Hürmüz Boğazı'nın Kapanması Arasında Petrol Şirketleri Neden Rekor Karlar Elde Ediyor?",
@@ -1357,7 +1407,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 59
+        "id": 61
     },
     {
         "title": "Hamas Müzakerecisi: Gazze'yi Kurtarmak İçin Silahsızlanma Anlaşması Gerekliydi",
@@ -1393,7 +1443,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 60
+        "id": 62
     },
     {
         "title": "İspanya Başbakanı Sanchez, AB Ceuta Göçmen Krizini Görüşürken Eleştirilerin Hedefinde",
@@ -1418,7 +1468,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 61
+        "id": 63
     },
     {
         "title": "Manş Denizi'nde Teknesi Alev Alan 150'den Fazla Düzensiz Göçmen Kurtarıldı",
@@ -1442,7 +1492,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 62
+        "id": 64
     },
     {
         "title": "Analiz: Trump, en yakın müttefiklerinden gelen soğuk gerçeklikle yüzleşiyor",
@@ -1462,7 +1512,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 63
+        "id": 65
     },
     {
         "title": "Ukrayna, Moskova bölgesinde beş kişinin öldüğü saldırının ardından daha fazla Wildberries tesisini vurdu",
@@ -1487,7 +1537,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 64
+        "id": 66
     },
     {
         "title": "Trump Media'nın Piyasaları Etkileyen Gönderilere Hızlı Erişim Satışı Neden Tartışmalı?",
@@ -1507,7 +1557,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 65
+        "id": 67
     },
     {
         "title": "Rus İşgali Altındaki Kırım'da Bir Asker Silahlı Saldırıda Dört Kişiyi Öldürdü",
@@ -1531,7 +1581,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 66
+        "id": 68
     },
     {
         "title": "AB, Ceuta'daki göçmen geçişlerinin ardından daha güçlü sınırlar çağrısında bulundu",
@@ -1561,7 +1611,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 67
+        "id": 69
     },
     {
         "title": "Rusya, Ukrayna İnsansız Hava Aracının Kalabalık Bir Plaja Çarpması Sonucu Yedi Kişinin Öldüğünü ve 40 Kişinin Yaralandığını Açıkladı",
@@ -1585,7 +1635,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 68
+        "id": 70
     },
     {
         "title": "Fransa'daki Orman Yangınları Köyde Yüzlerce 2. Dünya Savaşı Mühimmatını Ortaya Çıkardı",
@@ -1609,7 +1659,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 69
+        "id": 71
     },
     {
         "title": "Eşimi ve ikizlerimi geride bıraktım - Bu Nijeryalı adam neden Güney Afrika'dan kaçtı?",
@@ -1635,7 +1685,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 70
+        "id": 72
     },
     {
         "title": "ABD Eyaletleri, Onlarca Ülkeyi Etkileyen Trump Gümrük Vergilerini Engellemek İçin Dava Açtı",
@@ -1659,7 +1709,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 71
+        "id": 73
     },
     {
         "title": "Ren Nehri rekor seviyede düştü: Kuraklık Avrupa nehirlerini zorluyor",
@@ -1696,7 +1746,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 72
+        "id": 74
     },
     {
         "title": "Analistler: Orta Doğu'da Petrol Tankerlerine Yönelik Tehdit, İran Savaşı Başlangıcından Bu Yana En Kötü Seviyede",
@@ -1725,7 +1775,7 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 73
+        "id": 75
     },
     {
         "title": "Deprem Vuran Japonya AVM'sine Patronun Emriyle Giren İki İşçi Patlamada Öldü",
@@ -1745,7 +1795,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 74
+        "id": 76
     },
     {
         "title": "Ariana Grande, 'Bitmek Bilmeyen' Baskılar Nedeniyle Kamuoyundan Uzaklaşma Kararı Aldı",
@@ -1769,7 +1819,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 75
+        "id": 77
     },
     {
         "title": "Fas Kralı'nın Mektubu, Büyük Bir Otoyola Trump'ın Adının Verildiğini Doğruladı",
@@ -1794,7 +1844,7 @@
                 "color": "#ef4444"
             }
         },
-        "id": 76
+        "id": 78
     },
     {
         "title": "Massive Attack, Singapur'un Filistin Protestosu Yasağına Tepki Gösterdi",
@@ -1823,7 +1873,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 77
+        "id": 79
     },
     {
         "title": "ABD ve Japonya, Yen'i Desteklemek İçin Nadir Görülen Ortak Bir Adım Attı",
@@ -1844,7 +1894,7 @@
                 "color": "#22c55e"
             }
         },
-        "id": 78
+        "id": 80
     },
     {
         "title": "İran, Trump'ın Pazartesi günü yeni görüşmelerin başlayacağı yönündeki iddiasını yalanladı",
@@ -1873,7 +1923,7 @@
                 "color": "#10b981"
             }
         },
-        "id": 79
+        "id": 81
     },
     {
         "title": "Aung San Suu Kyi, 2,5 Yıl Sonra İlk Doğrulanan Dış Temasında Sağlıklı Görünüyor",
@@ -1897,7 +1947,7 @@
                 "color": "#3b82f6"
             }
         },
-        "id": 80
+        "id": 82
     },
     {
         "title": "\"Tek oğlum adalet için ayaktayken vuruldu\" - Pakistan yönetimindeki Keşmir'de ölümcül protestoların pençesindeki şehirden izlenimler",
@@ -1921,6 +1971,6 @@
                 "color": "#f59e0b"
             }
         },
-        "id": 81
+        "id": 83
     }
 ]
