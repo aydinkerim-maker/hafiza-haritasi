@@ -27,18 +27,18 @@
         <label>Özet / Kısa Açıklama</label>
         <input type="text" id="summary" placeholder="Kartta görünecek 1-2 cümlelik özet">
 
+        <label>Etiketler (Virgülle Ayırın)</label>
+        <input type="text" id="tags" placeholder="Örn: Tayvan, Çin, Pasifik, Çip Savaşları">
+        <div class="help-text">Raporla ilgili anahtar kelimeleri virgülle ayırarak yazın.</div>
+
         <label>YouTube Video Linki (NotebookLM / İçerik Videosu)</label>
         <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=...">
-        <div class="help-text">YouTube video linkini doğrudan yapıştırabilirsin.</div>
 
         <label>Infografik / Görsel Linki</label>
-        <input type="text" id="imageUrl" placeholder="https://i.ibb.co/...">
-        <div class="help-text">Görselini ImgBB, Img.su vb. bir yere yükleyip doğrudan resim adresini yapıştır.</div>
+        <input type="text" id="imageUrl" placeholder="https://i.imgur.com/... veya GitHub Issue linki">
 
         <label>Rapor Metni (HTML / Metin)</label>
         <textarea id="content" placeholder="Yapay zekanın hazırladığı detaylı rapor metnini buraya yapıştır..."></textarea>
-        <label>Etiketler (Virgülle Ayırın)</label>
-<input type="text" id="tags" placeholder="Örn: Tayvan, Çin, Pasifik, Çip Savaşları">
 
         <button onclick="generateJSON()">Rapor JSON Kodunu Üret</button>
 
@@ -55,6 +55,7 @@
                 date: new Date().toISOString().split('T')[0],
                 title: document.getElementById('title').value,
                 summary: document.getElementById('summary').value,
+                tags: document.getElementById('tags').value.split(',').map(t => t.trim()).filter(t => t.length > 0),
                 videoUrl: document.getElementById('videoUrl').value,
                 imageUrl: document.getElementById('imageUrl').value,
                 content: document.getElementById('content').value.replace(/\n/g, '<br>')
