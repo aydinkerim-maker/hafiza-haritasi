@@ -1,3 +1,88 @@
 [
-  
+  Küresel Hafıza - Yeni Rapor Ekle
+Rapor Başlığı
+Küresel Jeopolitikte Müzakere Diplomasisi ve Güvenlik Arayışları
+Özet / Kısa Açıklama
+Son bir hafta içerisinde küresel diplomasi ve uluslararası ilişkiler sahnesinde Orta Doğu'da tırmanan ABD-İran gerilimi ile Doğu Avrupa'da Rusya-Ukrayna savaşındaki son güvenlik hamleleri öne çıkmıştır.
+Etiketler (Virgülle Ayırın)
+ABD, Rusya, İran, Ukrayna
+Raporla ilgili anahtar kelimeleri virgülle ayırarak yazın.
+YouTube Video Linki (NotebookLM / İçerik Videosu)
+https://www.youtube.com/watch?v=...
+Infografik / Görsel Linki
+https://i.imgur.com/... veya GitHub Issue linki
+Rapor Metni (HTML / Metin)
+Uluslararası İlişkiler Haftalık Analiz Raporu: Küresel Jeopolitikte Müzakere Diplomasisi ve Güvenlik Arayışları
+
+Son bir hafta içerisinde küresel diplomasi ve uluslararası ilişkiler sahnesinde Orta Doğu'da tırmanan ABD-İran gerilimi ile Doğu Avrupa'da Rusya-Ukrayna savaşındaki son güvenlik hamleleri öne çıkmıştır. Küresel Hafıza okurları için hazırlanan bu raporda, bölgesel ve küresel dengeleri doğrudan etkileyen iki kritik olay detaylıca incelenmiştir.
+
+1. ABD-İran Gerilimi ve Hürmüz Boğazı Krizinde Müzakere Diplomasisi
+Arka Plan
+Ağustos ayının ilk haftasında Hürmüz Boğazı ve Körfez hattında ticari tankerlere yönelik gerçekleşen saldırılarla tırmanan askeri gerilim, ABD ile İran arasındaki ilişkileri kırılma noktasına getirmiştir Portal: Current Events - August 2026
+. Ancak askeri tırmanmanın hemen ardından bölgede yeni bir diplomasi trafiği başlatılmış ve taraflar arasında dolaylı müzakere kanalları kurulmuştur Bloomberg HT - Ekonomi ve Siyaset Gündemi
+.
+
+Kilit Aktörler
+ABD & İran: Bölgede askeri varlığı ve stratejik hedefleriyle karşı karşıya gelen ana aktörler The Guardian - US Foreign Policy
+.
+
+Katar & Umman: Müzakere kanallarını açık tutarak taraflar arasında mekik diplomasisi yürüten temel kolaylaştırıcılar Portal: Current Events - August 2026
+.
+
+Türkiye & Bölge Ülkeleri: Bölgesel savaş riskini önlemek ve diyalog zeminini güçlendirmek adına liderler düzeyinde yoğun diplomasi yürüten bölgesel aktörler SDE - Yoğun Diplomasi Trafiği
+.
+
+Bölgesel ve Küresel Etkiler
+Enerji Güvenliği ve Lojistik: Hürmüz Boğazı'ndaki seyrüsefer emniyetine yönelik tehditler küresel petrol ve sıvılaştırılmış doğal gaz (LNG) tedarik zincirinde dalgalanmalara yol açmıştır Portal: Current Events - August 2026
+.
+
+Geçici Gerilim Azaltımı: Katar ve Umman üzerinden yürütülen temaslar, olası askeri operasyonları askıya aldırarak diplomatik çözüm arayışlarına zaman kazandırmıştır Portal: Current Events - August 2026
+.
+
+Gelecek Senaryoları
+İyimser Senaryo: Dolaylı temasların kalıcı bir gerilimi azaltma protokolüne veya kontrollü bir ateşkes çerçevesine dönüşmesiyle Körfez'de ticaret güvenliğinin sağlanması.
+
+Kötümser Senaryo: Müzakere masasının tıkanması veya boğazda yaşanabilecek münferit bir seyrüsefer krizinin kontrol dışı bölgesel bir çatışmayı tetiklemesi.
+
+2. Rusya-Ukrayna Savaşında NATO’nun Hava Savunma Hamlesi ve Karadeniz Güvenliği
+Arka Plan
+Ukrayna genelinde, özellikle Kiev ve kritik altyapı tesislerine yönelik artan füze ve İHA saldırıları üzerine Ukrayna yönetimi hava savunma desteği çağrısında bulunmuştur The Guardian - US Foreign Policy
+. Aynı zamanda Karadeniz'deki ticari seyrüsefer hatlarında yaşanan gelişmeler, bölgedeki deniz güvenliği ve lojistik hatları yeniden küresel gündemin üst sıralarına taşımıştır Portal: Current Events - August 2026
+.
+
+Kilit Aktörler
+Ukrayna & Rusya: Cephe hattında ve stratejik altyapı alanlarında mücadeleyi sürdüren taraflar Portal: Current Events - August 2026
+.
+
+NATO & Batılı Müttefikler: Ukrayna'nın hava savunma kapasitesini acil kodlu sevkiyatlarla takviye etme kararı alan uluslararası ittifak The Guardian - US Foreign Policy
+.
+
+Bölgesel ve Küresel Etkiler
+Altyapı ve Sivillerin Korunması: NATO'nun acil tedarik hamlesi, Ukrayna kentlerinin ve enerji şebekelerinin kış öncesinde korunmasını amaçlamaktadır The Guardian - US Foreign Policy
+.
+
+Tahıl ve Deniz Ticareti Riskleri: Karadeniz'deki askerî hareketlilik gıda ve yük taşımacılığı yolları üzerindeki güvenlik endişelerini artırmaktadır Portal: Current Events - August 2026
+.
+
+Gelecek Senaryoları
+İyimser Senaryo: Yeni hava savunma sistemlerinin entegrasyonu ile hava sahası kontrolünün dengelenmesi ve Karadeniz'deki ticari koridorların korunması.
+
+Kötümser Senaryo: Füze ve mühimmat stoklarındaki artışın sürmesi halinde enerji altyapısındaki tahribatın derinleşmesi ve çatışma dinamiklerinin Karadeniz genelinde yayılması.
+ Rapor JSON Kodunu Üret
+Oluşan JSON Verisi (Bunu kopyalayıp reportsData.json içine yapıştırabilirsin):
+{
+  "id": 1786305820721,
+  "date": "2026-08-09",
+  "title": "Küresel Jeopolitikte Müzakere Diplomasisi ve Güvenlik Arayışları",
+  "summary": "Son bir hafta içerisinde küresel diplomasi ve uluslararası ilişkiler sahnesinde Orta Doğu'da tırmanan ABD-İran gerilimi ile Doğu Avrupa'da Rusya-Ukrayna savaşındaki son güvenlik hamleleri öne çıkmıştır.",
+  "tags": [
+    "ABD",
+    "Rusya",
+    "İran",
+    "Ukrayna"
+  ],
+  "videoUrl": "",
+  "imageUrl": "",
+  "content": "Uluslararası İlişkiler Haftalık Analiz Raporu: Küresel Jeopolitikte Müzakere Diplomasisi ve Güvenlik Arayışları<br><br>Son bir hafta içerisinde küresel diplomasi ve uluslararası ilişkiler sahnesinde Orta Doğu'da tırmanan ABD-İran gerilimi ile Doğu Avrupa'da Rusya-Ukrayna savaşındaki son güvenlik hamleleri öne çıkmıştır. Küresel Hafıza okurları için hazırlanan bu raporda, bölgesel ve küresel dengeleri doğrudan etkileyen iki kritik olay detaylıca incelenmiştir.<br><br>1. ABD-İran Gerilimi ve Hürmüz Boğazı Krizinde Müzakere Diplomasisi<br>Arka Plan<br>Ağustos ayının ilk haftasında Hürmüz Boğazı ve Körfez hattında ticari tankerlere yönelik gerçekleşen saldırılarla tırmanan askeri gerilim, ABD ile İran arasındaki ilişkileri kırılma noktasına getirmiştir Portal: Current Events - August 2026<br>. Ancak askeri tırmanmanın hemen ardından bölgede yeni bir diplomasi trafiği başlatılmış ve taraflar arasında dolaylı müzakere kanalları kurulmuştur Bloomberg HT - Ekonomi ve Siyaset Gündemi<br>.<br><br>Kilit Aktörler<br>ABD & İran: Bölgede askeri varlığı ve stratejik hedefleriyle karşı karşıya gelen ana aktörler The Guardian - US Foreign Policy<br>.<br><br>Katar & Umman: Müzakere kanallarını açık tutarak taraflar arasında mekik diplomasisi yürüten temel kolaylaştırıcılar Portal: Current Events - August 2026<br>.<br><br>Türkiye & Bölge Ülkeleri: Bölgesel savaş riskini önlemek ve diyalog zeminini güçlendirmek adına liderler düzeyinde yoğun diplomasi yürüten bölgesel aktörler SDE - Yoğun Diplomasi Trafiği<br>.<br><br>Bölgesel ve Küresel Etkiler<br>Enerji Güvenliği ve Lojistik: Hürmüz Boğazı'ndaki seyrüsefer emniyetine yönelik tehditler küresel petrol ve sıvılaştırılmış doğal gaz (LNG) tedarik zincirinde dalgalanmalara yol açmıştır Portal: Current Events - August 2026<br>.<br><br>Geçici Gerilim Azaltımı: Katar ve Umman üzerinden yürütülen temaslar, olası askeri operasyonları askıya aldırarak diplomatik çözüm arayışlarına zaman kazandırmıştır Portal: Current Events - August 2026<br>.<br><br>Gelecek Senaryoları<br>İyimser Senaryo: Dolaylı temasların kalıcı bir gerilimi azaltma protokolüne veya kontrollü bir ateşkes çerçevesine dönüşmesiyle Körfez'de ticaret güvenliğinin sağlanması.<br><br>Kötümser Senaryo: Müzakere masasının tıkanması veya boğazda yaşanabilecek münferit bir seyrüsefer krizinin kontrol dışı bölgesel bir çatışmayı tetiklemesi.<br><br>2. Rusya-Ukrayna Savaşında NATO’nun Hava Savunma Hamlesi ve Karadeniz Güvenliği<br>Arka Plan<br>Ukrayna genelinde, özellikle Kiev ve kritik altyapı tesislerine yönelik artan füze ve İHA saldırıları üzerine Ukrayna yönetimi hava savunma desteği çağrısında bulunmuştur The Guardian - US Foreign Policy<br>. Aynı zamanda Karadeniz'deki ticari seyrüsefer hatlarında yaşanan gelişmeler, bölgedeki deniz güvenliği ve lojistik hatları yeniden küresel gündemin üst sıralarına taşımıştır Portal: Current Events - August 2026<br>.<br><br>Kilit Aktörler<br>Ukrayna & Rusya: Cephe hattında ve stratejik altyapı alanlarında mücadeleyi sürdüren taraflar Portal: Current Events - August 2026<br>.<br><br>NATO & Batılı Müttefikler: Ukrayna'nın hava savunma kapasitesini acil kodlu sevkiyatlarla takviye etme kararı alan uluslararası ittifak The Guardian - US Foreign Policy<br>.<br><br>Bölgesel ve Küresel Etkiler<br>Altyapı ve Sivillerin Korunması: NATO'nun acil tedarik hamlesi, Ukrayna kentlerinin ve enerji şebekelerinin kış öncesinde korunmasını amaçlamaktadır The Guardian - US Foreign Policy<br>.<br><br>Tahıl ve Deniz Ticareti Riskleri: Karadeniz'deki askerî hareketlilik gıda ve yük taşımacılığı yolları üzerindeki güvenlik endişelerini artırmaktadır Portal: Current Events - August 2026<br>.<br><br>Gelecek Senaryoları<br>İyimser Senaryo: Yeni hava savunma sistemlerinin entegrasyonu ile hava sahası kontrolünün dengelenmesi ve Karadeniz'deki ticari koridorların korunması.<br><br>Kötümser Senaryo: Füze ve mühimmat stoklarındaki artışın sürmesi halinde enerji altyapısındaki tahribatın derinleşmesi ve çatışma dinamiklerinin Karadeniz genelinde yayılması."
+},
 ]
