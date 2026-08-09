@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Küresel Hafıza - Rapor Paneli</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
+        .container { max-width: 700px; margin: 0 auto; background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        h2 { color: #38bdf8; margin-top: 0; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #cbd5e1; }
+        input, textarea { width: 100%; padding: 10px; margin-top: 5px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: #fff; box-sizing: border-box; }
+        textarea { height: 150px; resize: vertical; }
+        button { margin-top: 20px; background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; }
+        button:hover { background: #0369a1; }
+        .output { margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 6px; font-family: monospace; white-space: pre-wrap; word-break: break-all; font-size: 12px; border: 1px solid #334155; }
+        .help-text { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Küresel Hafıza - Yeni Rapor Ekle</h2>
+        
+        <label>Rapor Başlığı</label>
+        <input type="text" id="title" placeholder="Örn: Haftalık Küresel Analiz - 1. Hafta">
+
+        <label>Özet / Kısa Açıklama</label>
+        <input type="text" id="summary" placeholder="Kartta görünecek 1-2 cümlelik özet">
+
+        <label>YouTube Video Linki (NotebookLM / İçerik Videosu)</label>
+        <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=...">
+        <div class="help-text">YouTube video linkini doğrudan yapıştırabilirsin.</div>
+
+        <label>Infografik / Görsel Linki</label>
+        <input type="text" id="imageUrl" placeholder="https://i.ibb.co/...">
+        <div class="help-text">Görselini ImgBB, Img.su vb. bir yere yükleyip doğrudan resim adresini yapıştır.</div>
+
+        <label>Rapor Metni (HTML / Metin)</label>
+        <textarea id="content" placeholder="Yapay zekanın hazırladığı detaylı rapor metnini buraya yapıştır..."></textarea>
+
+        <button onclick="generateJSON()">Rapor JSON Kodunu Üret</button>
+
+        <div id="resultArea" style="display:none;">
+            <label>Oluşan JSON Verisi (Bunu kopyalayıp reportsData.json içine yapıştırabilirsin):</label>
+            <div class="output" id="jsonOutput"></div>
+        </div>
+    </div>
+
+    <script>
+        function generateJSON() {
+            const newReport = {
+                id: Date.now(),
+                date: new Date().toISOString().split('T')[0],
+                title: document.getElementById('title').value,
+                summary: document.getElementById('summary').value,
+                videoUrl: document.getElementById('videoUrl').value,
+                imageUrl: document.getElementById('imageUrl').value,
+                content: document.getElementById('content').value.replace(/\n/g, '<br>')
+            };
+
+            document.getElementById('jsonOutput').innerText = JSON.stringify(newReport, null, 2) + ",";
+            document.getElementById('resultArea').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
